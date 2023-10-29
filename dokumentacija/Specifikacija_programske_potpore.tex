@@ -380,12 +380,62 @@
 				
 			\subsection{Sekvencijski dijagrami}
 				
-				\textbf{\textit{dio 1. revizije}}\\
-				
-				\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
+				\noindent
+				\textbf{Obrazac uporabe UC1-Pregled recepata}\newline
+					{Korisnik šalje zahtjev za prikaz recepata po kategorijama, sastojcima i/ili kuhinjama kojim pripadaju. Poslužitelj dohvaća recepete koji zadovoljavaju uvjete i prikazuje ih korisniku. Korisnik sada može spremiti recepte, ako je prijavljen to se provodi, ako nije preusmjeri ga se na stranicu za prijavu.}
 				\eject
-	
-		\section{Ostali zahtjevi}
+				
+				\begin{figure}[H]
+					\includegraphics[scale= 0.5]{slike/sekvencijski_dijagramUC1.png}
+					\centering
+					\caption{Sekvencijski dijagram za UC1}
+					\label{fig:Sekvencijski dijagram za UC1}
+				\end{figure} 
+				\eject
+
+				\noindent
+				\textbf{Obrazac uporabe UC3-Registracija}\newline
+					{Korisnik se registrira s korisničkim imenom i lozinkom. Ako takav korisnik već postoji, korisniku se ispisuje greška. Inače, korisnik se uspješno registrirao i to se bilježi u bazi podataka.}
+				\eject
+
+				\begin{figure}[H]
+					\includegraphics[scale= 0.6]{slike/sekvencijski_dijagramUC3.png}
+					\centering
+					\caption{Sekvencijski dijagram za UC3}
+					\label{fig:Sekvencijski dijagram za UC3}
+				\end{figure}
+				
+				\eject
+
+				\noindent
+				\textbf{Obrazac uporabe UC4-Prijava Korisnika}\newline
+					{Korisnik pokuša objaviti novi recept. Ako nije prijavljen, preusmjeri ga se na prijavu. Inače, recept se dodaje u bazu podataka i o tome se obavijesti korisnik.}
+				\eject
+
+				\begin{figure}[H]
+					\includegraphics[scale= 0.6]{slike/sekvencijski_dijagramUC4.png}
+					\centering
+					\caption{Sekvencijski dijagram za UC4}
+					\label{fig:Sekvencijski dijagram za UC4}
+				\end{figure}
+
+				\eject
+
+				\noindent
+				\textbf{Obrazac uporabe UC8-Videopoziv}\newline
+					{Korisnik zatraži video poziv s drugim korisnikom. Ako drugi korisnik ne postoji, poziv se ne uspostavlja i o tome se obavijesti prvog korisnika. Inače se šalje zahtjev za video pozivom drugom korisniku, koji ga može odbiti ili prihvatiti. Ako odbije poziv se ne uspostavlja i o tome se obavijesti prvi korsnik. Ako prihvati uspostavi se video poziv između dva korisnika.}
+				\eject
+
+				\begin{figure}[H]
+					\includegraphics[scale= 0.5]{slike/sekvencijski_dijagramUC7.png}
+					\centering
+					\caption{Sekvencijski dijagram za UC7}
+					\label{fig:Sekvencijski dijagram za UC7}
+				\end{figure}
+				
+				\eject
+			
+			\section{Ostali zahtjevi}
 		
 			\textbf{\textit{dio 1. revizije}}\\
 		 
