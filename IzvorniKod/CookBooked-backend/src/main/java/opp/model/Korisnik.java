@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.sql.Time;
 
@@ -20,6 +21,7 @@ public class Korisnik {
     private String KorisnickoIme;
 
     @NotNull
+    @Size(min = 6)
     private String LozinkaKorisnik;
     private String ImeKorisnik;
     private String PrezimeKorisnik;

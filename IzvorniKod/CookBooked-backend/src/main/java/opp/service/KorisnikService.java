@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface KorisnikService {
     List<Korisnik> listAll();
+    Korisnik createKorisnik(Korisnik korisnik);
 }
