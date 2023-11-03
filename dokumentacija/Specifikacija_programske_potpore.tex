@@ -1,21 +1,15 @@
 \chapter{Specifikacija programske potpore}
 		
 	\section{Funkcionalni zahtjevi}
-			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-			\textit{Navesti \textbf{dionike} koji imaju \textbf{interes u ovom sustavu} ili  \textbf{su nositelji odgovornosti}. To su prije svega korisnici, ali i administratori sustava, naručitelji, razvojni tim.}\\
-				
-			\textit{Navesti \textbf{aktore} koji izravno \textbf{koriste} ili \textbf{komuniciraju sa sustavom}. Oni mogu imati inicijatorsku ulogu, tj. započinju određene procese u sustavu ili samo sudioničku ulogu, tj. obavljaju određeni posao. Za svakog aktora navesti funkcionalne zahtjeve koji se na njega odnose.}\\
-			
-			
+	
 			\noindent \textbf{Dionici:}
 			
 			\begin{packed_enum}
 				
-				\item Dionik 1
-				\item Dionik 2				
-				\item ...
+				\item Administrator-voditelj tima
+				\item Razvojni tim CodeCooks			
+				\item Profesori predmeta Programsko inžinjerstvo
+				\item Korisnici
 				
 			\end{packed_enum}
 			
@@ -23,28 +17,62 @@
 			
 			
 			\begin{packed_enum}
-				\item  \underbar{Aktor 1 (inicijator) može:}
+				\item  \underbar{Admin može:}
 				
 				\begin{packed_enum}
 					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
+					\item Upravljanje korisnicima
+					\item Upravljanje receptima
 					\begin{packed_enum}
 						
-						\item  podfunkcionalnost 1 
-						\item  podfunkcionalnost 2
+						\item  Brisanje recepata
+						\item  Uređivanje recepata
+						
+					\end{packed_enum}
+					\item Upravljanje komentarima
+					\begin{packed_enum}
+						
+						\item  Brisanje komentara 
+						\item  Cenzuriranje komentara
 				
 					\end{packed_enum}
-					\item  funkcionalnost 3
+					\item  Mjenjanje kategorija
 					
 				\end{packed_enum}
 			
-				\item  \underbar{Aktor 2 (sudionik) može:}
+				\item  \underbar{Registrirani korisnik može:}
 				
 				\begin{packed_enum}
 					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
+					\item Objavljivanje recepata
+					\item Komuniciranje s ostalim registriranim korisnicima
+					\item Objavljivanje termina za komunikaciju
+					\item Označavanje recepata
+					\item Komentiranje recepata
+					\item Spremanje recepata
+					\item Praćenje drugih registriranih korisnika
+					\item Upravljanje dozvolama pratiteljima
+					\item Upravljanje osobnim informacijama
+					\item Upravljanje postavkama komunikacije i obavijestima
+					
+				\end{packed_enum}
+				
+				\item  \underbar{Neregistrirani korisnik može:}
+				
+				\begin{packed_enum}
+					
+					\item Pregledavanje recepata temeljem kategorija
+					
+				\end{packed_enum}
+				
+				
+				\item  \underbar{Baza podataka može:}
+				
+				\begin{packed_enum}
+					
+					\item Pohrana osobnih podataka registriranog korisnika
+					\item Pohrana recepata
+					\item Pohrana komentara
 					
 				\end{packed_enum}
 			\end{packed_enum}
@@ -67,24 +95,20 @@
 						
 						\item[] \begin{packed_enum}
 							
-							\item Korisnik otvori platformu
-							\item Ponuđene su mu kategorije, vrste kuhinje, specifični sastojci
-							\item Korisnik odabire kategoriju i prikazuju mu se recepti
+							\item Korisnik otvori platformu.
+							\item Ponuđene su mu kategorije, vrste kuhinje, specifični sastojci.
+							\item Korisnik odabire kategoriju.
+							\item Prikazuju mu se recepti.
+							\item Korisnik odabire recept.
+							\item Recept se prikazuje u web sučelju.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[2.a] 
-							\item[] \begin{packed_enum}
-								
-								\item 
-								\item
-								
-							\end{packed_enum}
-							\item[2.b] 
-							\item[3.a] 
+							\item[3.a] Nema pohranjenih recepata vezanih za zadanu kategoriju te se korisnik obavještava da nema podataka za njegovu pretragu.
+							
 							
 						\end{packed_item}
 					\end{packed_item}
@@ -110,11 +134,11 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[2.a] Odabir već zauzetog korisničkog imena i/ili e-maila, unos korisničkog podatka u nedozvoljenom formatu ili pružanje neispravnoga e-maila
+							\item[2.a] Odabir već zauzetog korisničkog imena i/ili e-maila, unos korisničkog podatka u nedozvoljenom formatu ili pružanje neispravnoga e-maila.
 							\item[] \begin{packed_enum}
 								
-								\item  Sustav obavještava korisnika o neuspjelom upisu i vraća ga na stranicu za registraciju
-								\item Korisnik mijenja potrebne podatke te završava unos ili odustaje od registracije
+								\item  Sustav obavještava korisnika o neuspjelom upisu i vraća ga na stranicu za registraciju.
+								\item Korisnik mijenja potrebne podatke te završava unos ili odustaje od registracije.
 								
 							\end{packed_enum}
 							
@@ -125,34 +149,31 @@
 					\noindent \underbar{\textbf{UC3 - Prijava u sustav}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: }
-						\item  \textbf{Cilj:} 
-						\item  \textbf{Sudionici:} 
+						\item \textbf{Glavni sudionik: Neregistrirani korisnik}
+						\item  \textbf{Cilj: Prijava korisnika u sustav} 
+						\item  \textbf{Sudionici: Baza podataka} 
 						\item  \textbf{Preduvjet:} 
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 							
-							\item 
-							\item 
-							\item 
-							\item 
-							\item 
+							\item Korisnik odabire opciju za prijavu.
+							\item Korisnik unosi potrebne korisničke podatke.
+							\item Korisnik dobiva potvrdnu poruku o prijavi.
+							\item Otvara se početni zaslon za registriranog korisnika.
+							
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[2.a] 
+							\item[2.a] Upis pogrešnog korisničkog imena ili lozinke.
 							\item[] \begin{packed_enum}
 								
-								\item 
-								\item
+								\item  Sustav obavještava korisnika o neuspjeloj prijavi i vraća ga na stranicu za prijavu.
 								
-							\end{packed_enum}
-							\item[2.b] 
-							\item[3.a] 
+							\end{packed_enum} 
 							
 						\end{packed_item}
 					\end{packed_item}
@@ -162,32 +183,24 @@
 						
 						\item \textbf{Glavni sudionik: Registrirani korisnik }
 						\item  \textbf{Cilj: Objava svog recepta na stranici} 
-						\item  \textbf{Sudionici:} 
+						\item  \textbf{Sudionici: Baza podataka} 
 						\item  \textbf{Preduvjet: Registracija i prijava korisnika} 
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 							
-							\item 
-							\item 
-							\item 
-							\item 
-							\item 
+							\item Korisnik odabire opciju objava recepta.
+							\item Aplikacija prikaže formu za objavu recepta.
+							\item Korisnik unosi potrebne podatke.
+							\item Nakon potvrde objave, otvara se početni zaslon za registriranog korisnika.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[2.a] 
-							\item[] \begin{packed_enum}
-								
-								\item 
-								\item
-								
-							\end{packed_enum}
-							\item[2.b] 
-							\item[3.a] 
+							\item[2.a] Aplikacija ne učita sva polja forme, gdje je potrebno ponovno zahtjevanje forme za objavu recepta. 
+							\item[3.a] Nisu ispunjeni svi potrebni podatci o receptu što vraća korisnika da dopuni nedostajeće podatke.
 							
 						\end{packed_item}
 					\end{packed_item}
@@ -195,34 +208,26 @@
 					\noindent \underbar{\textbf{UC5 - Razmjena poruka}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: }
-						\item  \textbf{Cilj:} 
-						\item  \textbf{Sudionici:} 
-						\item  \textbf{Preduvjet:} 
+						\item \textbf{Glavni sudionik: Registrirani korisnici}
+						\item  \textbf{Cilj: Razmjena poruka između registriranih korisnika} 
+						\item  \textbf{Sudionici: Baza podataka} 
+						\item  \textbf{Preduvjet: } 
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 							
-							\item 
-							\item 
-							\item 
-							\item 
-							\item 
+							\item Korisnik otvara profil drugog korisnika.
+							\item Korisnik odabire opciju za chat.
+							\item Korisnik odabire vrstu chata(text, video, poziv).
+							\item Otvara se zaslon za komunikaciju sa drugim korisnikom.
+						
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
-							
-							\item[2.a] 
-							\item[] \begin{packed_enum}
-								
-								\item 
-								\item
-								
-							\end{packed_enum}
-							\item[2.b] 
-							\item[3.a] 
+							 
+							\item[3.a] Ne otvara zaslon za komunikaciju zbog velikog broja zahtjeva za razmjenom poruka.
 							
 						\end{packed_item}
 					\end{packed_item}
@@ -230,34 +235,25 @@
 					\noindent \underbar{\textbf{UC6 - Čavrljanje }}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: }
-						\item  \textbf{Cilj:} 
-						\item  \textbf{Sudionici:} 
-						\item  \textbf{Preduvjet:} 
+						\item \textbf{Glavni sudionik: Registrirani korisnici}
+						\item  \textbf{Cilj: Razmjena tekstualnih poruka između korisnika} 
+						\item  \textbf{Sudionici: Baza podataka, API} 
+						\item  \textbf{Preduvjet: )} 
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 							
-							\item 
-							\item 
-							\item 
-							\item 
-							\item 
+							\item Otvara se prozor za upis teksta određenog korisnika.
+							\item Korisnik upisuje poruku.
+							\item Korisnik šalje poruku čime se osvježava prozor za upis i čitanje poruka.
+							 
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[2.a] 
-							\item[] \begin{packed_enum}
-								
-								\item 
-								\item
-								
-							\end{packed_enum}
-							\item[2.b] 
-							\item[3.a] 
+							\item[3.a] Poruka nije uspješno poslana što vraća korisniku opciju za ponovno slanje.
 							
 						\end{packed_item}
 					\end{packed_item}
@@ -265,34 +261,27 @@
 					\noindent \underbar{\textbf{UC7 - Videopoziv}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: }
-						\item  \textbf{Cilj:} 
-						\item  \textbf{Sudionici:} 
+						\item \textbf{Glavni sudionik: Registrirani korisnici}
+						\item  \textbf{Cilj: Uspostava videopoziva između korisnika.} 
+						\item  \textbf{Sudionici: Baza podataka, API} 
 						\item  \textbf{Preduvjet:} 
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 							
-							\item 
-							\item 
-							\item 
-							\item 
-							\item 
+							\item Otvara se prozor sa ponuđenim opcijama prilikom videopoziva.
+							\item Korisnik odabere opcije te pokrene videopoziv i čeka na odgovor.
+							\item Uspostavom poziva otvara se prozor sa videopozivom.
+							\item Nakon završetka videopoziva, otvara se prozor odabira komunikacijskog sredstva sa drugim korisnikom.
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[2.a] 
-							\item[] \begin{packed_enum}
-								
-								\item 
-								\item
-								
-							\end{packed_enum}
-							\item[2.b] 
-							\item[3.a] 
+							\item[2.a] Drugi korisnik ne odgovara na poziv u određenom vremenu te se poziv prekine i pošalje prikladnja povratna poruka.
+							\item[2.b] Drugi korisnik je zauzet te ne može odgovoriti na poziv čime se šalje prikladna povratna poruka. 
+							\item[3.a] Prevelika latencija poziva te dodatno usporavanje mreže te gubitak informacije gdje se pokušava ugasiti video, a ako se ne popravi, poziv se prekida i šalje se prikladna povratna poruka.
 							
 						\end{packed_item}
 					\end{packed_item}
