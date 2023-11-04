@@ -1,303 +1,679 @@
 \chapter{Specifikacija programske potpore}
-		
+	
 	\section{Funkcionalni zahtjevi}
+	
+	\textbf{\textit{dio 1. revizije}}\\
+	
+	\textit{Navesti \textbf{dionike} koji imaju \textbf{interes u ovom sustavu} ili  \textbf{su nositelji odgovornosti}. To su prije svega korisnici, ali i administratori sustava, naručitelji, razvojni tim.}\\
+	
+	\textit{Navesti \textbf{aktore} koji izravno \textbf{koriste} ili \textbf{komuniciraju sa sustavom}. Oni mogu imati inicijatorsku ulogu, tj. započinju određene procese u sustavu ili samo sudioničku ulogu, tj. obavljaju određeni posao. Za svakog aktora navesti funkcionalne zahtjeve koji se na njega odnose.}\\
+	
+	
+	\noindent \textbf{Dionici:}
+	
+	\begin{packed_enum}
+		
+		\item Dionik 1
+		\item Dionik 2				
+		\item ...
+		
+	\end{packed_enum}
+	
+	\noindent \textbf{Aktori i njihovi funkcionalni zahtjevi:}
+	
+	
+	\begin{packed_enum}
+		\item  \underbar{Aktor 1 (inicijator) može:}
+		
+		\begin{packed_enum}
 			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-			\textit{Navesti \textbf{dionike} koji imaju \textbf{interes u ovom sustavu} ili  \textbf{su nositelji odgovornosti}. To su prije svega korisnici, ali i administratori sustava, naručitelji, razvojni tim.}\\
-				
-			\textit{Navesti \textbf{aktore} koji izravno \textbf{koriste} ili \textbf{komuniciraju sa sustavom}. Oni mogu imati inicijatorsku ulogu, tj. započinju određene procese u sustavu ili samo sudioničku ulogu, tj. obavljaju određeni posao. Za svakog aktora navesti funkcionalne zahtjeve koji se na njega odnose.}\\
-			
-			
-			\noindent \textbf{Dionici:}
-			
+			\item funkcionalnost 1
+			\item funkcionalnost 2
 			\begin{packed_enum}
 				
-				\item Dionik 1
-				\item Dionik 2				
-				\item ...
+				\item  podfunkcionalnost 1 
+				\item  podfunkcionalnost 2
+				
+			\end{packed_enum}
+			\item  funkcionalnost 3
+			
+		\end{packed_enum}
+		
+		\item  \underbar{Aktor 2 (sudionik) može:}
+		
+		\begin{packed_enum}
+			
+			\item funkcionalnost 1
+			\item funkcionalnost 2
+			
+		\end{packed_enum}
+	\end{packed_enum}
+	
+	\eject 
+	
+	
+	
+	\subsection{Obrasci uporabe}
+	
+	\textbf{\textit{dio 1. revizije}}
+	
+	\subsubsection{Opis obrazaca uporabe}
+	\textit{Funkcionalne zahtjeve razraditi u obliku obrazaca uporabe. Svaki obrazac je potrebno razraditi prema donjem predlošku. Ukoliko u nekom koraku može doći do odstupanja, potrebno je to odstupanje opisati i po mogućnosti ponuditi rješenje kojim bi se tijek obrasca vratio na osnovni tijek.}\\
+	
+	
+	\noindent \underbar{\textbf{UC$<$broj obrasca$>$ -$<$ime obrasca$>$}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: }$<$sudionik$>$
+		\item  \textbf{Cilj:} $<$cilj$>$
+		\item  \textbf{Sudionici:} $<$sudionici$>$
+		\item  \textbf{Preduvjet:} $<$preduvjet$>$
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item $<$opis korak jedan$>$
+			\item $<$opis korak dva$>$
+			\item $<$opis korak tri$>$
+			\item $<$opis korak četiri$>$
+			\item $<$opis korak pet$>$
+		\end{packed_enum}
+		
+		\item  \textbf{Opis mogućih odstupanja:}
+		
+		\item[] \begin{packed_item}
+			
+			\item[2.a] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
+			\item[] \begin{packed_enum}
+				
+				\item $<$opis rješenja mogućeg scenarija korak 1$>$
+				\item $<$opis rješenja mogućeg scenarija korak 2$>$
+				
+			\end{packed_enum}
+			\item[2.b] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
+			\item[3.a] $<$opis mogućeg scenarija odstupanja  u koraku 3$>$
+			
+		\end{packed_item}
+	\end{packed_item}
+	
+	\noindent \underbar{\textbf{UC -}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: }
+		\item  \textbf{Cilj:} 
+		\item  \textbf{Sudionici:} 
+		\item  \textbf{Preduvjet:} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item 
+			\item 
+			\item 
+			\item 
+			\item 
+		\end{packed_enum}
+		
+		\item  \textbf{Opis mogućih odstupanja:}
+		
+		\item[] \begin{packed_item}
+			
+			\item[2.a] 
+			\item[] \begin{packed_enum}
+				
+				\item 
+				\item
+				
+			\end{packed_enum}
+			\item[2.b] 
+			\item[3.a] 
+			
+		\end{packed_item}
+	\end{packed_item}
+	
+	\noindent \underbar{\textbf{UC1 - Pregled recepata}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Neregistrirani korisnik, Registrirani korisnik}
+		\item  \textbf{Cilj: Pregled recepata temeljem kategorija} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: -} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik otvori platformu
+			\item Ponuđene su mu kategorije, vrste kuhinje, specifični sastojci
+			\item Korisnik odabire što želi i prikazuju mu se recepti
+		\end{packed_enum}
+		
+	\end{packed_item}
+	
+	
+	\noindent \underbar{\textbf{UC2 - Registracija}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Neregistrirani korisnik}
+		\item  \textbf{Cilj: Stvaranje računa za pristup ostalim značajkama sustava}  
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet:-} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik odabire opciju za registraciju
+			\item Korisnik unosi potrebne korisničke podatke
+			\item Korisnik prima obavijest o uspješnoj registraciji
+		\end{packed_enum}
+		
+		\item  \textbf{Opis mogućih odstupanja:}
+		
+		\item[] \begin{packed_item}
+			
+			\item[2.a] Odabir već zauzetog korisničkog imena i/ili e-maila, unos korisničkog podatka u nedozvoljenom formatu ili pružanje neispravnoga e-maila
+			\item[] \begin{packed_enum}
+				
+				\item  Sustav obavještava korisnika o neuspjelom upisu i vraća ga na stranicu za registraciju
+				\item Korisnik mijenja potrebne podatke te završava unos ili odustaje od registracije
 				
 			\end{packed_enum}
 			
-			\noindent \textbf{Aktori i njihovi funkcionalni zahtjevi:}
+		\end{packed_item}
+	\end{packed_item}
+	
+	
+	\noindent \underbar{\textbf{UC3 - Prijava u sustav}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: }
+		\item  \textbf{Cilj: Dobiti pristup ostali funkcijama sustava} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Registracija} 
+		\item  \textbf{Opis osnovnog tijeka: }
+		
+		\item[] \begin{packed_enum}
 			
+			\item Unos korisničkog imena i lozinke
+			\item Potvrda o ispravnosti unesenih podataka
+			\item Pristup korisničkim funkcijama
 			
-			\begin{packed_enum}
-				\item  \underbar{Aktor 1 (inicijator) može:}
-				
-				\begin{packed_enum}
-					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
-					\begin{packed_enum}
-						
-						\item  podfunkcionalnost 1 
-						\item  podfunkcionalnost 2
-				
-					\end{packed_enum}
-					\item  funkcionalnost 3
-					
-				\end{packed_enum}
+		\end{packed_enum}
+		
+		\item  \textbf{Opis mogućih odstupanja:}
+		
+		\item[] \begin{packed_item}
 			
-				\item  \underbar{Aktor 2 (sudionik) može:}
+			\item[2.a] Neispravno korisničko ime/lozinka
+			\item[] \begin{packed_enum}
 				
-				\begin{packed_enum}
-					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
-					
-				\end{packed_enum}
+				\item  Sustav obavještava korisnika o neuspjelom upisu i vraća ga na stranicu za registraciju
+				
+				
 			\end{packed_enum}
 			
-			\eject 
+			
+		\end{packed_item}
+	\end{packed_item}
+	
+	
+	
+	\noindent \underbar{\textbf{UC4 - Objava recepata}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Registrirani korisnik }
+		\item  \textbf{Cilj: Objava svog recepta} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Korisnik je prijavljen} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Navesti naslov, sastojke, korake pripreme i vrijeme kuhanja
+			\item Opcionalno dodati oznake poput „vegetarijansko“, „bezglutensko“ i sl.
+			\item Opcionalno dodati slike i videozapise koji se odnose na pripremu jela
+			\item Objavite recept
+			
+		\end{packed_enum}
+		
+		\item  \textbf{Opis mogućih odstupanja:}
+		
+		\item[] \begin{packed_item}
+			
+			\item[2.a] Korisnik nije naveo naslov, sastojke, korake pripreme i vrijeme kuhanja
+			\item[] \begin{packed_enum}
+				
+				\item Sustav obavještava korisnika o neuspjelom upisu i vraća ga na stranicu za objavu recepata
+				
+			\end{packed_enum}
+			
+		\end{packed_item}
+	\end{packed_item}
+	
+	
+	\noindent \underbar{\textbf{UC5 - Uređivanje recepata od strane korisnika}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Registrirani korisnik}
+		\item  \textbf{Cilj: Uređivanje svog objavljenog recepta} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Objavljen je recept i korisnik je prijavljen} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik pregledava svoj recept
+			\item Odabere gumb za uređivanje recepta
+			\item Uređuje recept kao pri objavi recepta
+			\item Sprema recept ili odustaje od promjena
+		\end{packed_enum}
+		
+		
+	\end{packed_item}
+	
+	\noindent \underbar{\textbf{UC6 - Brisanje recepata od strane korisnika}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Registrirani korisnik}
+		\item  \textbf{Cilj: Brisanje svog objavljenog recepta} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Objavljen je recept i korisnik je prijavljen} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik pregledava svoj recept
+			\item Odabere gumb za uređivanje recepta
+			\item Odabire gumb za brisanje recepta
+			\item U skočnom prozoru potvrđuje ili odustaje od brisanja recepta 
+		\end{packed_enum}
+	\end{packed_item}
+	
+	
+	\noindent \underbar{\textbf{UC7 - Razmjena poruka}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Registrirani korisnici i oni koji su objavili recept }
+		\item  \textbf{Cilj: Komunikacija između korisnika u vezi recepata} 
+		\item  \textbf{Sudionici: Baza podataka, FreeChat} 
+		\item  \textbf{Preduvjet: Korisnici su prijavljeni, autor je dostupan i ima objavljen recept} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik pregledava recept i na dijelu za autora pritisne gumb za razmjenu poruka
+			\item Napiše poruku i pošalje ju ili odustane od nje
+			\item Autor prima poruku i može odgovoriti na nju ako želi
+		\end{packed_enum}
+		
+		\item  \textbf{Opis mogućih odstupanja:}
+		
+		\item[] \begin{packed_item}
+			
+			\item[2.a] Autor nije dostupan za razmjenu poruka
+			\item[] \begin{packed_enum}
+				
+				\item Korisnika obavještavamo da autor nije dostupan i vraćamo ga na pregled recepta
+				
+			\end{packed_enum}
+			
+		\end{packed_item}
+	\end{packed_item}
+	
+	\noindent \underbar{\textbf{UC8 - Čavrljanje }}
+	\begin{packed_item}
+		
+		\item  \textbf{Glavni sudionik: Registrirani korisnici i oni koji su objavili recept }
+		\item  \textbf{Cilj: Komunikacija između korisnika u vezi recepata} 
+		\item  \textbf{Sudionici: Baza podataka, FreeChat} 
+		\item  \textbf{Preduvjet: Korisnici su prijavljeni, autor je dostupan i ima objavljen recept} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik pregledava recept i na dijelu za autora pritisne gumb za čavrljanje 
+			\item Autor treba prihvatiti ili odbiti zahtjev za čavrljanje
+			\item Otvori se prozor za čavrljanje i uspostavljena je komunikacija
+			\item Čavrljaju sve dok se ne zatvori prozor za čavrljanje
+		\end{packed_enum}
+		
+		\item  \textbf{Opis mogućih odstupanja:}
+		
+		\item[] \begin{packed_item}
+			
+			\item[2.a] Autor nije dostupan u to doba za čavrljanje
+			\item[] \begin{packed_enum}
+				
+				\item Korisnika obavještavamo da autor nije dostupan i vraćamo ga na pregled recepta
+				
+			\end{packed_enum}
+			
+		\end{packed_item}
+	\end{packed_item}
+	
+	\noindent \underbar{\textbf{UC9 - Video poziv}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Registrirani korisnici i oni koji su objavili recept }
+		\item  \textbf{Cilj: Komunikacija između korisnika u vezi recepata} 
+		\item  \textbf{Sudionici: Baza podataka, FreeChat} 
+		\item  \textbf{Preduvjet: Korisnici su prijavljeni, autor je dostupan i ima objavljen recept} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik pregledava recept i na dijelu za autora pritisne gumb za video poziv
+			\item Poziva se autor i može prihvatiti ili odbiti poziv
+			\item Ako je poziv prihvaćen traje sve dok ga jedan od korisnika ne prekine
+		\end{packed_enum}
+		
+		\item  \textbf{Opis mogućih odstupanja:}
+		
+		\item[] \begin{packed_item}
+			
+			\item[2.a] Autor nije dostupan u to doba za videopoziv
+			\item[] \begin{packed_enum}
+				
+				\item Korisnika obavještavamo da autor nije dostupan i vraćamo ga na pregled recepta
+				
+			\end{packed_enum}
+			
+		\end{packed_item}
+	\end{packed_item}
+	
+	
+	
+	\noindent \underbar{\textbf{UC10 - Označavanje recepata}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Registrirani korisnik}
+		\item  \textbf{Cilj: Stavljanje recepta u favorite za lako pronalaženje} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Korisnik je prijavljen} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik pregledava recept i može stisnuti na zvjezdicu za označavanje recepta kako bi ga stavio u favorite
+			\item Zvjezdica koja je inače iznutra prazna postane puna
+			\item Korisnik može označene recepte pregledati na posebnom dijelu aplikacije
+		\end{packed_enum}
+		
+		
+	\end{packed_item}
+	
+	
+	\noindent \underbar{\textbf{UC11 - Komentiranje recepata}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Registrirani korisnik}
+		\item  \textbf{Cilj: Postavljanje komentara na recept} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Korisnik je prijavljen i postoji recept} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik pregledava recept
+			\item U dijelu za komentare unosi komentar 
+			\item Odabire objavi ili odustane od objave komentara
+		\end{packed_enum}
+		
+		\item  \textbf{Opis mogućih odstupanja:}
+		
+		\item[] \begin{packed_item}
+			
+			\item[2.a] Prekršili smo ograničenje na broju znakova u komentaru
+			\item[] \begin{packed_enum}
+				
+				\item Obavještavamo korisnika o maksimalnom broju znakova i ne dopuštamo mu objaviti komentar 
+			\end{packed_enum}
 			
 			
-				
-			\subsection{Obrasci uporabe}
-				
-				
-						\noindent \underbar{\textbf{UC1 - Pregled recepata}}
-					\begin{packed_item}
-						
-						\item \textbf{Glavni sudionik: Neregistiran korisnik, Registriran korisnik}
-						\item  \textbf{Cilj: Pregled recepata temeljem kategorija} 
-						\item  \textbf{Sudionici: Baza podataka} 
-						\item  \textbf{Preduvjet: -} 
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-							
-							\item Korisnik otvori platformu
-							\item Ponuđene su mu kategorije, vrste kuhinje, specifični sastojci
-							\item Korisnik odabire kategoriju i prikazuju mu se recepti
-						\end{packed_enum}
-						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-							
-							\item[2.a] 
-							\item[] \begin{packed_enum}
-								
-								\item 
-								\item
-								
-							\end{packed_enum}
-							\item[2.b] 
-							\item[3.a] 
-							
-						\end{packed_item}
-					\end{packed_item}
-					
-					
-					\noindent \underbar{\textbf{UC2 - Registracija}}
-					\begin{packed_item}
-						
-						\item \textbf{Glavni sudionik: Neregistrirani korisnik}
-						\item  \textbf{Cilj: Stvaranje računa za pristup ostalim značajkama sustava}  
-						\item  \textbf{Sudionici: Baza podtaka} 
-						\item  \textbf{Preduvjet:-} 
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-							
-							\item Korisnik odabire opciju za registraciju
-							\item Korisnik unosi potrebne korisničke podatke
-							\item Korisnik prima obavijest o uspješnoj registraciji
-						\end{packed_enum}
-						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-							
-							\item[2.a] Odabir već zauzetog korisničkog imena i/ili e-maila, unos korisničkog podatka u nedozvoljenom formatu ili pružanje neispravnoga e-maila
-							\item[] \begin{packed_enum}
-								
-								\item  Sustav obavještava korisnika o neuspjelom upisu i vraća ga na stranicu za registraciju
-								\item Korisnik mijenja potrebne podatke te završava unos ili odustaje od registracije
-								
-							\end{packed_enum}
-							
-						\end{packed_item}
-					\end{packed_item}
-					
-					
-					\noindent \underbar{\textbf{UC3 - Prijava u sustav}}
-					\begin{packed_item}
-						
-						\item \textbf{Glavni sudionik: }
-						\item  \textbf{Cilj:} 
-						\item  \textbf{Sudionici:} 
-						\item  \textbf{Preduvjet:} 
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-							
-							\item 
-							\item 
-							\item 
-							\item 
-							\item 
-						\end{packed_enum}
-						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-							
-							\item[2.a] 
-							\item[] \begin{packed_enum}
-								
-								\item 
-								\item
-								
-							\end{packed_enum}
-							\item[2.b] 
-							\item[3.a] 
-							
-						\end{packed_item}
-					\end{packed_item}
-					
-					\noindent \underbar{\textbf{UC4 - Objava recepata}}
-					\begin{packed_item}
-						
-						\item \textbf{Glavni sudionik: Registrirani korisnik }
-						\item  \textbf{Cilj: Objava svog recepta na stranici} 
-						\item  \textbf{Sudionici:} 
-						\item  \textbf{Preduvjet: Registracija i prijava korisnika} 
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-							
-							\item 
-							\item 
-							\item 
-							\item 
-							\item 
-						\end{packed_enum}
-						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-							
-							\item[2.a] 
-							\item[] \begin{packed_enum}
-								
-								\item 
-								\item
-								
-							\end{packed_enum}
-							\item[2.b] 
-							\item[3.a] 
-							
-						\end{packed_item}
-					\end{packed_item}
-					
-					\noindent \underbar{\textbf{UC5 - Razmjena poruka}}
-					\begin{packed_item}
-						
-						\item \textbf{Glavni sudionik: }
-						\item  \textbf{Cilj:} 
-						\item  \textbf{Sudionici:} 
-						\item  \textbf{Preduvjet:} 
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-							
-							\item 
-							\item 
-							\item 
-							\item 
-							\item 
-						\end{packed_enum}
-						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-							
-							\item[2.a] 
-							\item[] \begin{packed_enum}
-								
-								\item 
-								\item
-								
-							\end{packed_enum}
-							\item[2.b] 
-							\item[3.a] 
-							
-						\end{packed_item}
-					\end{packed_item}
-					
-					\noindent \underbar{\textbf{UC6 - Čavrljanje }}
-					\begin{packed_item}
-						
-						\item \textbf{Glavni sudionik: }
-						\item  \textbf{Cilj:} 
-						\item  \textbf{Sudionici:} 
-						\item  \textbf{Preduvjet:} 
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-							
-							\item 
-							\item 
-							\item 
-							\item 
-							\item 
-						\end{packed_enum}
-						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-							
-							\item[2.a] 
-							\item[] \begin{packed_enum}
-								
-								\item 
-								\item
-								
-							\end{packed_enum}
-							\item[2.b] 
-							\item[3.a] 
-							
-						\end{packed_item}
-					\end{packed_item}
-					
-					\noindent \underbar{\textbf{UC7 - Videopoziv}}
-					\begin{packed_item}
-						
-						\item \textbf{Glavni sudionik: }
-						\item  \textbf{Cilj:} 
-						\item  \textbf{Sudionici:} 
-						\item  \textbf{Preduvjet:} 
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-							
-							\item 
-							\item 
-							\item 
-							\item 
-							\item 
-						\end{packed_enum}
-						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-							
-							\item[2.a] 
-							\item[] \begin{packed_enum}
-								
-								\item 
-								\item
-								
-							\end{packed_enum}
-							\item[2.b] 
-							\item[3.a] 
-							
-						\end{packed_item}
-					\end{packed_item}
-					
-					
+		\end{packed_item}
+	\end{packed_item}
+	
+	
+	\noindent \underbar{\textbf{UC12 - Spremanje recepata za buduću referencu}}
+	\begin{packed_item}
+		
+		\item  \textbf{Glavni sudionik: Registrirani korisnik}
+		\item  \textbf{Cilj: Spremanje recepta da ga korisnik može ponovno lako pronaći} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Korisnik je prijavljen i postoji recept} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik pregledava recept
+			\item Pritisne gumb za spremanje recepta, bookmark ikonica koja se inače prozirna
+			\item Recept je spremljen i ikonica je onda iznutra ispunjena
+		\end{packed_enum}
+	\end{packed_item}
+	
+	
+	\noindent \underbar{\textbf{UC13 - Uklanjanje oznake recepata}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Registrirani korisnik}
+		\item  \textbf{Cilj: Uklanjanje recepta iz favorita} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Korisnik je prijavljen} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik pregledava recept ili svoje označene recepte
+			\item Ako je recept označen, korisnik oznaku može ukloniti pritiskom na punu zvijezdu
+		\end{packed_enum}
+		
+		
+	\end{packed_item}
+	
+	
+	\noindent \underbar{\textbf{UC14 - Uklanjanje komentara}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Registrirani korisnik}
+		\item  \textbf{Cilj: Postavljanje komentara na recept} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Korisnik je prijavljen i postoji recept} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik pregledava recept
+			\item U dijelu za komentara pregledava svoj komentar
+			\item Odabire tri točkice pored komentara i može ga ukloniti
+			\item pojavi se potvrda za uklanjanje komentara gdje korisnik može potvrditi uklanjanje komentara ili odustati
+		\end{packed_enum}
+		
+		
+	\end{packed_item}
+	
+	\noindent \underbar{\textbf{UC15 - Uklanjanje spremljenog recepta}}
+	\begin{packed_item}
+		
+		\item  \textbf{Glavni sudionik: Registrirani korisnik}
+		\item  \textbf{Cilj: Spremanje recepta da ga korisnik može ponovno lako pronaći} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Korisnik je prijavljen i postoji recept} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik pregledava recept ili svoje spremljene recepte
+			\item Pritisne gumb za spremanje recepta koji je ispunjen kako bi uklonio spremljeni recept
+			\item Recept je uklonjen iz spremljenih recepata
+		\end{packed_enum}
+	\end{packed_item}
+	
+	
+	\noindent \underbar{\textbf{UC16 - Praćenje omiljenih autora recepata}}
+	\begin{packed_item}
+		
+		\item  \textbf{Glavni sudionik: Registrirani korisnik}
+		\item  \textbf{Cilj: Praćenje omiljenih autora kako bi korisnik dobio obavijesti o novim receptima} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Korisnik je prijavljen} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik pregledava profil autora recepta
+			\item Pritisne gumb za praćenje autora
+			\item Korisnik sada prati autora
+			
+		\end{packed_enum}
+		
+	\end{packed_item}
+	
+	
+	\noindent \underbar{\textbf{UC17 - Uklanjanje praćenja omiljenih autora recepata}}
+	\begin{packed_item}
+		
+		\item  \textbf{Glavni sudionik: Registrirani korisnik} 
+		\item  \textbf{Cilj: Uklanjanje praćenja omiljenih autora recepata} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Korisnik je prijavljen} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik pregledava profil autora recepta
+			\item Pritisne gumb za praćenje autora, na 
+			\item Korisnik sada prati autora
+			
+		\end{packed_enum}
+		
+	\end{packed_item}
+	
+	
+	\noindent \underbar{\textbf{UC18 - Slanje obavijesti o novim receptima omiljenih autora }}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Registrirani korisnik}
+		\item  \textbf{Cilj: Obavještavanje korisnika o novim objavama recepata } 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Korisnik je prijavljen i prati neke autore} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item U aplikaciji postovi dio za obavijest, ima ikonicu zvonca i ako ima novih obavijest pored zvonca se pojavi trenutni broj obavijest, osim toga se korisnika obavijest i notifikacijom
+		\end{packed_enum}
+	
+	\end{packed_item}
+	
+	\noindent \underbar{\textbf{UC19 - Pregled javnog profila}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Registrirani korisnik}
+		\item  \textbf{Cilj: Pregled javnog profila nekog korisnika} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Prijava korisnika} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik odabire profil nekog korisnika za pregled, može i vlastiti
+			\item Tamo može pregledati objavljene recepte, pratitelje i autore koje taj korisnik prati
+		\end{packed_enum}
+		
+	\end{packed_item}
+	
+	\noindent \underbar{\textbf{UC20 - Pregled privatnog profila}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Registrirani korisnik}
+		\item  \textbf{Cilj: Pregled vlastitog privatnog profila} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Prijava korisnika} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik odabire pregled privatnog profila
+			\item Tamo može pregledati osobne informacije, postavke komunikacije, obavijesti za poruke i aktivnosti povezane s receptima
+		\end{packed_enum}
+		
+	\end{packed_item}
+	
+	\noindent \underbar{\textbf{UC21 - Promjena postavki privatnog profila}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Registrirani korisnik}
+		\item  \textbf{Cilj: Uređivanje postavki vlastitog privatnog profila} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Prijava korisnika} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Korisnik odabire pregled privatnog profila
+			\item Tamo može uređivati postavke osobnih informacija, postavki komunikacije, obavijesti za poruke i aktivnosti povezane s receptima
+		\end{packed_enum}
+		
+	\end{packed_item}
+	
+	
+	\noindent \underbar{\textbf{UC22- Upravljanje korisnicima od strane sistemskom administratora}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Sistemski administrator}
+		\item  \textbf{Cilj: Upravljanje korisnicima od strane sistemskom administratora} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Postoje registrirani korisnici} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Administrator pregledava profil nekog korisnika i ima mogućnost uređivanja profila ili brisanja profila, ovo bi se koristilo u posebnim slučajevima ako dođe do nekih greški ili kriznih slučajeva ili ako korisnici rade nešto nedopušteno
+		\end{packed_enum}
+		
+	\end{packed_item}
+	
+	\noindent \underbar{\textbf{UC23 - Mijenjanje (kategorije) recepata od strane sistemskih administratora}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Sistemski administrator}
+		\item  \textbf{Cilj: Uređivanje (kategorija) recepta nekog korisnika} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Postoji objavljeni recept} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Sistemski administrator pregledava recept
+			\item Odabire gumb za uređivanje recepta
+			\item Odabire opciju za promjenu kategorija
+			\item Administrator potvrđuje ili odustaje od promjena
+			
+		\end{packed_enum}
+		
+	\end{packed_item}
+	
+	
+	\noindent \underbar{\textbf{UC24 - Brisanje recepata od strane sistemskih administratora}}
+	\begin{packed_item}
+		
+		\item \textbf{Glavni sudionik: Sistemski administrator}
+		\item  \textbf{Cilj: Brisanje recepta nekog korisnika} 
+		\item  \textbf{Sudionici: Baza podataka} 
+		\item  \textbf{Preduvjet: Postoji objavljeni recept} 
+		\item  \textbf{Opis osnovnog tijeka:}
+		
+		\item[] \begin{packed_enum}
+			
+			\item Sistemski administrator pregledava recept
+			\item Odabire gumb za brisanje recept
+			\item Pojavi se skočni prozor za potvrdu brisanja recepta
+			\item Administrator potvrđuje ili odustaje od brisanja recepta
+			
+		\end{packed_enum}
+		
+	\end{packed_item}
+		
+
 				\subsubsection{Dijagrami obrazaca uporabe}
 					
 					\textit{Prikazati odnos aktora i obrazaca uporabe odgovarajućim UML dijagramom. Nije nužno nacrtati sve na jednom dijagramu. Modelirati po razinama apstrakcije i skupovima srodnih funkcionalnosti.}
