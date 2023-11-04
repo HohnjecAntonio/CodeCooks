@@ -6,10 +6,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.sql.Time;
 
 @Entity
+@Data
+@EqualsAndHashCode
 public class Korisnik {
 
     @Id
@@ -96,5 +100,9 @@ public class Korisnik {
 
     public void setDostupan(Time dostupan) {
         Dostupan = dostupan;
+    }
+
+    public void setIDKorisnik(Long IDKorisnik) {
+        this.IDKorisnik = IDKorisnik;
     }
 }
