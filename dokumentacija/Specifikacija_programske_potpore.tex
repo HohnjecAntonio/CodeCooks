@@ -3,86 +3,83 @@
 	\section{Funkcionalni zahtjevi}
 	
 	
+	\noindent \textbf{Dionici:}
 	
-	\eject
-	
-	\subsection{Obrasci uporabe}
-	
-	\textbf{\textit{dio 1. revizije}}
-	
-	\subsubsection{Opis obrazaca uporabe}
-	\textit{Funkcionalne zahtjeve razraditi u obliku obrazaca uporabe. Svaki obrazac je potrebno razraditi prema donjem predlošku. Ukoliko u nekom koraku može doći do odstupanja, potrebno je to odstupanje opisati i po mogućnosti ponuditi rješenje kojim bi se tijek obrasca vratio na osnovni tijek.}\\
-	
-	
-	\noindent \underbar{\textbf{UC$<$broj obrasca$>$ -$<$ime obrasca$>$}}
-	\begin{packed_item}
+	\begin{packed_enum}
 		
-		\item \textbf{Glavni sudionik: }$<$sudionik$>$
-		\item  \textbf{Cilj:} $<$cilj$>$
-		\item  \textbf{Sudionici:} $<$sudionici$>$
-		\item  \textbf{Preduvjet:} $<$preduvjet$>$
-		\item  \textbf{Opis osnovnog tijeka:}
+		\item Administrator-voditelj tima
+		\item Razvojni tim CodeCooks			
+		\item Profesori predmeta Programsko inžinjerstvo
+		\item Korisnici
 		
-		\item[] \begin{packed_enum}
+	\end{packed_enum}
+	
+	\noindent \textbf{Aktori i njihovi funkcionalni zahtjevi:}
+	
+	
+	\begin{packed_enum}
+		\item  \underbar{Admin može:}
+		
+		\begin{packed_enum}
 			
-			\item $<$opis korak jedan$>$
-			\item $<$opis korak dva$>$
-			\item $<$opis korak tri$>$
-			\item $<$opis korak četiri$>$
-			\item $<$opis korak pet$>$
-		\end{packed_enum}
-		
-		\item  \textbf{Opis mogućih odstupanja:}
-		
-		\item[] \begin{packed_item}
-			
-			\item[2.a] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
-			\item[] \begin{packed_enum}
+			\item Upravljanje korisnicima
+			\item Upravljanje receptima
+			\begin{packed_enum}
 				
-				\item $<$opis rješenja mogućeg scenarija korak 1$>$
-				\item $<$opis rješenja mogućeg scenarija korak 2$>$
+				\item  Brisanje recepata
+				\item  Uređivanje recepata
 				
 			\end{packed_enum}
-			\item[2.b] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
-			\item[3.a] $<$opis mogućeg scenarija odstupanja  u koraku 3$>$
-			
-		\end{packed_item}
-	\end{packed_item}
-	
-	\noindent \underbar{\textbf{UC -}}
-	\begin{packed_item}
-		
-		\item \textbf{Glavni sudionik: }
-		\item  \textbf{Cilj:} 
-		\item  \textbf{Sudionici:} 
-		\item  \textbf{Preduvjet:} 
-		\item  \textbf{Opis osnovnog tijeka:}
-		
-		\item[] \begin{packed_enum}
-			
-			\item 
-			\item 
-			\item 
-			\item 
-			\item 
-		\end{packed_enum}
-		
-		\item  \textbf{Opis mogućih odstupanja:}
-		
-		\item[] \begin{packed_item}
-			
-			\item[2.a] 
-			\item[] \begin{packed_enum}
+			\item Upravljanje komentarima
+			\begin{packed_enum}
 				
-				\item 
-				\item
+				\item  Brisanje komentara 
+				\item  Cenzuriranje komentara
 				
 			\end{packed_enum}
-			\item[2.b] 
-			\item[3.a] 
+			\item  Mjenjanje kategorija
 			
-		\end{packed_item}
-	\end{packed_item}
+		\end{packed_enum}
+		
+		\item  \underbar{Registrirani korisnik može:}
+		
+		\begin{packed_enum}
+			
+			\item Objavljivanje recepata
+			\item Komuniciranje s ostalim registriranim korisnicima
+			\item Objavljivanje termina za komunikaciju
+			\item Označavanje recepata
+			\item Komentiranje recepata
+			\item Spremanje recepata
+			\item Praćenje drugih registriranih korisnika
+			\item Upravljanje dozvolama pratiteljima
+			\item Upravljanje osobnim informacijama
+			\item Upravljanje postavkama komunikacije i obavijestima
+			
+		\end{packed_enum}
+		
+		\item  \underbar{Neregistrirani korisnik može:}
+		
+		\begin{packed_enum}
+			
+			\item Pregledavanje recepata temeljem kategorija
+			
+		\end{packed_enum}
+		
+		
+		\item  \underbar{Baza podataka može:}
+		
+		\begin{packed_enum}
+			
+			\item Pohrana osobnih podataka registriranog korisnika
+			\item Pohrana recepata
+			\item Pohrana komentara
+			
+		\end{packed_enum}
+	\end{packed_enum}
+	
+	\eject 
+	
 	
 	\noindent \underbar{\textbf{UC1 - Pregled recepata}}
 	\begin{packed_item}
