@@ -1,9 +1,6 @@
 package opp.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -12,17 +9,19 @@ import lombok.EqualsAndHashCode;
 import java.sql.Time;
 
 @Entity
+@Table(name = "korisnik")
 @Data
 @EqualsAndHashCode
 public class Korisnik {
 
     @Id
     @GeneratedValue
+    @Column(name = "iDKorisnik")
     private Long IDKorisnik;
 
     @NotNull
-    @Column(unique = true)
-    private String KorisnickoIme;
+    @Column(name = "korisnickoIme", unique = true)
+    private String korisnickoIme;
 
     @NotNull
     @Size(min = 6)
@@ -39,7 +38,7 @@ public class Korisnik {
     }
 
     public String getKorisnickoIme() {
-        return KorisnickoIme;
+        return korisnickoIme;
     }
 
     public String getLozinkaKorisnik() {
@@ -71,7 +70,7 @@ public class Korisnik {
     }
 
     public void setKorisnickoIme(String korisnickoIme) {
-        KorisnickoIme = korisnickoIme;
+        this.korisnickoIme = korisnickoIme;
     }
 
     public void setLozinkaKorisnik(String lozinkaKorisnik) {

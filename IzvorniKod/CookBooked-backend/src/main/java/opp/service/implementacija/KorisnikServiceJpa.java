@@ -24,6 +24,11 @@ public class KorisnikServiceJpa implements KorisnikService {
     public Korisnik createKorisnik(Korisnik korisnik) {
         Assert.notNull(korisnik, "Objekt korisnik nije valjan");
         Assert.isNull(korisnik.getIDKorisnik(), "IDKorisnika mora biti null, ne " + korisnik.getIDKorisnik());
+        if (korisnikRepo.countByKorisnickoIme(korisnik.getKorisnickoIme()) > 0) {
+            throw new RequestDeniedException(
+                    "Korisničko ime je zauzeto"
+            );
+       }
         return korisnikRepo.save(korisnik);
     }
 

@@ -1,16 +1,17 @@
 package opp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
+@Table(name = "receptKategorije")
 @Data
 @EqualsAndHashCode
 public class ReceptKategorije {
 
     @Id
+    @Column(name = "iDRecept")
     private Long IDRecept;
 
     private Long IDKategorija;

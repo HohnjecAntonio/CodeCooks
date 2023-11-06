@@ -1,18 +1,21 @@
 package opp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
+@Table(name = "oznRecept")
 @Data
 @EqualsAndHashCode
 public class OznRecept {
 
     @Id
     private Long IDRecept;
+
+    @ManyToOne
+    @JoinColumn(name = "korisnik", referencedColumnName = "iDKorisnik")
+    private Korisnik korisnici;
 
     private Long IDKorisnik;
 

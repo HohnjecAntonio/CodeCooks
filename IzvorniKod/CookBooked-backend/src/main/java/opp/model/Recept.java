@@ -1,14 +1,14 @@
 package opp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import java.util.Set;
 
 import java.sql.Time;
 
 @Entity
+@Table(name = "recept")
 @Data
 @EqualsAndHashCode
 public class Recept {
@@ -19,9 +19,17 @@ public class Recept {
 
     private String NazivRecept;
 
+    @OneToMany
+    @JoinColumn(name = "receptKategorije", referencedColumnName = "iDKategorija")
+    private Set<ReceptKategorije> receptKategorije;
+
     private Long IDKategorija;
 
     private Long IDReceptSastojak;
+
+    //@OneToMany
+    //@JoinColumn(name = "vrstaKuhinja", referencedColumnName = "iDVrstaKuhinja")
+    //private Set<VrstaKuhinja> vrstaKuhinja;
 
     private Long IDVrstaKuhinje;
 
@@ -32,6 +40,7 @@ public class Recept {
     private String Oznaka; // ???
 
     private String SlikaRecept; // ?? Onda bolje link koji može bit il slika il dokument poput worda
+
 
     private Long IDVideoRecept;
 

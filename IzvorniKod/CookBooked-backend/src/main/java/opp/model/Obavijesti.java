@@ -1,15 +1,13 @@
 package opp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.sql.Time;
 
 @Entity
+@Table(name = "obavijesti")
 @Data
 @EqualsAndHashCode
 public class Obavijesti {
@@ -17,6 +15,10 @@ public class Obavijesti {
     @Id
     @GeneratedValue
     private Long IDObavijest;
+
+    @ManyToOne
+    @JoinColumn(name = "korisnik", referencedColumnName = "iDKorisnik")
+    private Korisnik korisnik;
 
     private Long IDKorisnik;
 
