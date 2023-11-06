@@ -1,8 +1,8 @@
-FROM maven: 3.8.5-openjdk-17 as build
+FROM maven:3.8.5-openjdk-17 AS build
 COPY . .
 RUN mvn clean package -DskipTests
 
-FROM openjdk:17.0.1-jdk-slim
-COPY --from=build /target/CookBooked-backend-0.0.1-SNAPSHOT.jar cookBooked-backend.jar
+FROM openjdk:17-jdk-slim
+COPY --from=build /target/CookBooked-backend-0.0.1-SNAPSHOT.jar CBbackend.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","cookBooked.jar"]
+ENTRYPOINT ["java","-jar","CBbackend.jar"]
