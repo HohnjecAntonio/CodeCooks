@@ -32,4 +32,28 @@ public class KorisnikServiceJpa implements KorisnikService {
         return korisnikRepo.save(korisnik);
     }
 
+    @Override
+    public Optional findById(long iDKorisnik) {
+        return korisnikRepo.findById(iDKorisnik);
+    }
+
+    @Override
+    public Optional findByUsername(String korisnickoIme) {
+        Assert.notNull(korisnickoIme, "Potrebno je unijeti korisničko ime.");
+        return korisnikRepo.findByUsername(korisnickoIme);
+    }
+
+    @Override
+    public Korisnik fetch(long iDKorisnik) {
+        return findById(iDKorisnik).orElseThrow(
+                () -> new EntityMissingException(Korisnik.class, iDKorisnik));
+    }
+
+    @Override
+    public Korisnik deleteKorisnik(long iDKorisnik) {
+        Korisnik korisnik = fetch(iDKorisnik);
+        korisnikRepo.delete(korisnik);
+        return korisnik;
+    }
+
 }
