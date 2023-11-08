@@ -23,6 +23,9 @@ public class KorisnikServiceJpa implements KorisnikService {
     @Override
     public Korisnik createKorisnik(Korisnik korisnik) {
         Assert.notNull(korisnik, "Objekt korisnik nije valjan");
+        Assert.hasLength(korisnik.getKorisnickoIme(), "Korisnicko ime ne smije biti prazno");
+        Assert.isTrue(korisnik.getLozinkaKorisnik() != null && korisnik.getLozinkaKorisnik().length() >= 6,
+                "Lozinka mora imati minimalno 6 znakova.");
         Assert.isNull(korisnik.getIDKorisnik(), "IDKorisnika mora biti null, ne " + korisnik.getIDKorisnik());
         if (korisnikRepo.countByKorisnickoIme(korisnik.getKorisnickoIme()) > 0) {
             throw new RequestDeniedException(
