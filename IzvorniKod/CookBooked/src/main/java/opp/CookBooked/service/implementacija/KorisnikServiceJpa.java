@@ -9,6 +9,7 @@ import opp.CookBooked.repository.KorisnikRepository;
 import opp.CookBooked.model.Korisnik;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class KorisnikServiceJpa implements KorisnikService {
@@ -33,4 +34,9 @@ public class KorisnikServiceJpa implements KorisnikService {
         return korisnikRepo.save(korisnik);
     }
 
+    @Override
+    public Optional<Korisnik> findByKorisnickoIme(String korisnickoIme) {
+        Assert.notNull(korisnickoIme, "Parametar korisnickoIme mora biti naveden");
+        return korisnikRepo.findByKorisnickoIme(korisnickoIme);
+    }
 }
