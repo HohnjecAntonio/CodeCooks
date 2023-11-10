@@ -55,5 +55,6 @@
   },
   "proxy": "http://localhost:8080/",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "homepage": "."
 }
