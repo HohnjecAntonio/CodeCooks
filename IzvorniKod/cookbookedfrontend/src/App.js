@@ -27,7 +27,7 @@ function App() {
       <BrowserRouter>
       
         <Routes>
-          <Route path='/' exact ><Blog/></Route>
+          <Route path='/' exact component = {Blog}/>
           <Route path='/Login' exact component={SignIn}/>
           <Route path='/Registration' exact component={SignUp}/>
           <Route path='/Categories' exact component={Categories}/>
