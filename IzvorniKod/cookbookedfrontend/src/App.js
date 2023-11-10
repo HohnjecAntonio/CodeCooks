@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Switch, Route} from 'react-router-dom';
 import Categories from './Categories';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
@@ -26,12 +26,12 @@ function App() {
         
       <BrowserRouter>
       
-        <Routes>
+        <Switch>
           <Route path='/' exact component = {Blog}/>
           <Route path='/Login' exact component={SignIn}/>
           <Route path='/Registration' exact component={SignUp}/>
           <Route path='/Categories' exact component={Categories}/>
-        </Routes>
+        </Switch>
       </BrowserRouter>
       </header>
       
