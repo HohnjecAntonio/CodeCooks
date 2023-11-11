@@ -18,6 +18,15 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const defaultTheme = createTheme();
 
 export default function SignInSide() {
+
+   const [signInForm, setSignInForm] = React.useState({ email: '', password: ''});
+   const [error, setError] = React.useState('');
+
+    function onChange(event) {
+       const {name, value} = event.target;
+       setSignInForm(oldForm => ({...oldForm, [name]: value}))
+     }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -25,6 +34,16 @@ export default function SignInSide() {
       email: data.get('email'),
       password: data.get('password'),
     });
+
+        const options = {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+
+        return fetch('/localhost:8080/api', options);
   };
 
   return (
@@ -71,6 +90,8 @@ export default function SignInSide() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+
+                onChange={onChange} value={signInForm.email}
               />
               <TextField
                 margin="normal"
@@ -81,6 +102,8 @@ export default function SignInSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+
+                onChange={onChange} value={signInForm.password}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}

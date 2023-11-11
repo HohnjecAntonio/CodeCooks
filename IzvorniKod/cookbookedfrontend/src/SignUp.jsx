@@ -17,14 +17,36 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const defaultTheme = createTheme();
 
+
+
 export default function SignUp() {
+  const [signUpForm, setSignUpForm] = React.useState({ email: '', password: '', firstName:'', lastName: ''});
+  const [error, setError] = React.useState('');
+
+ function onChange(event) {
+    const {name, value} = event.target;
+    setSignUpForm(oldForm => ({...oldForm, [name]: value}))
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get('email'),
       password: data.get('password'),
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName')
     });
+
+    const options = {
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            };
+
+            return fetch('/localhost:8080/api', options);
   };
 
   return (
@@ -56,6 +78,7 @@ export default function SignUp() {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  onChange={onChange} value={signUpForm.firstName}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -66,6 +89,7 @@ export default function SignUp() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  onChange={onChange} value={signUpForm.lastName}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -76,6 +100,7 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={onChange} value={signUpForm.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -87,6 +112,7 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={onChange} value={signUpForm.password}
                 />
               </Grid>
               <Grid item xs={12}>
