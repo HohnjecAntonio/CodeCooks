@@ -14,6 +14,7 @@ public class ReceptKategorije {
     @Column(name = "iDRecept")
     private Long IDRecept;
 
+    @Column(name = "iDKategorija")
     private Long IDKategorija;
 
     public Long getIDRecept() {

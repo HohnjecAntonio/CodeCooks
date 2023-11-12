@@ -1,4 +1,4 @@
-package opp.service.implementacija;
+package opp.service;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

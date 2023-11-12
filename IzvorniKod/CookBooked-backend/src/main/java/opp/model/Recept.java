@@ -1,6 +1,7 @@
 package opp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import java.util.Set;
@@ -15,21 +16,15 @@ public class Recept {
 
     @Id
     @GeneratedValue
+    @Column(name = "iDRecept")
     private Long IDRecept;
 
+    @NotNull
     private String NazivRecept;
-
-    @OneToMany
-    @JoinColumn(name = "receptKategorije", referencedColumnName = "iDKategorija")
-    private Set<ReceptKategorije> receptKategorije;
 
     private Long IDKategorija;
 
-    private Long IDReceptSastojak;
-
-    //@OneToMany
-    //@JoinColumn(name = "vrstaKuhinja", referencedColumnName = "iDVrstaKuhinja")
-    //private Set<VrstaKuhinja> vrstaKuhinja;
+    private Long IDSastojak;
 
     private Long IDVrstaKuhinje;
 
@@ -37,12 +32,19 @@ public class Recept {
 
     private Time VrijemeKuhanja;
 
-    private String Oznaka; // ???
+    private String Oznaka; // oznaka: vegetarijansko, bezglutensko ili na engl. tag
 
     private String SlikaRecept; // ?? Onda bolje link koji može bit il slika il dokument poput worda
 
-
     private Long IDVideoRecept;
+
+    //@OneToMany
+    //@JoinColumn(name = "receptKategorije", referencedColumnName = "iDKategorija")
+    //private Set<ReceptKategorije> receptKategorije;
+
+    //@OneToMany
+    //@JoinColumn(name = "vrstaKuhinja", referencedColumnName = "iDVrstaKuhinja")
+    //private Set<VrstaKuhinja> vrstaKuhinja;
 
     public Long getIDRecept() {
         return IDRecept;
@@ -52,8 +54,8 @@ public class Recept {
         return IDKategorija;
     }
 
-    public Long getIDReceptSastojak() {
-        return IDReceptSastojak;
+    public Long getIDSastojak() {
+        return IDSastojak;
     }
 
     public Long getIDVideoRecept() {
@@ -112,8 +114,8 @@ public class Recept {
         this.IDKategorija = IDKategorija;
     }
 
-    public void setIDReceptSastojak(Long IDReceptSastojak) {
-        this.IDReceptSastojak = IDReceptSastojak;
+    public void setIDSastojak(Long IDSastojak) {
+        this.IDSastojak = IDSastojak;
     }
 
     public void setIDVideoRecept(Long IDVideoRecept) {
