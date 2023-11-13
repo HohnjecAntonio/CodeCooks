@@ -23,7 +23,7 @@ public class KorisnikUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username){
-
+        System.out.println("loadUserByUsername called");
         if("admin".equals(username)){
             return new User(
                     username,

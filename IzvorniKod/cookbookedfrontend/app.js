@@ -25,7 +25,7 @@ app.listen(PORT, HOST, () => {
     console.log(`Starting Proxy at ${HOST}:${PORT}`);
 });
 
-app.get("*", async (req, res) => {
+app.get("/*", async (req, res) => {
         res.sendFile(path.join(__dirname, 'build', 'index.html'))
     }
 );

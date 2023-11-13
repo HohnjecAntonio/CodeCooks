@@ -33,6 +33,16 @@ public class Korisnik {
     private String razinaOvlasti;
     private Time dostupan;
 
+    public Korisnik() {
+
+    }
+
+    public Korisnik(String korisnickoIme, String lozinkaKorisnik, String emailKorisnik) {
+        this.korisnickoIme = korisnickoIme;
+        this.lozinkaKorisnik = lozinkaKorisnik;
+        this.emailKorisnik = emailKorisnik;
+    }
+
     public Long getIDKorisnik() {
         return idKorisnik;
     }

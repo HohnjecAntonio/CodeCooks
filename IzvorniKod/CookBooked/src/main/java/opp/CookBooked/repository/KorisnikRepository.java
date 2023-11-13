@@ -9,4 +9,8 @@ public interface KorisnikRepository  extends JpaRepository<Korisnik, Long> {
     int countByKorisnickoIme(String KorisnickoIme);
 
     Optional<Korisnik> findByKorisnickoIme(String korisnickoIme);
+
+    Optional<Korisnik> findByIdKorisnik(long iDKorisnik);
+
+    long countByEmailKorisnik(String emailKorisnik);
 }

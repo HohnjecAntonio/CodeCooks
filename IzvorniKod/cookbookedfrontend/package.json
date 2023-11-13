@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.17",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -14,15 +16,21 @@
     "@types/node": "^16.11.65",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
-    "axios": "^0.24.0",
+    "@types/react-router-dom": "^5.3.3",
+    "axios": "^1.6.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "http-browserify": "^1.7.0",
     "http-proxy-middleware": "^2.0.6",
+    "https-browserify": "^1.0.0",
+    "markdown-to-jsx": "^7.3.2",
+    "net": "^1.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "^5.0.1",
-    "typescript": "^4.8.4",
-    "web-vitals": "^2.1.4"
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4",
+    "yarn": "^1.22.19"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -49,7 +57,12 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080/",
+  "proxy": "https://api.render.com/deploy/srv-cl5sltu4v2vc739b59tg?key=Dkdu3w5kxzY",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "homepage": ".",
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "typescript": "^4.9.5"
+  }
 }
