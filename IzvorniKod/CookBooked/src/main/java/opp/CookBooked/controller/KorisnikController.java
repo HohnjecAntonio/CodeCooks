@@ -20,7 +20,7 @@ public class KorisnikController {
     }
 
     @PostMapping("")
-    public Korisnik createKorisnik(@RequestBody Korisnik korisnik){
-        return korisnikService.createKorisnik(korisnik);
+    public Korisnik createKorisnik(@RequestBody RegisterDTO dto){
+        return korisnikService.createKorisnik(dto.getUsername(), dto.getPassword(), dto.getEmail());
     }
 }
