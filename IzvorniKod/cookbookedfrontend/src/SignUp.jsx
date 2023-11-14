@@ -20,7 +20,11 @@ const defaultTheme = createTheme();
 
 
 export default function SignUp() {
+<<<<<<< HEAD
   const [signUpForm, setSignUpForm] = React.useState({ username: '', password: '', email: ''});
+=======
+  const [signUpForm, setSignUpForm] = React.useState({ email: '', password: '', firstName:'', lastName: ''});
+>>>>>>> dev_BZ
   const [error, setError] = React.useState('');
 
  function onChange(event) {
@@ -30,6 +34,7 @@ export default function SignUp() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+<<<<<<< HEAD
     const formData = new FormData(event.currentTarget);
     
     const data = {
@@ -39,6 +44,15 @@ export default function SignUp() {
     };
 
     console.log(JSON.stringify(data));
+=======
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName')
+    });
+>>>>>>> dev_BZ
 
     const options = {
                 method: 'POST',
@@ -48,6 +62,7 @@ export default function SignUp() {
                 body: JSON.stringify(data)
             };
 
+<<<<<<< HEAD
         fetch('http://localhost:8080/api/korisnici', options)
         .then(response => {
           if (!response.ok) {
@@ -64,6 +79,9 @@ export default function SignUp() {
           console.error('There was a problem while registering:', error);
           // You can perform error handling or show appropriate messages to the user
         });
+=======
+            return fetch('/localhost:8080/api', options);
+>>>>>>> dev_BZ
   };
 
   return (
@@ -86,6 +104,7 @@ export default function SignUp() {
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
+<<<<<<< HEAD
               <Grid item xs={12}>
                 <TextField
                   autoComplete="username"
@@ -96,6 +115,40 @@ export default function SignUp() {
                   label="Username"
                   autoFocus
                   onChange={onChange} value={signUpForm.username}
+=======
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  name="firstName"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
+                  onChange={onChange} value={signUpForm.firstName}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  autoComplete="family-name"
+                  onChange={onChange} value={signUpForm.lastName}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  onChange={onChange} value={signUpForm.email}
+>>>>>>> dev_BZ
                 />
               </Grid>
               <Grid item xs={12}>
@@ -111,6 +164,7 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
+<<<<<<< HEAD
                 <TextField
                   required
                   fullWidth
@@ -119,6 +173,11 @@ export default function SignUp() {
                   name="email"
                   autoComplete="email"
                   onChange={onChange} value={signUpForm.email}
+=======
+                <FormControlLabel
+                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  label="I want to receive inspiration, marketing promotions and updates via email."
+>>>>>>> dev_BZ
                 />
               </Grid>
             </Grid>
