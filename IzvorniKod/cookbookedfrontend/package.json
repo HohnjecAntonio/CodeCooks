@@ -57,7 +57,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://api.render.com/deploy/srv-cl5sltu4v2vc739b59tg?key=Dkdu3w5kxzY",
+  "proxy": "https://api.render.com/deploy/srv-cl5sltu4v2vc739b59tg?key=Dkdu3w5kxzY:8080",
   "main": "index.js",
   "license": "MIT",
   "homepage": ".",

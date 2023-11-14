@@ -46,7 +46,7 @@ export default function SignInSide() {
             body: new URLSearchParams(data).toString()
         };
 
-        fetch('https://api.render.com/deploy/srv-cl5sltu4v2vc739b59tg?key=Dkdu3w5kxzY/api/login', options)
+        fetch('/api/login', options)
         .then(response => {
           if (!response.ok) {
             throw new Error('Bad credentials');
