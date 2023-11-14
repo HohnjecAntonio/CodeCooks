@@ -14,7 +14,7 @@ import java.util.Map;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 public class RestExceptionHandler {
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(IllegalArgumentException.class)
     protected ResponseEntity<?> handleIllegalArgument(Exception e, WebRequest req) {
         Map<String, String> props = new HashMap<>();
         props.put("message", e.getMessage());
