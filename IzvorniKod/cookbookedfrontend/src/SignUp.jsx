@@ -48,7 +48,7 @@ export default function SignUp() {
                 body: JSON.stringify(data)
             };
 
-        fetch('/api/korisnici', options)
+        fetch('https://api.render.com/deploy/srv-cl5sltu4v2vc739b59tg?key=Dkdu3w5kxzY/api/korisnici', options)
         .then(response => {
           if (!response.ok) {
             //throw new Error('Bad credentials');
