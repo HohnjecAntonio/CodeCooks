@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e81ae52d-bdc0-4f70-a3a0-3d71e107a12f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/src/main/java/opp/CookBooked/controller/KorisnikController.java" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/src/main/java/opp/CookBooked/controller/KorisnikController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/src/main/java/opp/CookBooked/controller/KorisnikUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/src/main/java/opp/CookBooked/controller/KorisnikUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/src/main/java/opp/CookBooked/controller/WebSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/src/main/java/opp/CookBooked/controller/WebSecurity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/src/main/java/opp/CookBooked/model/Korisnik.java" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/src/main/java/opp/CookBooked/model/Korisnik.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/src/main/java/opp/CookBooked/repository/KorisnikRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/src/main/java/opp/CookBooked/repository/KorisnikRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/src/main/java/opp/CookBooked/service/KorisnikService.java" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/src/main/java/opp/CookBooked/service/KorisnikService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/src/main/java/opp/CookBooked/service/implementacija/KorisnikServiceJpa.java" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/src/main/java/opp/CookBooked/service/implementacija/KorisnikServiceJpa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/controller/KorisnikController.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/controller/KorisnikController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/controller/KorisnikUserDetailsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/controller/KorisnikUserDetailsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/controller/WebSecurity.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/controller/WebSecurity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/Kategorija.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/Kategorija.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/Komentar.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/Komentar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/Korisnik.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/Korisnik.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/Obavijesti.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/Obavijesti.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/ObjavaRecepta.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/ObjavaRecepta.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/OmiljeniAutor.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/OmiljeniAutor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/OznRecept.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/OznRecept.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/Recept.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/Recept.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/ReceptKategorije.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/ReceptKategorije.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/ReceptSastojci.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/ReceptSastojci.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/Sastojak.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/Sastojak.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/SpremljenRecept.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/SpremljenRecept.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/Video.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/Video.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/VrstaKuhinja.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/model/VrstaKuhinja.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/repository/KorisnikRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/repository/KorisnikRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/service/KorisnikService.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/service/KorisnikService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/service/implementacija/KorisnikServiceJpa.class" beforeDir="false" afterPath="$PROJECT_DIR$/IzvorniKod/CookBooked/target/classes/opp/CookBooked/service/implementacija/KorisnikServiceJpa.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2XyuHDBWXt231Y4lxWsz0RBL8ef" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/IzvorniKod/CookBooked" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e81ae52d-bdc0-4f70-a3a0-3d71e107a12f" name="Changes" comment="" />
+      <created>1699613551290</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699613551290</updated>
+    </task>
+    <servers />
+  </component>
+</project>

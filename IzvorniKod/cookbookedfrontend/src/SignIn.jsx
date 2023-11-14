@@ -20,7 +20,6 @@ const defaultTheme = createTheme();
 export default function SignInSide() {
 
    const [signInForm, setSignInForm] = React.useState({ username: '', password: ''});
-
    const [error, setError] = React.useState('');
 
     function onChange(event) {
@@ -38,7 +37,6 @@ export default function SignInSide() {
     };
 
     console.log(JSON.stringify(data));
-
 
         const options = {
             method: 'POST',
@@ -126,10 +124,6 @@ export default function SignInSide() {
                 onChange={onChange} value={signInForm.password}
               />
 
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
               <Button
                 type="submit"
                 fullWidth
