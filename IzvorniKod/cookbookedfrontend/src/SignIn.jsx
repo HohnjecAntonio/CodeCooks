@@ -19,11 +19,8 @@ const defaultTheme = createTheme();
 
 export default function SignInSide() {
 
-<<<<<<< HEAD
    const [signInForm, setSignInForm] = React.useState({ username: '', password: ''});
-=======
-   const [signInForm, setSignInForm] = React.useState({ email: '', password: ''});
->>>>>>> dev_BZ
+
    const [error, setError] = React.useState('');
 
     function onChange(event) {
@@ -33,7 +30,6 @@ export default function SignInSide() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-<<<<<<< HEAD
     const formData = new FormData(event.currentTarget);
 
     const data = {
@@ -42,18 +38,11 @@ export default function SignInSide() {
     };
 
     console.log(JSON.stringify(data));
-=======
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
->>>>>>> dev_BZ
+
 
         const options = {
             method: 'POST',
             headers:{
-<<<<<<< HEAD
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: new URLSearchParams(data).toString()
@@ -75,14 +64,6 @@ export default function SignInSide() {
           console.error('There was a problem logging in:', error);
           // You can perform error handling or show appropriate messages to the user
         });
-=======
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        };
-
-        return fetch('/localhost:8080/api', options);
->>>>>>> dev_BZ
   };
 
   return (
@@ -124,7 +105,6 @@ export default function SignInSide() {
                 margin="normal"
                 required
                 fullWidth
-<<<<<<< HEAD
                 id="username"
                 label="Username"
                 name="username"
@@ -132,15 +112,6 @@ export default function SignInSide() {
                 autoFocus
 
                 onChange={onChange} value={signInForm.username}
-=======
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-
-                onChange={onChange} value={signInForm.email}
->>>>>>> dev_BZ
               />
               <TextField
                 margin="normal"
@@ -154,14 +125,11 @@ export default function SignInSide() {
 
                 onChange={onChange} value={signInForm.password}
               />
-<<<<<<< HEAD
 
-=======
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
->>>>>>> dev_BZ
               <Button
                 type="submit"
                 fullWidth
