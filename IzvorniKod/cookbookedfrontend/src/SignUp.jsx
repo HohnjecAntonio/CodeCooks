@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from "axios";
 
 
 
@@ -48,7 +49,12 @@ export default function SignUp() {
                 body: JSON.stringify(data)
             };
 
-        fetch('https://cookbooked-codecooks.onrender.com/api/korisnici', options)
+        // fetch('https://cookbooked-codecooks.onrender.com/api/korisnici', options)
+
+      axios.post('https://cookbooked-codecooks.onrender.com/api/korisnici', {
+          username: formData.get('username'),
+          password: formData.get('password')
+      })
         .then(response => {
           if (!response.ok) {
             //throw new Error('Bad credentials');
