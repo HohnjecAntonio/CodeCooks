@@ -50,7 +50,7 @@ export default function SignUp() {
                 body: JSON.stringify(data)
             };
 
-        fetch('https://cookbooked-codecooks.onrender.com/api/korisnici', options)
+        fetch('/api/korisnici', options)
         .then(response => {
           if (!response.ok) {
             //throw new Error('Bad credentials');
