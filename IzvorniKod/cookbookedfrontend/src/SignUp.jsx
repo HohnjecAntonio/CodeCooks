@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -42,16 +42,15 @@ export default function SignUp() {
 
     const options = {
                 method: 'POST',
-                withCredentials: true,
+                //withCredentials: true,
                 headers:{
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer {{rnd_xET9P8RFqjGRjg2Pi5pikwU3u5AU}}'
+                    //'Authorization': 'Bearer {{rnd_xET9P8RFqjGRjg2Pi5pikwU3u5AU}}'
                 },
                 body: JSON.stringify(data)
             };
 
-
-        fetch('/api/korisnici', options)
+        fetch('https://cookbooked-codecooks.onrender.com/api/korisnici', options)
         .then(response => {
           if (!response.ok) {
             //throw new Error('Bad credentials');
@@ -67,7 +66,6 @@ export default function SignUp() {
           console.error('There was a problem while registering:', error);
           // You can perform error handling or show appropriate messages to the user
         });
-
   };
 
   return (
