@@ -12,7 +12,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from "axios";
 
 
 
@@ -41,21 +40,17 @@ export default function SignUp() {
 
     console.log(JSON.stringify(data));
 
-    // const options = {
-    //             method: 'POST',
-    //             headers:{
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(data)
-    //         };
+    const options = {
+                method: 'POST',
+                withCredentials: true,
+                headers:{
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer {{rnd_xET9P8RFqjGRjg2Pi5pikwU3u5AU}}'
+                },
+                body: JSON.stringify(data)
+            };
 
-        // fetch('https://cookbooked-codecooks.onrender.com/api/korisnici', options)
-
-      axios.post('https://cookbooked-codecooks.onrender.com/api/korisnici', {
-          username: formData.get('username'),
-          password: formData.get('password'),
-          email: formData.get('email'),
-      })
+        fetch('https://cookbooked-codecooks.onrender.com/api/korisnici', options)
         .then(response => {
           if (!response.ok) {
             //throw new Error('Bad credentials');

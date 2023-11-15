@@ -12,7 +12,6 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from "axios";
 
 
 
@@ -39,10 +38,17 @@ export default function SignInSide() {
 
     console.log(JSON.stringify(data));
 
-      axios.post('https://cookbooked-codecooks.onrender.com/api/login', {
-          username: formData.get('username'),
-          password: formData.get('password')
-      })
+        const options = {
+            method: 'POST',
+            withCredentials: true,
+            headers:{
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Bearer {{rnd_xET9P8RFqjGRjg2Pi5pikwU3u5AU}}'
+            },
+            body: new URLSearchParams(data).toString()
+        };
+
+        fetch('https://cookbooked-codecooks.onrender.com/api/login', options)
         .then(response => {
           if (!response.ok) {
             throw new Error('Bad credentials');
