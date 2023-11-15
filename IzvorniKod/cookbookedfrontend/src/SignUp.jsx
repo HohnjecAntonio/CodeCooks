@@ -41,19 +41,20 @@ export default function SignUp() {
 
     console.log(JSON.stringify(data));
 
-    const options = {
-                method: 'POST',
-                headers:{
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            };
+    // const options = {
+    //             method: 'POST',
+    //             headers:{
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify(data)
+    //         };
 
         // fetch('https://cookbooked-codecooks.onrender.com/api/korisnici', options)
 
       axios.post('https://cookbooked-codecooks.onrender.com/api/korisnici', {
           username: formData.get('username'),
-          password: formData.get('password')
+          password: formData.get('password'),
+          email: formData.get('email'),
       })
         .then(response => {
           if (!response.ok) {
