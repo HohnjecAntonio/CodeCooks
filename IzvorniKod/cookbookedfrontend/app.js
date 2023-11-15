@@ -6,8 +6,6 @@ const path = require("path")
 const app = express();
 
 // Configuration
-const { PORT } = process.env;
-const { HOST } = process.env;
 const { API_BASE_URL } = process.env;
 
 // Proxy
@@ -21,7 +19,7 @@ app.use(
 
 app.use(express.static(path.join(__dirname, 'build')))
 
-app.get("*", async (req, res) => {
+app.get("/*", async (req, res) => {
         res.sendFile(path.join(__dirname, 'build', 'index.html'))
     }
 );
