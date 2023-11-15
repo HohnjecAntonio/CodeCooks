@@ -48,7 +48,6 @@ export default function SignInSide() {
             body: new URLSearchParams(data).toString()
         };
 
-      React.useEffect(() => {
         fetch('/api/login', options)
         .then(response => {
           if (!response.ok) {
@@ -65,7 +64,7 @@ export default function SignInSide() {
           console.error('There was a problem logging in:', error);
           // You can perform error handling or show appropriate messages to the user
         });
-      });
+
   };
 
   return (

@@ -50,7 +50,7 @@ export default function SignUp() {
                 body: JSON.stringify(data)
             };
 
-    React.useEffect(() => {
+
         fetch('/api/korisnici', options)
         .then(response => {
           if (!response.ok) {
@@ -67,7 +67,7 @@ export default function SignUp() {
           console.error('There was a problem while registering:', error);
           // You can perform error handling or show appropriate messages to the user
         });
-    });
+
   };
 
   return (
