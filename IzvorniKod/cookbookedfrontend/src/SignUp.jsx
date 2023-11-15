@@ -50,7 +50,8 @@ export default function SignUp() {
                 body: JSON.stringify(data)
             };
 
-        fetch('https://cookbooked-codecooks.onrender.com/api/korisnici', options)
+    React.useEffect(() => {
+        fetch('/api/korisnici', options)
         .then(response => {
           if (!response.ok) {
             //throw new Error('Bad credentials');
@@ -66,6 +67,7 @@ export default function SignUp() {
           console.error('There was a problem while registering:', error);
           // You can perform error handling or show appropriate messages to the user
         });
+    }, []);
   };
 
   return (
