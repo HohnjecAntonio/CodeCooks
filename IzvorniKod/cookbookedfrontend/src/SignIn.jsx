@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -65,7 +65,7 @@ export default function SignInSide() {
           console.error('There was a problem logging in:', error);
           // You can perform error handling or show appropriate messages to the user
         });
-      }, []);
+      });
   };
 
   return (
