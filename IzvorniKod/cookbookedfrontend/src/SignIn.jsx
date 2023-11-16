@@ -48,7 +48,7 @@ export default function SignInSide() {
             body: new URLSearchParams(data).toString()
         };
 
-        fetch('/api/login', options)
+        fetch('https://cookbooked-codecooks.onrender.com/api/login', options)
         .then(response => {
           if (!response.ok) {
             throw new Error('Bad credentials');
