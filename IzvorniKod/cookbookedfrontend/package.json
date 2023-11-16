@@ -39,6 +39,9 @@
       "last 1 safari version"
     ]
   },
+  "main": "index.js",
+  "license": "MIT",
+  "homepage": ".",
   "devDependencies": {
     "http-proxy-middleware": "^2.0.6"
   }
