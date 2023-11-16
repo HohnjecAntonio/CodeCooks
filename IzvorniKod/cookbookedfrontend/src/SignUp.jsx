@@ -38,10 +38,10 @@ export default function SignUp() {
 
     const options = {
                 method: 'POST',
-                // withCredentials: true,
+                withCredentials: true,
                 headers:{
                     'Content-Type': 'application/json',
-                    // 'Authorization': 'Bearer {{rnd_xET9P8RFqjGRjg2Pi5pikwU3u5AU}}'
+                    'Authorization': 'Bearer rnd_xET9P8RFqjGRjg2Pi5pikwU3u5AU'
                 },
                 body: JSON.stringify(data)
             };

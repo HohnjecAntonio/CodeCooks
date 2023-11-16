@@ -40,10 +40,10 @@ export default function SignInSide() {
 
         const options = {
             method: 'POST',
-            // withCredentials: true,
+            withCredentials: true,
             headers:{
                 'Content-Type': 'application/x-www-form-urlencoded',
-                // 'Authorization': 'Bearer {{rnd_xET9P8RFqjGRjg2Pi5pikwU3u5AU}}'
+                'Authorization': 'Bearer rnd_xET9P8RFqjGRjg2Pi5pikwU3u5AU'
             },
             body: new URLSearchParams(data).toString()
         };
