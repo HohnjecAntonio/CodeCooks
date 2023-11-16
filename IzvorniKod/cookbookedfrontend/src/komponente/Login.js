@@ -1,11 +1,9 @@
-import "./Registracija.css";
 import React from "react";
 
-function Registracija(){
+function Login() {
     const [form, setForm] = React.useState({
-       username: '',
-       password: '',
-       email: ''
+        username: '',
+        password: '',
     });
 
     function onChange(event){
@@ -17,7 +15,6 @@ function Registracija(){
         const data = {
             username: form.username,
             password: form.password,
-            email: form.email
         };
         const options = {
             method: 'POST',
@@ -27,10 +24,10 @@ function Registracija(){
             body: JSON.stringify(data)
         }
 
-        return fetch('/api/korisnici', options).then(
+        return fetch('/api/Login', options).then(
             console.log(data)
         ).catch(
-            console.log("Error u registraciji")
+            console.log("Error u prijavi")
         );
     }
 
@@ -44,13 +41,11 @@ function Registracija(){
                 <label>Password:</label>
                 <input name = "password" onChange={onChange} value={form.password}/>
 
-                <label>Email:</label>
-                <input name = "email" onChange={onChange} value={form.email}/>
-
                 <button type = "submit">Register</button>
             </form>
         </div>
     );
+
 }
 
-export default Registracija;
+export default Login;
