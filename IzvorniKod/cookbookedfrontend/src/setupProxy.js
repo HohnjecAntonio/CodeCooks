@@ -4,7 +4,7 @@ module.exports = function (app) {
     app.use(
         "/api",
         createProxyMiddleware({
-            target: "http://CookBooked-CodeCooks-Backend.onrender.com/",
+            target: "http://localhost:8080",
             changeOrigin: true,
         })
     );
