@@ -11,17 +11,7 @@ import NoPage from "./komponente/NoPage";
 function App() {
 
   return (
-      <div className="App">
-          <div className="Header">
-              <button className = "Header-button">Home</button>
-              <button className = "Header-button">Prijava</button>
-              <button className = "Header-button">Registracija</button>
-          </div>
-          <div className = "Box">
-              <div className="Unos">
-                  <Registracija/>
-              </div>
-          </div>
+
 
 
           <BrowserRouter>
@@ -34,8 +24,10 @@ function App() {
                   </Route>
               </Routes>
           </BrowserRouter>
-      </div>
   );
 }
+
+const root= ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App/>);
 
 export default App;
