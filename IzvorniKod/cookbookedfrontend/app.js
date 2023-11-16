@@ -6,9 +6,11 @@ const path = require("path")
 const app = express();
 
 // Configuration
-const { PORT } = process.env;
-const { HOST } = process.env;
+// const { PORT } = process.env;
+// const { HOST } = process.env;
 const { API_BASE_URL } = process.env;
+
+console.log(API_BASE_URL)
 
 // Proxy
 app.use(
@@ -16,19 +18,19 @@ app.use(
     createProxyMiddleware({
         target: API_BASE_URL,
         changeOrigin: true,
-        onProxyRes: function (proxyRes, req, res) {
-            proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-        },
+        // onProxyRes: function (proxyRes, req, res) {
+        //     proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+        // },
     })
 );
 
 app.use(express.static(path.join(__dirname, 'build')))
 
-app.listen(PORT, HOST, () => {
-    console.log(`Starting Proxy at ${HOST}:${PORT}`);
-});
+// app.listen(PORT, HOST, () => {
+//     console.log(`Starting Proxy at ${HOST}:${PORT}`);
+// });
 
-app.get("/*", async (req, res) => {
+app.get("*", async (req, res) => {
         res.sendFile(path.join(__dirname, 'build', 'index.html'))
     }
 );
