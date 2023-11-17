@@ -1,8 +1,8 @@
 import React from "react";
 import "./Login.css"
-import {useHistory} from "react-router-dom";
+
 function Login() {
-    const history = useHistory;
+
     const [form, setForm] = React.useState({
         username: '',
         password: '',
@@ -24,6 +24,7 @@ function Login() {
         const options = {
             method: 'POST',
             headers: {
+                Accept: "application/json",
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
@@ -36,9 +37,10 @@ function Login() {
                 .then(response => {
                     if (!response.ok) {
                         alert("Prijava nije uspjela!");
+                        response.redirect("/");
                     } else {
                         alert("Prijava uspjela!");
-                        history.push('/');
+                        response.redirect("/");
                     }
                 })
         }catch (err){

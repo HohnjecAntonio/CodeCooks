@@ -1,10 +1,9 @@
 import "./Registracija.css";
 import React from "react";
-import {useHistory} from "react-router-dom";
 
 function Registracija(){
 
-    const history = useHistory;
+
     const [form, setForm] = React.useState({
        username: '',
        password: '',
@@ -29,6 +28,7 @@ function Registracija(){
         const options = {
             method: 'POST',
             headers: {
+                Accept: "application/json",
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
@@ -39,9 +39,10 @@ function Registracija(){
                 .then(response => {
                     if (!response.ok){
                         alert("Registracija nije uspjela!");
+                        response.redirect("/");
                     }else {
                         alert("Registracija uspjela!");
-                        history.push('/');
+                        response.redirect("/");
                     }
                 })
         } catch (err){
