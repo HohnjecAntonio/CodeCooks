@@ -24,9 +24,9 @@ function Login() {
         const options = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: JSON.stringify(data)
+            body: new URLSearchParams(data).toString()
         }
 
         console.log(JSON.stringify(data));
