@@ -19,9 +19,9 @@ function App() {
           <BrowserRouter>
               <Switch>
                   <Route path='/' exact ><Home/></Route>
-                  <Route path='/Login' exact component={Login}/>
-                  <Route path='/Registration' exact component={Registracija}/>
-                  <Route path='*' exact component={NoPage}/>
+                  <Route path='/Login' exact ><Login/></Route>
+                  <Route path='/Registration' exact ><Registracija/></Route>
+                  <Route path='*' exact ><NoPage/></Route>
               </Switch>
           </BrowserRouter>
       </div>
