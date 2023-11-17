@@ -18,11 +18,10 @@ function App() {
 
           <BrowserRouter>
               <Switch>
-                  <Route path="/" element={<Layout/>}>
-                      <Route index element={<Home/>} />
-                      <Route path="Registracija" element={<Registracija/>} />
-                      <Route path="Login" element={<Login/>} />
-                      <Route path="*" element={<NoPage/>} />
+                  <Route path="/" element={<Home/>} />
+                  <Route path="Registracija" element={<Registracija/>} />
+                  <Route path="Login" element={<Login/>} />
+                  <Route path="*" element={<NoPage/>} />
                   </Route>
               </Switch>
           </BrowserRouter>
