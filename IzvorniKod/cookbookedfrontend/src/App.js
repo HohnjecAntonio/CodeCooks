@@ -11,9 +11,9 @@ function App() {
   return (
       <div className="App">
           <div className="Header">
-              <button className = "Header-button">Home</button>
-              <button className = "Header-button">Prijava</button>
-              <button className = "Header-button">Registracija</button>
+              <button className = "Header-button" href = "/">Home</button>
+              <button className = "Header-button" href = "/Login" >Prijava</button>
+              <button className = "Header-button" href = "/Registracija">Registracija</button>
           </div>
 
           <BrowserRouter>
