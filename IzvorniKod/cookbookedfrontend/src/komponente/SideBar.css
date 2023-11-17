@@ -1,0 +1,27 @@
+.Meni{
+    border: 0px solid black;
+    width: 30vw;
+    min-width: 300px;
+    height: calc(100% - 62px);
+    background-color: rgba(255,255,255,0.9);
+    margin: 0px;
+    position: fixed;
+    left: 0px;
+    padding: 30px 0px;
+    z-index: 2;
+}
+
+.KategorijeJela, .RegijaJela{
+    text-align: center;
+}
+
+.KategorijeJela li, .RegijaJela li{
+    border-bottom: 0px solid black;
+    text-align: center;
+    font-weight: 500;
+}
+
+.KategorijeJela h4, .RegijaJela h4{
+    margin: 10px 10px 20px 10px;
+    text-align: left;
+}
