@@ -31,24 +31,19 @@ function Login() {
 
         console.log(JSON.stringify(data));
 
-        return fetch('/api/Login', options)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Bad credentials');
-                }
-                return response.text(); // Parse the JSON response
-            })
-            .then(dataR => {
-                // Handle the data when the request is successful
-                alert("Prijava uspjela!");
-                history.push('/');
-                console.log(dataR);
-            })
-            .catch(error => {
-                // Handle any errors that occur during the fetch request
-                console.error('There was a problem with login:', error);
-                // You can perform error handling or show appropriate messages to the user
-            });
+        try {
+            return fetch('/api/Login', options)
+                .then(response => {
+                    if (!response.ok) {
+                        alert("Prijava nije uspjela!");
+                    } else {
+                        alert("Prijava uspjela!");
+                        history.push('/');
+                    }
+                })
+        }catch (err){
+            alert("Prijava nije uspjela!");
+        }
     }
 
     return (

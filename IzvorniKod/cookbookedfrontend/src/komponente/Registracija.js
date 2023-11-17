@@ -3,6 +3,7 @@ import React from "react";
 import {useHistory} from "react-router-dom";
 
 function Registracija(){
+
     const history = useHistory;
     const [form, setForm] = React.useState({
        username: '',
@@ -33,24 +34,19 @@ function Registracija(){
             body: JSON.stringify(data)
         }
 
-        return fetch('/api/korisnici', options)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Bad credentials');
-                }
-                return response.text(); // Parse the JSON response
-            })
-            .then(dataR => {
-                // Handle the data when the request is successful
-                alert("Registracija uspjela!");
-                history.push('/');
-                console.log(dataR);
-            })
-            .catch(error => {
-                // Handle any errors that occur during the fetch request
-                console.error('There was a problem with registration:', error);
-                // You can perform error handling or show appropriate messages to the user
-            });
+        try {
+            return fetch('/api/korisnici', options)
+                .then(response => {
+                    if (!response.ok){
+                        alert("Registracija nije uspjela!");
+                    }else {
+                        alert("Registracija uspjela!");
+                        history.push('/');
+                    }
+                })
+        } catch (err){
+            alert("Registracija nije uspjela!");
+        }
     }
 
     return (
