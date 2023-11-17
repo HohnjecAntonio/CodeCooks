@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./Login.css"
 function Login() {
     const [form, setForm] = React.useState({
         username: '',
@@ -32,8 +32,8 @@ function Login() {
     }
 
     return (
-        <div className="RegistracijaForma">
-            <h2>Registracija novog korisnika</h2>
+        <div className="LoginForma">
+            <h2>Prijava korisnika</h2>
             <form onSubmit={onSubmit}>
                 <label>Username:</label>
                 <input name = "username" onChange={onChange} value={form.username}/>
@@ -41,7 +41,7 @@ function Login() {
                 <label>Password:</label>
                 <input name = "password" onChange={onChange} value={form.password}/>
 
-                <button type = "submit">Register</button>
+                <button type = "submit">Login</button>
             </form>
         </div>
     );
