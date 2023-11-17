@@ -18,10 +18,10 @@ function App() {
 
           <BrowserRouter>
               <Switch>
-                  <Route path="/" element={<Home/>} />
-                  <Route path="Registracija" element={<Registracija/>} />
-                  <Route path="Login" element={<Login/>} />
-                  <Route path="*" element={<NoPage/>} />
+                  <Route path='/' exact ><Home/></Route>
+                  <Route path='/Login' exact component={Login}/>
+                  <Route path='/Registration' exact component={Registracija}/>
+                  <Route path='*' exact component={NoPage}/>
               </Switch>
           </BrowserRouter>
       </div>
