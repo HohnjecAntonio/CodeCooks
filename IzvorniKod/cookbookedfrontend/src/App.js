@@ -1,7 +1,5 @@
 import './App.css';
-import axios from "axios";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Registracija from "./komponente/Registracija";
 import Home from "./komponente/Home";
 import Layout from "./komponente/Layout";
@@ -25,14 +23,14 @@ function App() {
 
 
           <BrowserRouter>
-              <Routes>
+              <Switch>
                   <Route path="/" element={<Layout/>}>
                       <Route index element={<Home/>} />
                       <Route path="Registracija" element={<Registracija/>} />
                       <Route path="Login" element={<Login/>} />
                       <Route path="*" element={<NoPage/>} />
                   </Route>
-              </Routes>
+              </Switch>
           </BrowserRouter>
       </div>
   );
