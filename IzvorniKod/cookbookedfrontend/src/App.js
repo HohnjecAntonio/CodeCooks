@@ -22,7 +22,6 @@ function App() {
                   <Route path="Registracija" element={<Registracija/>} />
                   <Route path="Login" element={<Login/>} />
                   <Route path="*" element={<NoPage/>} />
-                  </Route>
               </Switch>
           </BrowserRouter>
       </div>
