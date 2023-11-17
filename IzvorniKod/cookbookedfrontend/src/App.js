@@ -15,12 +15,6 @@ function App() {
               <button className = "Header-button">Prijava</button>
               <button className = "Header-button">Registracija</button>
           </div>
-          <div className = "Box">
-              <div className="Unos">
-                  <Registracija/>
-              </div>
-          </div>
-
 
           <BrowserRouter>
               <Switch>
