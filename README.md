@@ -7,8 +7,8 @@ Link backenda na renderu: https://cookbooked-codecooks-backend.onrender.com
 
 Za potrebe spajanja na web bazu putem pgadmin, podatci za spajanje su sljedeci:
 
-hostname: dpg-cl5s4bd6fh7c73eueupg-a
-baza: bazapodataka
-url: postgres://dpg-cl5s4bd6fh7c73eueupg-a.frankfurt-postgres.render.com/bazapodataka
-username: user
-lozinka: LbF9501ZSTOoGMZuFJK6fMDyRYspdyLx
+hostname: dpg-cl5s4bd6fh7c73eueupg-a </n>
+baza: bazapodataka </n>
+url: postgres://dpg-cl5s4bd6fh7c73eueupg-a.frankfurt-postgres.render.com/bazapodataka </n>
+username: user </n>
+lozinka: LbF9501ZSTOoGMZuFJK6fMDyRYspdyLx </n>
