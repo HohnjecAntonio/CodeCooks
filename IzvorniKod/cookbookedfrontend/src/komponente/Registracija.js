@@ -1,12 +1,16 @@
 import "./Registracija.css";
 import React from "react";
+import {useHistory} from "react-router-dom";
 
 function Registracija(){
+    const history = useHistory;
     const [form, setForm] = React.useState({
        username: '',
        password: '',
        email: ''
     });
+
+    const [error, setError] = React.useState('');
 
     function onChange(event){
         const {name, value} = event.target;
@@ -19,6 +23,8 @@ function Registracija(){
             password: form.password,
             email: form.email
         };
+
+        console.log(JSON.stringify(data));
         const options = {
             method: 'POST',
             headers: {
@@ -27,11 +33,24 @@ function Registracija(){
             body: JSON.stringify(data)
         }
 
-        return fetch('/api/korisnici', options).then(
-            console.log(data)
-        ).catch(
-            console.log("Error u registraciji")
-        );
+        return fetch('/api/korisnici', options)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Bad credentials');
+                }
+                return response.text(); // Parse the JSON response
+            })
+            .then(dataR => {
+                // Handle the data when the request is successful
+                alert("Registracija uspjela!");
+                history.push('/');
+                console.log(dataR);
+            })
+            .catch(error => {
+                // Handle any errors that occur during the fetch request
+                console.error('There was a problem with registration:', error);
+                // You can perform error handling or show appropriate messages to the user
+            });
     }
 
     return (
