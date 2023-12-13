@@ -25,3 +25,65 @@
     margin: 10px 10px 20px 10px;
     text-align: left;
 }
+
+/* CollapsibleSidebar.css */
+/*
+.app-container {
+  display: flex;
+  transition: margin-left 0.3s;
+}
+
+.sidebar {
+  height: 100%;
+  width: 250px;
+  background-color: #333;
+  padding-top: 20px;
+  color: white;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sidebar li:hover {
+  background-color: #555;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.toggle-button {
+  background-color: #333;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.toggle-button:hover {
+  background-color: #555;
+}
+
+.fa-chevron-left,
+.fa-chevron-right {
+  transition: transform 0.3s;
+}
+
+.sidebar-open .fa-chevron-left {
+  transform: rotate(180deg);
+}*/
+

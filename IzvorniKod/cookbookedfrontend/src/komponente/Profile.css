@@ -1,0 +1,85 @@
+/* UserProfile.css */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.profile {
+  text-align: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.profile-picture {
+  border-radius: 50%;
+  max-width: 150px;
+  margin-bottom: 20px;
+}
+
+.profile-name {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.profile-bio {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  color: #333;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+.connections {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.followers,
+.following {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-right: 10px;
+}
+
+.followers h2,
+.following h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.posts {
+  text-align: left;
+}
+
+.post {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.post h3 {
+  color: #333;
+}
+
+.post p {
+  color: #666;
+}
+
+.post-date {
+  color: #888;
+}
