@@ -25,3 +25,21 @@
     margin: 10px 10px 20px 10px;
     text-align: left;
 }
+.sidebar.closed {
+    transform: translateX(-200px);
+}
+  
+.sidebar.open {
+    transform: translateX(0);
+}
+.buttonconfi {
+    width: 460px; 
+    background: rgba(0, 0, 0, 0); 
+    font-weight: bold; 
+    font-size: 20px;
+    border: 1px solid grey;
+    margin-bottom: 0; 
+    margin-top: 0;
+    margin-left: 0; 
+    border-collapse: collapse; 
+}
