@@ -4,9 +4,10 @@ import './RecipeForm.css'; // You can create a separate CSS file for styling
 function RecipeForm () {
   const [recipe, setRecipe] = useState({
     title: '',
-    ingredients: [],
+    ingredients: '',
     category: '',
     image: null,
+    instructions: '',
   });
 
   const handleInputChange = (e) => {
@@ -75,6 +76,16 @@ function RecipeForm () {
           name="image"
           accept="image/*"
           onChange={handleImageChange}
+          required
+        />
+
+
+        <label htmlFor="instructions">Instructions:</label>
+        <textarea
+          id="instructions"
+          name="instructions"
+          value={recipe.instructions}
+          onChange={handleInputChange}
           required
         />
 

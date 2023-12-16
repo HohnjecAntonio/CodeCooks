@@ -15,12 +15,6 @@ function App() {
   return (
       <div className="App">
           <div className="Header">
-              <div className="MenuIkona">
-                  <button></button>
-              </div>
-              <div className="Ikona">
-                  <h4 className = "ContainsIkona">CookBooked</h4>
-              </div>
               <a className = "Header-button" href = "/">
                   <button>Home</button>
               </a>
