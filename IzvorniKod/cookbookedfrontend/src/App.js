@@ -56,8 +56,9 @@ function App() {
                   </Switch>
               </BrowserRouter>
 
-                <SideBar/>
+                
             </div>
+            <SideBar/>
       </div>
   );
 }
