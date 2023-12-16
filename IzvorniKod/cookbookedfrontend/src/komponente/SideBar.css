@@ -6,6 +6,7 @@
   --bg-primary: #23232e;
   --bg-secondary: #141418;
   --transition-speed: 600ms;
+  --speed: 500ms; 
 }
 
 .navbar-nav::-webkit-scrollbar {
@@ -80,6 +81,7 @@
 .link-text {
   display: none;
   margin-left: 1rem;
+  
 }
 
 .nav-link svg {
@@ -132,13 +134,77 @@
   transform: rotate(-180deg);
 }
 
+
+
+.icon-right{
+  margin-left: auto;
+}
+
+.icon-right svg{
+  display: none;
+  transform: rotate(-90deg);
+  color: white;
+}
+
+.navbar:hover .icon-right svg{
+  display:inline;
+}
+
+
+
+.menu {
+  margin: 0px;
+  width: 100%;
+  transition: height var(--speed) ease;
+  overflow: hidden;
+  
+}
+
+/* CSSTransition classes  */
+
+.menu-primary-enter {
+  position: sticky;
+  transform: translateX(-110%);
+}
+.menu-primary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+.menu-primary-exit {
+  position: sticky;
+}
+.menu-primary-exit-active {
+  transform: translateX(-110%);
+  transition: all var(--speed) ease;
+}
+
+
+.menu-secondary-enter {
+  transform: translateX(110%);
+  position: absolute;
+  top: 5rem;
+}
+.menu-secondary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+.menu-secondary-exit {
+  position: absolute;
+  top: 5rem;
+}
+.menu-secondary-exit-active {
+  transform: translateX(110%);
+  transition: all var(--speed) ease;
+}
+
+
+
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .navbar {
     bottom: 0;
     width: 100vw;
     height: 5rem;
-    
   }
 
   .logo {
