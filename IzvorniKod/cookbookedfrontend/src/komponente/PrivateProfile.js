@@ -96,8 +96,12 @@ const PrivateProfile = () => {
           />
         </label>
 
-        <button type="submit">Save Settings</button>
+        <button type="submit">Spremi</button>
+        
       </form>
+      <a href="/Profile" class="private-profile-button">
+          <button>Odustani</button>
+        </a>
     </div>
   );
 };

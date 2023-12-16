@@ -30,6 +30,8 @@ function Profile() {
 
   return (
     <div className="profile-container">
+          
+
           <div className="profile">
             <img src={userProfile.profilePicture} alt="Profile Picture" className="profile-picture" />
             <h1 className="profile-name">{userProfile.name}</h1>
@@ -41,7 +43,9 @@ function Profile() {
               <a href={userProfile.socialMedia.github} target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
             </div>
           </div>
-
+          <a href="/PrivateProfile" class="private-profile-button">
+            <button>Promjeni postavke</button>
+          </a>
           <div className="connections">
             <div className="followers">
               <h2>Followers</h2>
