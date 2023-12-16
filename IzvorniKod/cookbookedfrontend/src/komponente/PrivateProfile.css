@@ -1,0 +1,97 @@
+/* ProfileSettings.css */
+
+.profile-settings-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-picture {
+    border-radius: 50%;
+    max-width: 150px;
+    margin-bottom: 20px;
+    
+  }
+
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  label {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+    height: fit-content;
+  }
+  
+  input,
+  select,
+  button {
+    padding: 12px;
+    margin: 5px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    transition: border-color 0.3s;
+    height: fit-content;
+  }
+
+  input{
+
+  }
+
+  input:focus,
+  select:focus {
+    outline: none;
+    border-color: #4CAF50;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Subtle animation */
+  .profile-settings-container {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .image_upload{
+    height: 3rem;
+  }
+
+  .checkboxSetting{
+    height: 2rem;
+    height: 100%;
+  }

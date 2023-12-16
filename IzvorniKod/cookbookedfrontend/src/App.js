@@ -8,7 +8,7 @@ import Atributions from "./komponente/Atributions";
 import SideBar from "./komponente/SideBar";
 import Profile from "./komponente/Profile";
 import RecipeForm from "./komponente/RecipeForm";
-
+import PrivateProfile from "./komponente/PrivateProfile";
 
 function App() {
 
@@ -33,6 +33,9 @@ function App() {
               <a className = "Header-button" href = "/Profile">
                     <button>Profil</button>
                </a>
+               <a className = "Header-button" href = "/PrivateProfile">
+                    <button>Privatni profil</button>
+               </a>
               <a className = "Header-button" href = "/AddRecipe">
                                    <button>Dodaj recept</button>
                               </a>
@@ -51,6 +54,7 @@ function App() {
                       <Route path="/Registracija" exact component={Registracija} />
                       <Route path="/Login" exact component={Login} />
                       <Route path="/Profile" exact component={Profile} />
+                      <Route path="/PrivateProfile" exact component={PrivateProfile} />
                         <Route path="/AddRecipe" exact component={RecipeForm} />
                       <Route path="/Atributions" exact component={Atributions} />
 

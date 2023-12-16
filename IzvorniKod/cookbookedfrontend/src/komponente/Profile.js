@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './Profile.css'; // You can create a separate CSS file for styling
-
+import profilePictureTemp from "../images/img/user.jpeg";
 function Profile() {
   // State to store user profile information, followers, and following
   const [userProfile, setUserProfile] = useState({
     name: 'John Doe',
     bio: 'Web Developer | Explorer | Coffee Lover',
-    profilePicture: 'profile-picture.jpg',
+    profilePicture: profilePictureTemp,
     socialMedia: {
       twitter: 'https://twitter.com/johndoe',
       linkedin: 'https://www.linkedin.com/in/johndoe',

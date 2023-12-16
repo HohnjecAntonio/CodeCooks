@@ -44,20 +44,14 @@ function RecipeForm () {
           required
         />
 
-        <label htmlFor="ingredients">Select Ingredients:</label>
-        <select
+        <label htmlFor="ingredients">Ingredients:</label>
+        <textarea
           id="ingredients"
           name="ingredients"
-          multiple
           value={recipe.ingredients}
-          onChange={handleIngredientsChange}
+          onChange={handleInputChange}
           required
-        >
-          <option value="ingredient1">Ingredient 1</option>
-          <option value="ingredient2">Ingredient 2</option>
-          <option value="ingredient3">Ingredient 3</option>
-          {/* Add more ingredients as needed */}
-        </select>
+        />
 
         <label htmlFor="category">Select Category:</label>
         <select
@@ -75,6 +69,7 @@ function RecipeForm () {
 
         <label htmlFor="image">Upload Image:</label>
         <input
+          className='image_upload'
           type="file"
           id="image"
           name="image"

@@ -25,6 +25,18 @@
     background-size: cover;
 }
 
+.App::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+.App::-webkit-scrollbar-track {
+    background: #1e1e24;
+  }
+  
+  .App::-webkit-scrollbar-thumb {
+    background: #6649b8;
+  }
+
 .MenuIkona{
     text-align: center;
     border: 0px solid black;
