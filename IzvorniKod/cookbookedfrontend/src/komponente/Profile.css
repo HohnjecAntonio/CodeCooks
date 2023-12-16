@@ -1,10 +1,28 @@
 /* UserProfile.css */
+
+:root {
+  font-size: 16px;
+  font-family: 'Open Sans';
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #141418;
+  --transition-speed: 600ms;
+}
+
+main {
+  margin-left: 5rem;
+  padding: 1rem;
+}
+
 .profile-container {
+  margin-left: 5rem;
+  padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 20px;
+
 }
 
 .profile {

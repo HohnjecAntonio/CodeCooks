@@ -24,7 +24,8 @@ const Home = () => {
       }, []);
 
       return (
-        <div className="home-page">
+        <div className='main'>
+          <div className="home-page">
           <h1>Recipe Collection</h1>
           <div className="recipe-list">
             {recipes.map((recipe) => (
@@ -37,6 +38,8 @@ const Home = () => {
             ))}
           </div>
         </div>
+        </div>
+        
       );
     };
 
