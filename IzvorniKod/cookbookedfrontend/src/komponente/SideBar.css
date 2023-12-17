@@ -143,7 +143,7 @@
 .icon-right svg{
   display: none;
   transform: rotate(-90deg);
-  color: white;
+  fill: var(--text-color);
 }
 
 .navbar:hover .icon-right svg{

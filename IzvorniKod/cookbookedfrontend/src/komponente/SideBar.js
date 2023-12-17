@@ -90,7 +90,7 @@ function SideBar(){
             <NavItem
               leftIcon={<SpaceShuttleIcon/>}
               text ="Profil"
-              link= "/Profil">
+              link= "/Profile">
             </NavItem>
 
             <NavItem
