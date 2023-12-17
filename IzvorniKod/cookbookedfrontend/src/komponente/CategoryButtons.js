@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './CategoryButtons.css'
 const CategoryButtons = () => {
-  const sampleCategories = [
+  /*const sampleCategories = [
     { id: 1, name: 'Category 1' },
     { id: 2, name: 'Category 2' },
     { id: 3, name: 'Category 3' },
     
-  ];
+  ];*/
   
-  /*const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -19,15 +19,15 @@ const CategoryButtons = () => {
       .then((response) => response.json())
       .then((data) => setCategories(data))
       .catch((err) => setError(err.message));
-  }, []);*/
+  }, []);
   
-  const [categories] = useState(sampleCategories);
+  /*const [categories] = useState(sampleCategories);*/
 
   return (
     
       <div className='Forma'>
         <h2 style={{ fontSize: '75px' }}>Categories</h2>
-        {/*error && <p>Error: {error}</p>*/}
+        {error && <p>Error: {error}</p>}
         <div
           style={{
             display: 'flex',
