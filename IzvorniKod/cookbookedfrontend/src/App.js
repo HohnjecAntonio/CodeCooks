@@ -9,6 +9,7 @@ import SideBar from "./komponente/SideBar";
 import Profile from "./komponente/Profile";
 import RecipeForm from "./komponente/RecipeForm";
 import PrivateProfile from "./komponente/PrivateProfile";
+import CategoryButtons from './komponente/CategoryButtons';
 
 function App() {
 
@@ -36,7 +37,9 @@ function App() {
               <a className = "Header-button" href = "/Atributions">
                   <button>Atributions</button>
               </a>
-
+              <a className = "Header-button" href = "/Categories">
+                  <button>Categories</button>
+              </a>
 
 
           </div>
@@ -51,7 +54,7 @@ function App() {
                       <Route path="/PrivateProfile" exact component={PrivateProfile} />
                         <Route path="/AddRecipe" exact component={RecipeForm} />
                       <Route path="/Atributions" exact component={Atributions} />
-
+                      <Route path="/Categories" exact component={CategoryButtons} />
                       <Route path="/*" exact component={NoPage} />
                   </Switch>
               </BrowserRouter>
