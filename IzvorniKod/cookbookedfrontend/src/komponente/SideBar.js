@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import "./SideBar.css"
 
@@ -21,12 +21,34 @@ function SideBar(){
 
   const [activeMenu, setActiveMenu] = useState('main');
   const [menuHeight, setMenuHeight] = useState(null);
+  /*const categories = [
+    { id: 1, name: 'Category 1' },
+    { id: 2, name: 'Category 2' },
+    // Add more categories as needed
+  ];*/
+  
+  const [categories, setCategories] = useState([]);
 
+  useEffect(() => {
+    // Fetch categories from your API endpoint
+    fetchCategoriesFromAPI().then((data) => {
+      setCategories(data);
+    });
+  }, []);
   function calcHeight(el){
     const heigth = el.offsetHeight;
     setMenuHeight(heigth);
   }
-
+  async function fetchCategoriesFromAPI() {
+    try {
+      const response = await fetch('YOUR_API_ENDPOINT/categories');
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+      return [];
+    }
+  }
   return (
     <nav class="navbar">
       <ul class="navbar-nav">
@@ -139,18 +161,15 @@ function SideBar(){
               goToMenu="main"
               >
             </NavItem>
-
-            <NavItem
-              leftIcon={<AlienIcon/>}
-              text ="Kategorija 1"
-              link= "#">
-            </NavItem>
+            {categories.map((category) => (
+              <NavItem
+                key={category.id}
+                leftIcon={<AlienIcon />}
+                text={category.name}
+                link="#"
+              />
+            ))}
             
-            <NavItem
-              leftIcon={<SpaceStationIcon/>}
-              text ="Kategorija 2"
-              link= "#">
-            </NavItem>
           </div>
 
           
