@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import React, { useState } from 'react';
 import Registracija from "./komponente/Registracija";
 import Home from "./komponente/Home";
 import Login from "./komponente/Login"
@@ -12,8 +13,9 @@ import PrivateProfile from "./komponente/PrivateProfile";
 import CategoryButtons from './komponente/CategoryButtons';
 
 function App() {
+    const [isLoggedIn,setIsLoggedIn] = useState(false);
 
-  return (
+    return (
       <div className="App">
           <div className="Header">
               <a className = "Header-button" href = "/">
@@ -44,24 +46,26 @@ function App() {
 
           </div>
             <div className="Tijelo">
-
+                <button onClick={() => setIsLoggedIn(!isLoggedIn)}>Toggle login</button>
+                {/*isToggled && <Test />*/}
+                {/*isToggled ? <Test /> : "The value is false"*/}
               <BrowserRouter>
                   <Switch>
-                      <Route path="/" exact>{<Home/>}</Route>
-                      <Route path="/Registracija" exact component={Registracija} />
-                      <Route path="/Login" exact component={Login} />
-                      <Route path="/Profile" exact component={Profile} />
-                      <Route path="/PrivateProfile" exact component={PrivateProfile} />
+                        <Route path="/" exact>{<Home/>}</Route>
+                        <Route path="/Registracija" exact component={Registracija} />
+                        <Route path="/Login" exact component={Login} />
+                        <Route path="/Profile" exact component={Profile} />
+                        <Route path="/PrivateProfile" exact component={PrivateProfile} />
                         <Route path="/AddRecipe" exact component={RecipeForm} />
-                      <Route path="/Atributions" exact component={Atributions} />
-                      <Route path="/Categories" exact component={CategoryButtons} />
-                      <Route path="/*" exact component={NoPage} />
+                        <Route path="/Atributions" exact component={Atributions} />
+                        <Route path="/Categories" exact component={CategoryButtons} />
+                        <Route path="/*" exact component={NoPage} />
                   </Switch>
               </BrowserRouter>
 
                 
             </div>
-            <SideBar/>
+            <SideBar isLoggedIn={isLoggedIn} changeLoginState = {isLoggedIn => setIsLoggedIn(isLoggedIn)} />
       </div>
   );
 }

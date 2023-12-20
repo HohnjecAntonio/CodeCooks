@@ -58,7 +58,9 @@ function Login() {
                 <input name = "username" onChange={onChange} value={form.username}/>
 
                 <label>Password:</label>
-                <input name = "password" onChange={onChange} value={form.password}/>     
+                <input name = "password" onChange={onChange} value={form.password}/>    
+
+                <button type = "submit">Prijavi se</button> 
             </form>
             
         </div>

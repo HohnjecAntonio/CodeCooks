@@ -17,7 +17,7 @@ import { ReactComponent as ArrowIcon } from '../icons/arrow.svg';
 import { ReactComponent as BoltIcon } from '../icons/bolt.svg';
 
 
-function SideBar(){
+function SideBar(props){
 
   const [activeMenu, setActiveMenu] = useState('main');
   const [menuHeight, setMenuHeight] = useState(null);
@@ -39,6 +39,9 @@ function SideBar(){
     const heigth = el.offsetHeight;
     setMenuHeight(heigth);
   }
+
+
+
   async function fetchCategoriesFromAPI() {
     try {
       const response = await fetch('YOUR_API_ENDPOINT/categories');
@@ -49,6 +52,9 @@ function SideBar(){
       return [];
     }
   }
+
+  
+
   return (
     <nav class="navbar">
       <ul class="navbar-nav">
@@ -94,32 +100,26 @@ function SideBar(){
               text ="Home"
               link= "/">
             </NavItem>
-           
-
-            <NavItem
-              leftIcon={<AlienIcon/>}
-              text ="Prijava"
-              link= "/Login">
-            </NavItem>
-            
-            <NavItem
-              leftIcon={<SpaceStationIcon/>}
-              text ="Registracija"
-              link= "/Registracija">
-            </NavItem>
       
-
+            {
+            props.isLoggedIn 
+            &&
             <NavItem
               leftIcon={<SpaceShuttleIcon/>}
               text ="Profil"
               link= "/Profile">
             </NavItem>
+            }
 
+            {
+            props.isLoggedIn 
+            &&
             <NavItem
               leftIcon={<CatIcon/>}
               text ="Dodaj recept"
               link= "/AddRecipe">
             </NavItem>
+            }
 
             <NavItem
               leftIcon={<SpaceStationIcon/>}
@@ -129,18 +129,32 @@ function SideBar(){
               goToMenu="categories">
             </NavItem>
 
+
+
+
+            {
+              props.isLoggedIn 
+              ? 
+              <NavItem
+              leftIcon={<SpaceShuttleIcon/>}
+              text ="Odjava"
+              link= "/Logout">
+              </NavItem>
+              :
+              <NavItem
+              leftIcon={<AlienIcon/>}
+              text ="Prijava"
+              link= "/Login">
+              </NavItem> 
+            }
+            
             <NavItem
               leftIcon={<AlienIcon/>}
               text ="Atributions"
               link= "/Atributions">
             </NavItem>
 
-
-            <NavItem
-              leftIcon={<SpaceShuttleIcon/>}
-              text ="Logout"
-              link= "/Logout">
-            </NavItem>
+            <button onClick={() => props.changeLoginState(!props.isLoggedIn)}>Toggle login</button>
           </div>
 
 
