@@ -19,8 +19,9 @@ public class KorisnikController {
         return korisnikService.listAll();
     }
 
-    @PostMapping("")
-    public Korisnik createKorisnik(@RequestBody RegisterDTO dto){
-        return korisnikService.createKorisnik(dto.getUsername(), dto.getPassword(), dto.getEmail());
+    @GetMapping("/{id}")
+    public Korisnik getKorisnik(@PathVariable("id") long iDKorisnik) throws Throwable {
+        return korisnikService.fetch(iDKorisnik);
     }
+
 }

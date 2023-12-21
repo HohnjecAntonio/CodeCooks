@@ -15,9 +15,9 @@ public class OmiljeniAutor {
     @GeneratedValue
     private Long Autor;
 
-    @ManyToMany
-    @JoinColumn(name = "korisnik", referencedColumnName = "iDKorisnik")
-    private Set<Korisnik> korisnici;
+//    @ManyToMany
+//    @JoinColumn(name = "korisnik", referencedColumnName = "iDKorisnik")
+//    private Set<Korisnik> korisnici;
 
     private Long IDKorisnik;
 

@@ -15,8 +15,8 @@ import java.sql.Time;
 public class Korisnik {
 
     @Id
-    @GeneratedValue
-    @Column(name = "idKorisnik")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "idkorisnik")
     private Long idKorisnik;
 
     @NotNull
@@ -24,11 +24,15 @@ public class Korisnik {
     private String korisnickoIme;
 
     @NotNull
+    @Column(name = "lozinkaKorisnik")
     @Size(min = 6)
     private String lozinkaKorisnik;
+    @Column(name = "imeKorisnik")
     private String imeKorisnik;
+    @Column(name = "prezimeKorisnik")
     private String prezimeKorisnik;
     private String brojTelefona;
+    @Column(name = "emailKorisnik")
     private String emailKorisnik;
     private String razinaOvlasti;
     private Time dostupan;
@@ -84,31 +88,31 @@ public class Korisnik {
     }
 
     public void setLozinkaKorisnik(String lozinkaKorisnik) {
-        lozinkaKorisnik = lozinkaKorisnik;
+        this.lozinkaKorisnik = lozinkaKorisnik;
     }
 
     public void setImeKorisnik(String imeKorisnik) {
-        imeKorisnik = imeKorisnik;
+        this.imeKorisnik = imeKorisnik;
     }
 
     public void setPrezimeKorisnik(String prezimeKorisnik) {
-        prezimeKorisnik = prezimeKorisnik;
+        this.prezimeKorisnik = prezimeKorisnik;
     }
 
     public void setBrojTelefona(String brojTelefona) {
-        brojTelefona = brojTelefona;
+        this.brojTelefona = brojTelefona;
     }
 
     public void setEmailKorisnik(String emailKorisnik) {
-        emailKorisnik = emailKorisnik;
+        this.emailKorisnik = emailKorisnik;
     }
 
     public void setRazinaOvlasti(String razinaOvlasti) {
-        razinaOvlasti = razinaOvlasti;
+        this.razinaOvlasti = razinaOvlasti;
     }
 
     public void setDostupan(Time dostupan) {
-        dostupan = dostupan;
+        this.dostupan = dostupan;
     }
 
     public void setIDKorisnik(Long IDKorisnik) {
