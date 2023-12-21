@@ -1,9 +1,12 @@
 package opp.CookBooked.response;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@AllArgsConstructor
 public class AuthResponse {
 
     @Getter
@@ -13,9 +16,4 @@ public class AuthResponse {
     @Setter
     private String message;
 
-    public AuthResponse(String token, String message) {
-        super();
-        this.token = token;
-        this.message = message;
-    }
 }

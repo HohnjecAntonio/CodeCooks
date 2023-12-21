@@ -1,16 +1,15 @@
 package opp.CookBooked.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginDTO {
     @Getter
     private String korisnickoIme;
     @Getter
     private String lozinkaKorisnik;
-    public LoginDTO() {
-    }
-    public LoginDTO(String korisnickoIme, String lozinkaKorisnik) {
-        this.korisnickoIme = korisnickoIme;
-        this.lozinkaKorisnik = lozinkaKorisnik;
-    }
+
 }

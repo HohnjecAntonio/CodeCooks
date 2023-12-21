@@ -27,33 +27,21 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private KorisnikRepository korisnikRepo;
-
-    @Autowired
     private CustomerUserDetailsService customerUserDetails;
 
     @PostMapping("/signup")
     public AuthResponse createKorisnik(@RequestBody Korisnik korisnik) throws Exception {
 
-        Korisnik postojiKorisnik = korisnikRepo.findByKorisnickoIme(korisnik.getKorisnickoIme());
+        Korisnik postojiKorisnik = korisnikService.findByKorisnickoIme(korisnik.getKorisnickoIme());
 
         if (postojiKorisnik != null) throw new Exception("Već postoji korisnik s ovim korisničkim imenom.");
 
-        Korisnik noviKorisnik = new Korisnik();
-        noviKorisnik.setImeKorisnik(korisnik.getImeKorisnik());
-        noviKorisnik.setPrezimeKorisnik(korisnik.getPrezimeKorisnik());
-        noviKorisnik.setEmailKorisnik(korisnik.getEmailKorisnik());
-        noviKorisnik.setKorisnickoIme(korisnik.getKorisnickoIme());
-        noviKorisnik.setLozinkaKorisnik(passwordEncoder.encode(korisnik.getLozinkaKorisnik()));
-
-        Korisnik savedKorisnik = korisnikRepo.save(noviKorisnik);
+        Korisnik savedKorisnik = korisnikService.createKorisnik(korisnik);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(savedKorisnik.getKorisnickoIme(), savedKorisnik.getLozinkaKorisnik());
         String token = jwtProvider.generateToken(authentication);
 
-        AuthResponse res = new AuthResponse(token, "Uspješna registracija korisnika " + noviKorisnik.getKorisnickoIme());
-
-        return res;
+        return new AuthResponse(token, "Uspješna registracija korisnika " + savedKorisnik.getKorisnickoIme() + ".");
     }
 
     @PostMapping("/signin")
@@ -62,9 +50,7 @@ public class AuthController {
 
         String token = jwtProvider.generateToken(authentication);
 
-        AuthResponse res = new AuthResponse(token, "Uspješna prijava korisnika " + loginDTO.getKorisnickoIme());
-
-        return res;
+        return new AuthResponse(token, "Uspješna prijava korisnika " + loginDTO.getKorisnickoIme() + ".");
     }
 
     private Authentication authenticate(String korisnickoIme, String lozinkaKorisnik) {
@@ -74,7 +60,7 @@ public class AuthController {
             throw new BadCredentialsException("Pogrešno korisničko ime!");
         }
         if (!passwordEncoder.matches(lozinkaKorisnik, userDetails.getPassword())) {
-            throw new BadCredentialsException(("Pogrešna lozinka!"));
+            throw new BadCredentialsException("Pogrešna lozinka!");
         }
 
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

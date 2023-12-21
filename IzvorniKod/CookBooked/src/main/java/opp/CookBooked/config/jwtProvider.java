@@ -12,14 +12,13 @@ public class jwtProvider {
 
     private static SecretKey key = Keys.hmacShaKeyFor(jwtConstants.SECRET_KEY.getBytes());
     public static String generateToken(Authentication auth) {
-        String jwt = Jwts.builder()
+
+        return Jwts.builder()
                 .setIssuer("Codeda").setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime()+86400000))
+                .setExpiration(new Date(new Date().getTime() + 86400000))
                 .claim("korisnickoIme", auth.getName())
                 .signWith(key)
                 .compact();
-
-        return jwt;
     }
 
     public static String getUsernameFromJwtToken(String jwt) {
@@ -30,8 +29,6 @@ public class jwtProvider {
                 setSigningKey(key).build().
                 parseClaimsJws(jwt).getBody();
 
-        String username = String.valueOf(claims.get("korisnickoIme"));
-
-        return username;
+        return String.valueOf(claims.get("korisnickoIme"));
     }
 }

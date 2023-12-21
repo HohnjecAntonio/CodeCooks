@@ -21,7 +21,7 @@ public class KorisnikServiceJpa implements KorisnikService {
     private KorisnikRepository korisnikRepo;
 
     @Autowired
-    private PasswordEncoder pswdEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<Korisnik> listAll(){
@@ -31,16 +31,12 @@ public class KorisnikServiceJpa implements KorisnikService {
     @Override
     public Korisnik createKorisnik(Korisnik korisnik) throws Exception {
 
-        Korisnik postojiKorisnik = korisnikRepo.findByKorisnickoIme(korisnik.getKorisnickoIme());
-
-        if (postojiKorisnik != null) throw new Exception("Već postoji korisnik s ovim korisničkim imenom.");
-
         Korisnik noviKorisnik = new Korisnik();
         noviKorisnik.setImeKorisnik(korisnik.getImeKorisnik());
         noviKorisnik.setPrezimeKorisnik(korisnik.getPrezimeKorisnik());
         noviKorisnik.setEmailKorisnik(korisnik.getEmailKorisnik());
         noviKorisnik.setKorisnickoIme(korisnik.getKorisnickoIme());
-        noviKorisnik.setLozinkaKorisnik(pswdEncoder.encode(korisnik.getLozinkaKorisnik()));
+        noviKorisnik.setLozinkaKorisnik(passwordEncoder.encode(korisnik.getLozinkaKorisnik()));
 
         return korisnikRepo.save(noviKorisnik);
     }
@@ -48,7 +44,7 @@ public class KorisnikServiceJpa implements KorisnikService {
 
     @Override
    public Korisnik findByKorisnickoIme(String korisnickoIme) {
-        Assert.notNull(korisnickoIme, "Parametar korisnickoIme mora biti naveden");
+        Assert.notNull(korisnickoIme, "Polje korisnickoIme ne smije biti prazno!");
         return korisnikRepo.findByKorisnickoIme(korisnickoIme);
     }
 
