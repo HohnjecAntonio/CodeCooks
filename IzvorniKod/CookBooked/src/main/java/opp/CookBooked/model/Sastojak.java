@@ -1,39 +1,31 @@
 package opp.CookBooked.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 @Entity
 @Table(name = "sastojak")
 @Data
 @EqualsAndHashCode
+@NoArgsConstructor
 public class Sastojak {
 
     @Id
     @GeneratedValue
-    private Long IDSastojak;
+    @Getter
+    @Setter
+    @Column(name = "idsastojak")
+    private Long idSastojak;
 
     @NotNull
-    private String NazivSastojak;
+    @Getter
+    @Setter
+    @Column(name = "nazivsastojak")
+    private String nazivSastojak;
 
-    public Long getIDSastojak() {
-        return IDSastojak;
+    public Sastojak(String nazivSastojak) {
+        this.nazivSastojak = nazivSastojak;
     }
 
-    public void setIDSastojak(Long IDSastojak) {
-        this.IDSastojak = IDSastojak;
-    }
-
-    public String getNazivSastojak() {
-        return NazivSastojak;
-    }
-
-    public void setNazivSastojak(String nazivSastojak) {
-        NazivSastojak = nazivSastojak;
-    }
 }

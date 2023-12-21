@@ -1,27 +1,44 @@
 package opp.CookBooked.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "objavaRecepata")
+@Table(name = "objavaRecepta")
 @Data
 @EqualsAndHashCode
+@NoArgsConstructor
 public class ObjavaRecepta {
 
     @Id
-    @Column(name = "iDObjava")
-    private Long IDObjava;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idobjava")
+    @Getter
+    @Setter
+    private Long idObjava;
 
-    private Long IDKorisnik;
+    @Getter
+    @Setter
+    @ManyToOne
+    @JoinColumn(name = "idkorisnik")
+    private Korisnik korisnik;
 
-    private Long IDRecept;
+    @Getter
+    @Setter
+    @OneToOne
+    @JoinColumn(name = "idrecept")
+    private Recept recept;
 
-    private Date DatumObjava;
+    @Getter
+    @Setter
+    @Column(name = "datumObjava")
+    private Date datumObjava;
+
+    public ObjavaRecepta(Korisnik korisnik, Recept recept, Date datumObjava) {
+        this.korisnik = korisnik;
+        this.recept = recept;
+        this.datumObjava = datumObjava;
+    }
 }
