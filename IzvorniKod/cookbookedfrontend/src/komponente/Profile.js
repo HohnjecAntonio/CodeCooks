@@ -42,6 +42,12 @@ function Profile() {
               <a href={userProfile.socialMedia.linkedin} target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
               <a href={userProfile.socialMedia.github} target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
             </div>
+
+            <div className='contactButtons'>
+              <a href="/Chat">
+              <button>Chat</button>
+              </a>
+            </div>
           </div>
           <a href="/PrivateProfile" class="private-profile-button">
             <button>Promjeni postavke</button>

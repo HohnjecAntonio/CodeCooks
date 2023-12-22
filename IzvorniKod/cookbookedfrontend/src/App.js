@@ -11,6 +11,7 @@ import Profile from "./komponente/Profile";
 import RecipeForm from "./komponente/RecipeForm";
 import PrivateProfile from "./komponente/PrivateProfile";
 import CategoryButtons from './komponente/CategoryButtons';
+import Chat from './messenger/Chat'
 
 function App() {
     const [isLoggedIn,setIsLoggedIn] = useState(false);
@@ -42,6 +43,9 @@ function App() {
               <a className = "Header-button" href = "/Categories">
                   <button>Categories</button>
               </a>
+              <a className = "Header-button" href = "/Chat">
+                  <button>Chat</button>
+              </a>
 
 
           </div>
@@ -59,6 +63,7 @@ function App() {
                         <Route path="/AddRecipe" exact component={RecipeForm} />
                         <Route path="/Atributions" exact component={Atributions} />
                         <Route path="/Categories" exact component={CategoryButtons} />
+                        <Route path="/Chat" exact component={Chat} />
                         <Route path="/*" exact component={NoPage} />
                   </Switch>
               </BrowserRouter>

@@ -63,6 +63,7 @@ function Login() {
                 <button type = "submit">Prijavi se</button> 
             </form>
             
+            <a href="/Registracija">Nemaš profil? Napravi ga ovdje.</a>
         </div>
         
     );

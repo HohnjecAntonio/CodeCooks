@@ -65,6 +65,8 @@ function Registracija(){
 
                 <button type = "submit">Register</button>
             </form>
+
+            <a href="/Login">Već imaš profil? Prijavi se ovdje.</a>
         </div>
     );
 }
