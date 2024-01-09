@@ -30,12 +30,12 @@ function SideBar(props){
   
   const [categories, setCategories] = useState([]);
 
-  // useEffect(() => {
-  //   // Fetch categories from your API endpoint
-  //   fetchCategoriesFromAPI().then((data) => {
-  //     setCategories(data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    // Fetch categories from your API endpoint
+    fetchCategoriesFromAPI().then((data) => {
+      setCategories(data);
+    });
+  }, []);
   function calcHeight(el){
     const heigth = el.offsetHeight;
     setMenuHeight(heigth);
@@ -45,7 +45,7 @@ function SideBar(props){
 
   async function fetchCategoriesFromAPI() {
     try {
-      const response = await fetch('YOUR_API_ENDPOINT/categories');
+      const response = await fetch('api/categories');
       const data = await response.json();
       return data;
     } catch (error) {
