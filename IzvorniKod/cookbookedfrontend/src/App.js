@@ -10,6 +10,7 @@ import SideBar from "./komponente/SideBar";
 import Profile from "./komponente/Profile";
 import RecipeForm from "./komponente/RecipeForm";
 import PrivateProfile from "./komponente/PrivateProfile";
+import RecipePage from "./komponente/RecipePage";
 import CategoryButtons from './komponente/CategoryButtons';
 import Chat from './messenger/Chat'
 
@@ -46,6 +47,9 @@ function App() {
               <a className = "Header-button" href = "/Chat">
                   <button>Chat</button>
               </a>
+              <a className = "Header-button" href = "/RecipePage">
+                  <button>Recept</button>
+              </a>
 
 
           </div>
@@ -64,6 +68,7 @@ function App() {
                         <Route path="/Atributions" exact component={Atributions} />
                         <Route path="/Categories" exact component={CategoryButtons} />
                         <Route path="/Chat" exact component={Chat} />
+                        <Route path="/RecipePage" exact component={RecipePage} />
                         <Route path="/*" exact component={NoPage} />
                   </Switch>
               </BrowserRouter>

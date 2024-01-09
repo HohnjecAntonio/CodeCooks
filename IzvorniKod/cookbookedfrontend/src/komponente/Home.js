@@ -21,18 +21,68 @@ const Home = () => {
     fetchData();
   }, []);
 
+  const recipes = [
+    {
+      id: 1,
+      title: 'Spaghetti Bolognese',
+      ingredients: ['500g spaghetti', '400g minced beef', '1 onion', '2 cloves garlic', '400g tomato sauce'],
+      instructions: 'Cook spaghetti according to package instructions. In a pan, sauté onions and garlic, add minced beef, cook until browned, then add tomato sauce. Serve over cooked spaghetti.',
+      category: 'Pasta',
+      image: 'images/spaghetti.jpg',
+      creator: 'Chef John Doe',
+    },
+    {
+      id: 2,
+      title: 'Chicken Stir Fry',
+      ingredients: ['400g chicken breast', '1 bell pepper', '1 broccoli', '2 tbsp soy sauce'],
+      instructions: 'Slice chicken and vegetables. Stir-fry chicken until cooked, add vegetables and soy sauce. Cook until veggies are tender. Serve hot.',
+      category: 'Asian',
+      image: 'images/stir_fry.jpg',
+      creator: 'Chef Jane Smith',
+    },
+    // Add more recipe objects as needed
+  ];
+
+  const [newRecipe, setNewRecipe] = useState({
+    title: '',
+    ingredients: '',
+    instructions: '',
+    category: '',
+    creator: '',
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewRecipe({
+      ...newRecipe,
+      [name]: value,
+    });
+  };
+
+  const handleAddRecipe = (e) => {
+    e.preventDefault();
+    // Implement logic to add the new recipe to the list (e.g., send to server)
+    console.log('New recipe added:', newRecipe);
+    // For a real application, you would likely update the state with the new recipe
+  };
+
   return (
-    <div className="home-page">
-      <h1>Recent Recipes</h1>
+    <div className="recipe-page">
+      <h1>Recipes</h1>
       <div className="recipe-list">
-        {recentRecipes.map((recipe) => (
+        {recipes.map((recipe) => (
           <div key={recipe.id} className="recipe-card">
             <img src={recipe.image} alt={recipe.title} className="recipe-image" />
             <div className="recipe-details">
               <h2>{recipe.title}</h2>
-              <p>{recipe.description}</p>
               <p>Category: {recipe.category}</p>
-              <button>Read More</button>
+              <ul>
+                {recipe.ingredients.map((ingredient, index) => (
+                  <li key={index}>{ingredient}</li>
+                ))}
+              </ul>
+              <p>Instructions: {recipe.instructions}</p>
+              <p>Creator: {recipe.creator}</p>
             </div>
           </div>
         ))}
