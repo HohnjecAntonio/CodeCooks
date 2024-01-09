@@ -30,12 +30,12 @@ function SideBar(props){
   
   const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    // Fetch categories from your API endpoint
-    fetchCategoriesFromAPI().then((data) => {
-      setCategories(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   // Fetch categories from your API endpoint
+  //   fetchCategoriesFromAPI().then((data) => {
+  //     setCategories(data);
+  //   });
+  // }, []);
   function calcHeight(el){
     const heigth = el.offsetHeight;
     setMenuHeight(heigth);
