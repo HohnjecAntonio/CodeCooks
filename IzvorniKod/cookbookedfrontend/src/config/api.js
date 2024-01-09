@@ -1,1 +1,1 @@
-export const API_BASE_URL = "https://codecooks-cookbooked-backend.onrender.com";
+export const API_BASE_URL = "https://codecooks-cookbooked-backend.onrender.com/api";
