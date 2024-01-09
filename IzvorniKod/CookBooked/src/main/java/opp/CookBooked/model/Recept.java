@@ -1,8 +1,8 @@
 package opp.CookBooked.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+
 import java.util.Set;
 
 import java.sql.Time;
@@ -11,117 +11,82 @@ import java.sql.Time;
 @Table(name = "recept")
 @Data
 @EqualsAndHashCode
+@NoArgsConstructor
 public class Recept {
 
     @Id
     @GeneratedValue
-    private Long IDRecept;
+    @Getter
+    @Setter
+    @Column(name = "idrecept")
+    private Long idRecept;
 
-    private String NazivRecept;
+    @Getter
+    @Setter
+    @Column(name = "nazivRecept")
+    private String nazivRecept;
 
     @OneToMany
-    @JoinColumn(name = "receptKategorije", referencedColumnName = "iDKategorija")
+    @JoinColumn(name = "receptKategorije")
     private Set<ReceptKategorije> receptKategorije;
 
-    private Long IDKategorija;
+    @Getter
+    @Setter
+    @Column(name = "idkategorija")
+    private Long idKategorija;
 
-    private Long IDReceptSastojak;
+    @Getter
+    @Setter
+    @Column(name = "idreceptsastojak")
+    private Long idReceptSastojak;
 
-    //@OneToMany
-    //@JoinColumn(name = "vrstaKuhinja", referencedColumnName = "iDVrstaKuhinja")
-    //private Set<VrstaKuhinja> vrstaKuhinja;
+    @OneToMany
+    @JoinColumn(name = "vrstaKuhinja")
+    private Set<VrstaKuhinja> vrstaKuhinja;
 
-    private Long IDVrstaKuhinje;
+    @Getter
+    @Setter
+    @Column(name = "idvrstakuhinja")
+    private Long idVrstaKuhinja;
 
+    @Getter
+    @Setter
+    @Column(name = "priprema")
     private String Priprema;
 
-    private Time VrijemeKuhanja;
+    @Getter
+    @Setter
+    @Column(name = "vrijemeKuhanja")
+    private Time vrijemeKuhanja;
 
-    private String Oznaka; // ???
+    @Getter
+    @Setter
+    @Column(name = "oznaka")
+    private String Oznaka;
 
-    private String SlikaRecept; // ?? Onda bolje link koji može bit il slika il dokument poput worda
+    @Getter
+    @Setter
+    @Column(name = "slikaRecept")
+    private String slikaRecept; // potorebno provjeriti
 
+    @Getter
+    @Setter
+    @Column(name = "idvideorecept")
+    private Long idVideoRecept;
 
-    private Long IDVideoRecept;
-
-    public Long getIDRecept() {
-        return IDRecept;
+    public Recept(String nazivRecept, Long idKategorija, Long idReceptSastojak,
+                  Long idVrstaKuhinja, String priprema, Time vrijemeKuhanja,
+                  String oznaka, String slikaRecept, Long idVideoRecept) {
+        this.nazivRecept = nazivRecept;
+        this.idKategorija = idKategorija;
+        this.idReceptSastojak = idReceptSastojak;
+        this.idVrstaKuhinja = idVrstaKuhinja;
+        this.Priprema = priprema;
+        this.vrijemeKuhanja = vrijemeKuhanja;
+        this.Oznaka = oznaka;
+        this.slikaRecept = slikaRecept;
+        this.idVideoRecept = idVideoRecept;
     }
 
-    public Long getIDKategorija() {
-        return IDKategorija;
-    }
-
-    public Long getIDReceptSastojak() {
-        return IDReceptSastojak;
-    }
-
-    public Long getIDVideoRecept() {
-        return IDVideoRecept;
-    }
-
-    public Long getIDVrstaKuhinje() {
-        return IDVrstaKuhinje;
-    }
-
-    public String getNazivRecept() {
-        return NazivRecept;
-    }
-
-    public String getOznaka() {
-        return Oznaka;
-    }
-
-    public String getPriprema() {
-        return Priprema;
-    }
-
-    public String getSlikaRecept() {
-        return SlikaRecept;
-    }
-
-    public Time getVrijemeKuhanja() {
-        return VrijemeKuhanja;
-    }
-
-    public void setNazivRecept(String nazivRecept) {
-        NazivRecept = nazivRecept;
-    }
-
-    public void setOznaka(String oznaka) {
-        Oznaka = oznaka;
-    }
-
-    public void setPriprema(String priprema) {
-        Priprema = priprema;
-    }
-
-    public void setSlikaRecept(String slikaRecept) {
-        SlikaRecept = slikaRecept;
-    }
-
-    public void setVrijemeKuhanja(Time vrijemeKuhanja) {
-        VrijemeKuhanja = vrijemeKuhanja;
-    }
-
-    public void setIDRecept(Long IDRecept) {
-        this.IDRecept = IDRecept;
-    }
-
-    public void setIDKategorija(Long IDKategorija) {
-        this.IDKategorija = IDKategorija;
-    }
-
-    public void setIDReceptSastojak(Long IDReceptSastojak) {
-        this.IDReceptSastojak = IDReceptSastojak;
-    }
-
-    public void setIDVideoRecept(Long IDVideoRecept) {
-        this.IDVideoRecept = IDVideoRecept;
-    }
-
-    public void setIDVrstaKuhinje(Long IDVrstaKuhinje) {
-        this.IDVrstaKuhinje = IDVrstaKuhinje;
-    }
 }
 

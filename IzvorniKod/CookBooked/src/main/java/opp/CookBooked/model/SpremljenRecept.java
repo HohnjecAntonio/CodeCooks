@@ -1,35 +1,28 @@
 package opp.CookBooked.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 @Entity
 @Table(name = "spremljenRecept")
 @Data
 @EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class SpremljenRecept {
 
     @Id
-    private Long IDRecept;
+    @Getter
+    @Setter
+    @Column(name = "idrecept")
+    private Long idRecept;
 
-    private Long IDKorisnik;
+    @Getter
+    @Setter
+    @Column(name = "idkorisnik")
+    private Long idKorisnik;
 
-    public Long getIDRecept() {
-        return IDRecept;
-    }
-
-    public Long getIDKorisnik() {
-        return IDKorisnik;
-    }
-
-    public void setIDKorisnik(Long IDKorisnik) {
-        this.IDKorisnik = IDKorisnik;
-    }
-
-    public void setIDRecept(Long IDRecept) {
-        this.IDRecept = IDRecept;
-    }
 }

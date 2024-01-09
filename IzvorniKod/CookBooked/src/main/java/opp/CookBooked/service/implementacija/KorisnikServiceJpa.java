@@ -2,6 +2,8 @@ package opp.CookBooked.service.implementacija;
 
 import opp.CookBooked.service.RequestDeniedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -19,7 +21,7 @@ public class KorisnikServiceJpa implements KorisnikService {
     private KorisnikRepository korisnikRepo;
 
     @Autowired
-    private PasswordEncoder pswdEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<Korisnik> listAll(){
@@ -27,31 +29,22 @@ public class KorisnikServiceJpa implements KorisnikService {
     }
 
     @Override
-    public Korisnik createKorisnik(String korisnickoIme, String lozinkaKorisnik, String emailKorisnik) {
-        Assert.notNull(korisnickoIme, "Korisnicko ime mora biti predano");
-        Assert.notNull(emailKorisnik, "Email korisnika mora biti predan");
-        Assert.hasLength(korisnickoIme, "Korisnicko ime ne smije biti prazno");
-        Assert.isTrue(lozinkaKorisnik != null && lozinkaKorisnik.length() >= 6,
-                "Lozinka mora imati minimalno 6 znakova.");
+    public Korisnik createKorisnik(Korisnik korisnik) throws Exception {
 
-        if (korisnikRepo.countByKorisnickoIme(korisnickoIme) > 0) {
-            throw new RequestDeniedException(
-                    "Korisničko ime je zauzeto"
-            );
-        }
-        if (korisnikRepo.countByEmailKorisnik(emailKorisnik) > 0) {
-            throw new RequestDeniedException(
-                    "Email je zauzet"
-            );
-        }
+        Korisnik noviKorisnik = new Korisnik();
+        noviKorisnik.setImeKorisnik(korisnik.getImeKorisnik());
+        noviKorisnik.setPrezimeKorisnik(korisnik.getPrezimeKorisnik());
+        noviKorisnik.setEmailKorisnik(korisnik.getEmailKorisnik());
+        noviKorisnik.setKorisnickoIme(korisnik.getKorisnickoIme());
+        noviKorisnik.setLozinkaKorisnik(passwordEncoder.encode(korisnik.getLozinkaKorisnik()));
 
-        return korisnikRepo.save(new Korisnik(korisnickoIme, pswdEncoder.encode(lozinkaKorisnik), emailKorisnik));
+        return korisnikRepo.save(noviKorisnik);
     }
 
 
     @Override
-    public Optional<Korisnik> findByKorisnickoIme(String korisnickoIme) {
-        Assert.notNull(korisnickoIme, "Parametar korisnickoIme mora biti naveden");
+   public Korisnik findByKorisnickoIme(String korisnickoIme) {
+        Assert.notNull(korisnickoIme, "Polje korisnickoIme ne smije biti prazno!");
         return korisnikRepo.findByKorisnickoIme(korisnickoIme);
     }
 

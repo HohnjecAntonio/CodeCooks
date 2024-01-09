@@ -1,11 +1,7 @@
 package opp.CookBooked.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.sql.Time;
 
@@ -13,47 +9,34 @@ import java.sql.Time;
 @Table(name = "video")
 @Data
 @EqualsAndHashCode
+@NoArgsConstructor
 public class Video {
 
     @Id
     @GeneratedValue
-    private Long IDVideo;
+    @Getter
+    @Setter
+    @Column(name = "idvideo")
+    private Long idVideo;
 
-    private String NazivVideo;
+    @Getter
+    @Setter
+    @Column(name = "nazivVideo")
+    private String nazivVideo;
 
-    private Time TrajanjeVideo;
+    @Getter
+    @Setter
+    @Column(name = "trajanjeVideo")
+    private Time trajanjeVideo;
 
+    @Getter
+    @Setter
+    @Column(name = "poveznica")
     private String Poveznica;
 
-    public Long getIDVideo() {
-        return IDVideo;
-    }
-
-    public String getNazivVideo() {
-        return NazivVideo;
-    }
-
-    public String getPoveznica() {
-        return Poveznica;
-    }
-
-    public Time getTrajanjeVideo() {
-        return TrajanjeVideo;
-    }
-
-    public void setIDVideo(Long IDVideo) {
-        this.IDVideo = IDVideo;
-    }
-
-    public void setNazivVideo(String nazivVideo) {
-        NazivVideo = nazivVideo;
-    }
-
-    public void setPoveznica(String poveznica) {
-        Poveznica = poveznica;
-    }
-
-    public void setTrajanjeVideo(Time trajanjeVideo) {
-        TrajanjeVideo = trajanjeVideo;
+    public Video(String nazivVideo, Time trajanjeVideo, String poveznica) {
+        this.nazivVideo = nazivVideo;
+        this.trajanjeVideo = trajanjeVideo;
+        this.Poveznica = poveznica;
     }
 }

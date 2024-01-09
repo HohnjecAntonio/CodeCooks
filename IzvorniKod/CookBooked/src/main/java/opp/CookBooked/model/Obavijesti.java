@@ -1,8 +1,7 @@
 package opp.CookBooked.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.sql.Time;
 
@@ -10,71 +9,51 @@ import java.sql.Time;
 @Table(name = "obavijesti")
 @Data
 @EqualsAndHashCode
+@NoArgsConstructor
 public class Obavijesti {
 
     @Id
     @GeneratedValue
-    private Long IDObavijest;
+    @Getter
+    @Setter
+    @Column(name = "idobavijest")
+    private Long idObavijest;
+
+    @Getter
+    @Setter
+    @Column(name = "idkorisnik")
+    private Long idKorisnik;
+
+    @Getter
+    @Setter
+    @Column(name = "nazivObavijest")
+    private String nazivObavijest;
+
+    @Getter
+    @Setter
+    @Column(name = "sadrzajObavijest")
+    private String sadrzajObavijest;
+
+    @Getter
+    @Setter
+    @Column(name = "datumObavijest")
+    private Time datumObavijest;
+
+    @Getter
+    @Setter
+    @Column(name = "jeProcitano")
+    private Integer jeProcitano;
 
     @ManyToOne
-    @JoinColumn(name = "korisnik", referencedColumnName = "iDKorisnik")
+    @JoinColumn(name = "korisnik", referencedColumnName = "idkorisnik")
     private Korisnik korisnik;
 
-    private Long IDKorisnik;
-
-    private String NazivObavijest;
-
-    private String SadrzajObavijest;
-
-    private Time DatumObavijest;
-
-    private Integer JeProcitano;
-
-    public Long getIDKorisnik() {
-        return IDKorisnik;
+    public Obavijesti(Long idKorisnik, String nazivObavijest, String sadrzajObavijest, Time datumObavijest, Integer jeProcitano) {
+        this.idKorisnik = idKorisnik;
+        this.nazivObavijest = nazivObavijest;
+        this.sadrzajObavijest = sadrzajObavijest;
+        this.datumObavijest = datumObavijest;
+        this.jeProcitano = jeProcitano;
     }
 
-    public Integer getJeProcitano() {
-        return JeProcitano;
-    }
-
-    public Long getIDObavijest() {
-        return IDObavijest;
-    }
-
-    public String getNazivObavijest() {
-        return NazivObavijest;
-    }
-
-    public String getSadrzajObavijest() {
-        return SadrzajObavijest;
-    }
-
-    public Time getDatumObavijest() {
-        return DatumObavijest;
-    }
-
-    public void setIDKorisnik(Long IDKorisnik) {
-        this.IDKorisnik = IDKorisnik;
-    }
-
-    public void setDatumObavijest(Time datumObavijest) {
-        DatumObavijest = datumObavijest;
-    }
-
-    public void setIDObavijest(Long IDObavijest) {
-        this.IDObavijest = IDObavijest;
-    }
-
-    public void setJeProcitano(Integer jeProcitano) {
-        JeProcitano = jeProcitano;
-    }
-
-    public void setNazivObavijest(String nazivObavijest) {
-        NazivObavijest = nazivObavijest;
-    }
-
-    public void setSadrzajObavijest(String sadrzajObavijest) {
-        SadrzajObavijest = sadrzajObavijest;
-    }
 }

@@ -1,37 +1,35 @@
 package opp.CookBooked.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "oznRecept")
 @Data
 @EqualsAndHashCode
+@NoArgsConstructor
 public class OznRecept {
 
     @Id
-    private Long IDRecept;
+    @GeneratedValue
+    @Getter
+    @Setter
+    @Column(name = "idrecept")
+    private Long idRecept;
 
     @ManyToOne
     @JoinColumn(name = "korisnik", referencedColumnName = "iDKorisnik")
     private Korisnik korisnici;
 
-    private Long IDKorisnik;
+    @Getter
+    @Setter
+    @Column(name = "idkorisnik")
+    private Long idKorisnik;
 
-    public Long getIDRecept() {
-        return IDRecept;
+    public OznRecept(Long idKorisnik) {
+        this.idKorisnik = idKorisnik;
     }
 
-    public Long getIDKorisnik() {
-        return IDKorisnik;
-    }
-
-    public void setIDRecept(Long IDRecept) {
-        this.IDRecept = IDRecept;
-    }
-
-    public void setIDKorisnik(Long IDKorisnik) {
-        this.IDKorisnik = IDKorisnik;
-    }
 }

@@ -1,6 +1,8 @@
 import React from "react";
 import "./Login.css"
 
+
+
 function Login() {
 
     const [form, setForm] = React.useState({
@@ -56,11 +58,14 @@ function Login() {
                 <input name = "username" onChange={onChange} value={form.username}/>
 
                 <label>Password:</label>
-                <input name = "password" onChange={onChange} value={form.password}/>
+                <input name = "password" onChange={onChange} value={form.password}/>    
 
-                <button type = "submit">Login</button>
+                <button type = "submit">Prijavi se</button> 
             </form>
+            
+            <a href="/Registracija">Nemaš profil? Napravi ga ovdje.</a>
         </div>
+        
     );
 
 }
