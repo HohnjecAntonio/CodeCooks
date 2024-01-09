@@ -37,12 +37,13 @@ function Profile() {
             <h1 className="profile-name">{userProfile.name}</h1>
             <p className="profile-bio">{userProfile.bio}</p>
 
-            <div className="social-icons">
+            {
+            /*<div className="social-icons">
               <a href={userProfile.socialMedia.twitter} target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
               <a href={userProfile.socialMedia.linkedin} target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
               <a href={userProfile.socialMedia.github} target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
-            </div>
-
+              </div>*/ 
+            }
             <div className='contactButtons'>
               <a href="/Chat">
               <button>Chat</button>

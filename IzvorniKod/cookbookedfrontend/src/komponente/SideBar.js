@@ -17,7 +17,7 @@ import { ReactComponent as ArrowIcon } from '../icons/arrow.svg';
 import { ReactComponent as BoltIcon } from '../icons/bolt.svg';
 
 
-function SideBar(props){
+function SideBar(propsApp){
 
   const [activeMenu, setActiveMenu] = useState('main');
   const [menuHeight, setMenuHeight] = useState(null);
@@ -102,7 +102,7 @@ function SideBar(props){
             </NavItem>
       
             {
-            props.isLoggedIn 
+            propsApp.isLoggedIn 
             &&
             <NavItem
               leftIcon={<SpaceShuttleIcon/>}
@@ -112,7 +112,7 @@ function SideBar(props){
             }
 
             {
-            props.isLoggedIn 
+            propsApp.isLoggedIn 
             &&
             <NavItem
               leftIcon={<CatIcon/>}
@@ -133,12 +133,15 @@ function SideBar(props){
 
 
             {
-              props.isLoggedIn 
+              propsApp.isLoggedIn 
               ? 
               <NavItem
               leftIcon={<SpaceShuttleIcon/>}
               text ="Odjava"
-              link= "/Logout">
+              link= "#"
+              toggleLogin = "true"
+              >
+              
               </NavItem>
               :
               <NavItem
@@ -154,7 +157,7 @@ function SideBar(props){
               link= "/Atributions">
             </NavItem>
 
-            <button onClick={() => props.changeLoginState(!props.isLoggedIn)}>Toggle login</button>
+            <button onClick={() => propsApp.changeLoginState(!propsApp.isLoggedIn)}>Toggle login</button>
           </div>
 
 
@@ -195,7 +198,7 @@ function SideBar(props){
   function NavItem(props){
     return(
           <li class="nav-item">
-            <a href={props.link} class="nav-link" onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}>
+            <a href={props.link} class="nav-link" onClick={() => props.goToMenu && setActiveMenu(props.goToMenu) || props.toggleLogin && propsApp.changeLoginState(!propsApp.isLoggedIn)}>
               <span className="icon-button">{props.leftIcon}</span>
               <span class="link-text">{props.text}</span>
               <span className="icon-right">{props.rightIcon}</span>

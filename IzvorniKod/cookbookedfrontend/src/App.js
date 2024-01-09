@@ -15,7 +15,7 @@ import Chat from './messenger/Chat'
 
 function App() {
     const [isLoggedIn,setIsLoggedIn] = useState(false);
-
+    
     return (
       <div className="App">
           <div className="Header">
@@ -57,7 +57,7 @@ function App() {
                   <Switch>
                         <Route path="/" exact>{<Home/>}</Route>
                         <Route path="/Registracija" exact component={Registracija} />
-                        <Route path="/Login" exact component={Login} />
+                        <Route isLoggedIn={isLoggedIn} changeLoginState = {isLoggedIn => setIsLoggedIn(isLoggedIn)} path="/Login" exact component={Login} />
                         <Route path="/Profile" exact component={Profile} />
                         <Route path="/PrivateProfile" exact component={PrivateProfile} />
                         <Route path="/AddRecipe" exact component={RecipeForm} />
