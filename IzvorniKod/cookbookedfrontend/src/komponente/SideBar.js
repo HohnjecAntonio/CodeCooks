@@ -19,6 +19,8 @@ import { ReactComponent as BoltIcon } from '../icons/bolt.svg';
 
 function SideBar(propsApp){
 
+  //console.log(propsApp);
+
   const [activeMenu, setActiveMenu] = useState('main');
   const [menuHeight, setMenuHeight] = useState(null);
   /*const categories = [
@@ -157,7 +159,11 @@ function SideBar(propsApp){
               link= "/Atributions">
             </NavItem>
 
-            <button onClick={() => propsApp.changeLoginState(!propsApp.isLoggedIn)}>Toggle login</button>
+            <button onClick={() => {
+              propsApp.changeLoginState(!propsApp.isLoggedIn);
+              propsApp.changeCurrentUserID(1);
+            }
+            }>Toggle login</button>
           </div>
 
 

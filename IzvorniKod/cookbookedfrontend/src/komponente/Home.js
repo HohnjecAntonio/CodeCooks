@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css'; // You can create a separate CSS file for styling
 
-const Home = () => {
+const Home = (props) => {
   const [recentRecipes, setRecentRecipes] = useState([]);
 
   useEffect(() => {
@@ -10,11 +10,11 @@ const Home = () => {
     const fetchData = async () => {
       try {
         // Replace this with the actual endpoint to fetch recent recipes data
-        const response = await fetch('https://api.example.com/recent-recipes');
+        const response = await fetch('/api/Recipes');
         const data = await response.json();
         setRecentRecipes(data);
       } catch (error) {
-        console.error('Error fetching recent recipes:', error);
+        console.error('Error fetching recipes:', error);
       }
     };
 
@@ -30,6 +30,7 @@ const Home = () => {
       category: 'Pasta',
       image: 'images/spaghetti.jpg',
       creator: 'Chef John Doe',
+      userID: '1'
     },
     {
       id: 2,
@@ -39,6 +40,27 @@ const Home = () => {
       category: 'Asian',
       image: 'images/stir_fry.jpg',
       creator: 'Chef Jane Smith',
+      userID: '1'
+    },
+    {
+      id: 3,
+      title: 'Chicken Stir Fry',
+      ingredients: ['400g chicken breast', '1 bell pepper', '1 broccoli', '2 tbsp soy sauce'],
+      instructions: 'Slice chicken and vegetables. Stir-fry chicken until cooked, add vegetables and soy sauce. Cook until veggies are tender. Serve hot.',
+      category: 'Asian',
+      image: 'images/stir_fry.jpg',
+      creator: 'New user',
+      userID: '2'
+    },
+    {
+      id: 4,
+      title: 'Chicken Stir Fry',
+      ingredients: ['400g chicken breast', '1 bell pepper', '1 broccoli', '2 tbsp soy sauce'],
+      instructions: 'Slice chicken and vegetables. Stir-fry chicken until cooked, add vegetables and soy sauce. Cook until veggies are tender. Serve hot.',
+      category: 'Asian',
+      image: 'images/stir_fry.jpg',
+      creator: 'New user',
+      userID: '2'
     },
     // Add more recipe objects as needed
   ];
@@ -49,6 +71,7 @@ const Home = () => {
     instructions: '',
     category: '',
     creator: '',
+    userID: ''
   });
 
   const handleInputChange = (e) => {
@@ -82,7 +105,9 @@ const Home = () => {
                 ))}
               </ul>
               <p>Instructions: {recipe.instructions}</p>
-              <p>Creator: {recipe.creator}</p>
+              <p>Creator: <a href="#" onClick={() => {
+                  props.changeProfileID(recipe.userID);
+            }}>{recipe.creator}</a></p>
             </div>
           </div>
         ))}

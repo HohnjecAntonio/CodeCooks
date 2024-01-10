@@ -16,6 +16,8 @@ import Chat from './messenger/Chat'
 
 function App() {
     const [isLoggedIn,setIsLoggedIn] = useState(false);
+    const [currentUserID, setCurrentUserID] = useState(1);
+    const [profileID, setProfileID] = useState(1);
     
     return (
       <div className="App">
@@ -59,10 +61,33 @@ function App() {
                 {/*isToggled ? <Test /> : "The value is false"*/}
               <BrowserRouter>
                   <Switch>
-                        <Route path="/" exact>{<Home/>}</Route>
-                        <Route path="/Registracija" exact component={Registracija} />
-                        <Route isLoggedIn={isLoggedIn} changeLoginState = {isLoggedIn => setIsLoggedIn(isLoggedIn)} path="/Login" exact component={Login} />
-                        <Route path="/Profile" exact component={Profile} />
+                        <Route path="/" exact>
+                            {<Home profileID={profileID} 
+                                changeProfileID = {profileID => 
+                                {
+                                    setProfileID(profileID);
+                                    console.log(profileID);
+                                }}/>}
+
+                        </Route>
+                        <Route path="/Registracija">
+                            <Registracija/>
+                        </Route>
+
+                        <Route path="/Login" exact>
+                            {<Login isLoggedIn={isLoggedIn} changeLoginState = {isLoggedIn => setIsLoggedIn(isLoggedIn)} 
+                            currentUserID={currentUserID} changeCurrentUserID = {currentUserID => 
+                            {
+                                setCurrentUserID(currentUserID);
+                                console.log(currentUserID);
+                            }}/>}
+                        </Route>
+                        <Route path="/Profile" exact>
+                            {<Profile currentUserID={currentUserID} profileID={profileID}
+                                />}
+                        </Route>
+                        
+                        
                         <Route path="/PrivateProfile" exact component={PrivateProfile} />
                         <Route path="/AddRecipe" exact component={RecipeForm} />
                         <Route path="/Atributions" exact component={Atributions} />
@@ -75,7 +100,13 @@ function App() {
 
                 
             </div>
-            <SideBar isLoggedIn={isLoggedIn} changeLoginState = {isLoggedIn => setIsLoggedIn(isLoggedIn)} />
+            <SideBar isLoggedIn={isLoggedIn} changeLoginState = {isLoggedIn => setIsLoggedIn(isLoggedIn)}  
+            currentUserID={currentUserID} changeCurrentUserID = {currentUserID => 
+                {
+                    setCurrentUserID(currentUserID);
+                    console.log(currentUserID);
+                }
+            } />
       </div>
   );
 }
