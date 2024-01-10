@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Registracija from "./komponente/Registracija";
 import Home from "./komponente/Home";
 import Login from "./komponente/Login"
@@ -19,6 +19,10 @@ function App() {
     const [currentUserID, setCurrentUserID] = useState(1);
     const [profileID, setProfileID] = useState(1);
     
+    /*useEffect(()=> {
+        localStorage.setItem('profileToLoad',1);
+    },[profileID])*/
+
     return (
       <div className="App">
           <div className="Header">
@@ -63,10 +67,12 @@ function App() {
                   <Switch>
                         <Route path="/" exact>
                             {<Home profileID={profileID} 
-                                changeProfileID = {profileID => 
+                                changeProfileID = {newProfileID => 
                                 {
-                                    setProfileID(profileID);
-                                    console.log(profileID);
+                                    setProfileID(newProfileID);
+                                    console.log(newProfileID);
+                                    localStorage.setItem('profileToLoad', JSON.stringify(newProfileID));
+                                    console.log("Added to storage:" + localStorage.getItem('profileToLoad'));
                                 }}/>}
 
                         </Route>
@@ -83,7 +89,7 @@ function App() {
                             }}/>}
                         </Route>
                         <Route path="/Profile" exact>
-                            {<Profile currentUserID={currentUserID} profileID={profileID}
+                            {<Profile currentUserID={currentUserID} profileID={JSON.parse(localStorage.getItem('profileToLoad'))}
                                 />}
                         </Route>
                         

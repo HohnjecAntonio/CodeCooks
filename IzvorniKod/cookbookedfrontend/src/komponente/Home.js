@@ -105,7 +105,7 @@ const Home = (props) => {
                 ))}
               </ul>
               <p>Instructions: {recipe.instructions}</p>
-              <p>Creator: <a href="#" onClick={() => {
+              <p>Creator: <a href="/Profile" onClick={() => {
                   props.changeProfileID(recipe.userID);
             }}>{recipe.creator}</a></p>
             </div>
