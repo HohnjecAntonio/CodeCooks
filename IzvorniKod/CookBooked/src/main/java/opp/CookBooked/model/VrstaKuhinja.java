@@ -15,7 +15,7 @@ public class VrstaKuhinja {
     @GeneratedValue
     @Getter
     @Setter
-    @Column(name = "idvrstakuhinja")
+    @Column(name = "idVrstaKuhinja")
     private Long idVrstaKuhinja;
 
     @NotNull

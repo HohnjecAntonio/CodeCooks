@@ -15,13 +15,13 @@ public class Sastojak {
     @GeneratedValue
     @Getter
     @Setter
-    @Column(name = "idsastojak")
+    @Column(name = "idSastojak")
     private Long idSastojak;
 
     @NotNull
     @Getter
     @Setter
-    @Column(name = "nazivsastojak")
+    @Column(name = "nazivSastojak")
     private String nazivSastojak;
 
     public Sastojak(String nazivSastojak) {

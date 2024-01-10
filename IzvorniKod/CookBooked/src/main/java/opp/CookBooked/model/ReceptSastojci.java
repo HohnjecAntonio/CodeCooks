@@ -19,7 +19,7 @@ public class ReceptSastojci {
 
     @Getter
     @Setter
-    @Column(name = "idsastojak")
+    @Column(name = "idSastojak")
     private Long idSastojak;
 
     @Getter

@@ -3,8 +3,10 @@ package opp.CookBooked.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
-
 import java.sql.Time;
 
 @Entity
@@ -23,6 +25,12 @@ public class Recept {
 
     @Getter
     @Setter
+    @ManyToOne
+    @JoinColumn(name = "idKorisnik")
+    private Korisnik korisnik;
+
+    @Getter
+    @Setter
     @Column(name = "nazivRecept")
     private String nazivRecept;
 
@@ -37,7 +45,7 @@ public class Recept {
 
     @Getter
     @Setter
-    @Column(name = "idreceptsastojak")
+    @Column(name = "idreceptSastojak")
     private Long idReceptSastojak;
 
     @OneToMany
@@ -46,7 +54,7 @@ public class Recept {
 
     @Getter
     @Setter
-    @Column(name = "idvrstakuhinja")
+    @Column(name = "idVrstaKuhinja")
     private Long idVrstaKuhinja;
 
     @Getter
@@ -67,17 +75,29 @@ public class Recept {
     @Getter
     @Setter
     @Column(name = "slikaRecept")
-    private String slikaRecept; // potorebno provjeriti
+    private String slikaRecept;
 
     @Getter
     @Setter
-    @Column(name = "idvideorecept")
-    private Long idVideoRecept;
+    @Column(name = "videoRecept")
+    private String videoRecept;
 
-    public Recept(String nazivRecept, Long idKategorija, Long idReceptSastojak,
+    @Getter
+    @Setter
+    @Column(name = "vrijemeObjave")
+    private LocalDate vrijemeObjave;
+
+    @ManyToMany(mappedBy = "spremljeniRecepti")
+    private Set<Korisnik> saved;
+
+    @ManyToMany(mappedBy = "likedRecepti")
+    private Set<Korisnik> liked;
+
+    public Recept(String nazivRecept, Korisnik korisnik, Long idKategorija, Long idReceptSastojak,
                   Long idVrstaKuhinja, String priprema, Time vrijemeKuhanja,
-                  String oznaka, String slikaRecept, Long idVideoRecept) {
+                  String oznaka, String slikaRecept, String videoRecept) {
         this.nazivRecept = nazivRecept;
+        this.korisnik = korisnik;
         this.idKategorija = idKategorija;
         this.idReceptSastojak = idReceptSastojak;
         this.idVrstaKuhinja = idVrstaKuhinja;
@@ -85,7 +105,7 @@ public class Recept {
         this.vrijemeKuhanja = vrijemeKuhanja;
         this.Oznaka = oznaka;
         this.slikaRecept = slikaRecept;
-        this.idVideoRecept = idVideoRecept;
+        this.videoRecept = videoRecept;
     }
 
 }
