@@ -109,7 +109,9 @@ function SideBar(propsApp){
             <NavItem
               leftIcon={<SpaceShuttleIcon/>}
               text ="Profil"
+              openProfile = "true"
               link= "/Profile">
+
             </NavItem>
             }
 
@@ -204,7 +206,9 @@ function SideBar(propsApp){
   function NavItem(props){
     return(
           <li class="nav-item">
-            <a href={props.link} class="nav-link" onClick={() => props.goToMenu && setActiveMenu(props.goToMenu) || props.toggleLogin && propsApp.changeLoginState(!propsApp.isLoggedIn)}>
+            <a href={props.link} class="nav-link" onClick={() => props.goToMenu && setActiveMenu(props.goToMenu) || 
+              props.toggleLogin && propsApp.changeLoginState(!propsApp.isLoggedIn) ||
+              props.openProfile && propsApp.changeProfileID(propsApp.currentUserID)}>
               <span className="icon-button">{props.leftIcon}</span>
               <span class="link-text">{props.text}</span>
               <span className="icon-right">{props.rightIcon}</span>

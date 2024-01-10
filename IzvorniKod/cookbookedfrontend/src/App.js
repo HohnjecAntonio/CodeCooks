@@ -86,7 +86,10 @@ function App() {
                             {
                                 setCurrentUserID(currentUserID);
                                 console.log(currentUserID);
-                            }}/>}
+                            }}
+                            
+                            
+                            />}
                         </Route>
                         <Route path="/Profile" exact>
                             {<Profile currentUserID={currentUserID} profileID={JSON.parse(localStorage.getItem('profileToLoad'))}
@@ -112,7 +115,15 @@ function App() {
                     setCurrentUserID(currentUserID);
                     console.log(currentUserID);
                 }
-            } />
+            } 
+            profileID={profileID} 
+            changeProfileID = {newProfileID => 
+            {
+                setProfileID(newProfileID);
+                console.log(newProfileID);
+                localStorage.setItem('profileToLoad', JSON.stringify(newProfileID));
+                console.log("Added to storage:" + localStorage.getItem('profileToLoad'));
+            }}/>
       </div>
   );
 }
