@@ -2,12 +2,28 @@
 		
 		
 		\section{Korištene tehnologije i alati}
-		
-			\textbf{\textit{dio 2. revizije}}
 			
-			 \textit{Detaljno navesti sve tehnologije i alate koji su primijenjeni pri izradi dokumentacije i aplikacije. Ukratko ih opisati, te navesti njihovo značenje i mjesto primjene. Za svaki navedeni alat i tehnologiju je potrebno \textbf{navesti internet poveznicu} gdje se mogu preuzeti ili više saznati o njima}.
-			
-			
+			Kako je prijašnje navedeno, za izradu aplikacije koristimo REST servis gdje za backend koristimo Java Spring Boot proširenje, za frontend koristimo React uz dodatak redux-a i jsx datoteka, a za bazu podataka koristimo PostgreSQL bazu podataka.
+			\bigbreak
+			Za pregled podataka na PostgreSQL bazi podataka koristimo \href{https://www.pgadmin.org/}{PgAdmin}
+			\bigbreak
+			REST servis je vrsta web servisa koja prati REST arhitekturu. REST je stil arhitekture gdje su frontend i backend odjeljeni kao dvije zasebne aplikacije te se odvija komunikacija između frontend-a i backenda uz pomoć REST servisa pozivanjem zahtjeva pristupa backendu.
+			\bigbreak
+			Više o REST u Spring Boot-u: \href{https://spring.io/guides/tutorials/rest/}{REST}
+			\bigbreak
+			Nadalje, na strani backend-a koristimo se MVC frameworkom što znači da naš backend je sastavljen od modela, pogleda i kontrolera te je kod odjeljen na modele, repozitorije, servise i kontrolere. Pomoću modela stvaramo tablice baze podataka i njihove entitete. Repozitoriji su grana koja je na backendu najbliža bazi podataka te se putem repozitorija zbiva komunikacija između backend-a i baze. Kontroleri su mjesto u kojemu se nalazi sam REST-api. Repozitorij je mjesto gdje zadajemo upite koje dalje koristimo u kontrolerima.
+			\bigbreak
+			Više o Java Spring Boot na: \href{https://spring.io/projects/spring-boot/}{Spring Boot}, 
+			\href{https://spring.io/guides/gs/serving-web-content/}{MVC u Spring Boot-u}
+			\bigbreak
+			Za razvoj frontend aplikacije, korišten je React kao biblioteka javascripta te kao pomoć koristi se Redux kojem je glavna svrha pojednostavljivanje upravljanja stanjem aplikacije, posebno kada je aplikacija složena s mnogo komponenti koje dijele podatke. Koriste se i jsx datoteke koje nam omogućavaju strukturiraniji kod te dinamičnost korištenja Reacta i javascripta.
+			\bigbreak
+			Više o React-u na: \href{https://react.dev/learn}{React}, \href{https://redux.js.org/}{Redux}, \href{https://legacy.reactjs.org/docs/introducing-jsx.html}{JSX}
+			\bigbreak
+			Sva dokumentacija pisana je u latexu koji nam omogućava izradu pdf dokumenata dodavanjem oznaka i figura koje nam omogućuju uređivanje teksta i dodavanje vanjskih resursa kao što su slike, grafovi, tablice i slično.
+			\bigbreak
+			Više o Latex-u: \href{https://www.latex-project.org/}{Latex}
+			\bigbreak
 			\eject 
 		
 	
@@ -46,13 +62,131 @@
 			\eject 
 		
 		\section{Upute za puštanje u pogon}
-		
-			\textbf{\textit{dio 2. revizije}}\\
-		
-			 \textit{U ovom poglavlju potrebno je dati upute za puštanje u pogon (engl. deployment) ostvarene aplikacije. Na primjer, za web aplikacije, opisati postupak kojim se od izvornog kôda dolazi do potpuno postavljene baze podataka i poslužitelja koji odgovara na upite korisnika. Za mobilnu aplikaciju, postupak kojim se aplikacija izgradi, te postavi na neku od trgovina. Za stolnu (engl. desktop) aplikaciju, postupak kojim se aplikacija instalira na računalo. Ukoliko mobilne i stolne aplikacije komuniciraju s poslužiteljem i/ili bazom podataka, opisati i postupak njihovog postavljanja. Pri izradi uputa preporučuje se \textbf{naglasiti korake instalacije uporabom natuknica} te koristiti što je više moguće \textbf{slike ekrana} (engl. screenshots) kako bi upute bile jasne i jednostavne za slijediti.}
 			
+			 \noindent Za puštanje u pogon koristimo usluge web aplikacije \href{www.render.com}{Render} koja nam omogućuje kreiranje PostgreSql baze podataka te upload Spring Boot backenda uporabom DockerFile-a te upload React aplikacije uporabom Node-a.\newline
+			 
+			 \noindent Za početak važno je izraditi korisnički račun na Renderu. Kada uđemo na početnu stranicu Rendera, pritisnemo tipku Get Started gdje nas tada preusmjerava na formu za registraciju ili prijavu. Nudi nam i prijave pomoću drugih usluga kao što su GitHub, GitLab i Google. Preporuka je da ako je aplikacija već na GitHub-u, da se prijavi putem github računa.
+			 \bigbreak
+			 \noindent Nakon izrade korisničkog računa otvara se zaslon Render Dashboard. Sada za kreiranje PostgreSQL baze podataka slijedimo jednostavne upute:
+			 \bigbreak
+			\noindent  New =\textgreater  PostgreSQL =\textgreater  Name: naziv vidljiv u Render Dashboard-u, Database: naziv naše baze što uzimamo nešto kratko i prepoznatljivo, User: najbolje staviti nešto generičko kao user, Region: podesiti jednu od ponuđenih regija koja je najbliža. =\textgreater  Create Database
+			\bigbreak
+			\noindent Sada kada kliknemo na generiranu bazu podataka, možemo vidjeti neke od informacija. Za spajanje na bazu podataka koristiti ćemo External Database URL. 
+			\bigbreak
+			\noindent Te informacije će nam biti potrebne kako bismo se spojili sa bazom podataka te mogli vidjeti i uređivati podatke u PgAdmin-u te za spajanje Spring Boot backenda na bazu.
+			\bigbreak
+			\noindent Za spajanje na PgAdmin-u:
+			Desni klik na Servers =\textgreater  Register =\textgreater  Server =\textgreater  Name: dodamo ime =\textgreater  Pritisak na karticu Connection =\textgreater  Host name/address upišemo iz External Database URL podatka sve nakon znaka @ nakon čega slijedi dpg pa sve do zadnje kose crte.\newline
+			Izgled prije: postgres://user:.......@dpg......./nazivbaze \newline
+			Upisujemo: dpg....... \newline
+			Port je po default-u 5432. \newline
+			Maintnance database: Kopiramo polje Database. \newline
+			Username: Kopiramo polje Username. \newline
+			Password: Kopiramo polje Password. \newline
+			Pritisnemo tipku save i trebalo bi prikazati bazu podataka na listi servera.
+			\bigbreak
+			\noindent Za spajanje Spring Boot-a na bazu potrebno je otići u application.properties u folderu resources i upisivati podatke na sljedeći način:\newline
+			spring.datasource.url = jdbc:postgresql://dpg.../nazivbaze \newline
+			spring.datasource.username = Kopiramo polje Username \newline
+			spring.datasource.password = Kopiramo polje Password \newline
+			spring.jpa.hibernate.ddl-auto = odaberemo neku od opcija koje se mogu proučiti na
+			\href{https://www.jobyme88.com/?st_ai=spring-jpa-hibernate-ddl-auto}{ovoj stranici}.\newline
+			spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+			\bigbreak
+			\noindent Na dalje, opisati ćemo dodavanje Spring Boot aplikacije na Render. Kako bi to uopće bilo moguće, moramo dodati u Spring Boot DockerFile. Prilikom izrade Spring Boot-a, odabrali smo Gradle ili Maven. Ovdje smo odabrali maven te sada čemu unutar naše backend aplikacije napraviti folder docker, unutar njega folder maven te unutar njega smjestiti naš DockerFile. U DockerFile potrebno je voditi računa samo o verziji jave koju koristimo te na koji port želimo izložiti aplikaciju.
+			\bigbreak
+			\noindent Kod:
+			\bigbreak
+			\begin{verbatim}
+				# Container za izgradnju (build) aplikacije
+				FROM openjdk:17-alpine AS builder
+				
+				# Kopiranje izvornog koda u container
+				COPY ../../.mvn .mvn
+				COPY ../../mvnw .
+				COPY ../../pom.xml .
+				COPY ../../src src
+				RUN chmod +x mvnw
+				
+				# Pokretanje builda
+				RUN ./mvnw clean package
+				
+				# Stvaranje containera u kojem ce se vrtiti aplikacija
+				FROM openjdk:17-alpine
+				
+				## Ovdje je moguce instalirati alate potrebne za rad aplikacije. Vjerojatno vam nece trebati, no dobro je znati.
+				## Linux distro koji se koristi je Alpine, stoga se kao package manager koristi apk
+				#RUN apk install <nesto>
+				
+				# Kopiranje izvrsnog JAR-a iz build containera u izvrsni container
+				COPY --from=builder target/*.jar /app.jar
+				
+				# Izlaganje porta
+				EXPOSE 8080
+				
+				# Naredba kojom se pokrece aplikacija
+				ENTRYPOINT ["java","-jar","/app.jar"]
+				
+			\end{verbatim}
 			
-			 \textit{Dovršenu aplikaciju potrebno je pokrenuti na javno dostupnom poslužitelju. Studentima se preporuča korištenje neke od sljedećih besplatnih usluga: \href{https://aws.amazon.com/}{Amazon AWS}, \href{https://azure.microsoft.com/en-us/}{Microsoft Azure} ili \href{https://www.heroku.com/}{Heroku}. Mobilne aplikacije trebaju biti objavljene na F-Droid, Google Play ili Amazon App trgovini.}
+			\noindent Kada to spremimo, možemo otići u Render Dashboard i uploadati našu aplikaciju.
+			New =\textgreater  Build and deploy from a Git repository (sada je potrebno spojiti Github ili GitLab račun što je puno lakše ako smo račun izradili uz pomoć GitHub-a) =\textgreater  Next =\textgreater  Odaberemo naš račun i pritisnemo Connect =\textgreater  Name: odaberemo ime, Region: odaberemo najbližu regiju, Branch: unutar našeg Git projekta odaberemo na kojem branchu se nalazi ta naša aplikacija.
+			=\textgreater  Sada pod Root Directory je važno staviti nešto ako imamo unutar našeg git projekta više različitih aplikacija kao što u našem slučaju na jednom git projektu se nalazi i frontend i backend aplikacija pa za Root Directory odabiremo IzvorniKod/NazivBackendAplikacije =\textgreater  Runtime: Docker =\textgreater  Advanced =\textgreater  Dockerfile Path: ./docker/maven/DockerFile =\textgreater  Create Web Service 
+			\bigbreak
+			\noindent Sada da bismo isto tako uploadali frontend na Render potrebno je u Reactu na app.js datoteci promijeniti neke stvari. Primjer koda us korištenje express-a je sljedeći:
+			\bigbreak
+			\begin{verbatim}
+				const express = require("express");
+				const { createProxyMiddleware } = require("http-proxy-middleware");
+				require("dotenv").config();
+				const path = require("path")
+				
+				const app = express();
+				
+				// Configuration
+				
+				const { API_BASE_URL } = process.env;
+				
+				// Proxy
+				app.use(
+				"/api",
+				createProxyMiddleware({
+						target: API_BASE_URL,
+						changeOrigin: true,
+					})
+				);
+				
+				app.listen(3000);
+				
+				app.use(express.static(path.join(__dirname, 'build')))
+				
+				app.get("/*", async (req, res) => {
+						res.sendFile(path.join(__dirname, 'build', 'index.html'))
+					}
+				);
+			\end{verbatim}
+			\bigbreak
+			\noindent Kada ovo spremimo možemo otići na Render Dashboard.\newline
 			
+			\noindent New\ Web Service =\textgreater  Build and deploy from a Git repository =\textgreater  Connect
+			 =\textgreater  Connect na naš projekt =\textgreater  Sada na što je potrebno obratiti pažnju jest mi sada Root Directory postavljamo na IzvorniKod/NazivDirektorijaFrontenda i Runtime postavljamo na Node =\textgreater  Build Command: yarn build =\textgreater  Start Command: yarn start-prod =\textgreater  Sada još jedna važna stvar je da u enviroment varijable želimo postaviti dodatnu varijablu API\textunderscore BASE \textunderscore URL koju koristimo za spajanje frontenda na backend. Vrijednost te varijable postavimo na link tj. web adresu naše backend aplikacije. Još jedna Enviroment Varijabla koja može biti uzrokovati probleme ako se ne stavi jest NODE\textunderscore VERSION gdje vrijednost postavimo na neku od zadnjih stablinih verzija. Aplikacija CookBooked je postavlje na verziju 18.8.0 =\textgreater  Create Web Service\newline
+			\bigbreak
+			\noindent Ako je aplikacije uspješno postavljena, prikaže se oznaka Live što nam označi da je aplikacija online.
 			
 			\eject 
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
