@@ -1,11 +1,10 @@
 package opp.CookBooked.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.sql.Time;
 
@@ -25,37 +24,26 @@ public class Recept {
 
     @Getter
     @Setter
-    @ManyToOne
-    @JoinColumn(name = "idKorisnik")
-    private Korisnik korisnik;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_korisnik")
+    private Korisnik autor;
 
     @Getter
     @Setter
     @Column(name = "nazivRecept")
     private String nazivRecept;
 
-    @OneToMany
-    @JoinColumn(name = "receptKategorije")
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
     private Set<ReceptKategorije> receptKategorije;
 
-    @Getter
-    @Setter
-    @Column(name = "idkategorija")
-    private Long idKategorija;
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
+    private Set<ReceptSastojci> receptSastojci;
 
-    @Getter
-    @Setter
-    @Column(name = "idreceptSastojak")
-    private Long idReceptSastojak;
-
-    @OneToMany
-    @JoinColumn(name = "vrstaKuhinja")
-    private Set<VrstaKuhinja> vrstaKuhinja;
-
-    @Getter
-    @Setter
-    @Column(name = "idVrstaKuhinja")
-    private Long idVrstaKuhinja;
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
+    private Set<VrsteKuhinjaRecepta> vrsteKuhinjaRecepta;
 
     @Getter
     @Setter
@@ -87,25 +75,31 @@ public class Recept {
     @Column(name = "vrijemeObjave")
     private LocalDate vrijemeObjave;
 
-    @ManyToMany(mappedBy = "spremljeniRecepti")
-    private Set<Korisnik> saved;
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
+    private Set<SpremljeniRecepti> korisnici;
 
-    @ManyToMany(mappedBy = "likedRecepti")
-    private Set<Korisnik> liked;
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
+    private Set<OznacavanjeRecepata> korisniciOzn;
 
-    public Recept(String nazivRecept, Korisnik korisnik, Long idKategorija, Long idReceptSastojak,
-                  Long idVrstaKuhinja, String priprema, Time vrijemeKuhanja,
+    public Recept(String nazivRecept, Korisnik autor,
+                  String priprema, Time vrijemeKuhanja,
                   String oznaka, String slikaRecept, String videoRecept) {
         this.nazivRecept = nazivRecept;
-        this.korisnik = korisnik;
-        this.idKategorija = idKategorija;
-        this.idReceptSastojak = idReceptSastojak;
-        this.idVrstaKuhinja = idVrstaKuhinja;
+        this.autor = autor;
         this.Priprema = priprema;
         this.vrijemeKuhanja = vrijemeKuhanja;
         this.Oznaka = oznaka;
         this.slikaRecept = slikaRecept;
         this.videoRecept = videoRecept;
+    }
+
+    public Recept(Long idRecept, Korisnik autor, String nazivRecept, String priprema) {
+        this.idRecept = idRecept;
+        this.autor = autor;
+        this.nazivRecept = nazivRecept;
+        this.Priprema = priprema;
     }
 
 }

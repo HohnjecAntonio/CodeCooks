@@ -21,10 +21,6 @@ public class ReceptServiceJpa implements ReceptService {
     @Autowired
     private KorisnikService korisnikService;
 
-    @Autowired
-    private KorisnikRepository korisnikRepo;
-
-
     @Override
     public List<Recept> listAll() {
         return receptRepo.findAll();
@@ -36,19 +32,19 @@ public class ReceptServiceJpa implements ReceptService {
     }
 
     @Override
-    public List<Recept> findReceptByKorisnikId(long korisnikId) throws Exception {
-        return receptRepo.findReceptByKorisnikId(korisnikId);
+    public List<Recept> findSpremljeneRecepteByIdKorisnik(long idKorisnik) throws Exception {
+        return receptRepo.findSpremljeniReceptiByIdKorisnik(idKorisnik);
     }
 
     @Override
     public Recept createRecept(Recept recept, long iDKorisnik) throws Exception {
 
-        Korisnik korisnik = korisnikService.findByIdKorisnik(iDKorisnik);
+        Korisnik k = korisnikService.findByIdKorisnik(iDKorisnik);
 
         Recept noviRecept = new Recept();
 
         noviRecept.setNazivRecept(recept.getNazivRecept());
-        noviRecept.setKorisnik(korisnik);
+        noviRecept.setAutor(k);
         noviRecept.setPriprema(recept.getPriprema());
         noviRecept.setOznaka(recept.getOznaka());
         noviRecept.setVrijemeKuhanja(recept.getVrijemeKuhanja());
@@ -62,18 +58,24 @@ public class ReceptServiceJpa implements ReceptService {
     }
 
     @Override
-    public Recept updateRecept(Recept recept) throws Exception {
-        return null;
+    public Recept updateRecept(long idRecept, Recept updatedRecept) throws Exception {
+        return receptRepo.findById(idRecept).map(recept -> {
+
+            recept.setNazivRecept(updatedRecept.getNazivRecept());
+            recept.setPriprema(updatedRecept.getPriprema());
+
+            return receptRepo.save(recept);
+        }).orElseThrow(() -> new RuntimeException("Recept not found with id " + idRecept));
+
     }
 
     @Override
     public String deleteRecept(long idRecept, long korisnikId) throws Exception {
 
         Recept recept = findReceptById(idRecept);
-        Korisnik korisnik = korisnikService.findByIdKorisnik(korisnikId);
 
-        if (recept.getKorisnik().getIdKorisnik() != korisnikId) {
-            throw new Exception("Ne možete obrisati ovaj recept!");
+        if (recept.getAutor().getIdKorisnik() != korisnikId) {
+            throw new Exception("Ne možete obrisati ovaj recept jer niste njegov autor!");
         }
 
         receptRepo.delete(recept);

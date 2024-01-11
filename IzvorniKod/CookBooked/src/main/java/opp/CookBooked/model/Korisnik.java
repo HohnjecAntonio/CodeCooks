@@ -14,7 +14,7 @@ import java.util.*;
 @Entity
 @Table(name = "korisnik")
 @Data
-@EqualsAndHashCode(exclude = {"follows", "followers"})
+@EqualsAndHashCode
 @NoArgsConstructor
 public class Korisnik {
 
@@ -65,49 +65,26 @@ public class Korisnik {
     @Setter
     private Time dostupan;
 
-    @ManyToMany
-    @JoinTable(
-            name = "spremljeniRecepti",
-            joinColumns = @JoinColumn(name = "idkorisnik"),
-            inverseJoinColumns = @JoinColumn(name = "idrecept")
-    )
-    private Set<Recept> spremljeniRecepti;
+    @OneToMany(mappedBy = "follower")
+    @JsonIgnore
+    private Set<Pratioci> follows;
 
-    @ManyToMany
-    @JoinTable(
-            name = "likedRecepti",
-            joinColumns = @JoinColumn(name = "idkorisnik"),
-            inverseJoinColumns = @JoinColumn(name = "idrecept")
-    )
-    private Set<Recept> likedRecepti;
+    @OneToMany(mappedBy = "following")
+    @JsonIgnore
+    private Set<Pratioci> followers;
 
-    @ManyToMany
-    @JoinTable(
-            name = "following",
-            joinColumns = @JoinColumn(name = "follower_id"),
-            inverseJoinColumns = @JoinColumn(name = "following_id")
-    )
-    @JsonManagedReference
-    private Set<Korisnik> follows = new HashSet<>();
+    @OneToMany(mappedBy = "korisnik")
+    @JsonIgnore
+    private Set<SpremljeniRecepti> spremljeniRecepti;
 
-    @ManyToMany(mappedBy = "follows")
-    @JsonBackReference
-    private Set<Korisnik> followers = new HashSet<>();
+    @OneToMany(mappedBy = "korisnik")
+    @JsonIgnore
+    private Set<OznacavanjeRecepata> oznaceniRecepti;
 
     public Korisnik(String korisnickoIme, String lozinkaKorisnik, String emailKorisnik) {
         this.korisnickoIme = korisnickoIme;
         this.lozinkaKorisnik = lozinkaKorisnik;
         this.emailKorisnik = emailKorisnik;
-    }
-
-    public void addFollower(Korisnik follower) {
-        followers.add(follower);
-        follower.follows.add(this);
-    }
-
-    public void removeFollower(Korisnik follower) {
-        followers.remove(follower);
-        follower.follows.remove(this);
     }
 
 }

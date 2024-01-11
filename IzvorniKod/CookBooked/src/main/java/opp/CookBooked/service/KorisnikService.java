@@ -13,23 +13,11 @@ public interface KorisnikService {
 
     Korisnik findByKorisnickoIme(String korisnickoIme);
 
-    void addFollower(Korisnik follower, Korisnik following);
-
-    Recept saveRecipeForUser(long korisnikId, long receptId);
-
-    Set<Recept> getSavedRecipesForUser(long korisnikId);
-
-    Set<Korisnik> getUsersWhoSavedRecipe(long receptId);
-
-    Recept likeRecipe(long korisnikId, long receptId);
-
-    Set<Recept> getLikedRecipesForUser(long korisnikId);
-
-    Set<Korisnik> getUsersWhoLikedRecipe(long receptId);
-
     Korisnik findByIdKorisnik(long iDKorisnik);
 
     Korisnik fetch(long iDKorisnik) throws Throwable;
+
+    Korisnik update(long idKorisnik, Korisnik updatedKorisnik) throws Exception;
 
     Korisnik deleteKorisnik(long iDKorisnik);
 }

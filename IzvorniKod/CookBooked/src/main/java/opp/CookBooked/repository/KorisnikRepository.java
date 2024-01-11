@@ -18,10 +18,4 @@ public interface KorisnikRepository  extends JpaRepository<Korisnik, Long> {
 
     long countByEmailKorisnik(String emailKorisnik);
 
-    @Query("SELECT k.spremljeniRecepti FROM Korisnik k WHERE k.idKorisnik = :idKorisnik")
-    Set<Recept> findSavedRecipesByKorisnikId(@Param("idKorisnik") long idKorisnik);
-
-    @Query("SELECT k.likedRecepti FROM Korisnik k WHERE k.idKorisnik = :idKorisnik")
-    Set<Recept> findLikedRecipesByKorisnikId(@Param("idKorisnik") long idKorisnik);
-
 }

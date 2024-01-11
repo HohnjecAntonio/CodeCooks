@@ -13,11 +13,11 @@ public interface ReceptService {
 
     Recept findReceptById(long idRecept) throws Exception;
 
-    List<Recept> findReceptByKorisnikId(long korisnikId) throws Exception;
+    List<Recept> findSpremljeneRecepteByIdKorisnik(long iDKorisnik) throws Exception;
 
     Recept createRecept(Recept recept, long iDKorisnik) throws Exception;
 
-    Recept updateRecept(Recept recept) throws Exception;
+    Recept updateRecept(long idRecept, Recept updatedRecept) throws Exception;
 
     String deleteRecept(long idRecept, long korisnikId) throws Exception;
 }

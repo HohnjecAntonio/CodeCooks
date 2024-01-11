@@ -1,12 +1,15 @@
 import axios from "axios";
-import { API_BASE_URL } from "../../config/api";
+import {api, API_BASE_URL} from "../../config/api";
 import {
     LOGIN_FAILURE,
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     REGISTER_FAILURE,
     REGISTER_REQUEST,
-    REGISTER_SUCCESS
+    REGISTER_SUCCESS,
+    FETCH_KATEGORIJE_SUCCESS,
+    FETCH_KATEGORIJE_REQUEST,
+    FETCH_KATEGORIJE_FAILURE
 } from "./auth.actionType";
 
 export const loginUserAction = (loginData) => async (dispatch) => {
@@ -38,6 +41,16 @@ export const registerUserAction = (registerData) => async (dispatch) => {
     } catch (error) {
         console.log("------", error);
         dispatch({ type: REGISTER_FAILURE, payload: error });
+    }
+};
+
+export const fetchKategorije = () => async (dispatch) => {
+    dispatch({ type: FETCH_KATEGORIJE_REQUEST });
+    try {
+        const { data } = await api.get(`${API_BASE_URL}/`);
+        dispatch({ type: FETCH_KATEGORIJE_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: FETCH_KATEGORIJE_FAILURE, payload: error });
     }
 };
 

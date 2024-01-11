@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "kategorija")
 @Data
@@ -23,6 +25,9 @@ public class Kategorija {
     @NotNull
     @Column(name = "nazivKategorija")
     private String nazivKategorija;
+
+    @OneToMany(mappedBy = "kategorija")
+    private Set<ReceptKategorije> receptKategorije;
 
     public Kategorija(String nazivKategorija) {
         this.nazivKategorija = nazivKategorija;

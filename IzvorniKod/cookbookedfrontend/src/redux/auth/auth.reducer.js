@@ -1,4 +1,7 @@
 import {
+    FETCH_KATEGORIJE_FAILURE,
+    FETCH_KATEGORIJE_REQUEST,
+    FETCH_KATEGORIJE_SUCCESS,
     LOGIN_FAILURE,
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
@@ -10,7 +13,8 @@ import {
 const initialState = {
     token: null,
     error: null,
-    loading: false
+    loading: false,
+    kategorije: []
 }
 
 export const authReducer = (state=initialState, action) => {
@@ -24,7 +28,12 @@ export const authReducer = (state=initialState, action) => {
         case LOGIN_FAILURE:
         case REGISTER_FAILURE:
             return {...state, loading:false, error:action.payload}
-
+        case FETCH_KATEGORIJE_REQUEST:
+            return { ...state, loading: true, error: null };
+        case FETCH_KATEGORIJE_SUCCESS:
+            return { ...state, kategorije: action.payload, loading: false, error: null };
+        case FETCH_KATEGORIJE_FAILURE:
+            return { ...state, loading: false, error: action.payload };
         default:
             return state;
 

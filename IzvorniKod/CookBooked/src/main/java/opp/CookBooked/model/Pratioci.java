@@ -8,8 +8,8 @@ import jakarta.persistence.*;
 
 @Entity
 @NoArgsConstructor
-@Table(name = "receptKategorije")
-public class ReceptKategorije {
+@Table(name = "pratioci")
+public class Pratioci {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,20 +19,20 @@ public class ReceptKategorije {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "idRecept")
+    @JoinColumn(name = "followerID")
     @Getter
     @Setter
-    private Recept recept;
+    private Korisnik follower;
 
     @ManyToOne
-    @JoinColumn(name = "idKategorija")
+    @JoinColumn(name = "followingID")
     @Getter
     @Setter
-    private Kategorija kategorija;
+    private Korisnik following;
 
-    public ReceptKategorije(Recept recept, Kategorija kategorija) {
-        this.kategorija = kategorija;
-        this.recept = recept;
+    public Pratioci(Korisnik follower, Korisnik following) {
+        this.follower = follower;
+        this.following = following;
     }
 
 }
