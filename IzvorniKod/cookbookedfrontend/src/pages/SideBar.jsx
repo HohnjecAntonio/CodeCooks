@@ -22,20 +22,21 @@ function SideBar(props){
 
   const [activeMenu, setActiveMenu] = useState('main');
   const [menuHeight, setMenuHeight] = useState(null);
-  /*const categories = [
+  
+  const [categories, setCategories] = useState([
     { id: 1, name: 'Category 1' },
     { id: 2, name: 'Category 2' },
     // Add more categories as needed
-  ];*/
-  
-  const [categories, setCategories] = useState([]);
+  ]);
+  /*
+   useEffect(() => {
+     // Fetch categories from your API endpoint
+    fetchCategoriesFromAPI().then((data) => {
+      setCategories(data);
+    });
+  }, []);
 
-  // useEffect(() => {
-  //   // Fetch categories from your API endpoint
-  //   fetchCategoriesFromAPI().then((data) => {
-  //     setCategories(data);
-  //   });
-  // }, []);
+*/
   function calcHeight(el){
     const heigth = el.offsetHeight;
     setMenuHeight(heigth);
@@ -47,6 +48,7 @@ function SideBar(props){
     try {
       const response = await fetch('api/categories');
       const data = await response.json();
+      console.log("Dohvaćene kategorije s backenda" + data);
       return data;
     } catch (error) {
       console.error('Error fetching categories:', error);

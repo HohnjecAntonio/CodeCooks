@@ -2,26 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './HomePage.css'; // You can create a separate CSS file for styling
 
 const HomePage = (props) => {
-  const [recentRecipes, setRecentRecipes] = useState([]);
-
-  useEffect(() => {
-    // Simulating fetching data from a server
-    // In a real application, you would fetch data using something like fetch or Axios
-    const fetchData = async () => {
-      try {
-        // Replace this with the actual endpoint to fetch recent recipes data
-        const response = await fetch('/api/Recipes');
-        const data = await response.json();
-        setRecentRecipes(data);
-      } catch (error) {
-        console.error('Error fetching recipes:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const recipes = [
+  const [recipes, setRecipes] = useState([
     {
       id: 1,
       title: 'Spaghetti Bolognese',
@@ -73,7 +54,25 @@ const HomePage = (props) => {
         userID: '2'
       },
     // Add more recipe objects as needed
-  ];
+  ]);
+
+  useEffect(() => {
+    // Simulating fetching data from a server
+    // In a real application, you would fetch data using something like fetch or Axios
+    const fetchData = async () => {
+      try {
+        // Replace this with the actual endpoint to fetch recent recipes data
+        const response = await fetch('/api/Recipes');
+        const data = await response.json();
+        setRecipes(data);
+      } catch (error) {
+        console.error('Error fetching recipes:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   const [newRecipe, setNewRecipe] = useState({
     id: '',
