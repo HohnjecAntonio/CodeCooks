@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchKategorije } from '../redux/auth/auth.action.js';
 import { CSSTransition } from 'react-transition-group';
 import "./SideBar.css"
 
@@ -19,31 +21,40 @@ import {NavLink} from "react-router-dom";
 
 
 function SideBar(props){
+  const dispatch = useDispatch();
 
   const [activeMenu, setActiveMenu] = useState('main');
   const [menuHeight, setMenuHeight] = useState(null);
+  const categories = useSelector(state => state.auth.kategorije); // Adjust path according to your store structure
   
-  const [categories, setCategories] = useState([
+  useEffect(() => {
+    dispatch(fetchKategorije());
+}, [dispatch]);
+ /* const [categories, setCategories] = useState([
     { id: 1, name: 'Category 1' },
     { id: 2, name: 'Category 2' },
     // Add more categories as needed
   ]);
-  /*
+  
    useEffect(() => {
      // Fetch categories from your API endpoint
-    fetchCategoriesFromAPI().then((data) => {
+     fetch('api/categories').then((res) => {
+      return res.json();
+    })
+    .then((data)=>{
+      console.log(data);
       setCategories(data);
     });
   }, []);
-
 */
+
   function calcHeight(el){
     const heigth = el.offsetHeight;
     setMenuHeight(heigth);
   }
 
 
-
+/*
   async function fetchCategoriesFromAPI() {
     try {
       const response = await fetch('api/categories');
@@ -52,9 +63,8 @@ function SideBar(props){
       return data;
     } catch (error) {
       console.error('Error fetching categories:', error);
-      return [];
     }
-  }
+  }*/
 
   
 
@@ -163,9 +173,9 @@ function SideBar(props){
             </NavItem>
             {categories.map((category) => (
               <NavItem
-                key={category.id}
+                key={category.idKategorija}
                 leftIcon={<AlienIcon />}
-                text={category.name}
+                text={category.nazivKategorija}
                 link="#"
               />
             ))}
