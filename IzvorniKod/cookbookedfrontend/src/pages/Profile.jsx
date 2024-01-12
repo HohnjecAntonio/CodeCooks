@@ -86,7 +86,7 @@ function Profile(props) {
   });
 
   const testings = profiles.filter(newUser  =>
-    newUser.userID == props.profileID
+    newUser.userID == JSON.parse(localStorage.getItem("profileToLoad"))
   );
 
   /* Mapping the courses into a new array of JSX nodes as arrayDataItems */

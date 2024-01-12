@@ -81,14 +81,7 @@ function App() {
                     <Switch>
 
                         <Route path="/" exact>
-                            {<HomePage profileID={profileID} 
-                                changeProfileID = {newProfileID => 
-                                {
-                                    setProfileID(newProfileID);
-                                    console.log(newProfileID);
-                                    localStorage.setItem('profileToLoad', JSON.stringify(newProfileID));
-                                    console.log("Added to storage:" + localStorage.getItem('profileToLoad'));
-                                }}/>}
+                            {<HomePage/>}
 
                         </Route>
 

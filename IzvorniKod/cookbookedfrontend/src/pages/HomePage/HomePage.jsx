@@ -62,10 +62,21 @@ const HomePage = (props) => {
       creator: 'New user',
       userID: '2'
     },
+    {
+        id: 5,
+        title: 'Chicken Stir Fry',
+        ingredients: ['400g chicken breast', '1 bell pepper', '1 broccoli', '2 tbsp soy sauce'],
+        instructions: 'Slice chicken and vegetables. Stir-fry chicken until cooked, add vegetables and soy sauce. Cook until veggies are tender. Serve hot.',
+        category: 'Asian',
+        image: 'images/stir_fry.jpg',
+        creator: 'New user',
+        userID: '2'
+      },
     // Add more recipe objects as needed
   ];
 
   const [newRecipe, setNewRecipe] = useState({
+    id: '',
     title: '',
     ingredients: '',
     instructions: '',
@@ -95,6 +106,9 @@ const HomePage = (props) => {
       <div className="recipe-list">
         {recipes.map((recipe) => (
           <div key={recipe.id} className="recipe-card">
+
+            <a href="/RecipePage" onClick={()=>{localStorage.setItem('recipeToLoad',JSON.stringify(recipe.id)); console.log(recipe.id);}}>
+
             <img src={recipe.image} alt={recipe.title} className="recipe-image" />
             <div className="recipe-details">
               <h2>{recipe.title}</h2>
@@ -106,12 +120,14 @@ const HomePage = (props) => {
               </ul>
               <p>Instructions: {recipe.instructions}</p>
               <p>Creator: <a href="/Profile" onClick={() => {
-                  props.changeProfileID(recipe.userID);
+                  localStorage.setItem(localStorage.setItem('profileToLoad',JSON.stringify(recipe.userID)))
             }}>{recipe.creator}</a></p>
             </div>
+            </a>
           </div>
         ))}
       </div>
+      
     </div>
   );
 };
