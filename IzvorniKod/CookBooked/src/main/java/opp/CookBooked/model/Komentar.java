@@ -21,12 +21,6 @@ public class Komentar {
 
     @Getter
     @Setter
-    @ManyToOne
-    @JoinColumn(name = "idrecept")
-    private ObjavaRecepta objavaRecepta;
-
-    @Getter
-    @Setter
     @Column(name = "idobjava")
     private Long idObjava;
 
