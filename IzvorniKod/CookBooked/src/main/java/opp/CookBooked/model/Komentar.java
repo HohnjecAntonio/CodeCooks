@@ -55,8 +55,7 @@ public class Komentar {
     @Column(name = "datumKomentar")
     private Date datumKomentar;
 
-    public Komentar(ObjavaRecepta objavaRecepta, Long idObjava, Long idKorisnik, String naslovKomentar, String opisKomentar, Date datumKomentar) {
-        this.objavaRecepta = objavaRecepta;
+    public Komentar(Long idObjava, Long idKorisnik, String naslovKomentar, String opisKomentar, Date datumKomentar) {
         this.idObjava = idObjava;
         this.idKorisnik = idKorisnik;
         this.naslovKomentar = naslovKomentar;

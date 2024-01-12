@@ -1,9 +1,10 @@
 package opp.CookBooked.service;
 
 import opp.CookBooked.model.Korisnik;
+import opp.CookBooked.model.Recept;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 public interface KorisnikService {
     List<Korisnik> listAll();
@@ -12,9 +13,11 @@ public interface KorisnikService {
 
     Korisnik findByKorisnickoIme(String korisnickoIme);
 
-    Optional<Korisnik> findByIdKorisnik(long iDKorisnik);
+    Korisnik findByIdKorisnik(long iDKorisnik);
 
     Korisnik fetch(long iDKorisnik) throws Throwable;
+
+    Korisnik update(long idKorisnik, Korisnik updatedKorisnik) throws Exception;
 
     Korisnik deleteKorisnik(long iDKorisnik);
 }

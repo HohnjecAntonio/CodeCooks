@@ -48,7 +48,7 @@ function App() {
                         </NavLink>
 
                         {currentUser && (
-                            <NavLink className="Header-button" to="/user-feed">
+                            <NavLink to="/user-feed" className="text-lg font-semibold">
                                 User feed
                             </NavLink>
                         )}

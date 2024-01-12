@@ -23,7 +23,7 @@ const Login = () => {
 
     return (
         <>
-            <div className="Glavni flex justify-center items-center h-screen">
+            <div className="flex justify-center items-center h-screen">
                 <Formik onSubmit={handleSubmit} initialValues={initialValues}>
                     <Form className="w-full max-w-md">
                         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -61,8 +61,14 @@ const Login = () => {
                                 />
                                 <ErrorMessage name="lozinkaKorisnik" component="div" className="text-red-500" />
                             </div>
-                            <div>
-                                <Button type = "submit">
+                            <div className="flex items-center justify-between">
+                                <Button
+                                    sx={{ padding: '.8rem 9rem', backgroundColor: '#388E3C' }}
+                                    className="w-full bg-green-700 btn"
+                                    color="violet"
+                                    type="submit"
+                                    variant="container"
+                                >
                                     Login
                                 </Button>
                             </div>

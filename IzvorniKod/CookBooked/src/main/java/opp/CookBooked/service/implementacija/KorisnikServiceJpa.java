@@ -1,9 +1,9 @@
 package opp.CookBooked.service.implementacija;
 
-import opp.CookBooked.service.RequestDeniedException;
+import jakarta.transaction.Transactional;
+import opp.CookBooked.model.Recept;
+import opp.CookBooked.repository.ReceptRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -11,8 +11,8 @@ import opp.CookBooked.service.KorisnikService;
 import opp.CookBooked.repository.KorisnikRepository;
 import opp.CookBooked.model.Korisnik;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class KorisnikServiceJpa implements KorisnikService {
@@ -30,7 +30,6 @@ public class KorisnikServiceJpa implements KorisnikService {
 
     @Override
     public Korisnik createKorisnik(Korisnik korisnik) throws Exception {
-
         Korisnik noviKorisnik = new Korisnik();
         noviKorisnik.setImeKorisnik(korisnik.getImeKorisnik());
         noviKorisnik.setPrezimeKorisnik(korisnik.getPrezimeKorisnik());
@@ -41,22 +40,32 @@ public class KorisnikServiceJpa implements KorisnikService {
         return korisnikRepo.save(noviKorisnik);
     }
 
-
     @Override
-   public Korisnik findByKorisnickoIme(String korisnickoIme) {
+    public Korisnik findByKorisnickoIme(String korisnickoIme) {
         Assert.notNull(korisnickoIme, "Polje korisnickoIme ne smije biti prazno!");
         return korisnikRepo.findByKorisnickoIme(korisnickoIme);
     }
 
     @Override
-    public Optional<Korisnik> findByIdKorisnik(long iDKorisnik) {
+    public Korisnik findByIdKorisnik(long iDKorisnik) {
         return korisnikRepo.findByIdKorisnik(iDKorisnik);
     }
 
     @Override
     public Korisnik fetch(long iDKorisnik) {
-        return findByIdKorisnik(iDKorisnik).orElseThrow(
-                () -> new EntityMissingException(Korisnik.class, iDKorisnik));
+        return findByIdKorisnik(iDKorisnik);
+    }
+
+    @Override
+    public Korisnik update(long idKorisnik, Korisnik updatedKorisnik) throws Exception {
+        return korisnikRepo.findById(idKorisnik).map(korisnik -> {
+            korisnik.setKorisnickoIme(updatedKorisnik.getKorisnickoIme());
+            korisnik.setLozinkaKorisnik(updatedKorisnik.getLozinkaKorisnik());
+            korisnik.setEmailKorisnik(updatedKorisnik.getEmailKorisnik());
+
+            return korisnikRepo.save(korisnik);
+        }).orElseThrow(() -> new RuntimeException("Korisnik not found with id " + idKorisnik));
+
     }
 
     @Override

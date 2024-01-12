@@ -1,11 +1,15 @@
 package opp.CookBooked.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.sql.Time;
+import java.util.*;
 
 @Entity
 @Table(name = "korisnik")
@@ -60,6 +64,22 @@ public class Korisnik {
     @Getter
     @Setter
     private Time dostupan;
+
+    @OneToMany(mappedBy = "follower")
+    @JsonIgnore
+    private Set<Pratioci> follows;
+
+    @OneToMany(mappedBy = "following")
+    @JsonIgnore
+    private Set<Pratioci> followers;
+
+    @OneToMany(mappedBy = "korisnik")
+    @JsonIgnore
+    private Set<SpremljeniRecepti> spremljeniRecepti;
+
+    @OneToMany(mappedBy = "korisnik")
+    @JsonIgnore
+    private Set<OznacavanjeRecepata> oznaceniRecepti;
 
     public Korisnik(String korisnickoIme, String lozinkaKorisnik, String emailKorisnik) {
         this.korisnickoIme = korisnickoIme;
