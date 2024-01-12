@@ -117,7 +117,7 @@ function SideBar(props){
               <NavItem
                   leftIcon={<CatIcon/>}
                   text ="Dodaj recept"
-                  link= "/user-feed">
+                  link= "/AddRecipe">
               </NavItem>
           ) : (
               <div className="hidden">

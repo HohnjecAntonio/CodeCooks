@@ -7,10 +7,17 @@ import Login from "./pages/Login";
 import HomePage from "./pages/HomePage/HomePage";
 import './App.css';
 import SideBar from "./pages/SideBar";
+import Profile from "./pages/Profile";
+import RecipeForm from "./komponente/RecipeForm";
+import PrivateProfile from "./komponente/PrivateProfile";
+import RecipePage from "./komponente/RecipePage";
+import CategoryButtons from './komponente/CategoryButtons';
+import Chat from './messenger/Chat';
 
 function App() {
-    const [isLoggedIn,setIsLoggedIn] = useState(false);
+    const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
     const [currentUser, setCurrentUser] = useState(undefined);
+    const [profileID, setProfileID] = useState(localStorage.getItem('profileToLoad'));
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -72,20 +79,44 @@ function App() {
                 <div className="Tijelo">
                     <button className = "hidden" onClick={() => setIsLoggedIn(!isLoggedIn)}>Toggle login</button>
                     <Switch>
+
                         <Route path="/" exact>
-                            <HomePage/>
+                            {<HomePage profileID={profileID} 
+                                changeProfileID = {newProfileID => 
+                                {
+                                    setProfileID(newProfileID);
+                                    console.log(newProfileID);
+                                    localStorage.setItem('profileToLoad', JSON.stringify(newProfileID));
+                                    console.log("Added to storage:" + localStorage.getItem('profileToLoad'));
+                                }}/>}
+
                         </Route>
+
                         {currentUser ? (
                             <Route path="/user-feed">
                                 <UserFeed/>
                             </Route>
                         ) : null}
+
                         <Route path="/signin">
                             <Login/>
                         </Route>
+
                         <Route path="/signup">
                             <Registration/>
                         </Route>
+
+
+                        <Route path="/Profile" exact>
+                            {<Profile currentUserID={currentUser} profileID={JSON.parse(localStorage.getItem('profileToLoad'))}
+                                />}
+                        </Route>
+
+                        <Route path="/PrivateProfile" exact component={PrivateProfile} />
+                        <Route path="/AddRecipe" exact component={RecipeForm} />
+                        <Route path="/Categories" exact component={CategoryButtons} />
+                        <Route path="/Chat" exact component={Chat} />
+                        <Route path="/RecipePage" exact component={RecipePage} />
                     </Switch>
                 </div>
                 <SideBar currentUser={currentUser} changeLoginState = {isLoggedIn => setIsLoggedIn(isLoggedIn)} />

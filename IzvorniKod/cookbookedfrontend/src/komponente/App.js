@@ -70,6 +70,7 @@ function App() {
                                 }}/>}
 
                         </Route>
+                        
                         <Route path="/Registracija">
                             <Registracija/>
                         </Route>
