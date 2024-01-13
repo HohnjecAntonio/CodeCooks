@@ -1,16 +1,15 @@
 package opp.CookBooked.service.implementacija;
 
 import opp.CookBooked.dto.ReceptDTO;
-import opp.CookBooked.model.Korisnik;
-import opp.CookBooked.model.Recept;
+import opp.CookBooked.model.*;
 import opp.CookBooked.repository.KorisnikRepository;
 import opp.CookBooked.repository.ReceptRepository;
-import opp.CookBooked.service.KorisnikService;
-import opp.CookBooked.service.ReceptService;
+import opp.CookBooked.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,9 +21,60 @@ public class ReceptServiceJpa implements ReceptService {
     @Autowired
     private KorisnikService korisnikService;
 
+    @Autowired
+    private ReceptSastojciService recSasService;
+
+    @Autowired
+    private KategorijaService katService;
+
+    @Autowired
+    private VrsteKuhinjaReceptaService vrKuhService;
+
+    @Autowired
+    private KomentariService komentariService;
+
+    @Autowired
+    private OznacavanjeRecepataService oznRecService;
+
+
     @Override
     public List<Recept> listAll() {
         return receptRepo.findAll();
+    }
+
+    @Override
+    public List<ReceptDTO> listReceptsForFeed() {
+        List<ReceptDTO> receptiZaFeed = new ArrayList<>();
+        List<Recept> recepti = listAll();
+
+        for (Recept r : recepti) {
+
+            List<Sastojak> sastojci = recSasService.findAllByRecept(r.getIdRecept());
+            List<Kategorija> kategorije = katService.findAllByRecept(r.getIdRecept());
+            List<VrstaKuhinje> vrKuhinje = vrKuhService.findAllByRecept(r.getIdRecept());
+            List<Korisnik> lajkovi = oznRecService.findAllByRecept(r.getIdRecept());
+            List<Komentar> komentari = komentariService.findAllByRecept(r.getIdRecept());
+
+            ReceptDTO rdto = new ReceptDTO();
+
+            rdto.setIdRecept(r.getIdRecept());
+            rdto.setNazivRecept(r.getNazivRecept());
+            rdto.setAutor(r.getAutor().getKorisnickoIme());
+            rdto.setSlikaRecept(r.getSlikaRecept());
+            rdto.setVideoRecept(r.getVideoRecept());
+            rdto.setVrijemeKuhanja(r.getVrijemeKuhanja());
+            rdto.setOznaka(r.getOznaka());
+            rdto.setVrijemeObjave(r.getVrijemeObjave());
+            rdto.setSastojci(sastojci);
+            rdto.setKategorije(kategorije);
+            rdto.setVrsteKuhinje(vrKuhinje);
+            rdto.setLajkovi(lajkovi);
+            rdto.setKomentari(komentari);
+
+            receptiZaFeed.add(rdto);
+        }
+
+        return receptiZaFeed;
     }
 
     @Override
