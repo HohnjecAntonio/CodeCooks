@@ -53,6 +53,8 @@ public class AuthController {
         return new AuthResponse(token, "Uspješna prijava korisnika " + loginDTO.getKorisnickoIme() + ".");
     }
 
+
+
     private Authentication authenticate(String korisnickoIme, String lozinkaKorisnik) {
         UserDetails userDetails = customerUserDetails.loadUserByUsername(korisnickoIme);
 

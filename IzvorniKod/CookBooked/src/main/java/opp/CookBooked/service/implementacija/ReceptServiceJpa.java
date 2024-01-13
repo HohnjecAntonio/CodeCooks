@@ -1,5 +1,6 @@
 package opp.CookBooked.service.implementacija;
 
+import opp.CookBooked.dto.ReceptDTO;
 import opp.CookBooked.model.Korisnik;
 import opp.CookBooked.model.Recept;
 import opp.CookBooked.repository.KorisnikRepository;
@@ -37,6 +38,11 @@ public class ReceptServiceJpa implements ReceptService {
     }
 
     @Override
+    public List<Recept> findRecepteByAutor(long idKorisnik) throws Exception {
+        return receptRepo.findRecepteByAutor(idKorisnik);
+    }
+
+    @Override
     public Recept createRecept(Recept recept, long iDKorisnik) throws Exception {
 
         Korisnik k = korisnikService.findByIdKorisnik(iDKorisnik);
@@ -63,6 +69,12 @@ public class ReceptServiceJpa implements ReceptService {
 
             recept.setNazivRecept(updatedRecept.getNazivRecept());
             recept.setPriprema(updatedRecept.getPriprema());
+            recept.setAutor(updatedRecept.getAutor());
+            recept.setOznaka(updatedRecept.getOznaka());
+            recept.setSlikaRecept(updatedRecept.getSlikaRecept());
+            recept.setVideoRecept(updatedRecept.getVideoRecept());
+            recept.setVrijemeObjave(LocalDate.now());
+            recept.setVrijemeKuhanja(updatedRecept.getVrijemeKuhanja());
 
             return receptRepo.save(recept);
         }).orElseThrow(() -> new RuntimeException("Recept not found with id " + idRecept));

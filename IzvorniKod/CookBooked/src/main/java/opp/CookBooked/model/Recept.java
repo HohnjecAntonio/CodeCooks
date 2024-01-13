@@ -3,8 +3,10 @@ package opp.CookBooked.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 import java.sql.Time;
 
@@ -83,6 +85,10 @@ public class Recept {
     @JsonIgnore
     private Set<OznacavanjeRecepata> korisniciOzn;
 
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
+    private List<KomentariRecept> komentari;
+
     public Recept(String nazivRecept, Korisnik autor,
                   String priprema, Time vrijemeKuhanja,
                   String oznaka, String slikaRecept, String videoRecept) {
@@ -95,11 +101,16 @@ public class Recept {
         this.videoRecept = videoRecept;
     }
 
-    public Recept(Long idRecept, Korisnik autor, String nazivRecept, String priprema) {
+    public Recept(Long idRecept, Korisnik autor, String nazivRecept, String priprema, String oznaka, String slika, String video, LocalDate vrijemeObjave, Time vrijemeKuhanja) {
         this.idRecept = idRecept;
         this.autor = autor;
         this.nazivRecept = nazivRecept;
         this.Priprema = priprema;
+        this.Oznaka = oznaka;
+        this.slikaRecept = slika;
+        this.videoRecept = video;
+        this.vrijemeObjave = vrijemeObjave;
+        this.vrijemeKuhanja = vrijemeKuhanja;
     }
 
 }

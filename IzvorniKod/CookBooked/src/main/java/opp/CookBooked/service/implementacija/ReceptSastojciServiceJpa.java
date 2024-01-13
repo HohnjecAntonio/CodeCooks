@@ -9,6 +9,8 @@ import opp.CookBooked.service.ReceptSastojciService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReceptSastojciServiceJpa implements ReceptSastojciService {
 
@@ -27,5 +29,10 @@ public class ReceptSastojciServiceJpa implements ReceptSastojciService {
             ReceptSastojci spremRec = new ReceptSastojci(recept, sastojak);
             return recSasRepo.save(spremRec);
         }
+    }
+
+    @Override
+    public List<Sastojak> findAllByRecept(long idRecept) {
+        return recSasRepo.findAllByRecept(idRecept);
     }
 }

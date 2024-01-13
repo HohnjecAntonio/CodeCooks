@@ -18,4 +18,9 @@ public class KategorijaServiceJpa implements KategorijaService {
     public List<Kategorija> listAll() {
         return kategorijaRepo.findAll();
     }
+
+    @Override
+    public List<Kategorija> findAllByRecept(long idRecept) {
+        return kategorijaRepo.findAllByRecept(idRecept);
+    }
 }

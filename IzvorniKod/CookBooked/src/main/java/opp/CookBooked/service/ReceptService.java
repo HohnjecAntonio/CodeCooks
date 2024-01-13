@@ -15,6 +15,8 @@ public interface ReceptService {
 
     List<Recept> findSpremljeneRecepteByIdKorisnik(long iDKorisnik) throws Exception;
 
+    List<Recept> findRecepteByAutor(long idKorisnik) throws Exception;
+
     Recept createRecept(Recept recept, long iDKorisnik) throws Exception;
 
     Recept updateRecept(long idRecept, Recept updatedRecept) throws Exception;

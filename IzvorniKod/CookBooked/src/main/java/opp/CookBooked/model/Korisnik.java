@@ -87,4 +87,9 @@ public class Korisnik {
         this.emailKorisnik = emailKorisnik;
     }
 
+    public Korisnik(Long idKorisnik, String korisnickoIme) {
+        this.idKorisnik = idKorisnik;
+        this.korisnickoIme = korisnickoIme;
+    }
+
 }

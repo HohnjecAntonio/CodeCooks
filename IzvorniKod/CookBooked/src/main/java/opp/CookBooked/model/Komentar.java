@@ -3,6 +3,7 @@ package opp.CookBooked.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -10,6 +11,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode
 @NoArgsConstructor
+@AllArgsConstructor
 public class Komentar {
 
     @Id
@@ -19,25 +21,11 @@ public class Komentar {
     @Setter
     private Long idKomentar;
 
-    @Getter
-    @Setter
-    @Column(name = "idobjava")
-    private Long idObjava;
-
-    @Getter
-    @Setter
     @ManyToOne
-    @JoinColumn(name = "korisnik", referencedColumnName = "idkorisnik")
+    @JoinColumn(name = "idkorisnik")
+    @Getter
+    @Setter
     private Korisnik korisnik;
-
-    @Getter
-    @Setter
-    private Long idKorisnik;
-
-    @Getter
-    @Setter
-    @Column(name = "naslovKomentar")
-    private String naslovKomentar;
 
     @Getter
     @Setter
@@ -47,12 +35,9 @@ public class Komentar {
     @Getter
     @Setter
     @Column(name = "datumKomentar")
-    private Date datumKomentar;
+    private LocalDate datumKomentar;
 
-    public Komentar(Long idObjava, Long idKorisnik, String naslovKomentar, String opisKomentar, Date datumKomentar) {
-        this.idObjava = idObjava;
-        this.idKorisnik = idKorisnik;
-        this.naslovKomentar = naslovKomentar;
+    public Komentar(String opisKomentar, LocalDate datumKomentar) {
         this.opisKomentar = opisKomentar;
         this.datumKomentar = datumKomentar;
     }

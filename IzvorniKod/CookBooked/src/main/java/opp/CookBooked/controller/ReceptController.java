@@ -1,19 +1,18 @@
 package opp.CookBooked.controller;
 
-import opp.CookBooked.model.OznacavanjeRecepata;
-import opp.CookBooked.model.Recept;
-import opp.CookBooked.model.SpremljeniRecepti;
-import opp.CookBooked.service.KorisnikService;
-import opp.CookBooked.service.OznacavanjeRecepataService;
-import opp.CookBooked.service.ReceptService;
-import opp.CookBooked.service.SpremljeniReceptiService;
+import opp.CookBooked.dto.ReceptDTO;
+import opp.CookBooked.model.*;
+import opp.CookBooked.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/recepti")
 public class ReceptController {
 
@@ -29,46 +28,108 @@ public class ReceptController {
     @Autowired
     private OznacavanjeRecepataService oznRecService;
 
+    @Autowired
+    private ReceptSastojciService recSasService;
+
+    @Autowired
+    private KategorijaService katService;
+
+    @Autowired
+    private VrsteKuhinjaReceptaService vrKuhService;
+
+    @Autowired
+    private KomentariService komentariService;
+
     @GetMapping("")
-    public List<Recept> listRecept(){
-        return receptService.listAll();
+    public List<ReceptDTO> listRecepts(){
+
+        List<ReceptDTO> receptiZaFeed = new ArrayList<>();
+        List<Recept> recepti = receptService.listAll();
+
+        for (Recept r : recepti) {
+
+            List<Sastojak> sastojci = recSasService.findAllByRecept(r.getIdRecept());
+            List<Kategorija> kategorije = katService.findAllByRecept(r.getIdRecept());
+            List<VrstaKuhinje> vrKuhinje = vrKuhService.findAllByRecept(r.getIdRecept());
+            List<Korisnik> lajkovi = oznRecService.findAllByRecept(r.getIdRecept());
+            List<Komentar> komentari = komentariService.findAllByRecept(r.getIdRecept());
+
+            ReceptDTO rdto = new ReceptDTO();
+
+            rdto.setIdRecept(r.getIdRecept());
+            rdto.setNazivRecept(r.getNazivRecept());
+            rdto.setAutor(r.getAutor().getKorisnickoIme());
+            rdto.setSlikaRecept(r.getSlikaRecept());
+            rdto.setVideoRecept(r.getVideoRecept());
+            rdto.setVrijemeKuhanja(r.getVrijemeKuhanja());
+            rdto.setOznaka(r.getOznaka());
+            rdto.setVrijemeObjave(r.getVrijemeObjave());
+            rdto.setSastojci(sastojci);
+            rdto.setKategorije(kategorije);
+            rdto.setVrsteKuhinje(vrKuhinje);
+            rdto.setLajkovi(lajkovi);
+            rdto.setKomentari(komentari);
+
+            receptiZaFeed.add(rdto);
+        }
+
+        return receptiZaFeed;
     }
 
     @GetMapping("/{idRecept}")
-    public ResponseEntity<Recept> findReceptById(@PathVariable long idRecept) throws Exception {
+    public ResponseEntity<Recept> findReceptById(@RequestHeader("Authorization") String jwt, @PathVariable long idRecept) throws Exception {
         Recept nRecept = receptService.findReceptById(idRecept);
         return new ResponseEntity<>(nRecept, HttpStatus.OK);
     }
 
     @GetMapping("/korisnik/{iDKorisnik}")
-    public ResponseEntity<List<Recept>> findKorisnikRecepti(@PathVariable long iDKorisnik) throws Exception {
+    public ResponseEntity<List<Recept>> findKorisnikRecepti(@RequestHeader("Authorization") String jwt, @PathVariable long iDKorisnik) throws Exception {
         List<Recept> recepti = receptService.findSpremljeneRecepteByIdKorisnik(iDKorisnik);
 
         return new ResponseEntity<>(recepti, HttpStatus.OK);
     }
 
     @PostMapping("/save/korisnik/{iDKorisnik}")
-    public ResponseEntity<Recept> createRecept(@RequestBody Recept recept, @PathVariable long iDKorisnik) throws Exception {
+    public ResponseEntity<Recept> createRecept(@RequestHeader("Authorization") String jwt, @RequestBody Recept recept, @PathVariable long iDKorisnik) throws Exception {
         Recept noviRecept = receptService.createRecept(recept, iDKorisnik);
         return new ResponseEntity<>(noviRecept, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{receptId}/korisnik/{iDKorisnik}")
-    public ResponseEntity<String> deleteRecept(@PathVariable long receptId, @PathVariable long iDKorisnik) throws Exception {
-        String message = receptService.deleteRecept(receptId, iDKorisnik);
-        return new ResponseEntity<>(message, HttpStatus.OK);
+    @PostMapping("/{receptId}/addc/korisnik/{iDKorisnik}")
+    public ResponseEntity<KomentariRecept> komentiraj(@RequestHeader("Authorization") String jwt, @RequestBody Komentar komentar, @PathVariable long receptId, @PathVariable long iDKorisnik) throws Exception {
+        Korisnik k = korisnikService.findByIdKorisnik(iDKorisnik);
+        komentar.setKorisnik(k);
+        KomentariRecept kr = komentariService.dodajKomentar(komentar, receptId);
+        return new ResponseEntity<>(kr, HttpStatus.OK);
+    }
+
+    @PutMapping("/{receptId}/editc/korisnik/{iDKorisnik}")
+    public ResponseEntity<String> urediKomentar(@RequestHeader("Authorization") String jwt, @RequestBody Komentar komentar, @PathVariable long receptId, @PathVariable long iDKorisnik) throws Exception {
+        String kr = komentariService.urediKomentar(komentar.getIdKomentar(), komentar);
+        return new ResponseEntity<>(kr, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{receptId}/delc/{idKomentar}/korisnik/{iDKorisnik}")
+    public ResponseEntity<String> obrisiKomentar(@RequestHeader("Authorization") String jwt, @PathVariable long idKomentar, @PathVariable long receptId, @PathVariable long iDKorisnik) throws Exception {
+        String kr = komentariService.obrisiKomentar(idKomentar, receptId);
+        return new ResponseEntity<>(kr, HttpStatus.OK);
     }
 
     @PostMapping("/{receptId}/save/korisnik/{iDKorisnik}")
-    public ResponseEntity<SpremljeniRecepti> spremiRecept(@PathVariable long receptId, @PathVariable long iDKorisnik) throws Exception {
+    public ResponseEntity<SpremljeniRecepti> spremiRecept(@RequestHeader("Authorization") String jwt, @PathVariable long receptId, @PathVariable long iDKorisnik) throws Exception {
         SpremljeniRecepti sr = sprRecService.spremiRecept(korisnikService.findByIdKorisnik(iDKorisnik), receptService.findReceptById(receptId));
         return new ResponseEntity<>(sr, HttpStatus.OK);
     }
 
     @PostMapping("/{receptId}/like/korisnik/{iDKorisnik}")
-    public ResponseEntity<OznacavanjeRecepata> oznaciRecept(@PathVariable long receptId, @PathVariable long iDKorisnik) throws Exception {
+    public ResponseEntity<OznacavanjeRecepata> oznaciRecept(@RequestHeader("Authorization") String jwt, @PathVariable long receptId, @PathVariable long iDKorisnik) throws Exception {
         OznacavanjeRecepata r = oznRecService.oznaciRecept(korisnikService.findByIdKorisnik(iDKorisnik), receptService.findReceptById(receptId));
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
 
+    @DeleteMapping("/delete/{receptId}/korisnik/{iDKorisnik}")
+    public ResponseEntity<String> deleteRecept(@RequestHeader("Authorization") String jwt, @PathVariable long receptId, @PathVariable long iDKorisnik) throws Exception {
+        String message = receptService.deleteRecept(receptId, iDKorisnik);
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
 }

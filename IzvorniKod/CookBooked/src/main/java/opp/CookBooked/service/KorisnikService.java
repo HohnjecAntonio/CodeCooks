@@ -13,11 +13,13 @@ public interface KorisnikService {
 
     Korisnik findByKorisnickoIme(String korisnickoIme);
 
-    Korisnik findByIdKorisnik(long iDKorisnik);
+    Korisnik findByIdKorisnik(long idKorisnik);
 
-    Korisnik fetch(long iDKorisnik) throws Throwable;
+    Korisnik fetch(long idKorisnik) throws Throwable;
 
-    Korisnik update(long idKorisnik, Korisnik updatedKorisnik) throws Exception;
+    Korisnik updateKorisnik(long idKorisnik, Korisnik updatedKorisnik) throws Exception;
 
-    Korisnik deleteKorisnik(long iDKorisnik);
+    Korisnik getKorisnikFromJWT(String jwt);
+
+    Korisnik deleteKorisnik(long idKorisnik);
 }

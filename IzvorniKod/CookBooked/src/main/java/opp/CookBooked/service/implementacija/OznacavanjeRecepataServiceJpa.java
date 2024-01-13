@@ -8,6 +8,8 @@ import opp.CookBooked.service.OznacavanjeRecepataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OznacavanjeRecepataServiceJpa implements OznacavanjeRecepataService {
 
@@ -26,5 +28,10 @@ public class OznacavanjeRecepataServiceJpa implements OznacavanjeRecepataService
             OznacavanjeRecepata spremRec = new OznacavanjeRecepata(korisnik, recept);
             return oznRecRepo.save(spremRec);
         }
+    }
+
+    @Override
+    public List<Korisnik> findAllByRecept(long idRecept) {
+        return oznRecRepo.findAllByRecept(idRecept);
     }
 }
