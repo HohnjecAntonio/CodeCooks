@@ -30,32 +30,23 @@ public class KomentariServiceJpa implements KomentariService {
 
     @Override
     public KomentariRecept dodajKomentar(Komentar komentar, long idRecept) {
-
         Recept recept = receptRepo.findByIdRecept(idRecept);
-
         KomentariRecept kr = new KomentariRecept();
         komentar.setDatumKomentar(LocalDate.now());
         kr.setKomentar(komentar);
-
         komentariRepo.save(komentar);
-
         kr.setRecept(recept);
-
         komRecRepo.save(kr);
         return kr;
     }
 
     @Override
     public String urediKomentar(long idKomentar, Komentar updatedKomentar) {
-
         Komentar kom = findById(idKomentar);
-
         Korisnik korisnik = korisnikRepo.findByIdKorisnik(kom.getKorisnik().getIdKorisnik());
         kom.setOpisKomentar(updatedKomentar.getOpisKomentar());
         kom.setDatumKomentar(LocalDate.now());
-
         komentariRepo.save(kom);
-
         return "Uspješno ažuriranje komentara korisnika " + korisnik.getKorisnickoIme();
     }
 
@@ -63,18 +54,14 @@ public class KomentariServiceJpa implements KomentariService {
     public String obrisiKomentar(long idKomentar, long idRecept) {
         Komentar kom = findById(idKomentar);
         Recept recept = receptRepo.findByIdRecept(idRecept);
-
         KomentariRecept existingRelationship = komRecRepo
-                .findByIdReceptAndIdKorisnik(idRecept, recept.getAutor().getIdKorisnik());
-
+                .findByReceptIdAndAutorIdAAndKomentarId(idRecept, kom.getIdKomentar(), kom.getKorisnik().getIdKorisnik());
         if (existingRelationship != null) {
             komRecRepo.delete(existingRelationship);
+
         }
-
         komentariRepo.delete(kom);
-
-
-        return "Uspješno brisanje komentara korisnika";
+        return "Uspješno brisanje komentara";
     }
 
     @Override

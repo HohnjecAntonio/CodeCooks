@@ -29,51 +29,11 @@ public class ReceptController {
     private OznacavanjeRecepataService oznRecService;
 
     @Autowired
-    private ReceptSastojciService recSasService;
-
-    @Autowired
-    private KategorijaService katService;
-
-    @Autowired
-    private VrsteKuhinjaReceptaService vrKuhService;
-
-    @Autowired
     private KomentariService komentariService;
 
     @GetMapping("")
     public List<ReceptDTO> listRecepts(){
-
-        List<ReceptDTO> receptiZaFeed = new ArrayList<>();
-        List<Recept> recepti = receptService.listAll();
-
-        for (Recept r : recepti) {
-
-            List<Sastojak> sastojci = recSasService.findAllByRecept(r.getIdRecept());
-            List<Kategorija> kategorije = katService.findAllByRecept(r.getIdRecept());
-            List<VrstaKuhinje> vrKuhinje = vrKuhService.findAllByRecept(r.getIdRecept());
-            List<Korisnik> lajkovi = oznRecService.findAllByRecept(r.getIdRecept());
-            List<Komentar> komentari = komentariService.findAllByRecept(r.getIdRecept());
-
-            ReceptDTO rdto = new ReceptDTO();
-
-            rdto.setIdRecept(r.getIdRecept());
-            rdto.setNazivRecept(r.getNazivRecept());
-            rdto.setAutor(r.getAutor().getKorisnickoIme());
-            rdto.setSlikaRecept(r.getSlikaRecept());
-            rdto.setVideoRecept(r.getVideoRecept());
-            rdto.setVrijemeKuhanja(r.getVrijemeKuhanja());
-            rdto.setOznaka(r.getOznaka());
-            rdto.setVrijemeObjave(r.getVrijemeObjave());
-            rdto.setSastojci(sastojci);
-            rdto.setKategorije(kategorije);
-            rdto.setVrsteKuhinje(vrKuhinje);
-            rdto.setLajkovi(lajkovi);
-            rdto.setKomentari(komentari);
-
-            receptiZaFeed.add(rdto);
-        }
-
-        return receptiZaFeed;
+        return receptService.listReceptsForFeed();
     }
 
     @GetMapping("/{idRecept}")

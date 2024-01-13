@@ -19,13 +19,13 @@ public class KomentariRecept {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "idKorisnik")
+    @JoinColumn(name = "idRecept")
     @Getter
     @Setter
     private Recept recept;
 
     @ManyToOne
-    @JoinColumn(name = "idRecept")
+    @JoinColumn(name = "idKomentar")
     @Getter
     @Setter
     private Komentar komentar;

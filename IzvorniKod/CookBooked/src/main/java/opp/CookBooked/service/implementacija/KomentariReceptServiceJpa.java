@@ -12,9 +12,8 @@ public class KomentariReceptServiceJpa implements KomentariReceptService {
     @Autowired
     private KomentariReceptRepository komRecRepo;
 
-
     @Override
-    public KomentariRecept findByIdReceptAndIdKorisnik(long idRecept, long idKorisnik) {
-        return komRecRepo.findByIdReceptAndIdKorisnik(idRecept, idKorisnik);
+    public KomentariRecept findByReceptIdAndAutorIdAAndKomentarId(long idRecept, long idKorisnik, long idKomentar) {
+        return komRecRepo.findByReceptIdAndAutorIdAAndKomentarId(idRecept, idKorisnik, idKomentar);
     }
 }
