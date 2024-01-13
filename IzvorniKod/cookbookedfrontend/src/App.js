@@ -12,7 +12,7 @@ import RecipeForm from "./komponente/RecipeForm";
 import PrivateProfile from "./komponente/PrivateProfile";
 import RecipePage from "./komponente/RecipePage";
 import CategoryButtons from './komponente/CategoryButtons';
-import Chat from './messenger/Chat';
+import MessengerApp from './messenger/MessengerApp';
 
 function App() {
     const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
@@ -108,7 +108,7 @@ function App() {
                         <Route path="/PrivateProfile" exact component={PrivateProfile} />
                         <Route path="/AddRecipe" exact component={RecipeForm} />
                         <Route path="/Categories" exact component={CategoryButtons} />
-                        <Route path="/Chat" exact component={Chat} />
+                        <Route path="/MessengerApp" exact component={MessengerApp} />
                         <Route path="/RecipePage" exact component={RecipePage} />
                     </Switch>
                 </div>

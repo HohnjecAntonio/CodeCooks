@@ -1,0 +1,35 @@
+
+.sidebar {
+    width: 200px;
+    background-color: #f1f1f1;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .friend-selector-title{
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .add-friend {
+    cursor: pointer;
+    padding: 8px;
+    margin: 10px;
+  }
+  .add-friend:hover {
+    background-color: #ddd;
+  }
+  
+  .friend {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .friend:hover {
+    background-color: #ddd;
+  }

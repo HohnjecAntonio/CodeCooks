@@ -3,14 +3,14 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/database'; 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAqrrA2qPZIV3yqO7JbTHdveoXPNY53VIc",
-  authDomain: "testing-6cb68.firebaseapp.com",
-  databaseURL: 'https://testing-6cb68-default-rtdb.europe-west1.firebasedatabase.app', // Update this line
-  projectId: "testing-6cb68",
-  storageBucket: "testing-6cb68.appspot.com",
-  messagingSenderId: "947668955879",
-  appId: "1:947668955879:web:5ea6593eafadf45816e842",
-  measurementId: "G-8RE96Q41BG"
+  apiKey: "AIzaSyBws4gFgKuxGOsx8i9PW1DoHG86I-g3450",
+  authDomain: "progi-6c687.firebaseapp.com",
+  databaseURL: "https://progi-6c687-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "progi-6c687",
+  storageBucket: "progi-6c687.appspot.com",
+  messagingSenderId: "1006507850304",
+  appId: "1:1006507850304:web:13b7913a2095f8910b7da5",
+  measurementId: "G-FJW81D9HYW"
 };
 
 
