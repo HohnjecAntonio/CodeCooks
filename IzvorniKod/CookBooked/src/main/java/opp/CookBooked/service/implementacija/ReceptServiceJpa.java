@@ -2,8 +2,7 @@ package opp.CookBooked.service.implementacija;
 
 import opp.CookBooked.dto.ReceptDTO;
 import opp.CookBooked.model.*;
-import opp.CookBooked.repository.KorisnikRepository;
-import opp.CookBooked.repository.ReceptRepository;
+import opp.CookBooked.repository.*;
 import opp.CookBooked.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ReceptServiceJpa implements ReceptService {
@@ -34,7 +34,16 @@ public class ReceptServiceJpa implements ReceptService {
     private KomentariService komentariService;
 
     @Autowired
+    private KomentariRepository komentariRepo;
+
+    @Autowired
+    private KomentariReceptRepository komRecRepo;
+
+    @Autowired
     private OznacavanjeRecepataService oznRecService;
+
+    @Autowired
+    private SpremljeniReceptiService spremRecService;
 
 
     @Override
@@ -135,11 +144,21 @@ public class ReceptServiceJpa implements ReceptService {
     public String deleteRecept(long idRecept, long korisnikId) throws Exception {
 
         Recept recept = findReceptById(idRecept);
+        Korisnik korisnik = korisnikService.findByIdKorisnik(korisnikId);
 
         if (recept.getAutor().getIdKorisnik() != korisnikId) {
             throw new Exception("Ne možete obrisati ovaj recept jer niste njegov autor!");
         }
 
+        List<KomentariRecept> komentari = recept.getKomentari();
+        for (KomentariRecept komentarRecept : komentari) {
+            Komentar komentar = komentarRecept.getKomentar();
+            komentariService.obrisiKomentar(komentar.getIdKomentar(), komentarRecept.getRecept().getIdRecept());
+        }
+
+        spremRecService.obrisiRecept(korisnik,recept);
+
+        recept.setAutor(null);
         receptRepo.delete(recept);
         return "Recept s ID: " + recept.getIdRecept() + " od korisnika s ID: " + korisnikId + " uspješno obrisan.";
     }

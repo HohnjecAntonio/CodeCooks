@@ -29,4 +29,15 @@ public class SpremljeniReceptiServiceJpa implements SpremljeniReceptiService {
             return sprRecRepo.save(spremRec);
         }
     }
+
+    @Override
+    public SpremljeniRecepti obrisiRecept(Korisnik korisnik, Recept recept) {
+        SpremljeniRecepti existingRelationship = sprRecRepo
+                .findByKorisnikAndRecept(korisnik, recept);
+
+        if (existingRelationship != null)
+            sprRecRepo.delete(existingRelationship);
+
+        return existingRelationship;
+    }
 }

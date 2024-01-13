@@ -8,4 +8,7 @@ public interface SpremljeniReceptiService {
 
     SpremljeniRecepti spremiRecept(Korisnik korisnik, Recept recept);
 
-}
+    public SpremljeniRecepti obrisiRecept(Korisnik korisnik, Recept recept);
+
+
+    }
