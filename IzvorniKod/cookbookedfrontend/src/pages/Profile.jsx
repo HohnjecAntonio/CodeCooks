@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './Profile.css'; // You can create a separate CSS file for styling
 import profilePictureTemp from "../images/img/user.jpeg";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchUserProfile} from "../redux/auth/auth.action";
 
 
 function Profile(props) {
+  const jwtToken = localStorage.getItem("token");
+  const dispatch = useDispatch();
+  const userProfileInfo = useSelector(state => state.auth.userProfile); // Adjust path according to your store structure
+  const loading = useSelector(state => state.auth.loading);
+  const error = useSelector(state => state.auth.error);
+
+  useEffect(() => {
+    dispatch(fetchUserProfile());
+  }, [dispatch]);
 
   
   // State to store user profile information, followers, and following
@@ -155,6 +166,9 @@ function Profile(props) {
 
   return (
     <div>
+      <div className="container mx-auto my-10 p-6 bg-white shadow-md rounded-md">
+        {userProfileInfo.korisnickoIme + " " + userProfileInfo.imeKorisnik + " " + userProfileInfo.prezimeKorisnik + " " + userProfileInfo.brojTelefona + " " + userProfileInfo.emailKorisnik}
+      </div>
       {arrayDataItems}
     </div>
       
