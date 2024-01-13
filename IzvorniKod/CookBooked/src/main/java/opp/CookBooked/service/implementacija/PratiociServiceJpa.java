@@ -7,6 +7,8 @@ import opp.CookBooked.service.PratiociService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PratiociServiceJpa implements PratiociService {
 
@@ -25,6 +27,16 @@ public class PratiociServiceJpa implements PratiociService {
             Pratioci pratioci = new Pratioci(follower, following);
             return pratiociRepo.save(pratioci);
         }
+    }
+
+    @Override
+    public List<Korisnik> pronadjiOneKojePratim(long idKorisnik) throws Exception {
+        return pratiociRepo.findAllByFollower(idKorisnik);
+    }
+
+    @Override
+    public List<Korisnik> pronadjiOneKojiMePrate(long idKorisnik) throws Exception {
+        return pratiociRepo.findAllByFollowing(idKorisnik);
     }
 
 }

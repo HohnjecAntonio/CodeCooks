@@ -1,5 +1,5 @@
 import axios from "axios";
-import {api, API_BASE_URL} from "../../config/api";
+import {api, API_BASE_URL, apiAuth} from "../../config/api";
 import {
     LOGIN_FAILURE,
     LOGIN_REQUEST,
@@ -9,7 +9,11 @@ import {
     REGISTER_SUCCESS,
     FETCH_KATEGORIJE_SUCCESS,
     FETCH_KATEGORIJE_REQUEST,
-    FETCH_KATEGORIJE_FAILURE
+    FETCH_KATEGORIJE_FAILURE,
+    FETCH_RECIPES_REQUEST,
+    FETCH_RECIPES_SUCCESS,
+    FETCH_RECIPES_FAILURE,
+    FETCH_USER_PROFILE_REQUEST, FETCH_USER_PROFILE_SUCCESS, FETCH_USER_PROFILE_FAILURE
 } from "./auth.actionType";
 
 export const loginUserAction = (loginData) => async (dispatch) => {
@@ -51,6 +55,32 @@ export const fetchKategorije = () => async (dispatch) => {
         dispatch({ type: FETCH_KATEGORIJE_SUCCESS, payload: data });
     } catch (error) {
         dispatch({ type: FETCH_KATEGORIJE_FAILURE, payload: error });
+    }
+};
+
+export const fetchRecipesForUserFeed = () => async (dispatch) => {
+    dispatch({ type: FETCH_RECIPES_REQUEST });
+    try {
+        const { data } = await apiAuth.get(`${API_BASE_URL}/recepti`);
+
+        console.log("sdasd" + data);
+
+        dispatch({ type: FETCH_RECIPES_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: FETCH_RECIPES_FAILURE, payload: error });
+    }
+};
+
+export const fetchUserProfile = (jwt) => async (dispatch) => {
+    dispatch({ type: FETCH_USER_PROFILE_REQUEST });
+    try {
+        const { data } = await apiAuth.get(`${API_BASE_URL}/korisnici/profile`);
+
+        console.log("sdasd" + data);
+
+        dispatch({ type: FETCH_USER_PROFILE_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: FETCH_USER_PROFILE_FAILURE, payload: error });
     }
 };
 

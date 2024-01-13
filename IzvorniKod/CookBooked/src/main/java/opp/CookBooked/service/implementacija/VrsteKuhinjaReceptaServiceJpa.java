@@ -9,6 +9,8 @@ import opp.CookBooked.service.VrsteKuhinjaReceptaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class VrsteKuhinjaReceptaServiceJpa implements VrsteKuhinjaReceptaService {
 
@@ -27,5 +29,10 @@ public class VrsteKuhinjaReceptaServiceJpa implements VrsteKuhinjaReceptaService
             VrsteKuhinjaRecepta spremRec = new VrsteKuhinjaRecepta(recept, vrstaKuhinje);
             return vrKuhRecRepo.save(spremRec);
         }
+    }
+
+    @Override
+    public List<VrstaKuhinje> findAllByRecept(long idRecept) {
+        return vrKuhRecRepo.findAllByRecept(idRecept);
     }
 }
