@@ -17,7 +17,8 @@ import {
     FETCH_OTHER_PROFILE_FAILURE, FETCH_OTHER_PROFILE_SUCCESS,FETCH_OTHER_PROFILE_REQUEST,
     ADD_RECIPE_FAILURE, ADD_RECIPE_SUCCESS, ADD_RECIPE_REQUEST,
     FOLLOW_USER_REQUEST,FOLLOW_USER_FAILURE, FOLLOW_USER_SUCCESS,
-    UPDATE_USER_PROFILE_FAILURE, UPDATE_USER_PROFILE_SUCCESS, UPDATE_USER_PROFILE_REQUEST
+    UPDATE_USER_PROFILE_FAILURE, UPDATE_USER_PROFILE_SUCCESS, UPDATE_USER_PROFILE_REQUEST,
+    FETCH_RECIPE_BY_ID_SUCCESS, FETCH_RECIPE_BY_ID_REQUEST, FETCH_RECIPE_BY_ID_FAILURE
 } from "./auth.actionType";
 
 export const loginUserAction = (loginData) => async (dispatch) => {
@@ -89,6 +90,21 @@ export const fetchRecipesForUserFeed = () => async (dispatch) => {
         dispatch({ type: FETCH_RECIPES_SUCCESS, payload: data });
     } catch (error) {
         dispatch({ type: FETCH_RECIPES_FAILURE, payload: error });
+    }
+};
+
+
+export const fetchRecipeById = (id) => async (dispatch) => {
+    dispatch({ type: FETCH_RECIPE_BY_ID_REQUEST });
+    try {
+        const { data } = await apiAuth.get(`${API_BASE_URL}/recepti/${id}`);
+
+        console.log("Fetched recipe by id");
+        console.log(data);
+
+        dispatch({ type: FETCH_RECIPE_BY_ID_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: FETCH_RECIPE_BY_ID_FAILURE, payload: error });
     }
 };
 

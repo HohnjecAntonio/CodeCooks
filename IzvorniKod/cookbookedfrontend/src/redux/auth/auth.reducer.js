@@ -15,7 +15,8 @@ import {
     REGISTER_SUCCESS,
     ADD_RECIPE_FAILURE, ADD_RECIPE_SUCCESS, ADD_RECIPE_REQUEST,
     FOLLOW_USER_REQUEST,FOLLOW_USER_FAILURE, FOLLOW_USER_SUCCESS,
-    UPDATE_USER_PROFILE_FAILURE, UPDATE_USER_PROFILE_SUCCESS, UPDATE_USER_PROFILE_REQUEST
+    UPDATE_USER_PROFILE_FAILURE, UPDATE_USER_PROFILE_SUCCESS, UPDATE_USER_PROFILE_REQUEST,
+    FETCH_RECIPE_BY_ID_SUCCESS, FETCH_RECIPE_BY_ID_REQUEST, FETCH_RECIPE_BY_ID_FAILURE
 } from "./auth.actionType";
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
     recipesForFeed: [],
     userProfile: '',
     profileToLoad: '',
+    recipeToLoad: ''
 }
 
 export const authReducer = (state=initialState, action) => {
@@ -93,7 +95,14 @@ export const authReducer = (state=initialState, action) => {
         case FOLLOW_USER_SUCCESS:
         
         case FOLLOW_USER_FAILURE:
-            
+
+
+        case FETCH_RECIPE_BY_ID_FAILURE:
+            return { ...state, loading: false, error: action.payload };
+        case FETCH_RECIPE_BY_ID_REQUEST:
+            return { ...state, loading: true, error: null };
+        case FETCH_RECIPE_BY_ID_SUCCESS:
+            return { ...state, recipeToLoad: action.payload, loading: false, error: null };
 
         default:
             return state;

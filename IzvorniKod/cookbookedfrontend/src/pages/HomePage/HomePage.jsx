@@ -103,7 +103,7 @@ const HomePage = () => {
           <div className="recipe-list">
             
             {recipesForFeed.map((recipe) => (
-              <div key={recipe.id} className="recipe-card">
+              <div key={recipe.idRecept} className="recipe-card">
 
                 <a href="/RecipePage" onClick={()=>{localStorage.setItem('recipeToLoad',JSON.stringify(recipe.idRecept)); console.log(recipe.idRecept);}}>
                 <div className="recipe-details">
