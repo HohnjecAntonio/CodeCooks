@@ -1,5 +1,6 @@
 package opp.CookBooked.service;
 
+import opp.CookBooked.dto.FollowDTO;
 import opp.CookBooked.dto.ProfilDTO;
 import opp.CookBooked.model.Korisnik;
 import opp.CookBooked.model.Recept;
@@ -20,7 +21,11 @@ public interface KorisnikService {
 
     Korisnik fetch(long idKorisnik) throws Throwable;
 
-    Korisnik updateKorisnik(long idKorisnik, Korisnik updatedKorisnik) throws Exception;
+    List<FollowDTO> getFollowers(String jwt) throws Exception;
+
+    List<FollowDTO> getFollowings(String jwt) throws Exception;
+
+    Korisnik updateKorisnik(long idKorisnik, ProfilDTO updatedKorisnik) throws Exception;
 
     Korisnik getKorisnikFromJWT(String jwt);
 

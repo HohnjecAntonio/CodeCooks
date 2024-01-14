@@ -1,5 +1,6 @@
 package opp.CookBooked.service.implementacija;
 
+import opp.CookBooked.dto.FollowDTO;
 import opp.CookBooked.model.Korisnik;
 import opp.CookBooked.model.Pratioci;
 import opp.CookBooked.repository.PratiociRepository;
@@ -7,6 +8,7 @@ import opp.CookBooked.service.PratiociService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -42,13 +44,28 @@ public class PratiociServiceJpa implements PratiociService {
 
 
     @Override
-    public List<Korisnik> pronadjiOneKojePratim(long idKorisnik) throws Exception {
-        return pratiociRepo.findAllByFollower(idKorisnik);
+    public List<FollowDTO> pronadjiOneKojePratim(long idKorisnik) throws Exception {
+        List<FollowDTO> followers = new ArrayList<>();
+        List<Korisnik> korisnici = pratiociRepo.findAllByFollower(idKorisnik);
+
+        for (Korisnik k : korisnici) {
+            followers.add(new FollowDTO(k.getIdKorisnik(), k.getKorisnickoIme()));
+        }
+
+        return followers;
     }
 
     @Override
-    public List<Korisnik> pronadjiOneKojiMePrate(long idKorisnik) throws Exception {
-        return pratiociRepo.findAllByFollowing(idKorisnik);
+    public List<FollowDTO> pronadjiOneKojiMePrate(long idKorisnik) throws Exception {
+
+        List<FollowDTO> followers = new ArrayList<>();
+        List<Korisnik> korisnici = pratiociRepo.findAllByFollowing(idKorisnik);
+
+        for (Korisnik k : korisnici) {
+            followers.add(new FollowDTO(k.getIdKorisnik(), k.getKorisnickoIme()));
+        }
+
+        return followers;
     }
 
 }

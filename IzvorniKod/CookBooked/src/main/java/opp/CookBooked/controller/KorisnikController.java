@@ -43,7 +43,7 @@ public class KorisnikController {
     }
 
     @PutMapping("/update/{korisnickoIme}")
-    public Korisnik updateKorisnik(@RequestHeader("Authorization") String jwt, @RequestBody Korisnik korisnik) throws Throwable {
+    public Korisnik updateKorisnik(@RequestHeader("Authorization") String jwt, @RequestBody ProfilDTO korisnik) throws Throwable {
         Korisnik kr = korisnikService.getKorisnikFromJWT(jwt);
         return korisnikService.updateKorisnik(kr.getIdKorisnik(), korisnik);
     }

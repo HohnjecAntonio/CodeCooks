@@ -8,6 +8,7 @@ import opp.CookBooked.model.Korisnik;
 import opp.CookBooked.model.Recept;
 
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
@@ -35,7 +36,13 @@ public class ProfilDTO {
     private String brojTelefona;
 
     @Setter
-    private Time dostupan;
+    private LocalTime dostupanOd;
+
+    @Setter
+    private LocalTime dostupanDo;
+
+    @Setter
+    private String dostupanOdDo;
 
     @Setter
     private List<Recept> mojiRecepti;
@@ -44,9 +51,9 @@ public class ProfilDTO {
     private List<Recept> spremljeniReceptiKorisnika;
 
     @Setter
-    private List<Korisnik> pratiteljiKorisnika;
+    private List<FollowDTO> pratiteljiKorisnika;
 
     @Setter
-    private List<Korisnik> pratiociKorisnika;
+    private List<FollowDTO> pratiociKorisnika;
 
 }

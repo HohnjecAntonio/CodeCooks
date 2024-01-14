@@ -6,6 +6,7 @@ import lombok.*;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 import java.sql.Time;
@@ -55,7 +56,7 @@ public class Recept {
     @Getter
     @Setter
     @Column(name = "vrijemeKuhanja")
-    private Time vrijemeKuhanja;
+    private LocalTime vrijemeKuhanja;
 
     @Getter
     @Setter
@@ -90,7 +91,7 @@ public class Recept {
     private List<KomentariRecept> komentari;
 
     public Recept(String nazivRecept, Korisnik autor,
-                  String priprema, Time vrijemeKuhanja,
+                  String priprema, LocalTime vrijemeKuhanja,
                   String oznaka, String slikaRecept, String videoRecept) {
         this.nazivRecept = nazivRecept;
         this.autor = autor;
@@ -101,7 +102,7 @@ public class Recept {
         this.videoRecept = videoRecept;
     }
 
-    public Recept(Long idRecept, Korisnik autor, String nazivRecept, String priprema, String oznaka, String slika, String video, LocalDate vrijemeObjave, Time vrijemeKuhanja) {
+    public Recept(Long idRecept, Korisnik autor, String nazivRecept, String priprema, String oznaka, String slika, String video, LocalDate vrijemeObjave, LocalTime vrijemeKuhanja) {
         this.idRecept = idRecept;
         this.autor = autor;
         this.nazivRecept = nazivRecept;

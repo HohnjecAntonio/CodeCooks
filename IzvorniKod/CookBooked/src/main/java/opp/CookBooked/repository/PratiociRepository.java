@@ -1,5 +1,6 @@
 package opp.CookBooked.repository;
 
+import opp.CookBooked.dto.FollowDTO;
 import opp.CookBooked.model.Korisnik;
 import opp.CookBooked.model.Pratioci;
 import org.springframework.data.jpa.repository.JpaRepository;

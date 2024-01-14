@@ -2,6 +2,7 @@ package opp.CookBooked.service.implementacija;
 
 import jakarta.transaction.Transactional;
 import opp.CookBooked.config.jwtProvider;
+import opp.CookBooked.dto.FollowDTO;
 import opp.CookBooked.dto.ProfilDTO;
 import opp.CookBooked.model.Komentar;
 import opp.CookBooked.model.Recept;
@@ -18,6 +19,9 @@ import opp.CookBooked.service.KorisnikService;
 import opp.CookBooked.repository.KorisnikRepository;
 import opp.CookBooked.model.Korisnik;
 
+import javax.swing.text.DateFormatter;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,8 +57,8 @@ public class KorisnikServiceJpa implements KorisnikService {
         Korisnik korisnik = getKorisnikFromJWT(jwt);
         List<Recept> mojiRecepti = receptService.findRecepteByAutor(korisnik.getIdKorisnik());
         List<Recept> spremljeniRecepti = receptService.findSpremljeneRecepteByIdKorisnik(korisnik.getIdKorisnik());
-        List<Korisnik> pratim = pratiociService.pronadjiOneKojePratim(korisnik.getIdKorisnik());
-        List<Korisnik> prateMe = pratiociService.pronadjiOneKojiMePrate(korisnik.getIdKorisnik());
+        List<FollowDTO> pratim = pratiociService.pronadjiOneKojePratim(korisnik.getIdKorisnik());
+        List<FollowDTO> prateMe = pratiociService.pronadjiOneKojiMePrate(korisnik.getIdKorisnik());
 
         ProfilDTO profil = new ProfilDTO();
 
@@ -64,7 +68,7 @@ public class KorisnikServiceJpa implements KorisnikService {
         profil.setPrezimeKorisnik(korisnik.getPrezimeKorisnik());
         profil.setEmailKorisnik(korisnik.getEmailKorisnik());
         profil.setBrojTelefona(korisnik.getBrojTelefona());
-        profil.setDostupan(korisnik.getDostupan());
+        profil.setDostupanOdDo(korisnik.getDostupanOd() + " - " + korisnik.getDostupanDo());
         profil.setMojiRecepti(mojiRecepti);
         profil.setSpremljeniReceptiKorisnika(spremljeniRecepti);
         profil.setPratiteljiKorisnika(prateMe);
@@ -102,13 +106,31 @@ public class KorisnikServiceJpa implements KorisnikService {
     }
 
     @Override
-    public Korisnik updateKorisnik(long idKorisnik, Korisnik updatedKorisnik) throws Exception {
+    public List<FollowDTO> getFollowers(String jwt) throws Exception {
+        Korisnik k = getKorisnikFromJWT(jwt);
+        return null;
+    }
+
+    @Override
+    public List<FollowDTO> getFollowings(String jwt) throws Exception {
+        return null;
+    }
+
+    @Override
+    public Korisnik updateKorisnik(long idKorisnik, ProfilDTO updatedKorisnik) throws Exception {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        String formattedDostupanOd = formatLocalTime(updatedKorisnik.getDostupanOd());
+        String formattedDostupanDo = formatLocalTime(updatedKorisnik.getDostupanDo());
+
         return korisnikRepo.findById(idKorisnik).map(korisnik -> {
             korisnik.setImeKorisnik(updatedKorisnik.getImeKorisnik());
             korisnik.setPrezimeKorisnik(updatedKorisnik.getPrezimeKorisnik());
             korisnik.setKorisnickoIme(updatedKorisnik.getKorisnickoIme());
             korisnik.setEmailKorisnik(updatedKorisnik.getEmailKorisnik());
-            korisnik.setDostupan(updatedKorisnik.getDostupan());
+            korisnik.setDostupanOd(formattedDostupanOd);
+            korisnik.setDostupanDo(formattedDostupanDo);
             korisnik.setBrojTelefona(updatedKorisnik.getBrojTelefona());
 
             return korisnikRepo.save(korisnik);
@@ -141,5 +163,10 @@ public class KorisnikServiceJpa implements KorisnikService {
 
         korisnikRepo.delete(korisnik);
         return korisnik;
+    }
+
+    public String formatLocalTime(LocalTime time) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        return time.format(formatter);
     }
 }

@@ -140,7 +140,7 @@ export const updateUserProfile = (profileData) => async (dispatch) => {
     dispatch({ type: UPDATE_USER_PROFILE_REQUEST });
     try {
         console.log(profileData);
-        const { data } = await apiAuth.post(`${API_BASE_URL}/korisnici/update/${profileData.data.korisnickoIme}`, profileData.data);
+        const { data } = await apiAuth.put(`${API_BASE_URL}/korisnici/update/${profileData.data.korisnickoIme}`, profileData.data);
 
         console.log("Updated data: ");
         console.log(data);

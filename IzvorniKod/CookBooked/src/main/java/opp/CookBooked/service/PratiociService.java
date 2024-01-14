@@ -1,5 +1,6 @@
 package opp.CookBooked.service;
 
+import opp.CookBooked.dto.FollowDTO;
 import opp.CookBooked.model.Korisnik;
 import opp.CookBooked.model.Pratioci;
 
@@ -10,7 +11,7 @@ public interface PratiociService {
 
     List<Pratioci> obrisiFollow(long idFollower);
 
-    List<Korisnik> pronadjiOneKojePratim(long idKorisnik) throws Exception;
-    List<Korisnik> pronadjiOneKojiMePrate(long idKorisnik) throws Exception;
+    List<FollowDTO> pronadjiOneKojePratim(long idKorisnik) throws Exception;
+    List<FollowDTO> pronadjiOneKojiMePrate(long idKorisnik) throws Exception;
 
 }

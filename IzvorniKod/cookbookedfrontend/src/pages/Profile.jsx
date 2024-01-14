@@ -124,7 +124,7 @@ function Profile(props) {
       </div>
 
       <div className="container mx-auto my-10 p-6 bg-white shadow-md rounded-md">
-        {userProfileInfo.idKorisnik +" " + userProfileInfo.korisnickoIme + " " + userProfileInfo.imeKorisnik + " " + userProfileInfo.prezimeKorisnik + " " + userProfileInfo.brojTelefona + " " + userProfileInfo.emailKorisnik}
+        {userProfileInfo.idKorisnik +" " + userProfileInfo.korisnickoIme + " " + userProfileInfo.imeKorisnik + " " + userProfileInfo.prezimeKorisnik + " " + userProfileInfo.brojTelefona + " " + userProfileInfo.emailKorisnik + " " + userProfileInfo.dostupanOdDo}
       </div>
       <div className="profile-container">
           
@@ -154,17 +154,16 @@ function Profile(props) {
           <div className="connections">
             <div className="followers">
               <h2>Followers</h2>
-              {/*
-              {newUser.followers.map((follower, index) => (
-                <p key={index}>{follower}</p>
-              ))}*/}
+              {userProfileInfo.pratiociKorisnika && userProfileInfo.pratiociKorisnika.map((follower) => (
+                <p key={follower.idKorisnik}>{follower.korisnickoIme}</p>
+              ))}
             </div>
 
             <div className="following">
               <h2>Following</h2>
-              {/*{newUser.following.map((followed, index) => (
-                <p key={index}>{followed}</p>
-              ))*/}
+              {userProfileInfo.pratiteljiKorisnika && userProfileInfo.pratiteljiKorisnika.map((follower) => (
+                  <p key={follower.idKorisnik}>{follower.korisnickoIme}</p>
+              ))}
             </div>
           </div>
 

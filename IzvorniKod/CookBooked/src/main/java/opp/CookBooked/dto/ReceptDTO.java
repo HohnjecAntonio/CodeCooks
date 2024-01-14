@@ -8,6 +8,7 @@ import opp.CookBooked.model.*;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Getter
@@ -20,7 +21,7 @@ public class ReceptDTO {
     private String autor;
     private String nazivRecept;
     private String priprema;
-    private Time vrijemeKuhanja;
+    private LocalTime vrijemeKuhanja;
     private String oznaka;
     private String slikaRecept;
     private String videoRecept;

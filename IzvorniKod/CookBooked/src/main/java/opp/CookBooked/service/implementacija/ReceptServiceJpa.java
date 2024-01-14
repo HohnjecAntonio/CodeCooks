@@ -1,5 +1,6 @@
 package opp.CookBooked.service.implementacija;
 
+import jakarta.persistence.EntityNotFoundException;
 import opp.CookBooked.dto.ReceptDTO;
 import opp.CookBooked.model.*;
 import opp.CookBooked.repository.*;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Set;
 
@@ -87,6 +89,7 @@ public class ReceptServiceJpa implements ReceptService {
     public Recept findReceptById(long idRecept) throws Exception {
         return receptRepo.findByIdRecept(idRecept);
     }
+
 
     @Override
     public List<Recept> findSpremljeneRecepteByIdKorisnik(long idKorisnik) throws Exception {

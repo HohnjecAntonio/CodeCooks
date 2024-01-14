@@ -9,6 +9,8 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 @Entity
@@ -63,7 +65,11 @@ public class Korisnik {
 
     @Getter
     @Setter
-    private Time dostupan;
+    private String dostupanOd;
+
+    @Getter
+    @Setter
+    private String dostupanDo;
 
     @OneToMany(mappedBy = "follower")
     @JsonIgnore
