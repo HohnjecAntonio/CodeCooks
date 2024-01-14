@@ -23,7 +23,7 @@ function Profile(props) {
     dispatch(fetchOtherProfile(JSON.parse(localStorage.getItem("profileToLoad"))));
   }, [dispatch]);
 
-  const followUser = async () => {
+  const followUserFunction = async () => {
     console.log("Trying to follow user");
     await dispatch(followUser({ data: {followerId: userProfileInfo.idKorisnik, followingId: profileToLoad.idKorisnik}})).then(() => {
       //history.push('/Profile');
@@ -113,7 +113,7 @@ function Profile(props) {
               <a href="/MessengerApp">
                 <button>Chat</button>
               </a>
-              <button onClick={followUser}>Zaprati korisnika</button>
+              <button onClick={followUserFunction}>Zaprati korisnika</button>
             </div>
             }
             

@@ -116,7 +116,7 @@ const HomePage = () => {
                   </ul>*/}
                   <p>Uputstva: {recipe.priprema}</p>
                   <p>Autor: <a href="/Profile" onClick={() => {
-                      localStorage.setItem(localStorage.setItem('profileToLoad',JSON.stringify(recipe.idRecept)))
+                      localStorage.setItem('profileToLoad',JSON.stringify(recipe.idRecept))
                 }}>{recipe.autor}</a></p>
                 </div>
                 </a>

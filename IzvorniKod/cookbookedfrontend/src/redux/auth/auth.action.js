@@ -55,7 +55,8 @@ export const registerUserAction = (registerData) => async (dispatch) => {
 export const newRecipe = (recipeData) => async (dispatch) => {
     dispatch({ type: ADD_RECIPE_REQUEST });
     try {
-        const { data } = await axios.post(`${API_BASE_URL}/recepti/save/korisnik/${recipeData.data.idKorisnik}`, recipeData.data,recipeData.data.idKorisnik);
+        
+        const { data } = await apiAuth.post(`${API_BASE_URL}/recepti/save/korisnik/${recipeData.data.idKorisnik}`, recipeData.data,recipeData.data.idKorisnik);
 
         console.log("Dodan novi recept: ");
         console.log(data);
@@ -123,7 +124,7 @@ export const updateUserProfile = (profileData) => async (dispatch) => {
     dispatch({ type: UPDATE_USER_PROFILE_REQUEST });
     try {
         console.log(profileData);
-        const { data } = await axios.post(`${API_BASE_URL}/korisnici/update/${profileData.data.korisnickoIme}`, profileData.data);
+        const { data } = await apiAuth.post(`${API_BASE_URL}/korisnici/update/${profileData.data.korisnickoIme}`, profileData.data);
 
         console.log("Updated data: ");
         console.log(data);
@@ -139,7 +140,7 @@ export const updateUserProfile = (profileData) => async (dispatch) => {
 export const followUser = (requestData) => async (dispatch) => {
     dispatch({ type: FOLLOW_USER_REQUEST });
     try {
-        const { data } = await axios.post(`${API_BASE_URL}/korisnici/${requestData.data.followerId}/follow/${requestData.data.followingId}`);
+        const { data } = await apiAuth.post(`${API_BASE_URL}/korisnici/${requestData.data.followerId}/follow/${requestData.data.followingId}`);
 
         console.log(requestData.data.followerId + " followed user: " + requestData.data.followingId);
 

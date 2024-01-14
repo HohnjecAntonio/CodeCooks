@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchKategorije } from '../redux/auth/auth.action.js';
+import { fetchKategorije,fetchUserProfile } from '../redux/auth/auth.action.js';
 import { CSSTransition } from 'react-transition-group';
 import "./SideBar.css"
 
@@ -23,6 +23,7 @@ import {NavLink} from "react-router-dom";
 function SideBar(props){
   const dispatch = useDispatch();
 
+  const userProfileInfo = useSelector(state => state.auth.userProfile);
   const [activeMenu, setActiveMenu] = useState('main');
   const [menuHeight, setMenuHeight] = useState(null);
   const categories = useSelector(state => state.auth.kategorije); // Adjust path according to your store structure
@@ -30,43 +31,18 @@ function SideBar(props){
   useEffect(() => {
     dispatch(fetchKategorije());
 }, [dispatch]);
- /* const [categories, setCategories] = useState([
-    { id: 1, name: 'Category 1' },
-    { id: 2, name: 'Category 2' },
-    // Add more categories as needed
-  ]);
-  
-   useEffect(() => {
-     // Fetch categories from your API endpoint
-     fetch('api/categories').then((res) => {
-      return res.json();
-    })
-    .then((data)=>{
-      console.log(data);
-      setCategories(data);
-    });
-  }, []);
-*/
+
+
+useEffect(() => {
+  dispatch(fetchUserProfile());
+}, [dispatch]);
+
 
   function calcHeight(el){
     const heigth = el.offsetHeight;
     setMenuHeight(heigth);
   }
-
-
-/*
-  async function fetchCategoriesFromAPI() {
-    try {
-      const response = await fetch('api/categories');
-      const data = await response.json();
-      console.log("Dohvaćene kategorije s backenda" + data);
-      return data;
-    } catch (error) {
-      console.error('Error fetching categories:', error);
-    }
-  }*/
-
-  
+ 
 
   return (
     <nav class="navbar">
@@ -118,7 +94,8 @@ function SideBar(props){
               <NavItem
                   leftIcon={<SpaceShuttleIcon/>}
                   text ="Profil"
-                  link= "/Profile">
+                  link= "/Profile"
+                  openProfile = "true">
               </NavItem>
           ) : (
               <div className="hidden">
@@ -191,7 +168,9 @@ function SideBar(props){
   function NavItem(props){
     return(
           <li class="nav-item">
-            <a href={props.link} class="nav-link" onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}>
+            <a href={props.link} class="nav-link" onClick={() => {(props.goToMenu && setActiveMenu(props.goToMenu))
+            || (props.openProfile && localStorage.setItem('profileToLoad', JSON.stringify(userProfileInfo.idKorisnik)))
+            }}>
               <span className="icon-button">{props.leftIcon}</span>
               <span class="link-text">{props.text}</span>
               <span className="icon-right">{props.rightIcon}</span>
