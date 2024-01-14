@@ -1,5 +1,6 @@
 package opp.CookBooked.service;
 
+import opp.CookBooked.dto.ProfilDTO;
 import opp.CookBooked.model.Korisnik;
 import opp.CookBooked.model.Recept;
 
@@ -8,6 +9,8 @@ import java.util.Set;
 
 public interface KorisnikService {
     List<Korisnik> listAll();
+
+    ProfilDTO fetchProfil(String jwt) throws Exception;
 
     Korisnik createKorisnik(Korisnik korisnik) throws Exception;
 
@@ -21,5 +24,5 @@ public interface KorisnikService {
 
     Korisnik getKorisnikFromJWT(String jwt);
 
-    Korisnik deleteKorisnik(long idKorisnik);
+    Korisnik deleteKorisnik(long idKorisnik) throws Exception;
 }

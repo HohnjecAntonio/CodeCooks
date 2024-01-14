@@ -58,7 +58,6 @@ public class KomentariServiceJpa implements KomentariService {
                 .findByReceptIdAndAutorIdAAndKomentarId(idRecept, kom.getIdKomentar(), kom.getKorisnik().getIdKorisnik());
         if (existingRelationship != null) {
             komRecRepo.delete(existingRelationship);
-
         }
         komentariRepo.delete(kom);
         return "Uspješno brisanje komentara";
@@ -67,6 +66,11 @@ public class KomentariServiceJpa implements KomentariService {
     @Override
     public List<Komentar> findAllByRecept(long idRecept) {
         return komentariRepo.findAllByRecept(idRecept);
+    }
+
+    @Override
+    public List<Komentar> findAllByIdKorisnik(long idKorisnik) {
+        return komentariRepo.findAllByIdKorisnik(idKorisnik);
     }
 
     @Override

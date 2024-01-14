@@ -19,7 +19,7 @@ public class OznacavanjeRecepataServiceJpa implements OznacavanjeRecepataService
     @Override
     public OznacavanjeRecepata oznaciRecept(Korisnik korisnik, Recept recept) {
         OznacavanjeRecepata existingRelationship = oznRecRepo
-                .findByKorisnikAndRecept(korisnik, recept);
+                .findByIdKorisnikAndIdRecept(korisnik.getIdKorisnik(), recept.getIdRecept());
 
         if (existingRelationship != null) {
             oznRecRepo.delete(existingRelationship);
@@ -28,6 +28,17 @@ public class OznacavanjeRecepataServiceJpa implements OznacavanjeRecepataService
             OznacavanjeRecepata spremRec = new OznacavanjeRecepata(korisnik, recept);
             return oznRecRepo.save(spremRec);
         }
+    }
+
+    @Override
+    public List<OznacavanjeRecepata> obrisiOznaceReceptByIdKorisnik(long idKorisnik, long idRecept) {
+        List<OznacavanjeRecepata> existingRelationship = oznRecRepo
+                .findAllByReceptIdOznaka(idRecept);
+
+        if (existingRelationship != null)
+            oznRecRepo.deleteAll(existingRelationship);
+
+        return existingRelationship;
     }
 
     @Override

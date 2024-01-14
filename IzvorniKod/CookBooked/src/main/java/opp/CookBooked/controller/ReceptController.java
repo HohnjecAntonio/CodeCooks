@@ -55,41 +55,41 @@ public class ReceptController {
         return new ResponseEntity<>(noviRecept, HttpStatus.CREATED);
     }
 
-    @PostMapping("/{receptId}/addc/korisnik/{iDKorisnik}")
-    public ResponseEntity<KomentariRecept> komentiraj(@RequestHeader("Authorization") String jwt, @RequestBody Komentar komentar, @PathVariable long receptId, @PathVariable long iDKorisnik) throws Exception {
+    @PostMapping("/{idRecept}/addc/korisnik/{iDKorisnik}")
+    public ResponseEntity<KomentariRecept> komentiraj(@RequestHeader("Authorization") String jwt, @RequestBody Komentar komentar, @PathVariable long idRecept, @PathVariable long iDKorisnik) throws Exception {
         Korisnik k = korisnikService.findByIdKorisnik(iDKorisnik);
         komentar.setKorisnik(k);
-        KomentariRecept kr = komentariService.dodajKomentar(komentar, receptId);
+        KomentariRecept kr = komentariService.dodajKomentar(komentar, idRecept);
         return new ResponseEntity<>(kr, HttpStatus.OK);
     }
 
-    @PutMapping("/{receptId}/editc/korisnik/{iDKorisnik}")
-    public ResponseEntity<String> urediKomentar(@RequestHeader("Authorization") String jwt, @RequestBody Komentar komentar, @PathVariable long receptId, @PathVariable long iDKorisnik) throws Exception {
+    @PutMapping("/{idRecept}/editc/korisnik/{iDKorisnik}")
+    public ResponseEntity<String> urediKomentar(@RequestHeader("Authorization") String jwt, @RequestBody Komentar komentar, @PathVariable long idRecept, @PathVariable long iDKorisnik) throws Exception {
         String kr = komentariService.urediKomentar(komentar.getIdKomentar(), komentar);
         return new ResponseEntity<>(kr, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{receptId}/delc/{idKomentar}/korisnik/{iDKorisnik}")
-    public ResponseEntity<String> obrisiKomentar(@RequestHeader("Authorization") String jwt, @PathVariable long idKomentar, @PathVariable long receptId, @PathVariable long iDKorisnik) throws Exception {
-        String kr = komentariService.obrisiKomentar(idKomentar, receptId);
+    @DeleteMapping("/{idRecept}/delc/{idKomentar}/korisnik/{iDKorisnik}")
+    public ResponseEntity<String> obrisiKomentar(@RequestHeader("Authorization") String jwt, @PathVariable long idKomentar, @PathVariable long idRecept, @PathVariable long iDKorisnik) throws Exception {
+        String kr = komentariService.obrisiKomentar(idKomentar, idRecept);
         return new ResponseEntity<>(kr, HttpStatus.OK);
     }
 
-    @PostMapping("/{receptId}/save/korisnik/{iDKorisnik}")
-    public ResponseEntity<SpremljeniRecepti> spremiRecept(@RequestHeader("Authorization") String jwt, @PathVariable long receptId, @PathVariable long iDKorisnik) throws Exception {
-        SpremljeniRecepti sr = sprRecService.spremiRecept(korisnikService.findByIdKorisnik(iDKorisnik), receptService.findReceptById(receptId));
+    @PostMapping("/{idRecept}/save/korisnik/{iDKorisnik}")
+    public ResponseEntity<SpremljeniRecepti> spremiRecept(@RequestHeader("Authorization") String jwt, @PathVariable long idRecept, @PathVariable long iDKorisnik) throws Exception {
+        SpremljeniRecepti sr = sprRecService.spremiRecept(korisnikService.findByIdKorisnik(iDKorisnik), receptService.findReceptById(idRecept));
         return new ResponseEntity<>(sr, HttpStatus.OK);
     }
 
-    @PostMapping("/{receptId}/like/korisnik/{iDKorisnik}")
-    public ResponseEntity<OznacavanjeRecepata> oznaciRecept(@RequestHeader("Authorization") String jwt, @PathVariable long receptId, @PathVariable long iDKorisnik) throws Exception {
-        OznacavanjeRecepata r = oznRecService.oznaciRecept(korisnikService.findByIdKorisnik(iDKorisnik), receptService.findReceptById(receptId));
+    @PostMapping("/{idRecept}/like/korisnik/{iDKorisnik}")
+    public ResponseEntity<OznacavanjeRecepata> oznaciRecept(@RequestHeader("Authorization") String jwt, @PathVariable long idRecept, @PathVariable long iDKorisnik) throws Exception {
+        OznacavanjeRecepata r = oznRecService.oznaciRecept(korisnikService.findByIdKorisnik(iDKorisnik), receptService.findReceptById(idRecept));
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{receptId}/korisnik/{iDKorisnik}")
-    public ResponseEntity<String> deleteRecept(@RequestHeader("Authorization") String jwt, @PathVariable long receptId, @PathVariable long iDKorisnik) throws Exception {
-        String message = receptService.deleteRecept(receptId, iDKorisnik);
+    @DeleteMapping("/delete/{idRecept}/korisnik/{iDKorisnik}")
+    public ResponseEntity<String> deleteRecept(@RequestHeader("Authorization") String jwt, @PathVariable long idRecept, @PathVariable long iDKorisnik) throws Exception {
+        String message = receptService.deleteRecept(idRecept, iDKorisnik);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

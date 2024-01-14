@@ -30,6 +30,18 @@ public class PratiociServiceJpa implements PratiociService {
     }
 
     @Override
+    public List<Pratioci> obrisiFollow(long idFollower) {
+        List<Pratioci> existingRelationship = pratiociRepo
+                .findAllByFollwerId(idFollower);
+
+        if (existingRelationship != null)
+            pratiociRepo.deleteAll(existingRelationship);
+
+        return existingRelationship;
+    }
+
+
+    @Override
     public List<Korisnik> pronadjiOneKojePratim(long idKorisnik) throws Exception {
         return pratiociRepo.findAllByFollower(idKorisnik);
     }

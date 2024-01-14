@@ -16,6 +16,8 @@ public interface KomentariService {
 
     List<Komentar> findAllByRecept(long idRecept);
 
+    List<Komentar> findAllByIdKorisnik(long idKorisnik);
+
     Komentar findById(long idKomentar);
 
 }

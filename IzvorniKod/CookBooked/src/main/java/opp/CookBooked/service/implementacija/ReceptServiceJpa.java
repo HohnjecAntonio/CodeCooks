@@ -34,16 +34,13 @@ public class ReceptServiceJpa implements ReceptService {
     private KomentariService komentariService;
 
     @Autowired
-    private KomentariRepository komentariRepo;
-
-    @Autowired
-    private KomentariReceptRepository komRecRepo;
-
-    @Autowired
     private OznacavanjeRecepataService oznRecService;
 
     @Autowired
     private SpremljeniReceptiService spremRecService;
+
+    @Autowired
+    private KomentariReceptRepository komRecRepo;
 
 
     @Override
@@ -150,13 +147,15 @@ public class ReceptServiceJpa implements ReceptService {
             throw new Exception("Ne možete obrisati ovaj recept jer niste njegov autor!");
         }
 
-        List<KomentariRecept> komentari = recept.getKomentari();
-        for (KomentariRecept komentarRecept : komentari) {
-            Komentar komentar = komentarRecept.getKomentar();
-            komentariService.obrisiKomentar(komentar.getIdKomentar(), komentarRecept.getRecept().getIdRecept());
-        }
+        spremRecService.obrisiRecept(korisnik, recept);
+        oznRecService.obrisiOznaceReceptByIdKorisnik(korisnikId, idRecept);
 
-        spremRecService.obrisiRecept(korisnik,recept);
+        List<KomentariRecept> komentari = komRecRepo.findReceptsByKomentar(idRecept);
+        for (KomentariRecept kr : komentari) {
+            Komentar kom = kr.getKomentar();
+            komRecRepo.delete(kr);
+            komentariService.obrisiKomentar(kom.getIdKomentar(), idRecept);
+        }
 
         recept.setAutor(null);
         receptRepo.delete(recept);
