@@ -3,7 +3,7 @@ import './Profile.css'; // You can create a separate CSS file for styling
 import profilePictureTemp from "../images/img/user.jpeg";
 import {useDispatch, useSelector} from "react-redux";
 import { useHistory } from 'react-router-dom';
-import {fetchUserProfile, fetchOtherProfile, followUser} from "../redux/auth/auth.action";
+import {fetchUserProfile, fetchOtherProfile, followUser, fetchRecipesForUserFeed} from "../redux/auth/auth.action";
 
 
 function Profile(props) {
@@ -14,10 +14,16 @@ function Profile(props) {
   const loading = useSelector(state => state.auth.loading);
   const error = useSelector(state => state.auth.error);
   const history = useHistory();
+  const recipesForFeed = useSelector(state => state.auth.recipesForFeed);
 
   useEffect(() => {
     dispatch(fetchUserProfile());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchRecipesForUserFeed());
+}, [dispatch]);
+
 
   useEffect(() => {
     dispatch(fetchOtherProfile(JSON.parse(localStorage.getItem("profileToLoad"))));
@@ -86,6 +92,31 @@ function Profile(props) {
 
   ]
 
+
+  const korisnikRecepti = recipesForFeed.filter(recipe  =>
+    recipe.autor == profileToLoad.korisnickoIme
+  );
+
+
+  const arrayDataItems = korisnikRecepti.map(recipe => 
+    <div className="single-recipe-page">
+      <div className="recipe-card">
+      <a href="/RecipePage" onClick={()=>{localStorage.setItem('recipeToLoad',JSON.stringify(recipe.idRecept)); console.log(recipe.idRecept);}}>
+      <div className="recipe-details">
+        <h2>{recipe.nazivRecept}</h2>
+        {/*<p>Category: {recipe.category}</p>
+        <ul>
+          {recipe.ingredients.map((ingredient, index) => (
+            <li key={index}>{ingredient}</li>
+          ))}
+        </ul>*/}
+        <p>Uputstva: {recipe.priprema}</p>
+      </div>
+      </a>
+      </div>
+  </div>
+  );
+
   return (
     <div>
       <div className="container mx-auto my-10 p-6 bg-white shadow-md rounded-md">
@@ -139,13 +170,7 @@ function Profile(props) {
 
           <div className="posts">
             <h2>Recent Posts</h2>
-            {/*{newUser.posts.map((post, index) => (
-              <div key={index} className="post">
-                <h3>{post.title}</h3>
-                <p>{post.content}</p>
-                <p className="post-date">Date: {post.date}</p>
-              </div>
-            ))}*/}
+            {arrayDataItems}
           </div>
         </div>
     </div>
