@@ -2,9 +2,15 @@ package opp.CookBooked.service.implementacija;
 
 import jakarta.transaction.Transactional;
 import opp.CookBooked.config.jwtProvider;
+import opp.CookBooked.dto.ProfilDTO;
+import opp.CookBooked.model.Komentar;
 import opp.CookBooked.model.Recept;
 import opp.CookBooked.repository.ReceptRepository;
+import opp.CookBooked.service.KomentariService;
+import opp.CookBooked.service.PratiociService;
+import opp.CookBooked.service.ReceptService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -22,11 +28,49 @@ public class KorisnikServiceJpa implements KorisnikService {
     private KorisnikRepository korisnikRepo;
 
     @Autowired
+    private PratiociService pratiociService;
+
+    @Autowired
+    private KomentariService komentariService;
+
+    private ReceptService receptService;
+
+    @Autowired
+    public void setReceptService(@Lazy ReceptService receptService) {
+        this.receptService = receptService;
+    }
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
     public List<Korisnik> listAll(){
         return korisnikRepo.findAll();
+    }
+
+    @Override
+    public ProfilDTO fetchProfil(String jwt) throws Exception {
+        Korisnik korisnik = getKorisnikFromJWT(jwt);
+        List<Recept> mojiRecepti = receptService.findRecepteByAutor(korisnik.getIdKorisnik());
+        List<Recept> spremljeniRecepti = receptService.findSpremljeneRecepteByIdKorisnik(korisnik.getIdKorisnik());
+        List<Korisnik> pratim = pratiociService.pronadjiOneKojePratim(korisnik.getIdKorisnik());
+        List<Korisnik> prateMe = pratiociService.pronadjiOneKojiMePrate(korisnik.getIdKorisnik());
+
+        ProfilDTO profil = new ProfilDTO();
+
+        profil.setIdKorisnik(korisnik.getIdKorisnik());
+        profil.setKorisnickoIme(korisnik.getKorisnickoIme());
+        profil.setImeKorisnik(korisnik.getImeKorisnik());
+        profil.setPrezimeKorisnik(korisnik.getPrezimeKorisnik());
+        profil.setEmailKorisnik(korisnik.getEmailKorisnik());
+        profil.setBrojTelefona(korisnik.getBrojTelefona());
+        profil.setDostupan(korisnik.getDostupan());
+        profil.setMojiRecepti(mojiRecepti);
+        profil.setSpremljeniReceptiKorisnika(spremljeniRecepti);
+        profil.setPratiteljiKorisnika(prateMe);
+        profil.setPratiociKorisnika(pratim);
+
+        return profil;
     }
 
     @Override
@@ -79,8 +123,22 @@ public class KorisnikServiceJpa implements KorisnikService {
     }
 
     @Override
-    public Korisnik deleteKorisnik(long idKorisnik) {
+    public Korisnik deleteKorisnik(long idKorisnik) throws Exception {
         Korisnik korisnik = fetch(idKorisnik);
+
+        pratiociService.obrisiFollow(idKorisnik);
+
+        List<Recept> recepti = receptService.findRecepteByAutor(idKorisnik);
+
+        for (Recept r : recepti) {
+            receptService.deleteRecept(r.getIdRecept(), idKorisnik);
+        }
+
+        List<Komentar> komentari = komentariService.findAllByIdKorisnik(idKorisnik);
+        for (Komentar k : komentari) {
+            komentariService.obrisiKomentar(k.getIdKomentar(), idKorisnik);
+        }
+
         korisnikRepo.delete(korisnik);
         return korisnik;
     }

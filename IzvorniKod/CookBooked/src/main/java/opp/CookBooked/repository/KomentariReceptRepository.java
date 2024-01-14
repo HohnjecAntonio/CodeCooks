@@ -12,7 +12,7 @@ public interface KomentariReceptRepository extends JpaRepository<KomentariRecept
     @Query("SELECT kr FROM KomentariRecept kr WHERE kr.recept.idRecept = :idRecept AND kr.komentar.idKomentar = :idKomentar AND kr.recept.autor.idKorisnik = :idKorisnik")
     KomentariRecept findByReceptIdAndAutorIdAAndKomentarId(@Param("idRecept") Long idRecept, @Param("idKomentar") Long idKomentar, @Param("idKorisnik") Long idKorisnik);
 
-    @Query("SELECT NEW KomentariRecept(kr.recept, kr.komentar) FROM KomentariRecept kr WHERE kr.recept.idRecept = :idRecept")
+    @Query("SELECT kr FROM KomentariRecept kr WHERE kr.recept.idRecept = :idRecept")
     List<KomentariRecept> findReceptsByKomentar(long idRecept);
 
 }

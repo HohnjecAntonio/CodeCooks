@@ -14,6 +14,9 @@ public interface KomentariRepository extends JpaRepository<Komentar, Long> {
     @Query("SELECT k FROM Komentar k WHERE k.idKomentar = :idKomentar")
     Komentar findByIdKomentar(long idKomentar);
 
+    @Query("SELECT k FROM Komentar k WHERE k.korisnik.idKorisnik = :idKorisnik")
+    List<Komentar> findAllByIdKorisnik(long idKorisnik);
+
     @Query("SELECT NEW Komentar(kr.id, kr.komentar.korisnik, kr.komentar.opisKomentar, kr.komentar.datumKomentar) FROM KomentariRecept kr WHERE kr.recept.idRecept = :idRecept")
     List<Komentar> findAllByRecept(long idRecept);
 

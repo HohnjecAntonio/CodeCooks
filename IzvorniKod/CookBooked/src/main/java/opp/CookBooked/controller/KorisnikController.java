@@ -27,9 +27,6 @@ public class KorisnikController {
     @Autowired
     private PratiociService pratiociService;
 
-    @Autowired
-    private ReceptService receptService;
-
     @GetMapping("")
     public List<Korisnik> listKorisnik(){
         return korisnikService.listAll();
@@ -42,27 +39,7 @@ public class KorisnikController {
 
     @GetMapping("/profile")
     public ProfilDTO getKorisnikByKorisnickoIme(@RequestHeader("Authorization") String jwt) throws Throwable {
-        Korisnik korisnik = korisnikService.getKorisnikFromJWT(jwt);
-        List<Recept> mojiRecepti = receptService.findRecepteByAutor(korisnik.getIdKorisnik());
-        List<Recept> spremljeniRecepti = receptService.findSpremljeneRecepteByIdKorisnik(korisnik.getIdKorisnik());
-        List<Korisnik> pratim = pratiociService.pronadjiOneKojePratim(korisnik.getIdKorisnik());
-        List<Korisnik> prateMe = pratiociService.pronadjiOneKojiMePrate(korisnik.getIdKorisnik());
-
-        ProfilDTO profil = new ProfilDTO();
-
-        profil.setIdKorisnik(korisnik.getIdKorisnik());
-        profil.setKorisnickoIme(korisnik.getKorisnickoIme());
-        profil.setImeKorisnik(korisnik.getImeKorisnik());
-        profil.setPrezimeKorisnik(korisnik.getPrezimeKorisnik());
-        profil.setEmailKorisnik(korisnik.getEmailKorisnik());
-        profil.setBrojTelefona(korisnik.getBrojTelefona());
-        profil.setDostupan(korisnik.getDostupan());
-        profil.setMojiRecepti(mojiRecepti);
-        profil.setSpremljeniReceptiKorisnika(spremljeniRecepti);
-        profil.setPratiteljiKorisnika(prateMe);
-        profil.setPratiociKorisnika(pratim);
-
-        return profil;
+        return korisnikService.fetchProfil(jwt);
     }
 
     @PutMapping("/update/{korisnickoIme}")
@@ -83,5 +60,13 @@ public class KorisnikController {
         pratiociService.followUser(k1, k2);
 
         return new ResponseEntity<>("Uspješno", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/korisnik/{idKorisnik}")
+    public ResponseEntity<String> deleteKorisnik(
+            @RequestHeader("Authorization") String jwt,
+            @PathVariable long idKorisnik) throws Exception {
+        Korisnik korisnik = korisnikService.deleteKorisnik(idKorisnik);
+        return new ResponseEntity<>("Uspješno obrisan", HttpStatus.OK);
     }
 }
