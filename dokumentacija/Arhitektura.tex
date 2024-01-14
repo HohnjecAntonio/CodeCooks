@@ -405,8 +405,15 @@
 		\label{fig:Dijagram aktivnosti}
 	\end{figure} 
 \eject
+
 \section{Dijagram komponenti}
 
-\textbf{\textit{dio 2. revizije}}\\
 
-\textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
+{Sustav se sastoji od \textit{frontend} i \textit{backend} dijelova, te baze podataka. \textit{Frontend} dio sastoji se od niza JSX datoteka koje određuju prikaz stranice (HomePage, Login) ili dijela stranice (Sidebar). React-view komponenta komunicira sa komponentom Router i \textit{backendom} te ovisno o korisnikovim akcijama osvježava prikaz i dohvaća nove podatke ili datoteke. Komponenta Router na upit sa URL-om odlučuje koja datoteka će se poslužiti na sučelje. JSX datoteke ovise o React i Redux bibliotekama. \textit{Frontend} uspostavlja komunikaciju sa backendom koristeći REST API. Zahtjev se proslijeđuje Controllers komponenti koja koristi metode izložene u sučelju Services komponente. Komponenta Services ostvaruje komunikaciju sa komponentom Repositories koja je zadužena za dohvat tablica iz baze podataka.}
+
+	\begin{figure}[H]
+		\includegraphics[scale= 0.45]{slike/Component Diagram0.png}
+		\centering
+		\caption{Dijagram komponenti}
+		\label{fig:Dijagram komponenti}
+	\end{figure} 

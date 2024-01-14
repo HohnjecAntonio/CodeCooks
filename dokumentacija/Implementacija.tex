@@ -39,9 +39,13 @@
 		
 		\section{Dijagram razmještaja}
 			
-			\textbf{\textit{dio 2. revizije}}
-			
-			 \textit{Potrebno je umetnuti \textbf{specifikacijski} dijagram razmještaja i opisati ga. Moguće je umjesto specifikacijskog dijagrama razmještaja umetnuti dijagram razmještaja instanci, pod uvjetom da taj dijagram bolje opisuje neki važniji dio sustava.}
+			{Klijenti koriste web preglednik kako bi pristupili web aplikaciji. Aplikacija je puštena u pogon na Render cloud servisu. Sustav se sastoji od \textit{frontend} dijela realiziranog uz pomoć React biblioteke, \textit{backend} dijela implementiranog koristeći radni okvir Java Spring i PostgreSQL baze podataka. \textit{Frontend} i \textit{backend} dijelovi nalaze se u zasebnim Docker spremnicima. Ostvarena je komunikacija između \textit{frontenda} i \textit{backenda}, te \textit{backenda} i baze podataka.}
+	\begin{figure}[H]
+		\includegraphics[scale= 0.45]{slike/Deployment Diagram0.png}
+		\centering
+		\caption{Dijagram razmještaja}
+		\label{fig:Dijagram razmještaja}
+	\end{figure} 
 			
 			\eject 
 		
