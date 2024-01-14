@@ -20,6 +20,7 @@ const RecipePage = () => {
     dispatch(fetchRecipeById(JSON.parse(localStorage.getItem("recipeToLoad"))));
   }, [dispatch]);
 
+  console.log(recipe);
 /*  
   const recipes = [
     {
@@ -154,6 +155,28 @@ const RecipePage = () => {
     
     <div>
       {arrayDataItems}
+      {
+      
+      /*
+      <div className="single-recipe-page">
+        <div className="recipe-card">
+
+        <div className="recipe-details">
+          <h2>{recipe.nazivRecept}</h2>
+          {/*<p>Category: {recipe.category}</p>
+          <ul>
+            {recipe.ingredients.map((ingredient, index) => (
+              <li key={index}>{ingredient}</li>
+            ))}
+          </ul>*//*}
+          <p>Uputstva: {recipe.priprema}</p>
+          <p>Autor: <a href="/Profile" onClick={() => {
+              localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor.idKorisnik))
+        }}>{recipe.autor.korisnickoIme}</a></p>
+        </div>
+
+        </div>
+      </div>*/}
     </div>
     
   );
