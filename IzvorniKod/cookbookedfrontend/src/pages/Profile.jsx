@@ -92,7 +92,7 @@ function Profile(props) {
 
   ]
 
-
+  //volim kruške
   const korisnikRecepti = recipesForFeed.filter(recipe  =>
     recipe.autor == profileToLoad.korisnickoIme
   );
