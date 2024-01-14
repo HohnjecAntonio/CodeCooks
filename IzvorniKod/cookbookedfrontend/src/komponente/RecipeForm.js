@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchKategorije, newRecipe, fetchUserProfile } from '../redux/auth/auth.action.js';
+import { fetchKategorije, newRecipe, fetchUserProfile, fetchVrsteKuhinje } from '../redux/auth/auth.action.js';
 import { useHistory } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import './RecipeForm.css'; // You can create a separate CSS file for styling
@@ -11,6 +11,7 @@ function RecipeForm () {
   const loading = useSelector(state => state.auth.loading);
   const error = useSelector(state => state.auth.error);
   const userProfileInfo = useSelector(state => state.auth.userProfile);
+  const vrKuhinje = useSelector(state => state.auth.vrKuhinje);
 
   useEffect(() => {
     dispatch(fetchUserProfile());
@@ -18,6 +19,10 @@ function RecipeForm () {
 
   useEffect(() => {
     dispatch(fetchKategorije());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchVrsteKuhinje());
   }, [dispatch]);
 
 
@@ -31,18 +36,19 @@ function RecipeForm () {
 
   const initialValues = {
       idKorisnik: userProfileInfo.idKorisnik || '',
-      naziv_recept:'',
+      nazivRecept:'',
       sastojci: '',
-      id_kategorija: '1',        
-      priprema: ''
+      idKategorija: '1',
+      idVrstaKuhinje: '1',
+      priprema: '',
+      oznaka: ''
   }
 
   return (
     <div className="recipe-form-container">
       <Formik enableReinitialize={true} onSubmit={handleSubmit} 
       initialValues={initialValues}>
-        
-        
+
         <Form>
 
           <Field
@@ -52,12 +58,24 @@ function RecipeForm () {
           />
 
           <h1>Izradite novi recept</h1>
-          <label htmlFor="naziv_recept">Naziv recepta:</label>
+          <label htmlFor="nazivRecept">Naziv recepta:</label>
           <Field
             type="text"
-            id="naziv_recept"
-            name="naziv_recept"
+            id="nazivRecept"
+            name="nazivRecept"
           />
+
+          <label htmlFor="idVrstaKuhinje">Vrsta kuhinje:</label>
+          <select
+              id="idVrstaKuhinje"
+              name="idVrstaKuhinje"
+          >
+            {vrKuhinje.map(vrsta => (
+                <option key={vrsta.idVrstaKuhinje} value={vrsta.idVrstaKuhinje}>
+                  {vrsta.nazivVrstaKuhinje}
+                </option>
+            ))}
+          </select>
 
           <label htmlFor="sastojci">Sastojci:</label>
           <Field
@@ -68,8 +86,8 @@ function RecipeForm () {
 
           <label htmlFor="kategorija">Izaberite kategoriju:</label>
           <select
-            id="id_kategorija"
-            name="id_kategorija"
+            id="idKategorija"
+            name="idKategorija"
           >
             {kategorije.map(kategorija => (
                   <option key={kategorija.idKategorija} value={kategorija.idKategorija}>
@@ -97,6 +115,14 @@ function RecipeForm () {
             type="text"
             id="priprema"
             name="priprema"
+          />
+
+          <label htmlFor="oznaka">Dodatne napomene:</label>
+          <Field
+              component="textarea"
+              type="text"
+              id="oznaka"
+              name="oznaka"
           />
 
           <button type="submit">Submit Recipe</button>

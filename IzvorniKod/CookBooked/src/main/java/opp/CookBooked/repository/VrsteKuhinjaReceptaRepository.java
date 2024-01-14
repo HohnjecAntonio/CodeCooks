@@ -8,7 +8,14 @@ import java.util.List;
 
 public interface VrsteKuhinjaReceptaRepository extends JpaRepository<VrsteKuhinjaRecepta, Long> {
 
-    VrsteKuhinjaRecepta findByReceptAndVrstaKuhinje(Recept recept, VrstaKuhinje vrstaKuhinje);
+    @Query("SELECT NEW VrstaKuhinje(k.idVrstaKuhinje, k.nazivVrstaKuhinje) FROM VrstaKuhinje k")
+    List<VrstaKuhinje> findAllVrsteKuhinje();
+
+    @Query("SELECT k FROM VrstaKuhinje k WHERE k.idVrstaKuhinje = :idVrstaKuhinje")
+    VrstaKuhinje findByIdVK(long idVrstaKuhinje);
+
+    @Query("SELECT k FROM VrsteKuhinjaRecepta k WHERE k.recept.idRecept = :idRecept AND k.vrstaKuhinje.idVrstaKuhinje = :idVrstaKuhinje")
+    VrsteKuhinjaRecepta findByReceptAndVrstaKuhinje(long idRecept, long idVrstaKuhinje);
 
     @Query("SELECT NEW VrstaKuhinje(vr.vrstaKuhinje.nazivVrstaKuhinje) FROM VrsteKuhinjaRecepta vr WHERE vr.recept.idRecept = :idRecept")
     List<VrstaKuhinje> findAllByRecept(long idRecept);

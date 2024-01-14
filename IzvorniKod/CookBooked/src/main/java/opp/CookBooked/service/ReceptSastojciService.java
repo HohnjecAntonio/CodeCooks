@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ReceptSastojciService {
 
-    ReceptSastojci dodajSastojakReceptu(Recept recept, Sastojak sastojak);
+    ReceptSastojci dodajSastojkeReceptu(long idRecept, List<String> sastojci);
 
     List<Sastojak> findAllByRecept(long idRecept);
 

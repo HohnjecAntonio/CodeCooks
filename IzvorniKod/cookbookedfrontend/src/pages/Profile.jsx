@@ -132,7 +132,6 @@ function Profile(props) {
           <div className="profile">
             <h1 className="profile-name">{profileToLoad.imeKorisnik} {profileToLoad.prezimeKorisnik}</h1>
 
-            
             {
               userProfileInfo.idKorisnik == profileToLoad.idKorisnik
               ? 

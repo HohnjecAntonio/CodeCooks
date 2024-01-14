@@ -1,6 +1,7 @@
 package opp.CookBooked.service;
 
 import opp.CookBooked.dto.ReceptDTO;
+import opp.CookBooked.dto.ReceptSubmitDTO;
 import opp.CookBooked.model.Korisnik;
 import opp.CookBooked.model.Recept;
 import org.springframework.data.jpa.repository.Query;
@@ -20,7 +21,7 @@ public interface ReceptService {
 
     List<Recept> findRecepteByAutor(long idKorisnik) throws Exception;
 
-    Recept createRecept(Recept recept, long iDKorisnik) throws Exception;
+    Recept createRecept(ReceptSubmitDTO recept, long iDKorisnik) throws Exception;
 
     Recept updateRecept(long idRecept, Recept updatedRecept) throws Exception;
 

@@ -7,5 +7,7 @@ import java.util.List;
 public interface KategorijaService {
     List<Kategorija> listAll();
 
+    Kategorija findKategorijaById(long idKategorija);
+
     List<Kategorija> findAllByRecept(long idRecept);
 }

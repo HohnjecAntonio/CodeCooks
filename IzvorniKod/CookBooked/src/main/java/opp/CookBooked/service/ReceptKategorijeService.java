@@ -8,6 +8,6 @@ import java.util.Set;
 
 public interface ReceptKategorijeService {
 
-    ReceptKategorije dodajKategorijuReceptu(Recept recept, Kategorija kategorija);
+    ReceptKategorije dodajKategorijuReceptu(long idRecept, long idKategorija) throws Exception;
 
 }

@@ -1,6 +1,7 @@
 package opp.CookBooked.controller;
 
 import opp.CookBooked.dto.ReceptDTO;
+import opp.CookBooked.dto.ReceptSubmitDTO;
 import opp.CookBooked.model.*;
 import opp.CookBooked.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class ReceptController {
     @Autowired
     private KomentariService komentariService;
 
+    @Autowired
+    private VrsteKuhinjaReceptaService vrKuhService;
+
     @GetMapping("")
     public List<ReceptDTO> listRecepts(){
         return receptService.listReceptsForFeed();
@@ -50,7 +54,7 @@ public class ReceptController {
     }
 
     @PostMapping("/save/korisnik/{iDKorisnik}")
-    public ResponseEntity<Recept> createRecept(@RequestHeader("Authorization") String jwt, @RequestBody Recept recept, @PathVariable long iDKorisnik) throws Exception {
+    public ResponseEntity<Recept> createRecept(@RequestHeader("Authorization") String jwt, @RequestBody ReceptSubmitDTO recept, @PathVariable long iDKorisnik) throws Exception {
         Recept noviRecept = receptService.createRecept(recept, iDKorisnik);
         return new ResponseEntity<>(noviRecept, HttpStatus.CREATED);
     }
@@ -91,5 +95,11 @@ public class ReceptController {
     public ResponseEntity<String> deleteRecept(@RequestHeader("Authorization") String jwt, @PathVariable long idRecept, @PathVariable long iDKorisnik) throws Exception {
         String message = receptService.deleteRecept(idRecept, iDKorisnik);
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @GetMapping("/vrstekuhinje")
+    public ResponseEntity<List<VrstaKuhinje>> dohvatiVrsteKuhinje(@RequestHeader("Authorization") String jwt) {
+        List<VrstaKuhinje> r = vrKuhService.findAllVrsteKuhinje();
+        return new ResponseEntity<>(r, HttpStatus.OK);
     }
 }

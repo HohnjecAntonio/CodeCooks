@@ -4,19 +4,33 @@ import {
     FETCH_KATEGORIJE_SUCCESS,
     FETCH_RECIPES_FAILURE,
     FETCH_RECIPES_REQUEST,
-    FETCH_RECIPES_SUCCESS, FETCH_USER_PROFILE_FAILURE,
-    FETCH_USER_PROFILE_REQUEST, FETCH_USER_PROFILE_SUCCESS,
-    FETCH_OTHER_PROFILE_FAILURE, FETCH_OTHER_PROFILE_SUCCESS,FETCH_OTHER_PROFILE_REQUEST,
+    FETCH_RECIPES_SUCCESS,
+    FETCH_USER_PROFILE_FAILURE,
+    FETCH_USER_PROFILE_REQUEST,
+    FETCH_USER_PROFILE_SUCCESS,
+    FETCH_OTHER_PROFILE_FAILURE,
+    FETCH_OTHER_PROFILE_SUCCESS,
+    FETCH_OTHER_PROFILE_REQUEST,
     LOGIN_FAILURE,
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     REGISTER_FAILURE,
     REGISTER_REQUEST,
     REGISTER_SUCCESS,
-    ADD_RECIPE_FAILURE, ADD_RECIPE_SUCCESS, ADD_RECIPE_REQUEST,
-    FOLLOW_USER_REQUEST,FOLLOW_USER_FAILURE, FOLLOW_USER_SUCCESS,
-    UPDATE_USER_PROFILE_FAILURE, UPDATE_USER_PROFILE_SUCCESS, UPDATE_USER_PROFILE_REQUEST,
-    FETCH_RECIPE_BY_ID_SUCCESS, FETCH_RECIPE_BY_ID_REQUEST, FETCH_RECIPE_BY_ID_FAILURE
+    ADD_RECIPE_FAILURE,
+    ADD_RECIPE_SUCCESS,
+    ADD_RECIPE_REQUEST,
+    FOLLOW_USER_REQUEST,
+    FOLLOW_USER_FAILURE,
+    FOLLOW_USER_SUCCESS,
+    UPDATE_USER_PROFILE_FAILURE,
+    UPDATE_USER_PROFILE_SUCCESS,
+    UPDATE_USER_PROFILE_REQUEST,
+    FETCH_RECIPE_BY_ID_SUCCESS,
+    FETCH_RECIPE_BY_ID_REQUEST,
+    FETCH_RECIPE_BY_ID_FAILURE,
+    FETCH_VRKUHINJE_REQUEST,
+    FETCH_VRKUHINJE_FAILURE, FETCH_VRKUHINJE_SUCCESS
 } from "./auth.actionType";
 
 const initialState = {
@@ -27,7 +41,8 @@ const initialState = {
     recipesForFeed: [],
     userProfile: '',
     profileToLoad: '',
-    recipeToLoad: ''
+    recipeToLoad: '',
+    vrKuhinje: []
 }
 
 export const authReducer = (state=initialState, action) => {
@@ -50,6 +65,13 @@ export const authReducer = (state=initialState, action) => {
         case FETCH_KATEGORIJE_SUCCESS:
             return { ...state, kategorije: action.payload, loading: false, error: null };
         case FETCH_KATEGORIJE_FAILURE:
+            return { ...state, loading: false, error: action.payload };
+
+        case FETCH_VRKUHINJE_REQUEST:
+            return { ...state, loading: true, error: null };
+        case FETCH_VRKUHINJE_SUCCESS:
+            return { ...state, vrKuhinje: action.payload, loading: false, error: null };
+        case FETCH_VRKUHINJE_FAILURE:
             return { ...state, loading: false, error: action.payload };
 
 

@@ -33,4 +33,9 @@ public class VrstaKuhinje {
         this.nazivVrstaKuhinje = nazivVrstaKuhinje;
     }
 
+    public VrstaKuhinje(Long idVrstaKuhinje, String nazivVrstaKuhinje) {
+        this.idVrstaKuhinje = idVrstaKuhinje;
+        this.nazivVrstaKuhinje = nazivVrstaKuhinje;
+    }
+
 }

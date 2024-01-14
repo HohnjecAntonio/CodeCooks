@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 
 @Entity
 @NoArgsConstructor
-@Table(name = "receptKategorije")
+@Table(name = "receptSastojci")
 public class ReceptSastojci {
 
     @Id
