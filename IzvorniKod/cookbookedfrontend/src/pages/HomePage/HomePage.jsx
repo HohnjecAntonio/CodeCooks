@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchKategorije } from '../../redux/auth/auth.action.js'; // Import the action
 import './HomePage.css'; // You can create a separate CSS file for styling
+import {fetchRecipesForUserFeed} from "../../redux/auth/auth.action";
 
 
 const HomePage = () => {
@@ -9,6 +10,11 @@ const HomePage = () => {
     const kategorije = useSelector(state => state.auth.kategorije); // Adjust path according to your store structure
     const loading = useSelector(state => state.auth.loading);
     const error = useSelector(state => state.auth.error);
+    const recipesForFeed = useSelector(state => state.auth.recipesForFeed); // Adjust path according to your store structure
+
+    useEffect(() => {
+        dispatch(fetchRecipesForUserFeed());
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(fetchKategorije());
@@ -68,23 +74,6 @@ const HomePage = () => {
       // Add more recipe objects as needed
     ]);
   
-    useEffect(() => {
-      // Simulating fetching data from a server
-      // In a real application, you would fetch data using something like fetch or Axios
-      const fetchData = async () => {
-        try {
-          // Replace this with the actual endpoint to fetch recent recipes data
-          const response = await fetch('/api/Recipes');
-          const data = await response.json();
-          setRecipes(data);
-        } catch (error) {
-          console.error('Error fetching recipes:', error);
-        }
-      };
-  
-      fetchData();
-    }, []);
-  
   
     const [newRecipe, setNewRecipe] = useState({
       id: '',
@@ -95,25 +84,10 @@ const HomePage = () => {
       creator: '',
       userID: ''
     });
-  
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setNewRecipe({
-        ...newRecipe,
-        [name]: value,
-      });
-    };
-  
-    const handleAddRecipe = (e) => {
-      e.preventDefault();
-      // Implement logic to add the new recipe to the list (e.g., send to server)
-      console.log('New recipe added:', newRecipe);
-      // For a real application, you would likely update the state with the new recipe
-    };
 
     return (
         <div className='px-20'>
-            <h1>This is home page visible to anyone.</h1>
+            <h1>Dobro došli na CookBooked!</h1>
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error.message}</p>}
             <h3 className='text-4xl mt-5 mb-3'>Kategorije</h3>
@@ -127,24 +101,23 @@ const HomePage = () => {
             <div className="recipe-page">
           <h1>Recipes</h1>
           <div className="recipe-list">
-            {recipes.map((recipe) => (
+            
+            {recipesForFeed.map((recipe) => (
               <div key={recipe.id} className="recipe-card">
 
-                <a href="/RecipePage" onClick={()=>{localStorage.setItem('recipeToLoad',JSON.stringify(recipe.id)); console.log(recipe.id);}}>
-
-                <img src={recipe.image} alt={recipe.title} className="recipe-image" />
+                <a href="/RecipePage" onClick={()=>{localStorage.setItem('recipeToLoad',JSON.stringify(recipe.idRecept)); console.log(recipe.idRecept);}}>
                 <div className="recipe-details">
-                  <h2>{recipe.title}</h2>
-                  <p>Category: {recipe.category}</p>
+                  <h2>{recipe.nazivRecept}</h2>
+                  {/*<p>Category: {recipe.category}</p>
                   <ul>
                     {recipe.ingredients.map((ingredient, index) => (
                       <li key={index}>{ingredient}</li>
                     ))}
-                  </ul>
-                  <p>Instructions: {recipe.instructions}</p>
-                  <p>Creator: <a href="/Profile" onClick={() => {
-                      localStorage.setItem(localStorage.setItem('profileToLoad',JSON.stringify(recipe.userID)))
-                }}>{recipe.creator}</a></p>
+                  </ul>*/}
+                  <p>Uputstva: {recipe.priprema}</p>
+                  <p>Autor: <a href="/Profile" onClick={() => {
+                      localStorage.setItem(localStorage.setItem('profileToLoad',JSON.stringify(recipe.idRecept)))
+                }}>{recipe.autor}</a></p>
                 </div>
                 </a>
               </div>

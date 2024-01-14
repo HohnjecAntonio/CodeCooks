@@ -1,96 +1,107 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchKategorije, newRecipe, fetchUserProfile } from '../redux/auth/auth.action.js';
+import { useHistory } from 'react-router-dom';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import './RecipeForm.css'; // You can create a separate CSS file for styling
 
 function RecipeForm () {
-  const [recipe, setRecipe] = useState({
-    title: '',
-    ingredients: '',
-    category: '',
-    image: null,
-    instructions: '',
-  });
+  const dispatch = useDispatch();
+  const kategorije = useSelector(state => state.auth.kategorije); // Adjust path according to your store structure
+  const loading = useSelector(state => state.auth.loading);
+  const error = useSelector(state => state.auth.error);
+  const userProfileInfo = useSelector(state => state.auth.userProfile);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setRecipe({ ...recipe, [name]: value });
+  useEffect(() => {
+    dispatch(fetchUserProfile());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchKategorije());
+  }, [dispatch]);
+
+
+  const handleSubmit = async (values) => {
+    console.log('handle submit ', values);
+    await dispatch(newRecipe({ data: values })).then(() => {
+        //history.push('/');
+        //window.location.reload();
+    });
   };
 
-  const handleIngredientsChange = (e) => {
-    const selectedIngredients = Array.from(e.target.selectedOptions, (option) => option.value);
-    setRecipe({ ...recipe, ingredients: selectedIngredients });
-  };
-
-  const handleImageChange = (e) => {
-    const selectedImage = e.target.files[0];
-    setRecipe({ ...recipe, image: selectedImage });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle the submission logic (e.g., send data to the server)
-    console.log('Recipe submitted:', recipe);
-  };
+  const initialValues = {
+      idKorisnik: userProfileInfo.idKorisnik || '',
+      naziv_recept:'',
+      sastojci: '',
+      id_kategorija: '1',        
+      priprema: ''
+  }
 
   return (
     <div className="recipe-form-container">
-      <h1>Create a New Recipe</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Recipe Title:</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value={recipe.title}
-          onChange={handleInputChange}
-          required
-        />
+      <Formik enableReinitialize={true} onSubmit={handleSubmit} 
+      initialValues={initialValues}>
+        
+        
+        <Form>
 
-        <label htmlFor="ingredients">Ingredients:</label>
-        <textarea
-          id="ingredients"
-          name="ingredients"
-          value={recipe.ingredients}
-          onChange={handleInputChange}
-          required
-        />
+          <Field
+            type="hidden"
+            id="idKorisnik"
+            name="idKorisnik"
+          />
 
-        <label htmlFor="category">Select Category:</label>
-        <select
-          id="category"
-          name="category"
-          value={recipe.category}
-          onChange={handleInputChange}
-          required
-        >
-          <option value="appetizer">Appetizer</option>
-          <option value="mainCourse">Main Course</option>
-          <option value="dessert">Dessert</option>
-          {/* Add more categories as needed */}
-        </select>
+          <h1>Izradite novi recept</h1>
+          <label htmlFor="naziv_recept">Naziv recepta:</label>
+          <Field
+            type="text"
+            id="naziv_recept"
+            name="naziv_recept"
+          />
 
-        <label htmlFor="image">Upload Image:</label>
-        <input
-          className='image_upload'
-          type="file"
-          id="image"
-          name="image"
-          accept="image/*"
-          onChange={handleImageChange}
-          required
-        />
+          <label htmlFor="sastojci">Sastojci:</label>
+          <Field
+            type="text"
+            id="sastojci"
+            name="sastojci"
+          />
 
+          <label htmlFor="kategorija">Izaberite kategoriju:</label>
+          <select
+            id="id_kategorija"
+            name="id_kategorija"
+          >
+            {kategorije.map(kategorija => (
+                  <option key={kategorija.idKategorija} value={kategorija.idKategorija}>
+                      {kategorija.nazivKategorija}
+                  </option>
+              ))}
+          </select>
 
-        <label htmlFor="instructions">Instructions:</label>
-        <textarea
-          id="instructions"
-          name="instructions"
-          value={recipe.instructions}
-          onChange={handleInputChange}
-          required
-        />
+          {
 
-        <button type="submit">Submit Recipe</button>
-      </form>
+          /*
+          <label htmlFor="image">Odaberite sliku:</label>
+          <input
+            className='image_upload'
+            type="file"
+            id="image"
+            name="image"
+            accept="image/*"
+          />*/
+          }
+
+          <label htmlFor="priprema">Uputstva:</label>
+          <Field
+            component="textarea"
+            type="text"
+            id="priprema"
+            name="priprema"
+          />
+
+          <button type="submit">Submit Recipe</button>
+        </Form>
+      </Formik>
     </div>
   );
 };

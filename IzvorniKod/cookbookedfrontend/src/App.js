@@ -17,7 +17,6 @@ import MessengerApp from './messenger/MessengerApp';
 function App() {
     const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
     const [currentUser, setCurrentUser] = useState(undefined);
-    const [profileID, setProfileID] = useState(localStorage.getItem('profileToLoad'));
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -48,7 +47,7 @@ function App() {
                         </NavLink>
 
                         {currentUser && (
-                            <NavLink to="/user-feed" className="text-lg font-semibold">
+                            <NavLink to="/user-feed" className="Header-button">
                                 User feed
                             </NavLink>
                         )}
@@ -110,6 +109,7 @@ function App() {
                         <Route path="/Categories" exact component={CategoryButtons} />
                         <Route path="/MessengerApp" exact component={MessengerApp} />
                         <Route path="/RecipePage" exact component={RecipePage} />
+                        <Route path="/MessengerApp" exact component={MessengerApp}/>
                     </Switch>
                 </div>
                 <SideBar currentUser={currentUser} changeLoginState = {isLoggedIn => setIsLoggedIn(isLoggedIn)} />

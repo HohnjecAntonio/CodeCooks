@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import './RecipePage.css'; // You can create a separate CSS file for styling
 
 const RecipePage = () => {
+
+
+  
   const recipes = [
     {
       id: 1,
