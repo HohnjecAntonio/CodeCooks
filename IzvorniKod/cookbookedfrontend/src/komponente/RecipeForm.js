@@ -35,7 +35,7 @@ function RecipeForm () {
   };
 
   const initialValues = {
-      idKorisnik: userProfileInfo.idKorisnik || '',
+      idKorisnik: localStorage.getItem("profileToLoad") || '',
       nazivRecept:'',
       sastojci: '',
       idKategorija: '1',
