@@ -17,12 +17,16 @@ public class KomentariReceptServiceJpa implements KomentariReceptService {
 
     @Override
     public String obrisiKomentareReceptByKorisnik(long idRecept) {
-        List<KomentariRecept> existingRelationship = komRecRepo
-                .findReceptsByKomentar(idRecept);
+        try {
+            List<KomentariRecept> existingRelationship = komRecRepo
+                    .findReceptsByKomentar(idRecept);
 
-        komRecRepo.deleteAll(existingRelationship);
-
-        return "Uspješno";
+            komRecRepo.deleteAll(existingRelationship);
+            return "Uspješno";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Neuspješno";
+        }
     }
 
     @Override

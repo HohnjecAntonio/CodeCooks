@@ -4,18 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import opp.CookBooked.model.Korisnik;
 import opp.CookBooked.model.Recept;
 
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProfilDTO {
+public class ProfilDrugogKorisnikaDTO {
 
     @Setter
     private Long idKorisnik;
@@ -48,12 +45,8 @@ public class ProfilDTO {
     private List<ReceptDTO> mojiRecepti;
 
     @Setter
-    private List<Recept> spremljeniReceptiKorisnika;
-
-    @Setter
     private List<FollowDTO> pratiteljiKorisnika;
 
     @Setter
     private List<FollowDTO> pratiociKorisnika;
-
 }

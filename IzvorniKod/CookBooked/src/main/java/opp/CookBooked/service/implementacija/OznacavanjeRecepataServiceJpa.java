@@ -18,27 +18,39 @@ public class OznacavanjeRecepataServiceJpa implements OznacavanjeRecepataService
 
     @Override
     public OznacavanjeRecepata oznaciRecept(Korisnik korisnik, Recept recept) {
-        OznacavanjeRecepata existingRelationship = oznRecRepo
-                .findByIdKorisnikAndIdRecept(korisnik.getIdKorisnik(), recept.getIdRecept());
 
-        if (existingRelationship != null) {
-            oznRecRepo.delete(existingRelationship);
-            return existingRelationship;
-        } else {
-            OznacavanjeRecepata spremRec = new OznacavanjeRecepata(korisnik, recept);
-            return oznRecRepo.save(spremRec);
+        try {
+
+            OznacavanjeRecepata existingRelationship = oznRecRepo
+                    .findByIdKorisnikAndIdRecept(korisnik.getIdKorisnik(), recept.getIdRecept());
+
+            if (existingRelationship != null) {
+                oznRecRepo.delete(existingRelationship);
+                return existingRelationship;
+            } else {
+                OznacavanjeRecepata spremRec = new OznacavanjeRecepata(korisnik, recept);
+                return oznRecRepo.save(spremRec);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
     @Override
     public List<OznacavanjeRecepata> obrisiOznaceReceptByIdKorisnik(long idKorisnik, long idRecept) {
-        List<OznacavanjeRecepata> existingRelationship = oznRecRepo
-                .findAllByReceptIdOznaka(idRecept);
+        try {
+            List<OznacavanjeRecepata> existingRelationship = oznRecRepo
+                    .findAllByReceptIdOznaka(idRecept);
 
-        if (existingRelationship != null)
-            oznRecRepo.deleteAll(existingRelationship);
+            if (existingRelationship != null)
+                oznRecRepo.deleteAll(existingRelationship);
 
-        return existingRelationship;
+            return existingRelationship;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

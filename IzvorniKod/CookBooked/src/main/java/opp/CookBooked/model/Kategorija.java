@@ -33,4 +33,10 @@ public class Kategorija {
         this.nazivKategorija = nazivKategorija;
     }
 
+    public Kategorija(Long idKategorija, String nazivKategorija) {
+        this.idKategorija = idKategorija;
+        this.nazivKategorija = nazivKategorija;
+    }
+
+
 }

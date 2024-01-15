@@ -19,53 +19,73 @@ public class PratiociServiceJpa implements PratiociService {
 
     @Override
     public Pratioci followUser(Korisnik follower, Korisnik following) {
-        Pratioci existingRelationship = pratiociRepo
-                .findByFollowerAndFollowing(follower, following);
+        try {
+            Pratioci existingRelationship = pratiociRepo
+                    .findByFollowerAndFollowing(follower, following);
 
-        if (existingRelationship != null) {
-            pratiociRepo.delete(existingRelationship);
-            return existingRelationship;
-        } else {
-            Pratioci pratioci = new Pratioci(follower, following);
-            return pratiociRepo.save(pratioci);
+            if (existingRelationship != null) {
+                pratiociRepo.delete(existingRelationship);
+                return existingRelationship;
+            } else {
+                Pratioci pratioci = new Pratioci(follower, following);
+                return pratiociRepo.save(pratioci);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
     @Override
     public List<Pratioci> obrisiFollow(long idFollower) {
-        List<Pratioci> existingRelationship = pratiociRepo
-                .findAllByFollwerId(idFollower);
+        try {
+            List<Pratioci> existingRelationship = pratiociRepo
+                    .findAllByFollwerId(idFollower);
 
-        if (existingRelationship != null)
-            pratiociRepo.deleteAll(existingRelationship);
+            if (existingRelationship != null)
+                pratiociRepo.deleteAll(existingRelationship);
 
-        return existingRelationship;
+            return existingRelationship;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
     @Override
     public List<FollowDTO> pronadjiOneKojePratim(long idKorisnik) throws Exception {
-        List<FollowDTO> followers = new ArrayList<>();
-        List<Korisnik> korisnici = pratiociRepo.findAllByFollower(idKorisnik);
+        try {
+            List<FollowDTO> followers = new ArrayList<>();
+            List<Korisnik> korisnici = pratiociRepo.findAllByFollower(idKorisnik);
 
-        for (Korisnik k : korisnici) {
-            followers.add(new FollowDTO(k.getIdKorisnik(), k.getKorisnickoIme()));
+            for (Korisnik k : korisnici) {
+                followers.add(new FollowDTO(k.getIdKorisnik(), k.getKorisnickoIme()));
+            }
+
+            return followers;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
-
-        return followers;
     }
 
     @Override
     public List<FollowDTO> pronadjiOneKojiMePrate(long idKorisnik) throws Exception {
+        try {
 
-        List<FollowDTO> followers = new ArrayList<>();
-        List<Korisnik> korisnici = pratiociRepo.findAllByFollowing(idKorisnik);
+            List<FollowDTO> followers = new ArrayList<>();
+            List<Korisnik> korisnici = pratiociRepo.findAllByFollowing(idKorisnik);
 
-        for (Korisnik k : korisnici) {
-            followers.add(new FollowDTO(k.getIdKorisnik(), k.getKorisnickoIme()));
+            for (Korisnik k : korisnici) {
+                followers.add(new FollowDTO(k.getIdKorisnik(), k.getKorisnickoIme()));
+            }
+
+            return followers;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
-
-        return followers;
     }
 
 }

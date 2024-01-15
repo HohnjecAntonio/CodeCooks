@@ -4,6 +4,8 @@ import jakarta.transaction.Transactional;
 import opp.CookBooked.config.jwtProvider;
 import opp.CookBooked.dto.FollowDTO;
 import opp.CookBooked.dto.ProfilDTO;
+import opp.CookBooked.dto.ProfilDrugogKorisnikaDTO;
+import opp.CookBooked.dto.ReceptDTO;
 import opp.CookBooked.model.Komentar;
 import opp.CookBooked.model.Recept;
 import opp.CookBooked.repository.ReceptRepository;
@@ -54,119 +56,180 @@ public class KorisnikServiceJpa implements KorisnikService {
 
     @Override
     public ProfilDTO fetchProfil(String jwt) throws Exception {
-        Korisnik korisnik = getKorisnikFromJWT(jwt);
-        List<Recept> mojiRecepti = receptService.findRecepteByAutor(korisnik.getIdKorisnik());
-        List<Recept> spremljeniRecepti = receptService.findSpremljeneRecepteByIdKorisnik(korisnik.getIdKorisnik());
-        List<FollowDTO> pratim = pratiociService.pronadjiOneKojePratim(korisnik.getIdKorisnik());
-        List<FollowDTO> prateMe = pratiociService.pronadjiOneKojiMePrate(korisnik.getIdKorisnik());
+        try {
+            Korisnik korisnik = getKorisnikFromJWT(jwt);
 
-        ProfilDTO profil = new ProfilDTO();
+            if (korisnik != null) {
 
-        profil.setIdKorisnik(korisnik.getIdKorisnik());
-        profil.setKorisnickoIme(korisnik.getKorisnickoIme());
-        profil.setImeKorisnik(korisnik.getImeKorisnik());
-        profil.setPrezimeKorisnik(korisnik.getPrezimeKorisnik());
-        profil.setEmailKorisnik(korisnik.getEmailKorisnik());
-        profil.setBrojTelefona(korisnik.getBrojTelefona());
-        profil.setDostupanOdDo(korisnik.getDostupanOd() + " - " + korisnik.getDostupanDo());
-        profil.setMojiRecepti(mojiRecepti);
-        profil.setSpremljeniReceptiKorisnika(spremljeniRecepti);
-        profil.setPratiteljiKorisnika(prateMe);
-        profil.setPratiociKorisnika(pratim);
+                List<ReceptDTO> mojiRecepti = receptService.findRecepteByAutorDTO(korisnik.getIdKorisnik());
+                List<Recept> spremljeniRecepti = receptService.findSpremljeneRecepteByIdKorisnik(korisnik.getIdKorisnik());
+                List<FollowDTO> pratim = pratiociService.pronadjiOneKojePratim(korisnik.getIdKorisnik());
+                List<FollowDTO> prateMe = pratiociService.pronadjiOneKojiMePrate(korisnik.getIdKorisnik());
 
-        return profil;
+                ProfilDTO profil = new ProfilDTO();
+
+                profil.setIdKorisnik(korisnik.getIdKorisnik());
+                profil.setKorisnickoIme(korisnik.getKorisnickoIme());
+                profil.setImeKorisnik(korisnik.getImeKorisnik());
+                profil.setPrezimeKorisnik(korisnik.getPrezimeKorisnik());
+                profil.setEmailKorisnik(korisnik.getEmailKorisnik());
+                profil.setBrojTelefona(korisnik.getBrojTelefona());
+                profil.setDostupanOdDo(korisnik.getDostupanOd() + " - " + korisnik.getDostupanDo());
+                profil.setMojiRecepti(mojiRecepti);
+                profil.setSpremljeniReceptiKorisnika(spremljeniRecepti);
+                profil.setPratiteljiKorisnika(prateMe);
+                profil.setPratiociKorisnika(pratim);
+
+                return profil;
+            } else return null;
+        } catch (Exception e) {
+            throw new Exception("Nije moguće dohvatiti profil!");
+        }
     }
 
     @Override
     public Korisnik createKorisnik(Korisnik korisnik) throws Exception {
-        Korisnik noviKorisnik = new Korisnik();
-        noviKorisnik.setImeKorisnik(korisnik.getImeKorisnik());
-        noviKorisnik.setPrezimeKorisnik(korisnik.getPrezimeKorisnik());
-        noviKorisnik.setEmailKorisnik(korisnik.getEmailKorisnik());
-        noviKorisnik.setKorisnickoIme(korisnik.getKorisnickoIme());
-        noviKorisnik.setLozinkaKorisnik(passwordEncoder.encode(korisnik.getLozinkaKorisnik()));
+        try {
 
-        return korisnikRepo.save(noviKorisnik);
+            Assert.notNull(korisnik, "Objekt korisnik mora biti predan");
+
+            Korisnik noviKorisnik = new Korisnik();
+
+            noviKorisnik.setImeKorisnik(korisnik.getImeKorisnik());
+            noviKorisnik.setPrezimeKorisnik(korisnik.getPrezimeKorisnik());
+            noviKorisnik.setEmailKorisnik(korisnik.getEmailKorisnik());
+            noviKorisnik.setKorisnickoIme(korisnik.getKorisnickoIme());
+            noviKorisnik.setLozinkaKorisnik(passwordEncoder.encode(korisnik.getLozinkaKorisnik()));
+            noviKorisnik.setRazinaOvlasti("K");
+
+            return korisnikRepo.save(noviKorisnik);
+        } catch (Exception e) {
+            throw new Exception("Nije uspjelo spremanje korisnika!");
+        }
     }
 
     @Override
     public Korisnik findByKorisnickoIme(String korisnickoIme) {
-        Assert.notNull(korisnickoIme, "Polje korisnickoIme ne smije biti prazno!");
-        return korisnikRepo.findByKorisnickoIme(korisnickoIme);
+        try {
+            Assert.notNull(korisnickoIme, "Polje korisnickoIme ne smije biti prazno!");
+            return korisnikRepo.findByKorisnickoIme(korisnickoIme);
+        } catch (Exception e) {
+            throw new EntityMissingException(Korisnik.class, korisnickoIme);
+        }
     }
 
     @Override
     public Korisnik findByIdKorisnik(long idKorisnik) {
-        return korisnikRepo.findByIdKorisnik(idKorisnik);
+        try {
+            return korisnikRepo.findByIdKorisnik(idKorisnik);
+        } catch (Exception e) {
+            throw new EntityMissingException(Korisnik.class, idKorisnik);
+        }
     }
 
     @Override
-    public Korisnik fetch(long idKorisnik) {
-        return findByIdKorisnik(idKorisnik);
+    public ProfilDrugogKorisnikaDTO fetchZaProfil(String korisnickoIme) {
+        try {
+            Korisnik korisnik = findByKorisnickoIme(korisnickoIme);
+
+            if (korisnik != null) {
+
+                List<ReceptDTO> mojiRecepti = receptService.findRecepteByAutorDTO(korisnik.getIdKorisnik());
+                List<FollowDTO> pratim = pratiociService.pronadjiOneKojePratim(korisnik.getIdKorisnik());
+                List<FollowDTO> prateMe = pratiociService.pronadjiOneKojiMePrate(korisnik.getIdKorisnik());
+
+
+                ProfilDrugogKorisnikaDTO profil = new ProfilDrugogKorisnikaDTO();
+
+                profil.setIdKorisnik(korisnik.getIdKorisnik());
+                profil.setKorisnickoIme(korisnik.getKorisnickoIme());
+                profil.setImeKorisnik(korisnik.getImeKorisnik());
+                profil.setPrezimeKorisnik(korisnik.getPrezimeKorisnik());
+                profil.setEmailKorisnik(korisnik.getEmailKorisnik());
+                profil.setBrojTelefona(korisnik.getBrojTelefona());
+                profil.setDostupanOdDo(korisnik.getDostupanOd() + " - " + korisnik.getDostupanDo());
+                profil.setMojiRecepti(mojiRecepti);
+                profil.setPratiteljiKorisnika(prateMe);
+                profil.setPratiociKorisnika(pratim);
+
+                return profil;
+            } else return null;
+        } catch (Exception e) {
+            throw new EntityMissingException(Korisnik.class, korisnickoIme);
+        }
     }
 
     @Override
-    public List<FollowDTO> getFollowers(String jwt) throws Exception {
-        Korisnik k = getKorisnikFromJWT(jwt);
-        return null;
-    }
-
-    @Override
-    public List<FollowDTO> getFollowings(String jwt) throws Exception {
-        return null;
+    public Korisnik fetch(long idKorisnik) throws Exception {
+        try {
+            return korisnikRepo.findByIdKorisnik(idKorisnik);
+        } catch (Exception e) {
+            throw new EntityMissingException(Korisnik.class, idKorisnik);
+        }
     }
 
     @Override
     public Korisnik updateKorisnik(long idKorisnik, ProfilDTO updatedKorisnik) throws Exception {
+        try {
+            return korisnikRepo.findById(idKorisnik).map(korisnik -> {
+                korisnik.setImeKorisnik(updatedKorisnik.getImeKorisnik());
+                korisnik.setPrezimeKorisnik(updatedKorisnik.getPrezimeKorisnik());
+                korisnik.setKorisnickoIme(updatedKorisnik.getKorisnickoIme());
+                korisnik.setEmailKorisnik(updatedKorisnik.getEmailKorisnik());
+                korisnik.setDostupanOd(formatLocalTime(updatedKorisnik.getDostupanOd()));
+                korisnik.setDostupanDo(formatLocalTime(updatedKorisnik.getDostupanDo()));
+                korisnik.setBrojTelefona(updatedKorisnik.getBrojTelefona());
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-
-        String formattedDostupanOd = formatLocalTime(updatedKorisnik.getDostupanOd());
-        String formattedDostupanDo = formatLocalTime(updatedKorisnik.getDostupanDo());
-
-        return korisnikRepo.findById(idKorisnik).map(korisnik -> {
-            korisnik.setImeKorisnik(updatedKorisnik.getImeKorisnik());
-            korisnik.setPrezimeKorisnik(updatedKorisnik.getPrezimeKorisnik());
-            korisnik.setKorisnickoIme(updatedKorisnik.getKorisnickoIme());
-            korisnik.setEmailKorisnik(updatedKorisnik.getEmailKorisnik());
-            korisnik.setDostupanOd(formattedDostupanOd);
-            korisnik.setDostupanDo(formattedDostupanDo);
-            korisnik.setBrojTelefona(updatedKorisnik.getBrojTelefona());
-
-            return korisnikRepo.save(korisnik);
-        }).orElseThrow(() -> new RuntimeException("Korisnik not found with id " + idKorisnik));
-
+                return korisnikRepo.save(korisnik);
+            }).orElseThrow(() -> new RuntimeException("Korisnik not found with id " + idKorisnik));
+        } catch (Exception e) {
+            throw new Exception("Nije uspjelo ažuriranje podataka!");
+        }
     }
 
     @Override
     public Korisnik getKorisnikFromJWT(String jwt) {
-        String korisnickoIme = jwtProvider.getUsernameFromJwtToken(jwt);
-        return korisnikRepo.findByKorisnickoIme(korisnickoIme);
+        try {
+            String korisnickoIme = jwtProvider.getUsernameFromJwtToken(jwt);
+
+            if (!korisnickoIme.isEmpty()) return korisnikRepo.findByKorisnickoIme(korisnickoIme);
+            else return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
-    public Korisnik deleteKorisnik(long idKorisnik) throws Exception {
-        Korisnik korisnik = fetch(idKorisnik);
+    public Korisnik deleteKorisnik(long idKorisnik) {
+        try {
+            Korisnik korisnik = fetch(idKorisnik);
 
-        pratiociService.obrisiFollow(idKorisnik);
+            if (korisnik != null) {
+                pratiociService.obrisiFollow(idKorisnik);
 
-        List<Recept> recepti = receptService.findRecepteByAutor(idKorisnik);
+                List<Recept> recepti = receptService.findRecepteByAutor(idKorisnik); // pronalazenje svih recepata korisnika i brisanje istih
 
-        for (Recept r : recepti) {
-            receptService.deleteRecept(r.getIdRecept(), idKorisnik);
+                for (Recept r : recepti) {
+                    receptService.deleteRecept(r.getIdRecept(), idKorisnik);
+                }
+
+                List<Komentar> komentari = komentariService.findAllByIdKorisnik(idKorisnik); // pronalazenje svih komentara i brisanje istih
+                for (Komentar k : komentari) {
+                    komentariService.obrisiKomentar(k.getIdKomentar(), idKorisnik);
+                }
+
+                korisnikRepo.delete(korisnik);
+                return korisnik;
+            } else return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
-
-        List<Komentar> komentari = komentariService.findAllByIdKorisnik(idKorisnik);
-        for (Komentar k : komentari) {
-            komentariService.obrisiKomentar(k.getIdKomentar(), idKorisnik);
-        }
-
-        korisnikRepo.delete(korisnik);
-        return korisnik;
     }
 
     public String formatLocalTime(LocalTime time) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        return time.format(formatter);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            return time.format(formatter);
     }
 }

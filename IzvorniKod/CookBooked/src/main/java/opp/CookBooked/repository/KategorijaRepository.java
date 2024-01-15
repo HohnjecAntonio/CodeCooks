@@ -16,7 +16,6 @@ public interface KategorijaRepository extends JpaRepository<Kategorija, Long> {
     @Query("SELECT k FROM Kategorija k WHERE k.idKategorija = :idKategorija")
     Kategorija findByIdKategorija(long idKategorija);
 
-    @Query("SELECT NEW Kategorija(rk.kategorija.nazivKategorija) FROM ReceptKategorije rk WHERE rk.recept.idRecept = :idRecept")
+    @Query("SELECT NEW Kategorija(rk.kategorija.idKategorija, rk.kategorija.nazivKategorija) FROM ReceptKategorije rk WHERE rk.recept.idRecept = :idRecept")
     List<Kategorija> findAllByRecept(long idRecept);
-
 }

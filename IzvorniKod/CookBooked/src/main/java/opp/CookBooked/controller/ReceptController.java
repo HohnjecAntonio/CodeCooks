@@ -41,8 +41,8 @@ public class ReceptController {
     }
 
     @GetMapping("/{idRecept}")
-    public ResponseEntity<Recept> findReceptById(@RequestHeader("Authorization") String jwt, @PathVariable long idRecept) throws Exception {
-        Recept nRecept = receptService.findReceptById(idRecept);
+    public ResponseEntity<ReceptDTO> findReceptById(@RequestHeader("Authorization") String jwt, @PathVariable long idRecept) throws Exception {
+        ReceptDTO nRecept = receptService.findReceptDTOById(idRecept);
         return new ResponseEntity<>(nRecept, HttpStatus.OK);
     }
 

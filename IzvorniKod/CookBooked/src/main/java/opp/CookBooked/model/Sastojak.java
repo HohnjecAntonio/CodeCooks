@@ -32,5 +32,10 @@ public class Sastojak {
     public Sastojak(String nazivSastojak) {
         this.nazivSastojak = nazivSastojak;
     }
+    public Sastojak(Long idSastojak, String nazivSastojak) {
+        this.idSastojak = idSastojak;
+        this.nazivSastojak = nazivSastojak;
+    }
+
 
 }

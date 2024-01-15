@@ -1,6 +1,7 @@
 package opp.CookBooked.controller;
 
 import opp.CookBooked.dto.ProfilDTO;
+import opp.CookBooked.dto.ProfilDrugogKorisnikaDTO;
 import opp.CookBooked.model.Korisnik;
 import opp.CookBooked.model.Recept;
 import opp.CookBooked.service.KorisnikService;
@@ -35,6 +36,11 @@ public class KorisnikController {
     @GetMapping("/id/{id}")
     public Korisnik getKorisnikById(@RequestHeader("Authorization") String jwt, @PathVariable("id") long iDKorisnik) throws Throwable {
         return korisnikService.fetch(iDKorisnik);
+    }
+
+    @GetMapping("/profileDK/{korisnickoIme}")
+    public ProfilDrugogKorisnikaDTO getProfileDK(@RequestHeader("Authorization") String jwt, @PathVariable("korisnickoIme") String korisnickoIme) throws Throwable {
+        return korisnikService.fetchZaProfil(korisnickoIme);
     }
 
     @GetMapping("/profile")

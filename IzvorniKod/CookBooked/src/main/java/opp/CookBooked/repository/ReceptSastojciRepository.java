@@ -10,7 +10,10 @@ public interface ReceptSastojciRepository extends JpaRepository<ReceptSastojci, 
 
     ReceptSastojci findByReceptAndSastojak(Recept recept, Sastojak sastojak);
 
-    @Query("SELECT NEW Sastojak(rs.sastojak.nazivSastojak) FROM ReceptSastojci rs WHERE rs.recept.idRecept = :idRecept")
+    @Query("SELECT NEW Sastojak(rs.sastojak.idSastojak, rs.sastojak.nazivSastojak) FROM ReceptSastojci rs WHERE rs.recept.idRecept = :idRecept")
     List<Sastojak> findAllByRecept(long idRecept);
+
+    @Query("SELECT rs FROM ReceptSastojci rs WHERE rs.recept.idRecept = :idRecept")
+    List<ReceptSastojci> findAllByReceptId(long idRecept);
 
 }

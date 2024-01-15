@@ -17,9 +17,13 @@ public interface ReceptService {
 
     Recept findReceptById(long idRecept) throws Exception;
 
+    ReceptDTO findReceptDTOById(long idRecept) throws Exception;
+
     List<Recept> findSpremljeneRecepteByIdKorisnik(long iDKorisnik) throws Exception;
 
     List<Recept> findRecepteByAutor(long idKorisnik) throws Exception;
+
+    List<ReceptDTO> findRecepteByAutorDTO(long idKorisnik) throws Exception;
 
     Recept createRecept(ReceptSubmitDTO recept, long iDKorisnik) throws Exception;
 

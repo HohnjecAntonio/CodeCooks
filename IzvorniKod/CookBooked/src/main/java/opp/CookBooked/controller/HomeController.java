@@ -1,5 +1,6 @@
 package opp.CookBooked.controller;
 
+import opp.CookBooked.dto.KategorijaDTO;
 import opp.CookBooked.model.Kategorija;
 import opp.CookBooked.service.KategorijaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class HomeController {
     private KategorijaService kategorijaService;
 
     @GetMapping("")
-    public List<Kategorija> listKategorije(){
+    public List<KategorijaDTO> listKategorije(){
         return kategorijaService.listAll();
     }
 
