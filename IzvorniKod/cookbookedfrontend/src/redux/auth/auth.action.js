@@ -32,7 +32,12 @@ import {
     FETCH_RECIPE_BY_ID_REQUEST,
     FETCH_RECIPE_BY_ID_FAILURE,
     FETCH_VRKUHINJE_REQUEST,
-    FETCH_VRKUHINJE_SUCCESS, FETCH_VRKUHINJE_FAILURE
+    FETCH_VRKUHINJE_SUCCESS, FETCH_VRKUHINJE_FAILURE,
+    ADD_COMMENT_REQUEST,ADD_COMMENT_SUCCESS,ADD_COMMENT_FAILURE,
+    EDIT_COMMENT_REQUEST,EDIT_COMMENT_SUCCESS,EDIT_COMMENT_FAILURE,
+    DELETE_COMMENT_REQUEST,DELETE_COMMENT_SUCCESS,DELETE_COMMENT_FAILURE,
+    FETCH_RECIPE_BY_USER_FAILURE,FETCH_RECIPE_BY_USER_REQUEST,FETCH_RECIPE_BY_USER_SUCCESS, 
+    DELETE_RECIPE_REQUEST, DELETE_RECIPE_SUCCESS, DELETE_RECIPE_FAILURE
 } from "./auth.actionType";
 
 export const loginUserAction = (loginData) => async (dispatch) => {
@@ -83,13 +88,90 @@ export const newRecipe = (recipeData) => async (dispatch) => {
     }
 };
 
+
+
+//todo
+export const deleteRecipe = (requestData) => async (dispatch) => {
+    dispatch({ type: DELETE_RECIPE_REQUEST });
+    try {
+        
+        const { data } = await apiAuth.post(`${API_BASE_URL}/recepti/delete/${requestData.data.idRecept}/korisnik/${requestData.data.idKorisnik}`);
+
+        console.log("Izbrisan recept: ");
+        console.log(data);
+
+        dispatch({ type: DELETE_RECIPE_SUCCESS, payload: data});
+    } catch (error) {
+        console.log("------", error);
+        dispatch({ type: DELETE_RECIPE_FAILURE, payload: error });
+    }
+};
+
+
+
+
+
+
+export const addComment = (commentData) => async (dispatch) => {
+    dispatch({ type: ADD_COMMENT_REQUEST });
+    try {
+        
+        const { data } = await apiAuth.post(`${API_BASE_URL}/recepti/${commentData.data.idRecept}/addc/korisnik/${commentData.data.idKorisnik}`, 
+        commentData.data);
+
+        console.log("Dodan komentar: ");
+        console.log(data);
+
+        dispatch({ type: ADD_COMMENT_SUCCESS, payload: data});
+    } catch (error) {
+        console.log("------", error);
+        dispatch({ type: ADD_COMMENT_FAILURE, payload: error });
+    }
+};
+
+
+export const editComment = (commentData) => async (dispatch) => {
+    dispatch({ type: EDIT_COMMENT_REQUEST });
+    try {
+        
+        const { data } = await apiAuth.post(`${API_BASE_URL}/recepti/${commentData.data.idRecept}/editc/korisnik/${commentData.data.idKorisnik}/`,
+        commentData.data);
+
+        console.log("Uređen komentar: ");
+        console.log(data);
+
+        dispatch({ type: EDIT_COMMENT_SUCCESS, payload: data});
+    } catch (error) {
+        console.log("------", error);
+        dispatch({ type: EDIT_COMMENT_FAILURE, payload: error });
+    }
+};
+
+
+export const deleteComment = (commentData) => async (dispatch) => {
+    dispatch({ type: DELETE_COMMENT_REQUEST });
+    try {
+        
+        const { data } = await apiAuth.post(`${API_BASE_URL}/recepti/${commentData.data.idRecept}/delc/${commentData.data.idKomentar}/korisnik/${commentData.data.idKorisnik}/`);
+
+        console.log("Izbrisan komentar: ");
+        console.log(data);
+
+        dispatch({ type: DELETE_COMMENT_SUCCESS, payload: data});
+    } catch (error) {
+        console.log("------", error);
+        dispatch({ type: DELETE_COMMENT_FAILURE, payload: error });
+    }
+};
+
+
 export const fetchKategorije = () => async (dispatch) => {
     dispatch({ type: FETCH_KATEGORIJE_REQUEST });
     try {
         const { data } = await api.get(`${API_BASE_URL}/`);
 
-        console.log("dsadsa");
-        console.log(data + " kategorije");
+        console.log("Kategorije");
+        console.log(data);
 
         dispatch({ type: FETCH_KATEGORIJE_SUCCESS, payload: data });
     } catch (error) {
@@ -133,6 +215,20 @@ export const fetchRecipeById = (id) => async (dispatch) => {
         dispatch({ type: FETCH_RECIPE_BY_ID_SUCCESS, payload: data });
     } catch (error) {
         dispatch({ type: FETCH_RECIPE_BY_ID_FAILURE, payload: error });
+    }
+};
+
+export const fetchRecipesByUser = (id) => async (dispatch) => {
+    dispatch({ type: FETCH_RECIPE_BY_USER_REQUEST });
+    try {
+        const { data } = await apiAuth.get(`${API_BASE_URL}/recepti/korisnik/${id}`);
+
+        console.log("Fetched recipe by user id");
+        console.log(data);
+
+        dispatch({ type: FETCH_RECIPE_BY_USER_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: FETCH_RECIPE_BY_USER_FAILURE, payload: error });
     }
 };
 

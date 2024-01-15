@@ -109,7 +109,7 @@ function App() {
                         <Route path="/Categories" exact component={CategoryButtons} />
                         <Route path="/MessengerApp" exact component={MessengerApp} />
                         <Route path="/RecipePage" exact component={RecipePage} />
-                        <Route path="/MessengerApp" exact component={MessengerApp}/>
+                        <Route path="/Categories" exact component={CategoryButtons}/>
                     </Switch>
                 </div>
                 <SideBar currentUser={currentUser} changeLoginState = {isLoggedIn => setIsLoggedIn(isLoggedIn)} />

@@ -30,7 +30,11 @@ import {
     FETCH_RECIPE_BY_ID_REQUEST,
     FETCH_RECIPE_BY_ID_FAILURE,
     FETCH_VRKUHINJE_REQUEST,
-    FETCH_VRKUHINJE_FAILURE, FETCH_VRKUHINJE_SUCCESS
+    FETCH_VRKUHINJE_FAILURE, FETCH_VRKUHINJE_SUCCESS,
+    EDIT_COMMENT_REQUEST,EDIT_COMMENT_SUCCESS,EDIT_COMMENT_FAILURE,
+    DELETE_COMMENT_REQUEST,DELETE_COMMENT_SUCCESS,DELETE_COMMENT_FAILURE,
+    FETCH_RECIPE_BY_USER_FAILURE,FETCH_RECIPE_BY_USER_REQUEST,FETCH_RECIPE_BY_USER_SUCCESS, DELETE_RECIPE_REQUEST, DELETE_RECIPE_SUCCESS, DELETE_RECIPE_FAILURE
+
 } from "./auth.actionType";
 
 const initialState = {
@@ -42,6 +46,7 @@ const initialState = {
     userProfile: '',
     profileToLoad: '',
     recipeToLoad: '',
+    recipesByUser: [],
     vrKuhinje: []
 }
 
@@ -125,6 +130,34 @@ export const authReducer = (state=initialState, action) => {
             return { ...state, loading: true, error: null };
         case FETCH_RECIPE_BY_ID_SUCCESS:
             return { ...state, recipeToLoad: action.payload, loading: false, error: null };
+
+        case FETCH_RECIPE_BY_USER_FAILURE:
+            return { ...state, loading: false, error: action.payload };
+        case FETCH_RECIPE_BY_USER_REQUEST:
+            return { ...state, loading: true, error: null };
+        case FETCH_RECIPE_BY_USER_SUCCESS:
+            return { ...state, recipesByUser: action.payload, loading: false, error: null };
+
+        case EDIT_COMMENT_FAILURE:
+        
+        case EDIT_COMMENT_REQUEST:
+        
+        case EDIT_COMMENT_SUCCESS:
+
+
+
+        case DELETE_COMMENT_FAILURE:
+        
+        case DELETE_COMMENT_REQUEST:
+        
+        case DELETE_COMMENT_SUCCESS:
+
+
+        case DELETE_RECIPE_FAILURE:
+        
+        case DELETE_RECIPE_REQUEST:
+        
+        case DELETE_RECIPE_SUCCESS:
 
         default:
             return state;

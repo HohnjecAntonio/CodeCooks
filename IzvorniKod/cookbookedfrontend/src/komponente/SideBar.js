@@ -191,7 +191,7 @@ function SideBar(propsApp){
                 key={category.id}
                 leftIcon={<AlienIcon />}
                 text={category.name}
-                link="#"
+                link="/Categories"
               />
             ))}
             

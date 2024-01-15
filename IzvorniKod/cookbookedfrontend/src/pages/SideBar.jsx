@@ -150,11 +150,13 @@ useEffect(() => {
               >
             </NavItem>
             {categories.map((category) => (
+              
               <NavItem
-                key={category.idKategorija}
+                categoryId={category.idKategorija}
                 leftIcon={<AlienIcon />}
                 text={category.nazivKategorija}
-                link="#"
+                link="/Categories"
+                openCategory = "true"
               />
             ))}
             
@@ -171,6 +173,7 @@ useEffect(() => {
           <li class="nav-item">
             <a href={props.link} class="nav-link" onClick={() => {(props.goToMenu && setActiveMenu(props.goToMenu))
             || (props.openProfile && localStorage.setItem('profileToLoad', JSON.stringify(userProfileInfo.idKorisnik)))
+            || (props.openCategory && localStorage.setItem('categoryToLoad', JSON.stringify(props.categoryId)))
             }}>
               <span className="icon-button">{props.leftIcon}</span>
               <span class="link-text">{props.text}</span>

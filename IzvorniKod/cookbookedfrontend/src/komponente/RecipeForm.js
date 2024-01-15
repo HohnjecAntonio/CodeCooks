@@ -35,7 +35,7 @@ function RecipeForm () {
   };
 
   const initialValues = {
-      idKorisnik: localStorage.getItem("profileToLoad") || '',
+      idKorisnik: userProfileInfo.idKorisnik || '',
       nazivRecept:'',
       sastojci: '',
       idKategorija: '1',
@@ -108,6 +108,13 @@ function RecipeForm () {
             accept="image/*"
           />*/
           }
+
+        <label htmlFor="priprema">Vrijeme kuhanja:</label>
+          <Field
+            type="time"
+            id="vrijemeKuhanja"
+            name="vrijemeKuhanja"
+          />
 
           <label htmlFor="priprema">Uputstva:</label>
           <Field
