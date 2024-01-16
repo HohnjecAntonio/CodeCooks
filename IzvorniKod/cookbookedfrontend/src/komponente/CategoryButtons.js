@@ -45,7 +45,7 @@ const arrayDataItems = kategorijaRecepti.map(recipe =>
       </ul>*/}
       <p>Uputstva: {recipe.priprema}</p>
       <p>Autor: <a href="/Profile" onClick={() => {
-            localStorage.setItem('profileToLoad',JSON.stringify(recipe.idRecept))
+            localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
       }}>{recipe.autor}</a></p>
     </div>
     </a>

@@ -33,7 +33,9 @@ import {
     FETCH_VRKUHINJE_FAILURE, FETCH_VRKUHINJE_SUCCESS,
     EDIT_COMMENT_REQUEST,EDIT_COMMENT_SUCCESS,EDIT_COMMENT_FAILURE,
     DELETE_COMMENT_REQUEST,DELETE_COMMENT_SUCCESS,DELETE_COMMENT_FAILURE,
-    FETCH_RECIPE_BY_USER_FAILURE,FETCH_RECIPE_BY_USER_REQUEST,FETCH_RECIPE_BY_USER_SUCCESS, DELETE_RECIPE_REQUEST, DELETE_RECIPE_SUCCESS, DELETE_RECIPE_FAILURE
+    FETCH_RECIPE_BY_USER_FAILURE,FETCH_RECIPE_BY_USER_REQUEST,FETCH_RECIPE_BY_USER_SUCCESS, 
+    DELETE_RECIPE_REQUEST, DELETE_RECIPE_SUCCESS, DELETE_RECIPE_FAILURE, 
+    FETCH_OTHER_PROFILE_BY_USERNAME_SUCCESS, FETCH_OTHER_PROFILE_BY_USERNAME_FAILURE, FETCH_OTHER_PROFILE_BY_USERNAME_REQUEST
 
 } from "./auth.actionType";
 
@@ -107,6 +109,13 @@ export const authReducer = (state=initialState, action) => {
         case FETCH_OTHER_PROFILE_SUCCESS:
             return { ...state, profileToLoad: action.payload, loading: false, error: null };
         case FETCH_OTHER_PROFILE_FAILURE:
+            return { ...state, loading: false, error: action.payload };
+
+        case FETCH_OTHER_PROFILE_BY_USERNAME_REQUEST:
+            return { ...state, loading: true, error: null };
+        case FETCH_OTHER_PROFILE_BY_USERNAME_SUCCESS:
+            return { ...state, profileToLoad: action.payload, loading: false, error: null };
+        case FETCH_OTHER_PROFILE_BY_USERNAME_FAILURE:
             return { ...state, loading: false, error: action.payload };
 
         case UPDATE_USER_PROFILE_REQUEST:

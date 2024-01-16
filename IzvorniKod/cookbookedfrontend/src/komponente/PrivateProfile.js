@@ -4,7 +4,7 @@ import profilePictureTemp from "../images/img/user.jpeg";
 import {useDispatch, useSelector} from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import {fetchUserProfile, updateUserProfile} from "../redux/auth/auth.action";
+import {fetchUserProfile, updateUserProfile, deleteUserAction} from "../redux/auth/auth.action";
 
 const PrivateProfile = () => {
   const jwtToken = localStorage.getItem("token");
@@ -24,6 +24,16 @@ const PrivateProfile = () => {
   const handleSubmit = async (values) => {
     console.log('handle submit ', values);
     await dispatch(updateUserProfile({ data: values })).then(() => {
+        //history.push('/Profile');
+        //window.location.reload();
+    });
+  };
+
+
+  const deleteUserFunction = async (idKorisnik) => {
+    await dispatch(deleteUserAction({ data: {
+      idKorisnik: idKorisnik
+    } })).then(() => {
         //history.push('/Profile');
         //window.location.reload();
     });
@@ -115,6 +125,9 @@ const PrivateProfile = () => {
           
         </Form>
       </Formik>
+      <a href="#" onClick={() => deleteUserFunction(userProfileInfo.idKorisnik)} class="private-profile-button">
+        <button>Izbriši profil</button>
+      </a>
       <a href="/Profile" class="private-profile-button">
         <button>Odustani</button>
       </a>

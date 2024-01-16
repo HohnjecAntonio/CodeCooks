@@ -37,7 +37,11 @@ import {
     EDIT_COMMENT_REQUEST,EDIT_COMMENT_SUCCESS,EDIT_COMMENT_FAILURE,
     DELETE_COMMENT_REQUEST,DELETE_COMMENT_SUCCESS,DELETE_COMMENT_FAILURE,
     FETCH_RECIPE_BY_USER_FAILURE,FETCH_RECIPE_BY_USER_REQUEST,FETCH_RECIPE_BY_USER_SUCCESS, 
-    DELETE_RECIPE_REQUEST, DELETE_RECIPE_SUCCESS, DELETE_RECIPE_FAILURE
+    DELETE_RECIPE_REQUEST, DELETE_RECIPE_SUCCESS, DELETE_RECIPE_FAILURE,
+    EDIT_RECIPE_FAILURE,EDIT_RECIPE_REQUEST,EDIT_RECIPE_SUCCESS,
+    SAVE_RECIPE_FAILURE,SAVE_RECIPE_REQUEST,SAVE_RECIPE_SUCCESS,
+    LIKE_RECIPE_FAILURE,LIKE_RECIPE_REQUEST,LIKE_RECIPE_SUCCESS, 
+    DELETE_USER_PROFILE_REQUEST, DELETE_USER_PROFILE_SUCCESS, DELETE_USER_PROFILE_FAILURE, FETCH_OTHER_PROFILE_BY_USERNAME_REQUEST, FETCH_OTHER_PROFILE_BY_USERNAME_SUCCESS, FETCH_OTHER_PROFILE_BY_USERNAME_FAILURE
 } from "./auth.actionType";
 
 export const loginUserAction = (loginData) => async (dispatch) => {
@@ -72,6 +76,22 @@ export const registerUserAction = (registerData) => async (dispatch) => {
     }
 };
 
+
+export const deleteUserAction = (requestData) => async (dispatch) => {
+    dispatch({ type: DELETE_USER_PROFILE_REQUEST });
+    try {
+        const { data } = await apiAuth.post(`${API_BASE_URL}/korisnici/delete/korisnik/${requestData.data.idKorisnik}`);
+
+        console.log("Izbrisan korisnik: ");
+        console.log(data);
+
+        dispatch({ type: DELETE_USER_PROFILE_SUCCESS, payload: data });
+    } catch (error) {
+        console.log("------", error);
+        dispatch({ type: DELETE_USER_PROFILE_FAILURE, payload: error });
+    }
+};
+
 export const newRecipe = (recipeData) => async (dispatch) => {
     dispatch({ type: ADD_RECIPE_REQUEST });
     try {
@@ -88,9 +108,24 @@ export const newRecipe = (recipeData) => async (dispatch) => {
     }
 };
 
+//TODO
+export const editRecipe = (requestData) => async (dispatch) => {
+    dispatch({ type: EDIT_RECIPE_REQUEST });
+    try {
+        
+        const { data } = await apiAuth.post(`${API_BASE_URL}/recepti/edit/${requestData.data.idRecept}/korisnik/${requestData.data.idKorisnik}`,requestData.data);
+
+        console.log("Uredi recept: ");
+        console.log(data);
+
+        dispatch({ type: EDIT_RECIPE_SUCCESS, payload: data});
+    } catch (error) {
+        console.log("------", error);
+        dispatch({ type: EDIT_RECIPE_FAILURE, payload: error });
+    }
+};
 
 
-//todo
 export const deleteRecipe = (requestData) => async (dispatch) => {
     dispatch({ type: DELETE_RECIPE_REQUEST });
     try {
@@ -108,8 +143,37 @@ export const deleteRecipe = (requestData) => async (dispatch) => {
 };
 
 
+export const saveRecipe = (recipeData) => async (dispatch) => {
+    dispatch({ type: SAVE_RECIPE_REQUEST });
+    try {
+        
+        const { data } = await apiAuth.post(`${API_BASE_URL}/recepti/${recipeData.data.idRecept}/save/korisnik/${recipeData.data.idKorisnik}`);
 
+        console.log("Spremljen recept: ");
+        console.log(data);
 
+        dispatch({ type: SAVE_RECIPE_SUCCESS, payload: data});
+    } catch (error) {
+        console.log("------", error);
+        dispatch({ type: SAVE_RECIPE_FAILURE, payload: error });
+    }
+};
+
+export const likeRecipe = (recipeData) => async (dispatch) => {
+    dispatch({ type: LIKE_RECIPE_REQUEST });
+    try {
+        
+        const { data } = await apiAuth.post(`${API_BASE_URL}/recepti/${recipeData.data.idRecept}/like/korisnik/${recipeData.data.idKorisnik}`);
+
+        console.log("Označen recept: ");
+        console.log(data);
+
+        dispatch({ type: LIKE_RECIPE_SUCCESS, payload: data});
+    } catch (error) {
+        console.log("------", error);
+        dispatch({ type: LIKE_RECIPE_FAILURE, payload: error });
+    }
+};
 
 
 export const addComment = (commentData) => async (dispatch) => {
@@ -257,6 +321,21 @@ export const fetchOtherProfile = (id) => async (dispatch) => {
         dispatch({ type: FETCH_OTHER_PROFILE_SUCCESS, payload: data });
     } catch (error) {
         dispatch({ type: FETCH_OTHER_PROFILE_FAILURE, payload: error });
+    }
+};
+
+
+export const fetchOtherProfileByUsername = (korisnickoIme) => async (dispatch) => {
+    dispatch({ type: FETCH_OTHER_PROFILE_BY_USERNAME_REQUEST });
+    try {
+        const { data } = await apiAuth.get(`${API_BASE_URL}/korisnici/profileDK/${korisnickoIme}`);
+
+        console.log("Profile to load data: ");
+        console.log(data);
+
+        dispatch({ type: FETCH_OTHER_PROFILE_BY_USERNAME_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: FETCH_OTHER_PROFILE_BY_USERNAME_FAILURE, payload: error });
     }
 };
 

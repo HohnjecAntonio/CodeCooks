@@ -3,7 +3,7 @@ import './Profile.css'; // You can create a separate CSS file for styling
 import profilePictureTemp from "../images/img/user.jpeg";
 import {useDispatch, useSelector} from "react-redux";
 import { useHistory } from 'react-router-dom';
-import {fetchUserProfile, fetchOtherProfile, followUser, fetchRecipesForUserFeed} from "../redux/auth/auth.action";
+import {fetchUserProfile, fetchOtherProfile, followUser, fetchRecipesForUserFeed, fetchOtherProfileByUsername} from "../redux/auth/auth.action";
 
 
 function Profile(props) {
@@ -26,7 +26,7 @@ function Profile(props) {
 
 
   useEffect(() => {
-    dispatch(fetchOtherProfile(JSON.parse(localStorage.getItem("profileToLoad"))));
+    dispatch(fetchOtherProfileByUsername(JSON.parse(localStorage.getItem("profileToLoad"))));
   }, [dispatch]);
 
   const followUserFunction = async () => {
@@ -153,14 +153,21 @@ function Profile(props) {
           <div className="connections">
             <div className="followers">
               <h2>Followers</h2>
-              {userProfileInfo.pratiociKorisnika && userProfileInfo.pratiociKorisnika.map((follower) => (
+
+              
+              {
+              profileToLoad.pratiociKorisnika && profileToLoad.pratiociKorisnika.map((follower) => (
                 <p key={follower.idKorisnik}>{follower.korisnickoIme}</p>
-              ))}
+              ))
+              }
+              
             </div>
 
             <div className="following">
               <h2>Following</h2>
-              {userProfileInfo.pratiteljiKorisnika && userProfileInfo.pratiteljiKorisnika.map((follower) => (
+              {
+
+              profileToLoad.pratiteljiKorisnika && profileToLoad.pratiteljiKorisnika.map((follower) => (
                   <p key={follower.idKorisnik}>{follower.korisnickoIme}</p>
               ))}
             </div>

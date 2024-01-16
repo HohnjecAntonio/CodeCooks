@@ -8,11 +8,13 @@ import HomePage from "./pages/HomePage/HomePage";
 import './App.css';
 import SideBar from "./pages/SideBar";
 import Profile from "./pages/Profile";
+
 import RecipeForm from "./komponente/RecipeForm";
 import PrivateProfile from "./komponente/PrivateProfile";
 import RecipePage from "./komponente/RecipePage";
 import CategoryButtons from './komponente/CategoryButtons';
 import MessengerApp from './messenger/MessengerApp';
+import SpremljeniRecepti from "./pages/UserFeed/SpremljeniRecepti";
 
 function App() {
     const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
@@ -110,6 +112,7 @@ function App() {
                         <Route path="/MessengerApp" exact component={MessengerApp} />
                         <Route path="/RecipePage" exact component={RecipePage} />
                         <Route path="/Categories" exact component={CategoryButtons}/>
+                        <Route path="/SpremljeniRecepti" exact component={SpremljeniRecepti}/>
                     </Switch>
                 </div>
                 <SideBar currentUser={currentUser} changeLoginState = {isLoggedIn => setIsLoggedIn(isLoggedIn)} />

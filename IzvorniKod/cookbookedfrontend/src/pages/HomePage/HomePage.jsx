@@ -7,10 +7,10 @@ import {fetchRecipesForUserFeed} from "../../redux/auth/auth.action";
 
 const HomePage = () => {
     const dispatch = useDispatch();
-    const kategorije = useSelector(state => state.auth.kategorije); // Adjust path according to your store structure
+    const kategorije = useSelector(state => state.auth.kategorije); 
     const loading = useSelector(state => state.auth.loading);
     const error = useSelector(state => state.auth.error);
-    const recipesForFeed = useSelector(state => state.auth.recipesForFeed); // Adjust path according to your store structure
+    const recipesForFeed = useSelector(state => state.auth.recipesForFeed); 
 
     useEffect(() => {
         dispatch(fetchRecipesForUserFeed());
@@ -116,7 +116,7 @@ const HomePage = () => {
                   </ul>*/}
                   <p>Uputstva: {recipe.priprema}</p>
                   <p>Autor: <a href="/Profile" onClick={() => {
-                      localStorage.setItem('profileToLoad',JSON.stringify(recipe.idRecept))
+                      localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
                 }}>{recipe.autor}</a></p>
                 </div>
                 </a>

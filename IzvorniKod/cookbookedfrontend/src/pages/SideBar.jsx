@@ -17,6 +17,8 @@ import { ReactComponent as CogIcon } from '../icons/cog.svg';
 import { ReactComponent as ChevronIcon } from '../icons/chevron.svg';
 import { ReactComponent as ArrowIcon } from '../icons/arrow.svg';
 import { ReactComponent as BoltIcon } from '../icons/bolt.svg';
+
+import * as AuthService from "../redux/auth/auth.action";
 import {NavLink} from "react-router-dom";
 
 
@@ -43,6 +45,10 @@ useEffect(() => {
     const heigth = el.offsetHeight;
     setMenuHeight(heigth);
   }
+
+  const logOut = () => {
+    AuthService.logoutUser();
+};
  
 
   return (
@@ -85,34 +91,45 @@ useEffect(() => {
         >
           <div className='menu'>
 
-          <NavItem
+            <NavItem
               leftIcon={<CatIcon/>}
               text ="Home"
               link= "/">
             </NavItem>
 
-          {props.currentUser ? (
-              <NavItem
-                  leftIcon={<SpaceShuttleIcon/>}
-                  text ="Profil"
-                  link= "/Profile"
-                  openProfile = "true">
-              </NavItem>
-          ) : (
-              <div className="hidden">
-              </div>
-          )}
+            {props.currentUser ? (
+                <NavItem
+                    leftIcon={<SpaceShuttleIcon/>}
+                    text ="Profil"
+                    link= "/Profile"
+                    openProfile = "true">
+                </NavItem>
+            ) : (
+                <div className="hidden">
+                </div>
+            )}
 
-          {props.currentUser ? (
+            {props.currentUser ? (
+                <NavItem
+                    leftIcon={<CatIcon/>}
+                    text ="Dodaj recept"
+                    link= "/AddRecipe">
+                </NavItem>
+            ) : (
+                <div className="hidden">
+                </div>
+            )}
+
+            {props.currentUser ? (
               <NavItem
                   leftIcon={<CatIcon/>}
-                  text ="Dodaj recept"
-                  link= "/AddRecipe">
+                  text ="Spremljeni recepti"
+                  link= "/SpremljeniRecepti">
               </NavItem>
-          ) : (
+              ) : (
               <div className="hidden">
               </div>
-          )}
+            )}
 
             <NavItem
               leftIcon={<SpaceStationIcon/>}
@@ -123,6 +140,22 @@ useEffect(() => {
             </NavItem>
 
             
+            
+
+            {props.currentUser ? (
+              <NavItem
+                  leftIcon={<CatIcon/>}
+                  text ="Logout"
+                  link= "/signin"
+                  logout="true"
+                  >
+                  
+              </NavItem>
+              ) : (
+              <div className="hidden">
+              </div>
+            )}
+
             <NavItem
               leftIcon={<AlienIcon/>}
               text ="Atributions"
@@ -172,8 +205,9 @@ useEffect(() => {
     return(
           <li class="nav-item">
             <a href={props.link} class="nav-link" onClick={() => {(props.goToMenu && setActiveMenu(props.goToMenu))
-            || (props.openProfile && localStorage.setItem('profileToLoad', JSON.stringify(userProfileInfo.idKorisnik)))
+            || (props.openProfile && localStorage.setItem('profileToLoad', JSON.stringify(userProfileInfo.korisnickoIme)))
             || (props.openCategory && localStorage.setItem('categoryToLoad', JSON.stringify(props.categoryId)))
+            || (props.logout && logOut())
             }}>
               <span className="icon-button">{props.leftIcon}</span>
               <span class="link-text">{props.text}</span>

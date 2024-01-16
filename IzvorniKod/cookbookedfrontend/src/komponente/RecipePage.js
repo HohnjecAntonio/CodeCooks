@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchKategorije, fetchRecipesForUserFeed ,addComment,editComment,deleteComment,deleteRecipe, fetchUserProfile} from '../redux/auth/auth.action.js'; 
+import { fetchKategorije, fetchRecipesForUserFeed ,addComment,editComment,deleteComment,deleteRecipe, fetchUserProfile, likeRecipe, saveRecipe} from '../redux/auth/auth.action.js'; 
 import {fetchRecipeById} from "../redux/auth/auth.action";
 import './RecipePage.css'; // You can create a separate CSS file for styling
 import { ErrorMessage, Field, Form, Formik } from 'formik';
@@ -27,98 +27,6 @@ const RecipePage = () => {
   }, [dispatch]);
 
   console.log(recipe);
-/*  
-  const recipes = [
-    {
-      id: 1,
-      title: 'Spaghetti Bolognese',
-      ingredients: ['500g spaghetti', '400g minced beef', '1 onion', '2 cloves garlic', '400g tomato sauce'],
-      instructions: 'Cook spaghetti according to package instructions. In a pan, sauté onions and garlic, add minced beef, cook until browned, then add tomato sauce. Serve over cooked spaghetti.',
-      category: 'Pasta',
-      image: 'images/spaghetti.jpg',
-      creator: 'Chef John Doe',
-      userID: '1'
-    },
-    {
-      id: 2,
-      title: 'Chicken Stir Fry',
-      ingredients: ['400g chicken breast', '1 bell pepper', '1 broccoli', '2 tbsp soy sauce'],
-      instructions: 'Slice chicken and vegetables. Stir-fry chicken until cooked, add vegetables and soy sauce. Cook until veggies are tender. Serve hot.',
-      category: 'Asian',
-      image: 'images/stir_fry.jpg',
-      creator: 'Chef Jane Smith',
-      userID: '1'
-    },
-    {
-      id: 3,
-      title: 'Chicken Stir Fry',
-      ingredients: ['400g chicken breast', '1 bell pepper', '1 broccoli', '2 tbsp soy sauce'],
-      instructions: 'Slice chicken and vegetables. Stir-fry chicken until cooked, add vegetables and soy sauce. Cook until veggies are tender. Serve hot.',
-      category: 'Asian',
-      image: 'images/stir_fry.jpg',
-      creator: 'New user',
-      userID: '2'
-    },
-    {
-      id: 4,
-      title: 'Chicken Stir Fry',
-      ingredients: ['400g chicken breast', '1 bell pepper', '1 broccoli', '2 tbsp soy sauce'],
-      instructions: 'Slice chicken and vegetables. Stir-fry chicken until cooked, add vegetables and soy sauce. Cook until veggies are tender. Serve hot.',
-      category: 'Asian',
-      image: 'images/stir_fry.jpg',
-      creator: 'New user',
-      userID: '2'
-    },
-    {
-        id: 5,
-        title: 'Chicken Stir Fry',
-        ingredients: ['400g chicken breast', '1 bell pepper', '1 broccoli', '2 tbsp soy sauce'],
-        instructions: 'Slice chicken and vegetables. Stir-fry chicken until cooked, add vegetables and soy sauce. Cook until veggies are tender. Serve hot.',
-        category: 'Asian',
-        image: 'images/stir_fry.jpg',
-        creator: 'New user',
-        userID: '2'
-      },
-  ]
-
-  const [recipe, setRecipe] = useState({
-    id: '',
-    title: '',
-    ingredients: [],
-    instructions: '',
-    category: '',
-    image: '',
-    creator: '',
-    userID: ''
-  })
-
-  const testings = recipes.filter(recipe  =>
-    recipe.id == JSON.parse(localStorage.getItem("recipeToLoad"))
-  );
-
- 
-
-  const arrayDataItems = testings.map(recipe => 
-    <div className="single-recipe-page">
-    <h1>{recipe.title}</h1>
-    <div className="recipe-card">
-      <img src={recipe.image} alt={recipe.title} className="recipe-image" />
-      <div className="recipe-details">
-        <p>Category: {recipe.category}</p>
-        <ul>
-          {recipe.ingredients.map((ingredient, index) => (
-            <li key={index}>{ingredient}</li>
-          ))}
-        </ul>
-        <p>Instructions: {recipe.instructions}</p>
-        <p>Creator: <a href="/Profile" onClick={() => {
-                  localStorage.setItem(localStorage.setItem('profileToLoad',JSON.stringify(recipe.userID)))
-            }}>{recipe.creator}</a></p>
-      </div>
-    </div>
-  </div>
-
-)*/
 
 
 const addCommentFunction = async (values) => {
@@ -152,6 +60,26 @@ const deleteRecipeFunction = async (idKorisnik, idRecept) => {
   });
 };
 
+const likeRecipeFunction = async (idKorisnik, idRecept) => {
+  await dispatch(likeRecipe({ data: {
+    idKorisnik: idKorisnik,
+    idRecept: idRecept
+  } })).then(() => {
+      //history.push('/');
+      //window.location.reload();
+  });
+};
+
+const saveRecipeFunction = async (idKorisnik, idRecept) => {
+  await dispatch(saveRecipe({ data: {
+    idKorisnik: idKorisnik,
+    idRecept: idRecept
+  } })).then(() => {
+      //history.push('/');
+      //window.location.reload();
+  });
+};
+
   const testings = recipesForFeed.filter(recipe  =>
     recipe.idRecept == JSON.parse(localStorage.getItem("recipeToLoad"))
   );
@@ -172,15 +100,21 @@ const deleteRecipeFunction = async (idKorisnik, idRecept) => {
         </ul>*/}
         <p>Uputstva: {recipe.priprema}</p>
         <p>Autor: <a href="/Profile" onClick={() => {
-            localStorage.setItem('profileToLoad',JSON.stringify(recipe.idRecept))
+            localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
       }}>{recipe.autor}</a></p>
 
       {
         recipe.autor == userProfileInfo.korisnickoIme
         ?
-        <button onClick={() => deleteRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Izbriši recept</button>
+        <div>
+          <button>Uredi recept</button>
+          <button onClick={() => deleteRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Izbriši recept</button>
+        </div>
         :
-        null
+        <div>
+          <button onClick={() => saveRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Spremi recept</button>
+          <button onClick={() => likeRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Označi recept</button>
+        </div>
       }
       </div>
 
@@ -350,7 +284,8 @@ const deleteRecipeFunction = async (idKorisnik, idRecept) => {
         </div>
 
         </div>
-      </div>}
+      </div>
+      }
     </div>
     
   );
