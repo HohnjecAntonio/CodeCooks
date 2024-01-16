@@ -1,10 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import firebase from './firebase';
+import {useDispatch, useSelector} from "react-redux";
+import {fetchUserProfile, fetchOtherProfile, fetchOtherProfileByUsername} from "../redux/auth/auth.action";
 import './Chat.css'
 
 const Chat = ({ userId, friendId }) => {
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState('');
+    const [messages, setMessages] = useState([]);
+    const [input, setInput] = useState('');
+
+
+    const dispatch = useDispatch();
+    const friendProfileInfo = useSelector(state => state.auth.profileToLoad);
+
+
+    useEffect(() => {
+        dispatch(fetchOtherProfile(JSON.parse(localStorage.getItem("friendId"))));
+      }, [dispatch]);
+
+
+    var userId = JSON.parse(localStorage.getItem("userId"))
+    var friendId = JSON.parse(localStorage.getItem("friendId"));
+
+    console.log("Current user ID: "+userId);
+    console.log("Friend ID: "+friendId);
+    console.log("Friend profile info:");
+    console.log(friendProfileInfo);
+
+
+
 
   useEffect(() => {
     const messagesRef = firebase.database().ref('messages');

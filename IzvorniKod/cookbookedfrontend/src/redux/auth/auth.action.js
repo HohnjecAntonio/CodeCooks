@@ -80,7 +80,7 @@ export const registerUserAction = (registerData) => async (dispatch) => {
 export const deleteUserAction = (requestData) => async (dispatch) => {
     dispatch({ type: DELETE_USER_PROFILE_REQUEST });
     try {
-        const { data } = await apiAuth.post(`${API_BASE_URL}/korisnici/delete/korisnik/${requestData.data.idKorisnik}`);
+        const { data } = await apiAuth.delete(`${API_BASE_URL}/korisnici/delete/korisnik/${requestData.data.idKorisnik}`);
 
         console.log("Izbrisan korisnik: ");
         console.log(data);
@@ -113,7 +113,7 @@ export const editRecipe = (requestData) => async (dispatch) => {
     dispatch({ type: EDIT_RECIPE_REQUEST });
     try {
         
-        const { data } = await apiAuth.post(`${API_BASE_URL}/recepti/edit/${requestData.data.idRecept}/korisnik/${requestData.data.idKorisnik}`,requestData.data);
+        const { data } = await apiAuth.put(`${API_BASE_URL}/recepti/edit/${requestData.data.idRecept}/korisnik/${requestData.data.idKorisnik}`,requestData.data);
 
         console.log("Uredi recept: ");
         console.log(data);
@@ -130,7 +130,7 @@ export const deleteRecipe = (requestData) => async (dispatch) => {
     dispatch({ type: DELETE_RECIPE_REQUEST });
     try {
         
-        const { data } = await apiAuth.post(`${API_BASE_URL}/recepti/delete/${requestData.data.idRecept}/korisnik/${requestData.data.idKorisnik}`);
+        const { data } = await apiAuth.delete(`${API_BASE_URL}/recepti/delete/${requestData.data.idRecept}/korisnik/${requestData.data.idKorisnik}`);
 
         console.log("Izbrisan recept: ");
         console.log(data);
@@ -198,7 +198,8 @@ export const editComment = (commentData) => async (dispatch) => {
     dispatch({ type: EDIT_COMMENT_REQUEST });
     try {
         
-        const { data } = await apiAuth.post(`${API_BASE_URL}/recepti/${commentData.data.idRecept}/editc/korisnik/${commentData.data.idKorisnik}/`,
+        const { data } = 
+        await apiAuth.put(`${API_BASE_URL}/recepti/${commentData.data.idRecept}/editc/korisnik/${commentData.data.idKorisnik}/`,
         commentData.data);
 
         console.log("Uređen komentar: ");
@@ -216,7 +217,7 @@ export const deleteComment = (commentData) => async (dispatch) => {
     dispatch({ type: DELETE_COMMENT_REQUEST });
     try {
         
-        const { data } = await apiAuth.post(`${API_BASE_URL}/recepti/${commentData.data.idRecept}/delc/${commentData.data.idKomentar}/korisnik/${commentData.data.idKorisnik}/`);
+        const { data } = await apiAuth.delete(`${API_BASE_URL}/recepti/${commentData.data.idRecept}/delc/${commentData.data.idKomentar}/korisnik/${commentData.data.idKorisnik}/`);
 
         console.log("Izbrisan komentar: ");
         console.log(data);

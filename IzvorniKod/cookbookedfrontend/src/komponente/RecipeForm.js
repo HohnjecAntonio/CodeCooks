@@ -132,7 +132,7 @@ function RecipeForm () {
               name="oznaka"
           />
 
-          <button type="submit">Submit Recipe</button>
+          <button type="submit">Objavi recept</button>
         </Form>
       </Formik>
     </div>
