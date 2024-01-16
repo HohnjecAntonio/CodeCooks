@@ -81,68 +81,339 @@
 \subsection{Opis tablica}
 
 
-				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
-				
-				
-				\begin{longtblr}[
-					label=none,
-					entry=none
-					]{
-						width = \textwidth,
-						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
-						rowhead = 1,
-					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-					\hline \SetCell[c=3]{c}{\textbf{korisnik - ime tablice}}	 \\ \hline[3pt]
-					\SetCell{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  	\\ \hline
-					korisnickoIme	& VARCHAR &   	\\ \hline 
-					email & VARCHAR &   \\ \hline 
-					ime & VARCHAR	&  		\\ \hline 
-					\SetCell{LightBlue} primjer	& VARCHAR &   	\\ \hline 
-				\end{longtblr}
-				
-				
-			
-			\subsection{Dijagram baze podataka}
-				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
-			
-			\eject
-			
-			
-		\section{Dijagram razreda}
-		
-			\textit{Potrebno je priložiti dijagram razreda s pripadajućim opisom. Zbog preglednosti je moguće dijagram razlomiti na više njih, ali moraju biti grupirani prema sličnim razinama apstrakcije i srodnim funkcionalnostima.}\\
-			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-			\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\\
-			
-			\textbf{\textit{dio 2. revizije}}\\			
-			
-			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
-			
-			
-			
-			\eject
-		
-		\section{Dijagram stanja}
-			
-			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
-			
-			
-			\eject 
-		
-		\section{Dijagram aktivnosti}
-			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			 \textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
-			
-			\eject
-		\section{Dijagram komponenti}
-		
-			\textbf{\textit{dio 2. revizije}}\\
-		
-			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
+\textnormal{\textbf{Korisnik}		Entitet Korisnik služi za evidenciju podataka o korisnicima koji koriste web aplikaciju. Atributi koji ga opisuju su korisnickoIme, lozinkaKorisnik, imeKorisnik, prezimeKorisnik, brojTelefona, emailKorisnik, razinaOvlasti i Dostupan što označava kada je dostupan za komunikaciju s drugim korisnicima unutar web aplikacije. Entitet Korisnik je u \textit{One-To-Many} vezi s entitetom Recept. Entitet Korisnik je i u \textit{Many-To-Many} vezi s entitetom OmiljeniAutor koji bilježi korisnike koje ovaj korisnik prati. Također, ovaj entitet je u \textit{Many-To-Many} vezi s entitetima SpremljenRecept, OznačenRecept, a u \textit{One-To-Many} vezi s entitetima Objava i Komentar.}
+
+
+\begin{longtblr}[
+	label=none,
+	entry=none
+	]{
+	width = \textwidth,
+	colspec={|X[8,l]|X[6, l]|X[20, l]|},
+	rowhead = 1,
+	} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+	\hline \SetCell[c=3]{c}{\textbf{Korisnik}}                                     \\ \hline[3pt]
+	\SetCell{LightGreen}IDKorisnik & INT     & jedinstveni identifikator korisnika \\ \hline
+	KorisnickoIme                  & VARCHAR & korisničko ime                      \\ \hline
+	LozinkaKorisnik                & VARCHAR & spremljena hash lozinka za pristup  \\ \hline
+	ImeKorisnik                    & VARCHAR & ime korisnika                       \\ \hline
+	PrezimeKorisnik                & VARCHAR & prezime korisnika                   \\ \hline
+	BrojTelefona                   & VARCHAR & broj telefona korisnika             \\ \hline
+	EmailKorisnik                  & VARCHAR & e-mail adresa korisnika             \\ \hline
+	RazinaOvlasti                  & VARCHAR & razina ovlasti u aplikaciji         \\ \hline
+	Dostupan                       & TIME    & vrijeme dostupnosti                 \\ \hline
+\end{longtblr}
+
+\eject
+
+\textnormal{\textbf{Komentar}		Entitet Komentar služi za evidenciju komentara koji korisnici međusobno dijele u web aplikaciji. Opisuju ga atributi IDKomentar, IDKorisnik, IDObjava, te NaslovKomentar, SadrzajKomentar i DatumKomentar. Ovaj entitet je  u \textit{Many-To-One} vezi s entitetom Korisnik, te u istoj vezi s entitetom Objava.}
+
+\begin{longtblr}[
+	label=none,
+	entry=none
+	]{
+	width = \textwidth,
+	colspec={|X[8,l]|X[6, l]|X[20, l]|},
+	rowhead = 1,
+	} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+	\hline \SetCell[c=3]{c}{\textbf{Komentar}}                                     \\ \hline[3pt]
+	\SetCell{LightGreen}IDKomentar & INT     & jedinstveni identifikator komentara \\ \hline
+	IDKorisnik                     & INT     & jedinstveni identifikator korisnika \\ \hline
+	IDObjava                       & INT     & jedinstveni identifikator objave    \\ \hline
+	NaslovKomentar                 & VARCHAR & naziv komentara                     \\ \hline
+	OpisKomentar                   & VARCHAR & sadržaj komentara                   \\ \hline
+	DatumKomentar                  & DATE    & datum komentara                     \\ \hline
+\end{longtblr}
+
+
+\vspace{\baselineskip}
+\textnormal{\textbf{OmiljeniAutor}		Entitet OmiljeniAutor služi za evidenciju korisnika koje jedan korisnik zaprati. Opisan je sljedećim atributima: IDKorisnik i IDAutor. U \textit{Many-To-Many} je vezi s entitetom Korisnik unutar web aplikacije.}
+
+\begin{longtblr}[
+	label=none,
+	entry=none
+	]{
+	width = \textwidth,
+	colspec={|X[6,l]|X[6, l]|X[20, l]|},
+	rowhead = 1,
+	} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+	\hline \SetCell[c=3]{c}{\textbf{OmiljeniAutor}}                             \\ \hline[3pt]
+	\SetCell{LightGreen}IDKorisnik & INT & jedinstveni identifikator pratitelja \\ \hline
+	IDAutor                        & INT & ID korisnika koji je zapraćen        \\ \hline
+\end{longtblr}
+
+\vspace{\baselineskip}
+\textnormal{\textbf{Recept}		Entitet Recept služi za evidenciju podataka o receptima koji cirkulišu i nastaju u web aplikaciji. Opisan je atributima: IDRecept, NazivRecept, IDKategorija, IDSastojak, IDVrstaKuhinja, PripremaRecept, VrijemeKuhanja, IDOznaka, SlikaRecept i IDVideoRecept. Entitet Recept je u \textit{Many-To-One} vezi s entitetom Korisnik, a u \textit{Many-To-Many} vezi s entitetom Sastojak, te u \textit{Many-To-Many} vezi s Kategorija, a \textit{One-To-One} s VrstaKuhinja. Također je u \textit{One-To-One} vezi s entitetom Objava.}
+
+\begin{longtblr}[
+	label=none,
+	entry=none
+	]{
+	width = \textwidth,
+	colspec={|X[8,l]|X[6, l]|X[20, l]|},
+	rowhead = 1,
+	} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+	\hline \SetCell[c=3]{c}{\textbf{Recept}}                                      \\ \hline[3pt]
+	\SetCell{LightGreen}IDRecept & INT     & jedinstveni identifikator recepta    \\ \hline
+	NazivRecept                  & VARCHAR & naziv recepta                        \\ \hline
+	IDKategorija                 & INT     & ID kategorije kojoj recept pripada   \\ \hline
+	IDSastojak                   & INT     & ID sastojka u receptu                \\ \hline
+	IDVrstaKuhinja               & INT     & ID vrste kuhinje recepta             \\ \hline
+	PripremaRecept               & VARCHAR & Opis pripreme recepta                \\ \hline
+	VrijemeKuhanja               & TIME    & Vrijeme potrebno za pripremu recepta \\ \hline
+	IDOznaka                     & INT     & ID oznake recepta                    \\ \hline
+	SlikaRecept                  & VARCHAR & Slika recepta                        \\ \hline
+	IDVideoRecept                & INT     & ID Video recepta                     \\ \hline
+\end{longtblr}
+
+\vspace{\baselineskip}
+\textnormal{\textbf{Video}		Entitet Video služi za evidenciju videa koji se objavljuju uz recepte. Opisan je sljedećim atributima: IDVideo, NazivVideo i TrajanjeVideo što omogućuje pretragu recepata po dužini pripremanja. U \textit{One-To-One} je vezi s entitetom Recept unutar web aplikacije.}
+
+\begin{longtblr}[
+	label=none,
+	entry=none
+	]{
+	width = \textwidth,
+	colspec={|X[6,l]|X[6, l]|X[20, l]|},
+	rowhead = 1,
+	} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+	\hline \SetCell[c=3]{c}{\textbf{Video}}                                 \\ \hline[3pt]
+	\SetCell{LightGreen}IDVideo & INT     & jedinstveni identifikator videa \\ \hline
+	NazivVideo                  & VARCHAR & naziv videa                     \\ \hline
+	TrajanjeVideo               & TIME    & trajanje videa                  \\ \hline
+\end{longtblr}
+
+\vspace{\baselineskip}
+\textnormal{\textbf{Objava}		Entitet Objava služi za evidenciju objava recepata koje korisnici objavljuju unutar web aplikacije. Opisan je atributima: IDObjava, IDKorisnik, IDRecept i DatumObjava. U \textit{Many-To-One} vezi je s entitetom Korisnik, te u \textit{Many-To-Many} vezi s entitetom Komentar i u \textit{One-To-One} s entitetom Recept.}
+
+\begin{longtblr}[
+	label=none,
+	entry=none
+	]{
+	width = \textwidth,
+	colspec={|X[6,l]|X[6, l]|X[20, l]|},
+	rowhead = 1,
+	} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+	\hline \SetCell[c=3]{c}{\textbf{Objava}}                                  \\ \hline[3pt]
+	\SetCell{LightGreen}IDObjava & INT  & jedinstveni identifikator objave    \\ \hline
+	IDKorisnik                   & INT  & jedinstveni identifikator korisnika \\ \hline
+	IDRecept                     & INT  & jedinstveni identifikator recepta   \\ \hline
+	DatumObjava                  & DATE & datum objave                        \\ \hline
+\end{longtblr}
+
+\vspace{\baselineskip}
+\textnormal{\textbf{OznačenRecept}		Entitet OznačenRecept služi za evidenciju označenih recepata od strane korisnika. Opisan je atributima: IDRecept i IDKorisnik. U \textit{Many-To-Many} vezi je s entitetom Korisnik.}
+
+\begin{longtblr}[
+	label=none,
+	entry=none
+	]{
+	width = \textwidth,
+	colspec={|X[6,l]|X[6, l]|X[20, l]|},
+	rowhead = 1,
+	} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+	\hline \SetCell[c=3]{c}{\textbf{OznačenRecept}}                          \\ \hline[3pt]
+	\SetCell{LightGreen}IDRecept & INT & jedinstveni identifikator recepta   \\ \hline
+	IDKorisnik                   & INT & ID korisnika koji je označio recept \\ \hline
+\end{longtblr}
+
+\vspace{\baselineskip}
+\textnormal{\textbf{SpremljenRecept}		Entitet SpremljenRecept za evidenciju spremljenih recepata od strane korisnika. Opisan je atributima: IDRecept i IDKorisnik. U \textit{Many-To-Many} vezi je s entitetom Korisnik.}
+
+\begin{longtblr}[
+	label=none,
+	entry=none
+	]{
+	width = \textwidth,
+	colspec={|X[6,l]|X[6, l]|X[20, l]|},
+	rowhead = 1,
+	} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+	\hline \SetCell[c=3]{c}{\textbf{SpremljenRecept}}                        \\ \hline[3pt]
+	\SetCell{LightGreen}IDRecept & INT & jedinstveni identifikator recepta   \\ \hline
+	IDKorisnik                   & INT & ID korisnika koji je spremio recept \\ \hline
+\end{longtblr}
+
+\vspace{\baselineskip}
+\textnormal{\textbf{Kategorija}		Entitet Kategorija služi za evidenciju kategorija. Opisan je atributima: IDKategorija, NazivKategorija i OpisKategorija.}
+
+\begin{longtblr}[
+	label=none,
+	entry=none
+	]{
+	width = \textwidth,
+	colspec={|X[8,l]|X[6, l]|X[20, l]|},
+	rowhead = 1,
+	} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+	\hline \SetCell[c=3]{c}{\textbf{Kategorija}}                                      \\ \hline[3pt]
+	\SetCell{LightGreen}IDKategorija & INT     & jedinstveni identifikator kateogrije \\ \hline
+	NazivKategorija                  & VARCHAR & naziv kategorije                     \\ \hline
+	OpisKategorija                   & VARCHAR & opis kategorije                      \\ \hline
+\end{longtblr}
+
+\vspace{\baselineskip}
+\textnormal{\textbf{ReceptKategorije}		Entitet ReceptKategorije služi za evidenciju kategorija i recepata pod tim kategorijama. Opisan je atributima: IDKategorija, NazivKategorija i OpisKategorija. U \textit{Many-To-Many} vezi je s entitetom Recept.}
+
+\begin{longtblr}[
+	label=none,
+	entry=none
+	]{
+	width = \textwidth,
+	colspec={|X[8,l]|X[6, l]|X[20, l]|},
+	rowhead = 1,
+	} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+	\hline \SetCell[c=3]{c}{\textbf{ReceptKategorije}}                        \\ \hline[3pt]
+	\SetCell{LightGreen}IDRecept & INT & jedinstveni identifikator kateogrije \\ \hline
+	IDKategorija                 & INT & jedinstveni identifikator recepta    \\ \hline
+\end{longtblr}
+
+\vspace{\baselineskip}
+\textnormal{\textbf{VrstaKuhinja}		Entitet VrstaKuhinja služi za evidenciju različitih vrsta kuhinja. Opisan je atributima: IDVrstaKuhinja, NazivVrstaKuhinja i OpisKategorija. U \textit{One-To-One} vezi je s entitetom Recept.}
+
+\begin{longtblr}[
+	label=none,
+	entry=none
+	]{
+	width = \textwidth,
+	colspec={|X[9,l]|X[6, l]|X[20, l]|},
+	rowhead = 1,
+	} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+	\hline \SetCell[c=3]{c}{\textbf{VrstaKuhinja}}                                         \\ \hline[3pt]
+	\SetCell{LightGreen}IDVrstaKuhinje & INT     & jedinstveni identifikator vrste kuhinje \\ \hline
+	NazivVrstaKuhinja                  & VARCHAR & naziv vrste kuhinje                     \\ \hline
+\end{longtblr}
+
+\vspace{\baselineskip}
+\textnormal{\textbf{Sastojak}		Entitet Sastojak služi za evidenciju različitih sastojaka. Opisan je atributima: IDSastojak, NazivSastojak.}
+
+\begin{longtblr}[
+	label=none,
+	entry=none
+	]{
+	width = \textwidth,
+	colspec={|X[6,l]|X[6, l]|X[20, l]|},
+	rowhead = 1,
+	} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+	\hline \SetCell[c=3]{c}{\textbf{Sastojak}}                                    \\ \hline[3pt]
+	\SetCell{LightGreen}IDSastojak & INT     & jedinstveni identifikator sastojka \\ \hline
+	NazivSastojak                  & VARCHAR & naziv sastojka                     \\ \hline
+\end{longtblr}
+
+\vspace{\baselineskip}
+\textnormal{\textbf{ReceptSastojci}		Entitet ReceptSastojci služi za evidenciju različitih sastojaka unutar recepta. Opisan je atributima: IDRecept, IDSastojak i KolicinaSastojak. U \textit{Many-To-Many} vezi je s entitetom Recept.}
+
+\begin{longtblr}[
+	label=none,
+	entry=none
+	]{
+	width = \textwidth,
+	colspec={|X[8,l]|X[6, l]|X[20, l]|},
+	rowhead = 1,
+	} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+	\hline \SetCell[c=3]{c}{\textbf{ReceptSastojci}}                            \\ \hline[3pt]
+	\SetCell{LightGreen}IDRecept & INT     & jedinstveni identifikator recepta  \\ \hline
+	IDSastojak                   & INT     & jedinstveni identifikator sastojka \\ \hline
+	KolicinaSastojak             & VARCHAR & količina sastojka                  \\ \hline
+\end{longtblr}
+
+\vspace{\baselineskip}
+\textnormal{\textbf{Obavijesti}		Entitet Obavijesti služi za slanje obavijesti korisnicima koji prate određene autore recepata. Opisan je atributima: IDObavijest, IDAutor, NazivObavijest, SadrzajObavijest, DatumObavijest i JeProcitano. U \textit{Many-To-One} vezi je s entitetom Korisnik.}
+
+\begin{longtblr}[
+	label=none,
+	entry=none
+	]{
+	width = \textwidth,
+	colspec={|X[8,l]|X[6, l]|X[20, l]|},
+	rowhead = 1,
+	} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+	\hline \SetCell[c=3]{c}{\textbf{Obavijesti}}                                    \\ \hline[3pt]
+	\SetCell{LightGreen}IDObavijest & INT     & jed. identifikator obavijesti       \\ \hline
+	IDKorisnik                      & INT     & jedinstveni identifikator korisnika \\ \hline
+	NazivObavijest                  & VARCHAR & naziv obavijesti                    \\ \hline
+	SadrzajObavijest                & VARCHAR & sadržaj obavijesti                  \\ \hline
+	DatumObavijest                  & DATE    & datum obavijesti                    \\ \hline
+	JeProcitano                     & TINYINT & oznaka pročitane obavijesti         \\ \hline
+\end{longtblr}
+
+\subsection{Dijagram baze podataka}
+%unos slike
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{slike/CookBooked-dbp.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\centering
+	\caption{Dijagram relacijske baze podataka za web aplikaciju}
+	\label{fig:dijagrambp}
+\end{figure}
+\eject
+
+
+\section{Dijagram razreda}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{slike/DijagramRazreda.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\centering
+	\caption{Dijagram razreda}
+	\label{fig:dijagramraz}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{slike/ControllerRazredi.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\centering
+	\caption{Dijagram razreda kontrolera}
+	\label{fig:dijagramkontr}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{slike/DTO.png} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+	\centering
+	\caption{DTO}
+	\label{fig:dijagramdto}
+\end{figure}
+
+\textbf{\textit{dio 2. revizije}}\\
+
+\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
+
+
+
+\eject
+
+\section{Dijagram stanja}
+
+
+	\noindent
+	\textbf{Dijagram stanja - Dodavanje recepta}\newline
+		{Registrirani korisnik šalje zahtjev za dodavanje recepta. Recept mora sadržavati ime, sastojke i korake pripreme. Dodatno, moguće je dodati video ili slike pripreme. Recept se sprema u bazu podataka.}
+
+	\begin{figure}[H]
+		\includegraphics[scale= 0.4]{slike/DijagramStanja.png}
+		\centering
+		\caption{Dijagram stanja}
+		\label{fig:Dijagram stanja}
+	\end{figure} 
+\eject
+
+\section{Dijagram aktivnosti}
+
+	\noindent
+	\textbf{Dijagram aktivnosti - Pregled recepta}\newline
+		{Korisnik šalje zahtjev za receptima po nekom kriteriju. Aplikacija šalje upit bazi i na temelju odgovora prikazuje recepte korisniku. Tada, korinsik može spremiti recept ako je registriran. Ako nije, preusmjeri ga se na registraciju.}
+
+	\begin{figure}[H]
+		\includegraphics[scale= 0.4]{slike/Dijagram aktivnosti - Pregled Recepata.png}
+		\centering
+		\caption{Dijagram aktivnosti}
+		\label{fig:Dijagram aktivnosti}
+	\end{figure} 
+\eject
+
+\section{Dijagram komponenti}
+
+
+{Sustav se sastoji od \textit{frontend} i \textit{backend} dijelova, te baze podataka. \textit{Frontend} dio sastoji se od niza JSX datoteka koje određuju prikaz stranice (HomePage, Login) ili dijela stranice (Sidebar). React-view komponenta komunicira sa komponentom Router i \textit{backendom} te ovisno o korisnikovim akcijama osvježava prikaz i dohvaća nove podatke ili datoteke. Komponenta Router na upit sa URL-om odlučuje koja datoteka će se poslužiti na sučelje. JSX datoteke ovise o React i Redux bibliotekama. \textit{Frontend} uspostavlja komunikaciju sa backendom koristeći REST API. Zahtjev se proslijeđuje Controllers komponenti koja koristi metode izložene u sučelju Services komponente. Komponenta Services ostvaruje komunikaciju sa komponentom Repositories koja je zadužena za dohvat tablica iz baze podataka.}
+
+	\begin{figure}[H]
+		\includegraphics[scale= 0.45]{slike/Component Diagram0.png}
+		\centering
+		\caption{Dijagram komponenti}
+		\label{fig:Dijagram komponenti}
+	\end{figure} 

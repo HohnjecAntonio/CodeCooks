@@ -1,27 +1,29 @@
 \babel@toc {croatian}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Coolinarka}}{5}{figure.2.1}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces ReciPeci}}{5}{figure.2.2}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Coolinarka}}{6}{figure.2.1}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces ReciPeci}}{6}{figure.2.2}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Dijagram obrazaca uporabe, funkcionalnosti korisnika}}{18}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Dijagram obrazaca uporabe, komunikacija korisnika}}{19}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Dijagram obrazaca uporabe, upravljanje receptima, pregled i izmjena profila}}{19}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Dijagram obrazaca uporabe, praćenje autora i spremanje recepata}}{20}{figure.3.4}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Dijagram obrazaca uporabe, funkcionalnosti administratora}}{20}{figure.3.5}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Sekvencijski dijagram za UC1}}{21}{figure.3.6}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Sekvencijski dijagram za UC3}}{22}{figure.3.7}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Sekvencijski dijagram za UC4}}{23}{figure.3.8}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Sekvencijski dijagram za UC7}}{24}{figure.3.9}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Dijagram obrazaca uporabe, funkcionalnosti korisnika}}{20}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Dijagram obrazaca uporabe, komunikacija korisnika}}{21}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Dijagram obrazaca uporabe, upravljanje receptima, pregled i izmjena profila}}{21}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Dijagram obrazaca uporabe, praćenje autora i spremanje recepata}}{22}{figure.3.4}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Dijagram obrazaca uporabe, funkcionalnosti administratora}}{22}{figure.3.5}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Sekvencijski dijagram za UC1}}{23}{figure.3.6}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Sekvencijski dijagram za UC3}}{24}{figure.3.7}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Sekvencijski dijagram za UC4}}{25}{figure.3.8}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Sekvencijski dijagram za UC7}}{26}{figure.3.9}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Arhitektura sustava}}{26}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Arhitektura sustava backend}}{27}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Arhitektura sustava backend i frontend}}{27}{figure.4.3}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Dijagram relacijske baze podataka za web aplikaciju}}{35}{figure.4.4}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Dijagram razreda}}{36}{figure.4.5}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Dijagram razreda kontrolera}}{37}{figure.4.6}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces DTO}}{38}{figure.4.7}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Dijagram stanja}}{39}{figure.4.8}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Dijagram aktivnosti}}{40}{figure.4.9}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Arhitektura sustava}}{28}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Arhitektura sustava backend}}{29}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Arhitektura sustava backend i frontend}}{29}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Dijagram relacijske baze podataka za web aplikaciju}}{37}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Dijagram razreda}}{38}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Dijagram razreda kontrolera}}{39}{figure.4.6}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces DTO}}{40}{figure.4.7}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Dijagram stanja}}{41}{figure.4.8}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Dijagram aktivnosti}}{42}{figure.4.9}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Dijagram komponenti}}{44}{figure.4.10}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Dijagram razmještaja}}{48}{figure.5.1}%
 \addvspace {10\p@ }
