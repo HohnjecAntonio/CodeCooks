@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchKategorije, fetchRecipesForUserFeed ,addComment,editComment,deleteComment,deleteRecipe, fetchUserProfile, likeRecipe, saveRecipe} from '../redux/auth/auth.action.js'; 
+import { fetchKategorije, fetchVrsteKuhinje, fetchRecipesForUserFeed ,addComment,editComment,deleteComment,deleteRecipe, fetchUserProfile, likeRecipe, saveRecipe, editRecipe} from '../redux/auth/auth.action.js'; 
 import {fetchRecipeById} from "../redux/auth/auth.action";
 import './RecipePage.css'; // You can create a separate CSS file for styling
 import { ErrorMessage, Field, Form, Formik } from 'formik';
@@ -12,7 +12,15 @@ const RecipePage = () => {
   const error = useSelector(state => state.auth.error);
   const recipesForFeed = useSelector(state => state.auth.recipesForFeed);
   const userProfileInfo = useSelector(state => state.auth.userProfile);
+  const kategorije = useSelector(state => state.auth.kategorije); 
+  const vrKuhinje = useSelector(state => state.auth.vrKuhinje);
 
+
+  const [urediRecept,setUrediRecept] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchKategorije());
+}, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchRecipesForUserFeed());
@@ -24,6 +32,10 @@ const RecipePage = () => {
 
   useEffect(() => {
     dispatch(fetchUserProfile());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchVrsteKuhinje());
   }, [dispatch]);
 
   console.log(recipe);
@@ -49,6 +61,15 @@ const deleteCommentFunction = async (idKomentar, idKorisnik, idRecept) => {
       //window.location.reload();
   });
 };
+
+const editRecipeFunction = async (values) => {
+  console.log('handle submit ', values);
+  await dispatch(editRecipe({ data: values })).then(() => {
+      //history.push('/');
+      window.location.reload();
+  });
+};
+
 
 const deleteRecipeFunction = async (idKorisnik, idRecept) => {
   await dispatch(deleteRecipe({ data: {
@@ -87,40 +108,134 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
 
 
   const arrayDataItems = testings.map(recipe => 
+
     <div className="single-recipe-page">
-      <div className="recipe-card">
-
-      <div className="recipe-details">
-        <h2>{recipe.nazivRecept}</h2>
-        {/*<p>Category: {recipe.category}</p>
-        <ul>
-          {recipe.ingredients.map((ingredient, index) => (
-            <li key={index}>{ingredient}</li>
-          ))}
-        </ul>*/}
-        <p>Uputstva: {recipe.priprema}</p>
-        <p>Autor: <a href="/Profile" onClick={() => {
-            localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
-      }}>{recipe.autor}</a></p>
-
       {
-        recipe.autor == userProfileInfo.korisnickoIme
-        ?
-        <div>
-          <button>Uredi recept</button>
-          <button onClick={() => deleteRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Izbriši recept</button>
-        </div>
+        urediRecept ?
+        <Formik enableReinitialize={true} onSubmit={() => { editRecipeFunction(); setUrediRecept(false);}} 
+          initialValues={
+            recipe
+          }>
+
+        <Form>
+
+          <Field
+            type="hidden"
+            id="idKorisnik"
+            name="idKorisnik"
+          />
+
+          <h1>Izradite novi recept</h1>
+          <label htmlFor="nazivRecept">Naziv recepta:</label>
+          <Field
+            type="text"
+            id="nazivRecept"
+            name="nazivRecept"
+          />
+
+          <label htmlFor="idVrstaKuhinje">Vrsta kuhinje:</label>
+          <select
+              id="idVrstaKuhinje"
+              name="idVrstaKuhinje"
+          >
+            {vrKuhinje.map(vrsta => (
+                <option key={vrsta.idVrstaKuhinje} value={vrsta.idVrstaKuhinje}>
+                  {vrsta.nazivVrstaKuhinje}
+                </option>
+            ))}
+          </select>
+
+          <label htmlFor="sastojci">Sastojci:</label>
+          <Field
+            type="text"
+            id="sastojci"
+            name="sastojci"
+          />
+
+          <label htmlFor="kategorija">Izaberite kategoriju:</label>
+          <select
+            id="idKategorija"
+            name="idKategorija"
+          >
+            {kategorije.map(kategorija => (
+                  <option key={kategorija.idKategorija} value={kategorija.idKategorija}>
+                      {kategorija.nazivKategorija}
+                  </option>
+              ))}
+          </select>
+
+          {
+
+          /*
+          <label htmlFor="image">Odaberite sliku:</label>
+          <input
+            className='image_upload'
+            type="file"
+            id="image"
+            name="image"
+            accept="image/*"
+          />*/
+          }
+
+        <label htmlFor="priprema">Vrijeme kuhanja:</label>
+          <Field
+            type="time"
+            id="vrijemeKuhanja"
+            name="vrijemeKuhanja"
+          />
+
+          <label htmlFor="priprema">Uputstva:</label>
+          <Field
+            component="textarea"
+            type="text"
+            id="priprema"
+            name="priprema"
+          />
+
+          <label htmlFor="oznaka">Dodatne napomene:</label>
+          <Field
+              component="textarea"
+              type="text"
+              id="oznaka"
+              name="oznaka"
+          />
+
+          <button type="submit">Spremi recept</button>
+        </Form>
+        </Formik>
         :
-        <div>
-          <button onClick={() => saveRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Spremi recept</button>
-          <button onClick={() => likeRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Označi recept</button>
+        
+        <div className="recipe-card">
+
+            <div className="recipe-details">
+              <h2>{recipe.nazivRecept}</h2>
+              {/*<p>Category: {recipe.category}</p>
+              <ul>
+                {recipe.ingredients.map((ingredient, index) => (
+                  <li key={index}>{ingredient}</li>
+                ))}
+              </ul>*/}
+              <p>Uputstva: {recipe.priprema}</p>
+              <p>Autor: <a href="/Profile" onClick={() => {
+                  localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
+            }}>{recipe.autor}</a></p>
+
+            {
+              recipe.autor == userProfileInfo.korisnickoIme
+              ?
+              <div>
+                <button onClick={()=> setUrediRecept(true) }>Uredi recept</button>
+                <button onClick={() => deleteRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Izbriši recept</button>
+              </div>
+              :
+              <div>
+                <button onClick={() => saveRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Spremi recept</button>
+                <button onClick={() => likeRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Označi recept</button>
+              </div>
+            }
+            </div>
         </div>
       }
-      </div>
-
-      
-
-      </div>
       <p>Komentari:</p>
       <Formik enableReinitialize="true" initialValues={
         {
