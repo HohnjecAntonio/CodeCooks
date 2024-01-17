@@ -16,6 +16,9 @@ public interface KorisnikRepository  extends JpaRepository<Korisnik, Long> {
 
     Korisnik findByIdKorisnik(long iDKorisnik);
 
+    @Query("SELECT NEW Korisnik(k.idKorisnik, k.korisnickoIme, k.razinaOvlasti) FROM Korisnik as k where k.idKorisnik = :idKorisnik")
+    Korisnik getRoleByIdKorisnik(long idKorisnik);
+
     long countByEmailKorisnik(String emailKorisnik);
 
 }

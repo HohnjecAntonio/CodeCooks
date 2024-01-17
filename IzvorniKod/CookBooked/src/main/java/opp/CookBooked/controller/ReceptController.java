@@ -91,8 +91,8 @@ public class ReceptController {
     }
 
     @PutMapping("/edit/{idRecept}/korisnik/{idKorisnik}")
-    public Recept updateRecept(@RequestHeader("Authorization") String jwt, @PathVariable long idRecept, @RequestBody ReceptSubmitDTO recept, @PathVariable long iDKorisnik) throws Exception {
-        return receptService.updateRecept(idRecept, iDKorisnik, recept);
+    public Recept updateRecept(@RequestHeader("Authorization") String jwt, @PathVariable long idRecept, @RequestBody ReceptSubmitDTO recept) throws Exception {
+        return receptService.updateRecept(idRecept, recept);
     }
 
     @DeleteMapping("/delete/{idRecept}/korisnik/{iDKorisnik}")

@@ -128,6 +128,15 @@ public class KorisnikServiceJpa implements KorisnikService {
     }
 
     @Override
+    public Korisnik getRoleByIdKorisnik(long idKorisnik){
+        try {
+            return korisnikRepo.getRoleByIdKorisnik(idKorisnik);
+        } catch (Exception e) {
+            throw new EntityMissingException(Korisnik.class, idKorisnik);
+        }
+    }
+
+    @Override
     public ProfilDrugogKorisnikaDTO fetchZaProfil(String korisnickoIme) {
         try {
             Korisnik korisnik = findByKorisnickoIme(korisnickoIme);
