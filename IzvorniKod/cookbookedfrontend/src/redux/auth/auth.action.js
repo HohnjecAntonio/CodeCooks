@@ -113,7 +113,7 @@ export const editRecipe = (requestData) => async (dispatch) => {
     dispatch({ type: EDIT_RECIPE_REQUEST });
     try {
         
-        const { data } = await apiAuth.put(`${API_BASE_URL}/recepti/edit/${requestData.data.idRecept}`,requestData.data);
+        const { data } = await apiAuth.put(`${API_BASE_URL}/recepti/edit/${requestData.data.idRecept}/korisnik/${requestData.data.idAutor}`,requestData.data);
 
         console.log("Uredi recept: ");
         console.log(data);

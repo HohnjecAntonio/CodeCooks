@@ -90,9 +90,9 @@ public class ReceptController {
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
 
-    @PutMapping("/edit/{idRecept}")
-    public Recept updateRecept(@RequestHeader("Authorization") String jwt, @PathVariable long idRecept, @RequestBody Recept recept) throws Exception {
-        return receptService.updateRecept(idRecept, recept);
+    @PutMapping("/edit/{idRecept}/korisnik/{idKorisnik}")
+    public Recept updateRecept(@RequestHeader("Authorization") String jwt, @PathVariable long idRecept, @RequestBody ReceptSubmitDTO recept, @PathVariable long iDKorisnik) throws Exception {
+        return receptService.updateRecept(idRecept, iDKorisnik, recept);
     }
 
     @DeleteMapping("/delete/{idRecept}/korisnik/{iDKorisnik}")
