@@ -77,6 +77,7 @@ public class ReceptServiceJpa implements ReceptService {
                 rdto.setIdRecept(r.getIdRecept());
                 rdto.setNazivRecept(r.getNazivRecept());
                 rdto.setAutor(r.getAutor().getKorisnickoIme());
+                rdto.setIdAutor(r.getAutor().getIdKorisnik());
                 rdto.setSlikaRecept(r.getSlikaRecept());
                 rdto.setVideoRecept(r.getVideoRecept());
                 rdto.setVrijemeKuhanja(r.getVrijemeKuhanja());
@@ -129,6 +130,7 @@ public class ReceptServiceJpa implements ReceptService {
             r.setIdRecept(recept.getIdRecept());
             r.setNazivRecept(recept.getNazivRecept());
             r.setAutor(recept.getAutor().getKorisnickoIme());
+            r.setIdAutor(recept.getAutor().getIdKorisnik());
             r.setOznaka(recept.getOznaka());
             r.setPriprema(recept.getPriprema());
             r.setSlikaRecept(r.getSlikaRecept());
@@ -182,6 +184,7 @@ public class ReceptServiceJpa implements ReceptService {
                 dtos.add(new ReceptDTO(
                         r.getIdRecept(),
                         r.getAutor().getKorisnickoIme(),
+                        r.getAutor().getIdKorisnik(),
                         r.getNazivRecept(),
                         r.getPriprema(),
                         r.getVrijemeKuhanja(),

@@ -131,22 +131,47 @@ function Profile(props) {
 
           <div className="profile">
             <h1 className="profile-name">{profileToLoad.imeKorisnik} {profileToLoad.prezimeKorisnik}</h1>
-
             {
-              userProfileInfo.idKorisnik == profileToLoad.idKorisnik
-              ? 
-              <a href="/PrivateProfile" class="private-profile-button">
-              <button>Promjeni postavke</button>
-            </a>
-            :
-            <div className='contactButtons'>
-              <a href="/MessengerApp">
-                <button onClick={()=>{localStorage.setItem('friendId',JSON.stringify(profileToLoad.idKorisnik)); localStorage.setItem('userId',JSON.stringify(userProfileInfo.idKorisnik));}}>Chat</button>
-              </a>
-              <button onClick={followUserFunction}>Zaprati korisnika</button>
-            </div>
-            }
-            
+                props.currentUser
+                ?
+                <div>
+                  {
+                    props.isAdmin 
+                    ?
+                    <div>
+                        <a href="/PrivateProfile" class="private-profile-button">
+                          <button>Promjeni postavke</button> 
+                        </a>
+                        <a href="/MessengerApp">
+                          <button onClick={()=>{localStorage.setItem('friendId',JSON.stringify(profileToLoad.idKorisnik)); localStorage.setItem('userId',JSON.stringify(userProfileInfo.idKorisnik));}}>Chat</button>
+                        </a>
+                        <button onClick={followUserFunction}>Zaprati korisnika</button>
+                    </div>
+                    :
+                    <div>
+                      {
+                        userProfileInfo.idKorisnik == profileToLoad.idKorisnik
+                        ? 
+                        <a href="/PrivateProfile" class="private-profile-button">
+                        <button>Promjeni postavke</button>
+                        </a>
+                        :
+                        <div className='contactButtons'>
+                          <a href="/MessengerApp">
+                            <button onClick={()=>{localStorage.setItem('friendId',JSON.stringify(profileToLoad.idKorisnik)); localStorage.setItem('userId',JSON.stringify(userProfileInfo.idKorisnik));}}>Chat</button>
+                          </a>
+                          <button onClick={followUserFunction}>Zaprati korisnika</button>
+                        </div>
+                      }
+                    </div>
+                  }
+
+
+                  
+                </div>
+                  :
+                  null
+          }
           </div>
 
 

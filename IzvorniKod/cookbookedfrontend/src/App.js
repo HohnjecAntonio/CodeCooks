@@ -18,6 +18,7 @@ import SpremljeniRecepti from "./pages/UserFeed/SpremljeniRecepti";
 
 function App() {
     const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
+    const [isAdmin,setIsAdmin] = useState(false);
     const [currentUser, setCurrentUser] = useState(undefined);
 
     useEffect(() => {
@@ -79,6 +80,7 @@ function App() {
 
                 <div className="Tijelo">
                     <button className = "hidden" onClick={() => setIsLoggedIn(!isLoggedIn)}>Toggle login</button>
+                    <button onClick={() => {setIsAdmin(!isAdmin)}}>Toggle admin</button>
                     <Switch>
 
                         <Route path="/" exact>
@@ -102,15 +104,19 @@ function App() {
 
 
                         <Route path="/Profile" exact>
-                            {<Profile currentUserID={currentUser} profileID={JSON.parse(localStorage.getItem('profileToLoad'))}
+                            {<Profile currentUser={currentUser}
+                                isAdmin={isAdmin} 
                                 />}
                         </Route>
 
+                        <Route path="/RecipePage">
+                            {<RecipePage currentUser={currentUser}
+                                isAdmin={isAdmin}></RecipePage>}
+                            </Route> 
+
                         <Route path="/PrivateProfile" exact component={PrivateProfile} />
                         <Route path="/AddRecipe" exact component={RecipeForm} />
-                        <Route path="/Categories" exact component={CategoryButtons} />
                         <Route path="/MessengerApp" exact component={MessengerApp} />
-                        <Route path="/RecipePage" exact component={RecipePage} />
                         <Route path="/Categories" exact component={CategoryButtons}/>
                         <Route path="/SpremljeniRecepti" exact component={SpremljeniRecepti}/>
                     </Switch>

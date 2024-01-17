@@ -5,7 +5,7 @@ import {fetchRecipeById} from "../redux/auth/auth.action";
 import './RecipePage.css'; // You can create a separate CSS file for styling
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 
-const RecipePage = () => {
+const RecipePage = (props) => {
   const dispatch = useDispatch();
   const recipe = useSelector(state => state.auth.recipeToLoad);
   const loading = useSelector(state => state.auth.loading);
@@ -66,7 +66,7 @@ const editRecipeFunction = async (values) => {
   console.log('handle submit ', values);
   await dispatch(editRecipe({ data: values })).then(() => {
       //history.push('/');
-      window.location.reload();
+      //window.location.reload();
   });
 };
 
@@ -112,17 +112,23 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
     <div className="single-recipe-page">
       {
         urediRecept ?
-        <Formik enableReinitialize={true} onSubmit={() => { editRecipeFunction(); setUrediRecept(false);}} 
+        <Formik enableReinitialize={true} onSubmit={(values) => { editRecipeFunction(values); setUrediRecept(false);}} 
           initialValues={
             recipe
           }>
 
         <Form>
+          
+        <Field
+            type="hidden"
+            id="idRecept"
+            name="idRecept"
+          />
 
           <Field
             type="hidden"
-            id="idKorisnik"
-            name="idKorisnik"
+            id="idAutor"
+            name="idAutor"
           />
 
           <h1>Izradite novi recept</h1>
@@ -203,6 +209,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
           <button type="submit">Spremi recept</button>
         </Form>
         </Formik>
+
         :
         
         <div className="recipe-card">
@@ -219,57 +226,91 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
               <p>Autor: <a href="/Profile" onClick={() => {
                   localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
             }}>{recipe.autor}</a></p>
-
             {
-              recipe.autor == userProfileInfo.korisnickoIme
+              props.currentUser
               ?
+              
               <div>
-                <button onClick={()=> setUrediRecept(true) }>Uredi recept</button>
-                <button onClick={() => deleteRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Izbriši recept</button>
+              {
+                props.isAdmin
+                ?
+                <div>
+                    <button onClick={()=> setUrediRecept(true) }>Uredi recept</button>
+                    <button onClick={() => deleteRecipeFunction(recipe.idAutor,recipe.idRecept)}>Izbriši recept</button>
+                    <button onClick={() => saveRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Spremi recept</button>
+                    <button onClick={() => likeRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Označi recept</button>
+
+                </div>
+                :
+                <div>
+                  {
+                     recipe.autor == userProfileInfo.korisnickoIme
+                    ?
+                      <div>
+                        <button onClick={()=> setUrediRecept(true) }>Uredi recept</button>
+                        <button onClick={() => deleteRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Izbriši recept</button>
+                      </div>
+                      :
+                      <div>
+                        <button onClick={() => saveRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Spremi recept</button>
+                        <button onClick={() => likeRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Označi recept</button>
+                      </div>
+                  }
+                </div>
+              }
+              
+              
               </div>
               :
-              <div>
-                <button onClick={() => saveRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Spremi recept</button>
-                <button onClick={() => likeRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Označi recept</button>
-              </div>
+              null
             }
             </div>
         </div>
       }
       <p>Komentari:</p>
-      <Formik enableReinitialize="true" initialValues={
-        {
-        idKorisnik: userProfileInfo.idKorisnik || '',
-        idRecept: recipe.idRecept || '',
-        komentar: ''
+      
+      {
+       props.currentUser
+            ?
+          <div>
+          <Formik enableReinitialize="true" initialValues={
+            {
+            idKorisnik: userProfileInfo.idKorisnik || '',
+            idRecept: recipe.idRecept || '',
+            komentar: ''
+          }
+            } onSubmit={addCommentFunction}>
+            <Form>
+              <h1>Dodaj komentar:</h1>
+              <Field
+                type="hidden"
+                id="idKorisnik"
+                name="idKorisnik"
+              />
+
+              <Field
+                type="hidden"
+                id="idRecept"
+                name="idRecept"
+              />
+              
+              <Field
+                component="textarea"
+                type="text"
+                id="opisKomentar"
+                name="opisKomentar"
+              />
+
+              <button type="submit">Dodaj komentar</button>
+              
+              </Form>
+            </Formik>
+            </div>
+        
+        :
+        null
       }
-        } onSubmit={addCommentFunction}>
-        <Form>
-          <h1>Dodaj komentar:</h1>
-          <Field
-            type="hidden"
-            id="idKorisnik"
-            name="idKorisnik"
-          />
-
-          <Field
-            type="hidden"
-            id="idRecept"
-            name="idRecept"
-          />
-          
-          <Field
-            component="textarea"
-            type="text"
-            id="opisKomentar"
-            name="opisKomentar"
-          />
-
-          <button type="submit">Dodaj komentar</button>
-          
-          </Form>
-        </Formik>
-        <div>
+      <div>
         {recipe.komentari.map(komentar => (
           <div>
 
