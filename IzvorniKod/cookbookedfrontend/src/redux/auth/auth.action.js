@@ -233,7 +233,7 @@ export const deleteComment = (commentData) => async (dispatch) => {
 export const fetchKategorije = () => async (dispatch) => {
     dispatch({ type: FETCH_KATEGORIJE_REQUEST });
     try {
-        const { data } = await api.get(`${API_BASE_URL}/`);
+        const { data } = await axios.get(`${API_BASE_URL}/`);
 
         console.log("Kategorije");
         console.log(data);
@@ -257,7 +257,7 @@ export const fetchVrsteKuhinje = () => async (dispatch) => {
 export const fetchRecipesForUserFeed = () => async (dispatch) => {
     dispatch({ type: FETCH_RECIPES_REQUEST });
     try {
-        const { data } = await apiAuth.get(`${API_BASE_URL}/recepti`);
+        const { data } = await axios.get(`${API_BASE_URL}/recepti`);
 
         console.log("Fetched recipes");
         console.log(data);

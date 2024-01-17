@@ -32,13 +32,14 @@ function SideBar(props){
   const categories = useSelector(state => state.auth.kategorije); // Adjust path according to your store structure
   
   useEffect(() => {
-    dispatch(fetchKategorije());
+    if(props.currentUser)
+      dispatch(fetchKategorije());
 }, [dispatch]);
 
-
+/*
 useEffect(() => {
   dispatch(fetchUserProfile());
-}, [dispatch]);
+}, [dispatch]);*/
 
 
   function calcHeight(el){
