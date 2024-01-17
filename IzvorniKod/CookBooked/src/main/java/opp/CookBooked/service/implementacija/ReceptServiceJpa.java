@@ -77,6 +77,7 @@ public class ReceptServiceJpa implements ReceptService {
                 rdto.setIdRecept(r.getIdRecept());
                 rdto.setNazivRecept(r.getNazivRecept());
                 rdto.setAutor(r.getAutor().getKorisnickoIme());
+                rdto.setIdAutor(r.getAutor().getIdKorisnik());
                 rdto.setSlikaRecept(r.getSlikaRecept());
                 rdto.setVideoRecept(r.getVideoRecept());
                 rdto.setVrijemeKuhanja(r.getVrijemeKuhanja());
@@ -129,6 +130,7 @@ public class ReceptServiceJpa implements ReceptService {
             r.setIdRecept(recept.getIdRecept());
             r.setNazivRecept(recept.getNazivRecept());
             r.setAutor(recept.getAutor().getKorisnickoIme());
+            r.setIdAutor(recept.getAutor().getIdKorisnik());
             r.setOznaka(recept.getOznaka());
             r.setPriprema(recept.getPriprema());
             r.setSlikaRecept(r.getSlikaRecept());
@@ -182,6 +184,7 @@ public class ReceptServiceJpa implements ReceptService {
                 dtos.add(new ReceptDTO(
                         r.getIdRecept(),
                         r.getAutor().getKorisnickoIme(),
+                        r.getAutor().getIdKorisnik(),
                         r.getNazivRecept(),
                         r.getPriprema(),
                         r.getVrijemeKuhanja(),
@@ -241,19 +244,28 @@ public class ReceptServiceJpa implements ReceptService {
     }
 
     @Override
-    public Recept updateRecept(long idRecept, Recept updatedRecept) {
+    public Recept updateRecept(long idRecept, long idKorisnik, ReceptSubmitDTO updatedRecept) {
         try {
+            Korisnik k = korisnikService.findByIdKorisnik(idKorisnik);
+
+            String sastojci = updatedRecept.getSastojci();
+            String[] sastojciList = sastojci.split(",");
+
+            List<String> sas = new ArrayList<>(List.of(sastojciList));
+
             return receptRepo.findById(idRecept).map(recept -> {
 
                 recept.setNazivRecept(updatedRecept.getNazivRecept());
                 recept.setPriprema(updatedRecept.getPriprema());
-                recept.setAutor(updatedRecept.getAutor());
+                recept.setAutor(k);
                 recept.setOznaka(updatedRecept.getOznaka());
                 recept.setSlikaRecept(updatedRecept.getSlikaRecept());
                 recept.setVideoRecept(updatedRecept.getVideoRecept());
                 recept.setVrijemeObjave(LocalDate.now());
                 recept.setVrijemeKuhanja(updatedRecept.getVrijemeKuhanja());
 
+
+                recSasService.dodajSastojkeReceptu(updatedRecept.getIdRecept(), sas);
                 return receptRepo.save(recept);
             }).orElseThrow(() -> new RuntimeException("Recept not found with id " + idRecept));
         } catch (Exception e) {

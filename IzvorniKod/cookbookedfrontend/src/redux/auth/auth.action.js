@@ -113,7 +113,7 @@ export const editRecipe = (requestData) => async (dispatch) => {
     dispatch({ type: EDIT_RECIPE_REQUEST });
     try {
         
-        const { data } = await apiAuth.put(`${API_BASE_URL}/recepti/edit/${requestData.data.idRecept}/korisnik/${requestData.data.idKorisnik}`,requestData.data);
+        const { data } = await apiAuth.put(`${API_BASE_URL}/recepti/edit/${requestData.data.idRecept}/korisnik/${requestData.data.idAutor}`,requestData.data);
 
         console.log("Uredi recept: ");
         console.log(data);
@@ -233,7 +233,7 @@ export const deleteComment = (commentData) => async (dispatch) => {
 export const fetchKategorije = () => async (dispatch) => {
     dispatch({ type: FETCH_KATEGORIJE_REQUEST });
     try {
-        const { data } = await api.get(`${API_BASE_URL}/`);
+        const { data } = await axios.get(`${API_BASE_URL}/`);
 
         console.log("Kategorije");
         console.log(data);
@@ -257,7 +257,7 @@ export const fetchVrsteKuhinje = () => async (dispatch) => {
 export const fetchRecipesForUserFeed = () => async (dispatch) => {
     dispatch({ type: FETCH_RECIPES_REQUEST });
     try {
-        const { data } = await apiAuth.get(`${API_BASE_URL}/recepti`);
+        const { data } = await axios.get(`${API_BASE_URL}/recepti`);
 
         console.log("Fetched recipes");
         console.log(data);
@@ -272,7 +272,7 @@ export const fetchRecipesForUserFeed = () => async (dispatch) => {
 export const fetchRecipeById = (id) => async (dispatch) => {
     dispatch({ type: FETCH_RECIPE_BY_ID_REQUEST });
     try {
-        const { data } = await apiAuth.get(`${API_BASE_URL}/recepti/${id}`);
+        const { data } = await axios.get(`${API_BASE_URL}/recepti/${id}`);
 
         console.log("Fetched recipe by id");
         console.log(data);
@@ -329,7 +329,7 @@ export const fetchOtherProfile = (id) => async (dispatch) => {
 export const fetchOtherProfileByUsername = (korisnickoIme) => async (dispatch) => {
     dispatch({ type: FETCH_OTHER_PROFILE_BY_USERNAME_REQUEST });
     try {
-        const { data } = await apiAuth.get(`${API_BASE_URL}/korisnici/profileDK/${korisnickoIme}`);
+        const { data } = await axios.get(`${API_BASE_URL}/korisnici/profileDK/${korisnickoIme}`);
 
         console.log("Profile to load data: ");
         console.log(data);
@@ -344,7 +344,7 @@ export const updateUserProfile = (profileData) => async (dispatch) => {
     dispatch({ type: UPDATE_USER_PROFILE_REQUEST });
     try {
         console.log(profileData);
-        const { data } = await apiAuth.put(`${API_BASE_URL}/korisnici/update/${profileData.data.korisnickoIme}`, profileData.data);
+        const { data } = await apiAuth.put(`${API_BASE_URL}/korisnici/update/${profileData.data.idKorisnik}`, profileData.data);
 
         console.log("Updated data: ");
         console.log(data);

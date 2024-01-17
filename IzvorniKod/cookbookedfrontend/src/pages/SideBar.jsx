@@ -32,12 +32,14 @@ function SideBar(props){
   const categories = useSelector(state => state.auth.kategorije); // Adjust path according to your store structure
   
   useEffect(() => {
-    dispatch(fetchKategorije());
+    
+      dispatch(fetchKategorije());
 }, [dispatch]);
 
 
 useEffect(() => {
-  dispatch(fetchUserProfile());
+  if(props.currentUser)
+    dispatch(fetchUserProfile());
 }, [dispatch]);
 
 

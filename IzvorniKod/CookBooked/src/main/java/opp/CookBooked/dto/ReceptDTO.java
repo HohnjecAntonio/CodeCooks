@@ -19,6 +19,7 @@ public class ReceptDTO {
 
     private Long idRecept;
     private String autor;
+    private Long idAutor;
     private String nazivRecept;
     private String priprema;
     private LocalTime vrijemeKuhanja;

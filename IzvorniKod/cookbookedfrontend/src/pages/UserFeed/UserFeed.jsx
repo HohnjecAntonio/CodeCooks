@@ -23,7 +23,7 @@ const UserFeed = () => {
        userProfileInfo.pratiteljiKorisnika.forEach(element => {
            
            return recipe.autor == element.korisnickoIme
-
+            
         })
     );
 
