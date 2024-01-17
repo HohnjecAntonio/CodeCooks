@@ -48,6 +48,11 @@ public class KorisnikController {
         return korisnikService.fetchProfil(jwt);
     }
 
+    @GetMapping("/role/{idKorisnik}")
+    public Korisnik getRoleByIdKorisnik(@PathVariable("idKorisnik") long idKorisnik) throws Throwable{
+        return korisnikService.getRoleByIdKorisnik(idKorisnik);
+    }
+
     @PutMapping("/update/{idKorisnik}")
     public Korisnik updateKorisnik(@RequestHeader("Authorization") String jwt,  @RequestBody ProfilDTO korisnik, @PathVariable("idKorisnik") long iDKorisnik) throws Throwable {
         return korisnikService.updateKorisnik(iDKorisnik, korisnik);

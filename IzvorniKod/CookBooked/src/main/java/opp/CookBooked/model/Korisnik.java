@@ -98,4 +98,10 @@ public class Korisnik {
         this.korisnickoIme = korisnickoIme;
     }
 
+    public Korisnik(Long idKorisnik, String korisnickoIme, String razinaOvlasti) {
+        this.idKorisnik = idKorisnik;
+        this.korisnickoIme = korisnickoIme;
+        this.razinaOvlasti = razinaOvlasti;
+    }
+
 }
