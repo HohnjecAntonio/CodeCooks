@@ -1,84 +1,83 @@
-
+/* Chat.css */
 .chat {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-  }
-  
-  header h2 {
-    margin: 0;
-  }
-  
-  .messages {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .chat-bubble {
-    max-width: 70%;
-    margin: 8px;
-    padding: 12px;
-    border-radius: 8px;
-  }
-  
-  .messages {
-    overflow-y: auto; 
-  }
-  
-  .my-message {
-    background-color: #4caf50; 
-    color: white;
-    margin: 8px;
-    padding: 12px;
-    border-radius: 8px;
-    float: right; 
-    clear: both; 
-  }
-  
-  .other-message {
-    background-color: #ddd; 
-    margin: 8px;
-    padding: 12px;
-    border-radius: 8px;
-    float: left; 
-    clear: both; 
-  }
-  
-  .input {
-    display: flex;
-  }
-  
-  input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 5px 0 0 5px;
-  }
-  
-  button {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 0 5px 5px 0;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  .chat-date {
-    text-align: center;
-    font-size: 12px;
-    color: #888;
-    margin: 8px 0;
-  }
-  
-  .message-time {
-    font-size: 12px;
-    color: #888;
-    align-self: flex-end;
-  }
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.chatingWith {
+  color: #ddd;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.chat-bubble {
+  max-width: 70%;
+  margin: 8px;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.my-message {
+  background-color: #4caf50;
+  color: white;
+  margin: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  float: right;
+  clear: both;
+  min-height: fit-content;
+}
+
+.other-message {
+  background-color: #ddd;
+  margin: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  float: left;
+  clear: both;
+  min-height: fit-content;
+}
+
+.input {
+  display: flex;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px 0 0 5px;
+}
+
+button {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 0 5px 5px 0;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  min-width: fit-content;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.chat-date {
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  margin: 8px 0;
+}
+
+.message-time {
+  font-size: 12px;
+  color: #888;
+  align-self: flex-end;
+}
