@@ -27,8 +27,8 @@ const MessingerApp = () => {
   
   useEffect(() => {
     if (userProfile && userProfile.idKorisnik) {
-      //console.log('korisnik: ' + userProfile.idKorisnik);
-      setUserName(userProfile.imeKorisnik);
+      console.log('korisnik: ' + userProfile.idKorisnik);
+      setUserName(userProfile.korisnickoIme);
     }
   }, [userProfile]);
   

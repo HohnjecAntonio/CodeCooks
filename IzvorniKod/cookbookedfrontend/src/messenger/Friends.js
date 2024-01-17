@@ -58,10 +58,12 @@ const Friend = ({ userName, onFriendSelect }) => {
     
     const handleAddFriend = () => {
         const newfriendName = prompt('Upisi korisnickoIme prijatelja:');
-        const input = newfriendName.toString();
-        if (input.trim() !== '' && input !== speakingWith) {
-            setSpeakingWith((prevSpeakingWith) => [...prevSpeakingWith, input]);
-            onFriendSelect(input);
+        if(newfriendName!=null){
+            const input = newfriendName.toString();
+            if (input.trim() !== '' && input !== speakingWith) {
+                setSpeakingWith((prevSpeakingWith) => [...prevSpeakingWith, input]);
+                onFriendSelect(input);
+            }
         }
     };
     
