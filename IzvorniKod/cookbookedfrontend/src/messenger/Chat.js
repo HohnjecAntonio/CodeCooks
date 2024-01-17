@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import firebase from './firebase';
-import {useDispatch, useSelector} from "react-redux";
-import {fetchUserProfile, fetchOtherProfile, fetchOtherProfileByUsername} from "../redux/auth/auth.action";
 import './Chat.css'
+import {useDispatch, useSelector} from "react-redux";
 
 const Chat = ({ userId, friendId }) => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
-    const [friendList, setFriendList] = useState([]);
 
-
+    
     const dispatch = useDispatch();
     const friendProfileInfo = useSelector(state => state.auth.profileToLoad);
-
+    
 
 
     //ovo bi bilo da fetchamo listu prijatelja prema postojećoj listi prijatelja od nekud, tu treba zamijeniti array i element da prestavljaju listu prijatelja i id prijatelja čiji profil želimo dohvatit
-    /*useEffect(() => {
+    /*
+    useEffect(() => {
 
         const fetchFriendsList = async () => {
             friendList = []
@@ -30,10 +29,11 @@ const Chat = ({ userId, friendId }) => {
         friendList = fetchFriendsList();
         setFriendList(friendList)
 
-        },[dispatch]);*/
-        
+    },[dispatch]);
+        */
 
     //ovo bi bilo da fetchamo samo jednog novog prijatelja iz chata
+    /*
     useEffect(() => {
         dispatch(fetchOtherProfile(JSON.parse(localStorage.getItem("friendId"))));
       }, [dispatch]);
@@ -46,42 +46,42 @@ const Chat = ({ userId, friendId }) => {
     console.log("Friend ID: "+friendId);
     console.log("Friend profile info:");
     console.log(friendProfileInfo);
-
-
-
-
-  useEffect(() => {
-    const messagesRef = firebase.database().ref('messages');
-    messagesRef.on('value', (snapshot) => {
-      const messagesData = snapshot.val();
-      if (messagesData) {
-        const messagesArray = Object.values(messagesData);
-        setMessages(messagesArray);
-      }
-    });
-  }, []);
-
-  const handleSendMessage = () => {  
-    if (input.trim() !== '' && userId !== '' && friendId !== '') {
-        const messagesRef = firebase.database().ref('messages');
-        const currentDate = new Date().toString(); 
-        messagesRef.push({
-        message: input,
-        userId: userId,
-        friendId: friendId,
-        date: currentDate, 
-    });
-        setInput('');
-    }
     
-  };
+      */
 
-  // Assuming 'HR' in your date formatting is for Croatian, modify it as needed.
+
+    useEffect(() => {
+        const messagesRef = firebase.database().ref('messages');
+        messagesRef.on('value', (snapshot) => {
+        const messagesData = snapshot.val();
+        if (messagesData) {
+            const messagesArray = Object.values(messagesData);
+            setMessages(messagesArray);
+        }
+        });
+        
+    }, []);
+
+    const handleSendMessage = () => {  
+        if (input.trim() !== '' && userId !== '' && friendId !== '') {
+            const messagesRef = firebase.database().ref('messages');
+            const currentDate = new Date().toString(); 
+            messagesRef.push({
+            message: input,
+            userId: userId,
+            friendId: friendId,
+            date: currentDate, 
+        });
+            setInput('');
+        }
+        
+    };
+
 
     return (
         <div className="chat">
         <header>
-            <h2>Chatting with: {friendId}</h2>
+            <h2 className='chatingWith'>Chatting with: {friendId}</h2>
         </header>
         <div className="messages">
             {messages
@@ -97,7 +97,7 @@ const Chat = ({ userId, friendId }) => {
                 const isNewDay = !prevMessage || new Date(prevMessage.date).toDateString() !== new Date(message.date).toDateString();
     
                 return (
-                <div key={index}>
+                <div className='message' key={index}>
                     {isNewDay && (
                     <div className="chat-date">
                         {new Date(message.date).toLocaleDateString('HR', { year: 'numeric', month: 'numeric', day: 'numeric' })}

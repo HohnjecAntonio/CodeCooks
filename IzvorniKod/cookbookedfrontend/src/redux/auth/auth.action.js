@@ -302,8 +302,8 @@ export const fetchUserProfile = (jwt) => async (dispatch) => {
     try {
         const { data } = await apiAuth.get(`${API_BASE_URL}/korisnici/profile`);
 
-        console.log("Fetched user profile" );
-        console.log(data);
+        //console.log("Fetched user profile" );
+        //console.log(data);
 
         dispatch({ type: FETCH_USER_PROFILE_SUCCESS, payload: data });
     } catch (error) {
@@ -316,8 +316,8 @@ export const fetchOtherProfile = (id) => async (dispatch) => {
     try {
         const { data } = await apiAuth.get(`${API_BASE_URL}/korisnici/id/${id}`);
 
-        console.log("Profile to load data: ");
-        console.log(data);
+        //console.log("Profile to load data: ");
+        //console.log(data);
 
         dispatch({ type: FETCH_OTHER_PROFILE_SUCCESS, payload: data });
     } catch (error) {
