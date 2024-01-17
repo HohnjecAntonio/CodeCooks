@@ -7,11 +7,11 @@ import { fetchUserProfile } from '../redux/auth/auth.action';
 
 const MessingerApp = () => {
   const [userId, setUserId] = useState('');
-  const [selectedFriendId, setSelectedFriendId] = useState('');
-  //const [userName, setUserName] = useState('');
+  const [selectedFriendName, setSelectedFriendName] = useState('');
+  const [userName, setUserName] = useState('');
 
   const dispatch = useDispatch();
-  //const userProfile = useSelector((state) => state.auth.userProfile);
+  const userProfile = useSelector((state) => state.auth.userProfile);
 
   useEffect(() => {
     const getUserIdFromLocalStorage = () => {
@@ -24,28 +24,28 @@ const MessingerApp = () => {
     getUserIdFromLocalStorage();
   }, [dispatch]);
 
-  /*
+  
   useEffect(() => {
     if (userProfile && userProfile.idKorisnik) {
-      console.log('korisnik: ' + userProfile.idKorisnik);
+      //console.log('korisnik: ' + userProfile.idKorisnik);
       setUserName(userProfile.imeKorisnik);
     }
   }, [userProfile]);
-  */
+  
 
-  const handleFriendSelect = (friendId) => {
-    setSelectedFriendId(friendId);
+  const handleFriendSelect = (friendName) => {
+    setSelectedFriendName(friendName);
   };
 
   return (
     <div className="app-container">
       <main>
-        {userId === '' ? (
-          <h1>ERROR no userId</h1>
+        {userName === '' ? (
+          <h1>ERROR no userName</h1>
         ) : (
           <>
-            <Friends userId={userId} onFriendSelect={handleFriendSelect} />
-            <Chat userId={userId} friendId={selectedFriendId} />
+            <Friends userName={userName} onFriendSelect={handleFriendSelect} />
+            <Chat userName={userName} friendName={selectedFriendName} />
           </>
         )}
       </main>

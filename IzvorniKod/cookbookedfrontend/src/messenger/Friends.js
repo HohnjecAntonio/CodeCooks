@@ -5,11 +5,8 @@ import './Friend.css'
 import {useDispatch, useSelector} from "react-redux";
 import {fetchUserProfile, fetchOtherProfile, fetchOtherProfileByUsername} from "../redux/auth/auth.action";
 
-const Friend = ({ userId, onFriendSelect }) => {
+const Friend = ({ userName, onFriendSelect }) => {
     const [speakingWith, setSpeakingWith] = useState([]);
-    const [friendList, setFriendList] = useState([]);
-
-    const dispatch = useDispatch();
     
 
     useEffect(() => {
@@ -23,18 +20,18 @@ const Friend = ({ userId, onFriendSelect }) => {
                 messagesArray
                 .filter(
                     (message) =>
-                    (message.friendId === userId && message.userId) ||
-                    (message.userId === userId && message.friendId)
+                    (message.friendName === userName && message.userName) ||
+                    (message.userName === userName && message.friendName)
                 )
                 .map((message) =>
-                    message.userId === userId ? message.friendId : message.userId
+                    message.userName === userName ? message.friendName : message.userName
                 )
             )
             );
             setSpeakingWith(uniqueRecipients);
         }
         });
-    }, [userId]);
+    }, [userName]);
 
     /*
     var getUserFromId = async (id) => {
@@ -60,8 +57,8 @@ const Friend = ({ userId, onFriendSelect }) => {
     */
     
     const handleAddFriend = () => {
-        const newFriendId = prompt('Enter the ID of the person you want to chat with:');
-        const input = newFriendId.toString();
+        const newfriendName = prompt('Upisi korisnickoIme prijatelja:');
+        const input = newfriendName.toString();
         if (input.trim() !== '' && input !== speakingWith) {
             setSpeakingWith((prevSpeakingWith) => [...prevSpeakingWith, input]);
             onFriendSelect(input);
@@ -77,15 +74,15 @@ const Friend = ({ userId, onFriendSelect }) => {
                 + Add new friend
             </div>
             <div className="friends">
-                {speakingWith.map((friendId, index) => (
-                    <div className="friend" key={index} onClick={() => onFriendSelect(friendId)}>
+                {speakingWith.map((friendName, index) => (
+                    <div className="friend" key={index} onClick={() => onFriendSelect(friendName)}>
                         {
                           
-                            friendId
+                            friendName
                         }
                     </div>
                     ))
-                }
+                    }
                 
                 {/*
                     {friendList.map((user, index) => (

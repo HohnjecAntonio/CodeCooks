@@ -3,7 +3,7 @@ import firebase from './firebase';
 import './Chat.css'
 import {useDispatch, useSelector} from "react-redux";
 
-const Chat = ({ userId, friendId }) => {
+const Chat = ({ userName, friendName }) => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
 
@@ -63,13 +63,13 @@ const Chat = ({ userId, friendId }) => {
     }, []);
 
     const handleSendMessage = () => {  
-        if (input.trim() !== '' && userId !== '' && friendId !== '') {
+        if (input.trim() !== '' && userName !== '' && friendName !== '') {
             const messagesRef = firebase.database().ref('messages');
             const currentDate = new Date().toString(); 
             messagesRef.push({
             message: input,
-            userId: userId,
-            friendId: friendId,
+            userName: userName,
+            friendName: friendName,
             date: currentDate, 
         });
             setInput('');
@@ -81,17 +81,17 @@ const Chat = ({ userId, friendId }) => {
     return (
         <div className="chat">
         <header>
-            <h2 className='chatingWith'>Chatting with: {friendId}</h2>
+            <h2 className='chatingWith'>Chatting with: {friendName}</h2>
         </header>
         <div className="messages">
             {messages
             .filter((message) => 
-                (message.friendId === friendId && message.userId === userId) ||
-                (message.friendId === userId && message.userId === friendId)
+                (message.friendName === friendName && message.userName === userName) ||
+                (message.friendName === userName && message.userName === friendName)
             )
             .sort((a, b) => new Date(a.date) - new Date(b.date))
             .map((message, index, array) => {
-                const isMyMessage = message.userId === userId;
+                const isMyMessage = message.userName === userName;
                 const prevMessage = array[index - 1];
     
                 const isNewDay = !prevMessage || new Date(prevMessage.date).toDateString() !== new Date(message.date).toDateString();
