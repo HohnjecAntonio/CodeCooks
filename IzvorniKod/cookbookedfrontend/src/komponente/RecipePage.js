@@ -224,7 +224,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
               </ul>*/}
               <p>Uputstva: {recipe.priprema}</p>
               <p>Autor: <a href="/Profile" onClick={() => {
-                  localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
+                  localStorage.setItem('profileToLoad',JSON.stringify(recipe.idAutor))
             }}>{recipe.autor}</a></p>
             {
               props.currentUser
@@ -248,7 +248,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
                     ?
                       <div>
                         <button onClick={()=> setUrediRecept(true) }>Uredi recept</button>
-                        <button onClick={() => deleteRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Izbriši recept</button>
+                        <button onClick={() => deleteRecipeFunction(recipe.idAutor,recipe.idRecept)}>Izbriši recept</button>
                       </div>
                       :
                       <div>
@@ -419,6 +419,8 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
     
     <div>
       {arrayDataItems}
+
+      
       {
       
       
@@ -434,9 +436,9 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
             ))}
           </ul>*/}
           <p>Uputstva: {recipe.priprema}</p>
-          {/*<p>Autor: <a href="/Profile" onClick={() => {
-              localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor.idKorisnik))
-        }}>{recipe.autor.korisnickoIme}</a></p>*/}
+          {<p>Autor: <a href="/Profile" onClick={() => {
+              localStorage.setItem('profileToLoad',JSON.stringify(recipe.idAutor))
+        }}>{recipe.autor}</a></p>}
         </div>
 
         </div>
