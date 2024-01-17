@@ -1,30 +1,38 @@
 package opp.CookBooked.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import jakarta.persistence.*;
-import lombok.*;
 
 @Entity
-@Table(name = "receptSastojci")
-@Data
-@EqualsAndHashCode
 @NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "receptSastojci")
 public class ReceptSastojci {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     @Getter
     @Setter
-    @Column(name = "idrecept")
-    private Long idRecept;
+    private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "idRecept")
     @Getter
     @Setter
-    @Column(name = "idsastojak")
-    private Long idSastojak;
+    private Recept recept;
 
+    @ManyToOne
+    @JoinColumn(name = "idSastojak")
     @Getter
     @Setter
-    @Column(name = "kolicinaSastojak")
-    private String kolicinaSastojak;
+    private Sastojak sastojak;
+
+    public ReceptSastojci(Recept recept, Sastojak sastojak) {
+        this.recept = recept;
+        this.sastojak = sastojak;
+    }
 
 }

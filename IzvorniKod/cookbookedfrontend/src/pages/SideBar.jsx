@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchKategorije,fetchUserProfile } from '../redux/auth/auth.action.js';
 import { CSSTransition } from 'react-transition-group';
 import "./SideBar.css"
 
@@ -15,46 +17,41 @@ import { ReactComponent as CogIcon } from '../icons/cog.svg';
 import { ReactComponent as ChevronIcon } from '../icons/chevron.svg';
 import { ReactComponent as ArrowIcon } from '../icons/arrow.svg';
 import { ReactComponent as BoltIcon } from '../icons/bolt.svg';
+
+import * as AuthService from "../redux/auth/auth.action";
 import {NavLink} from "react-router-dom";
 
 
 function SideBar(props){
+  
+  const dispatch = useDispatch();
 
+  const userProfileInfo = useSelector(state => state.auth.userProfile);
   const [activeMenu, setActiveMenu] = useState('main');
   const [menuHeight, setMenuHeight] = useState(null);
-  /*const categories = [
-    { id: 1, name: 'Category 1' },
-    { id: 2, name: 'Category 2' },
-    // Add more categories as needed
-  ];*/
+  const categories = useSelector(state => state.auth.kategorije); // Adjust path according to your store structure
   
-  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    
+      dispatch(fetchKategorije());
+}, [dispatch]);
 
-  // useEffect(() => {
-  //   // Fetch categories from your API endpoint
-  //   fetchCategoriesFromAPI().then((data) => {
-  //     setCategories(data);
-  //   });
-  // }, []);
+
+useEffect(() => {
+  if(props.currentUser)
+    dispatch(fetchUserProfile());
+}, [dispatch]);
+
+
   function calcHeight(el){
     const heigth = el.offsetHeight;
     setMenuHeight(heigth);
   }
 
-
-
-  async function fetchCategoriesFromAPI() {
-    try {
-      const response = await fetch('api/categories');
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching categories:', error);
-      return [];
-    }
-  }
-
-  
+  const logOut = () => {
+    AuthService.logoutUser();
+};
+ 
 
   return (
     <nav class="navbar">
@@ -96,33 +93,45 @@ function SideBar(props){
         >
           <div className='menu'>
 
-          <NavItem
+            <NavItem
               leftIcon={<CatIcon/>}
               text ="Home"
               link= "/">
             </NavItem>
 
-          {props.currentUser ? (
-              <NavItem
-                  leftIcon={<SpaceShuttleIcon/>}
-                  text ="Profil"
-                  link= "/Profile">
-              </NavItem>
-          ) : (
-              <div className="hidden">
-              </div>
-          )}
+            {props.currentUser ? (
+                <NavItem
+                    leftIcon={<SpaceShuttleIcon/>}
+                    text ="Profil"
+                    link= "/Profile"
+                    openProfile = "true">
+                </NavItem>
+            ) : (
+                <div className="hidden">
+                </div>
+            )}
 
-          {props.currentUser ? (
+            {props.currentUser ? (
+                <NavItem
+                    leftIcon={<CatIcon/>}
+                    text ="Dodaj recept"
+                    link= "/AddRecipe">
+                </NavItem>
+            ) : (
+                <div className="hidden">
+                </div>
+            )}
+
+            {props.currentUser ? (
               <NavItem
                   leftIcon={<CatIcon/>}
-                  text ="Dodaj recept"
-                  link= "/user-feed">
+                  text ="Spremljeni recepti"
+                  link= "/SpremljeniRecepti">
               </NavItem>
-          ) : (
+              ) : (
               <div className="hidden">
               </div>
-          )}
+            )}
 
             <NavItem
               leftIcon={<SpaceStationIcon/>}
@@ -133,6 +142,22 @@ function SideBar(props){
             </NavItem>
 
             
+            
+
+            {props.currentUser ? (
+              <NavItem
+                  leftIcon={<CatIcon/>}
+                  text ="Logout"
+                  link= "/signin"
+                  logout="true"
+                  >
+                  
+              </NavItem>
+              ) : (
+              <div className="hidden">
+              </div>
+            )}
+
             <NavItem
               leftIcon={<AlienIcon/>}
               text ="Atributions"
@@ -160,11 +185,13 @@ function SideBar(props){
               >
             </NavItem>
             {categories.map((category) => (
+              
               <NavItem
-                key={category.id}
+                categoryId={category.idKategorija}
                 leftIcon={<AlienIcon />}
-                text={category.name}
-                link="#"
+                text={category.nazivKategorija}
+                link="/Categories"
+                openCategory = "true"
               />
             ))}
             
@@ -179,7 +206,11 @@ function SideBar(props){
   function NavItem(props){
     return(
           <li class="nav-item">
-            <a href={props.link} class="nav-link" onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}>
+            <a href={props.link} class="nav-link" onClick={() => {(props.goToMenu && setActiveMenu(props.goToMenu))
+            || (props.openProfile && localStorage.setItem('profileToLoad', JSON.stringify(userProfileInfo.korisnickoIme)))
+            || (props.openCategory && localStorage.setItem('categoryToLoad', JSON.stringify(props.categoryId)))
+            || (props.logout && logOut())
+            }}>
               <span className="icon-button">{props.leftIcon}</span>
               <span class="link-text">{props.text}</span>
               <span className="icon-right">{props.rightIcon}</span>

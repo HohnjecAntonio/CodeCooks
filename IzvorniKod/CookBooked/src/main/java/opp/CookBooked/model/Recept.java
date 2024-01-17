@@ -1,10 +1,14 @@
 package opp.CookBooked.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
-
 import java.sql.Time;
 
 @Entity
@@ -23,31 +27,26 @@ public class Recept {
 
     @Getter
     @Setter
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_korisnik")
+    private Korisnik autor;
+
+    @Getter
+    @Setter
     @Column(name = "nazivRecept")
     private String nazivRecept;
 
-    @OneToMany
-    @JoinColumn(name = "receptKategorije")
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
     private Set<ReceptKategorije> receptKategorije;
 
-    @Getter
-    @Setter
-    @Column(name = "idkategorija")
-    private Long idKategorija;
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
+    private Set<ReceptSastojci> receptSastojci;
 
-    @Getter
-    @Setter
-    @Column(name = "idreceptsastojak")
-    private Long idReceptSastojak;
-
-    @OneToMany
-    @JoinColumn(name = "vrstaKuhinja")
-    private Set<VrstaKuhinja> vrstaKuhinja;
-
-    @Getter
-    @Setter
-    @Column(name = "idvrstakuhinja")
-    private Long idVrstaKuhinja;
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
+    private Set<VrsteKuhinjaRecepta> vrsteKuhinjaRecepta;
 
     @Getter
     @Setter
@@ -57,7 +56,7 @@ public class Recept {
     @Getter
     @Setter
     @Column(name = "vrijemeKuhanja")
-    private Time vrijemeKuhanja;
+    private LocalTime vrijemeKuhanja;
 
     @Getter
     @Setter
@@ -67,25 +66,52 @@ public class Recept {
     @Getter
     @Setter
     @Column(name = "slikaRecept")
-    private String slikaRecept; // potorebno provjeriti
+    private String slikaRecept;
 
     @Getter
     @Setter
-    @Column(name = "idvideorecept")
-    private Long idVideoRecept;
+    @Column(name = "videoRecept")
+    private String videoRecept;
 
-    public Recept(String nazivRecept, Long idKategorija, Long idReceptSastojak,
-                  Long idVrstaKuhinja, String priprema, Time vrijemeKuhanja,
-                  String oznaka, String slikaRecept, Long idVideoRecept) {
+    @Getter
+    @Setter
+    @Column(name = "vrijemeObjave")
+    private LocalDate vrijemeObjave;
+
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
+    private Set<SpremljeniRecepti> korisnici;
+
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
+    private Set<OznacavanjeRecepata> korisniciOzn;
+
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
+    private List<KomentariRecept> komentari;
+
+    public Recept(String nazivRecept, Korisnik autor,
+                  String priprema, LocalTime vrijemeKuhanja,
+                  String oznaka, String slikaRecept, String videoRecept) {
         this.nazivRecept = nazivRecept;
-        this.idKategorija = idKategorija;
-        this.idReceptSastojak = idReceptSastojak;
-        this.idVrstaKuhinja = idVrstaKuhinja;
+        this.autor = autor;
         this.Priprema = priprema;
         this.vrijemeKuhanja = vrijemeKuhanja;
         this.Oznaka = oznaka;
         this.slikaRecept = slikaRecept;
-        this.idVideoRecept = idVideoRecept;
+        this.videoRecept = videoRecept;
+    }
+
+    public Recept(Long idRecept, Korisnik autor, String nazivRecept, String priprema, String oznaka, String slika, String video, LocalDate vrijemeObjave, LocalTime vrijemeKuhanja) {
+        this.idRecept = idRecept;
+        this.autor = autor;
+        this.nazivRecept = nazivRecept;
+        this.Priprema = priprema;
+        this.Oznaka = oznaka;
+        this.slikaRecept = slika;
+        this.videoRecept = video;
+        this.vrijemeObjave = vrijemeObjave;
+        this.vrijemeKuhanja = vrijemeKuhanja;
     }
 
 }

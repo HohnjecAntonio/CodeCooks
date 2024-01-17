@@ -7,9 +7,17 @@ import Login from "./pages/Login";
 import HomePage from "./pages/HomePage/HomePage";
 import './App.css';
 import SideBar from "./pages/SideBar";
+import Profile from "./pages/Profile";
+
+import RecipeForm from "./komponente/RecipeForm";
+import PrivateProfile from "./komponente/PrivateProfile";
+import RecipePage from "./komponente/RecipePage";
+import CategoryButtons from './komponente/CategoryButtons';
+import MessengerApp from './messenger/MessengerApp';
+import SpremljeniRecepti from "./pages/UserFeed/SpremljeniRecepti";
 
 function App() {
-    const [isLoggedIn,setIsLoggedIn] = useState(false);
+    const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
     const [currentUser, setCurrentUser] = useState(undefined);
 
     useEffect(() => {
@@ -41,7 +49,7 @@ function App() {
                         </NavLink>
 
                         {currentUser && (
-                            <NavLink className="Header-button" to="/user-feed">
+                            <NavLink to="/user-feed" className="Header-button">
                                 User feed
                             </NavLink>
                         )}
@@ -72,20 +80,39 @@ function App() {
                 <div className="Tijelo">
                     <button className = "hidden" onClick={() => setIsLoggedIn(!isLoggedIn)}>Toggle login</button>
                     <Switch>
+
                         <Route path="/" exact>
-                            <HomePage/>
+                            {<HomePage/>}
+
                         </Route>
+
                         {currentUser ? (
                             <Route path="/user-feed">
                                 <UserFeed/>
                             </Route>
                         ) : null}
+
                         <Route path="/signin">
                             <Login/>
                         </Route>
+
                         <Route path="/signup">
                             <Registration/>
                         </Route>
+
+
+                        <Route path="/Profile" exact>
+                            {<Profile currentUserID={currentUser} profileID={JSON.parse(localStorage.getItem('profileToLoad'))}
+                                />}
+                        </Route>
+
+                        <Route path="/PrivateProfile" exact component={PrivateProfile} />
+                        <Route path="/AddRecipe" exact component={RecipeForm} />
+                        <Route path="/Categories" exact component={CategoryButtons} />
+                        <Route path="/MessengerApp" exact component={MessengerApp} />
+                        <Route path="/RecipePage" exact component={RecipePage} />
+                        <Route path="/Categories" exact component={CategoryButtons}/>
+                        <Route path="/SpremljeniRecepti" exact component={SpremljeniRecepti}/>
                     </Switch>
                 </div>
                 <SideBar currentUser={currentUser} changeLoginState = {isLoggedIn => setIsLoggedIn(isLoggedIn)} />

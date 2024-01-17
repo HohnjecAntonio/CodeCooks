@@ -3,7 +3,8 @@ import "./Login.css"
 
 
 
-function Login() {
+function Login(propsLogin) {
+    console.log(propsLogin);
 
     const [form, setForm] = React.useState({
         username: '',
@@ -42,6 +43,8 @@ function Login() {
                         response.redirect("/");
                     } else {
                         alert("Prijava uspjela!");
+                        propsLogin.changeLoginState(propsLogin.isLoggedIn)
+                        propsLogin.changeCurrentUserID(data.IDKorisnik);
                         response.redirect("/");
                     }
                 })

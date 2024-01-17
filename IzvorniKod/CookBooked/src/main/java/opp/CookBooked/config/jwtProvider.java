@@ -14,7 +14,7 @@ public class jwtProvider {
     public static String generateToken(Authentication auth) {
 
         return Jwts.builder()
-                .setIssuer("Codeda").setIssuedAt(new Date())
+                .setIssuer("CodeCooks").setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + 86400000))
                 .claim("korisnickoIme", auth.getName())
                 .signWith(key)

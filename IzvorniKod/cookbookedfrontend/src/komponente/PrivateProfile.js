@@ -1,107 +1,136 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './PrivateProfile.css'; // You can create a separate CSS file for styling
 import profilePictureTemp from "../images/img/user.jpeg";
+import {useDispatch, useSelector} from "react-redux";
+import { useHistory } from 'react-router-dom';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import {fetchUserProfile, updateUserProfile, deleteUserAction} from "../redux/auth/auth.action";
 
 const PrivateProfile = () => {
-  // State for user settings
-  const [settings, setSettings] = useState({
-    profilePicture: profilePictureTemp,
-    name: 'John Doe',
-    email: 'john@example.com',
-    availability: 'Anytime',
-    receiveMessages: true,
-    receiveNotifications: true,
-  });
+  const jwtToken = localStorage.getItem("token");
+  const dispatch = useDispatch();
+  const userProfileInfo = useSelector(state => state.auth.userProfile); // Adjust path according to your store structure
+  const kategorije = useSelector(state => state.auth.kategorije);
+  const loading = useSelector(state => state.auth.loading);
+  const error = useSelector(state => state.auth.error);
+  const history = useHistory();
 
-  // Handle input changes
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    const newValue = type === 'checkbox' ? checked : value;
+  useEffect(() => {
+    dispatch(fetchUserProfile());
+  }, [dispatch]);
 
-    setSettings({
-      ...settings,
-      [name]: newValue,
+
+  // Handle form submission
+  const handleSubmit = async (values) => {
+    console.log('handle submit ', values);
+    await dispatch(updateUserProfile({ data: values })).then(() => {
+        //history.push('/Profile');
+        //window.location.reload();
     });
   };
 
-  const handleImageChange = (e) => {
-    const selectedImage = e.target.files[0];
-    setSettings({ ...settings, profilePicture: selectedImage });
-  };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Implement logic to save settings (e.g., send to server)
-    console.log('Settings submitted:', settings);
+  const deleteUserFunction = async (idKorisnik) => {
+    await dispatch(deleteUserAction({ data: {
+      idKorisnik: idKorisnik
+    } })).then(() => {
+        //history.push('/Profile');
+        //window.location.reload();
+    });
   };
 
   return (
     <div className="profile-settings-container">
+      
+      <div className="container mx-auto my-10 p-6 bg-white shadow-md rounded-md">
+        {userProfileInfo.korisnickoIme + " " + userProfileInfo.imeKorisnik + " " + userProfileInfo.prezimeKorisnik + " " + userProfileInfo.brojTelefona + " " + userProfileInfo.emailKorisnik}
+      </div>
+
       <h2>Profile Settings</h2>
-      <form onSubmit={handleSubmit}>
-      <img src={settings.profilePicture} alt="Profile Picture" className="profile-picture" />
-      <label htmlFor="profile_picture">Upload Image:</label>
-        <input
-          className='image_upload'
-          type="file"
-          id="image"
-          name="image"
-          accept="image/*"
-          onChange={handleImageChange}
-        />
-
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={settings.name}
-          onChange={handleInputChange}
-        />
-
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={settings.email}
-          onChange={handleInputChange}
-        />
-
-        <label for="from">Availability:</label>
-
-        <label>From: <input type="time" id="from" name="appt" min="09:00" max="18:00" required /></label>
-        <label>To: <input type="time" id="to" name="appt" min="09:00" max="18:00" required /></label>
-
-        <label>
-          Receive Messages:
-          <input
-            className='checkboxSetting'
-            type="checkbox"
-            name="receiveMessages"
-            checked={settings.receiveMessages}
-            onChange={handleInputChange}
+      <Formik enableReinitialize="true" initialValues={userProfileInfo} onSubmit={handleSubmit}>
+        <Form>
+          <Field
+            type="hidden"
+            id="idKorisnik"
+            name="idKorisnik"
           />
-        </label>
-
-        <label>
-          Receive Notifications:
-          <input
-            className='checkboxSetting'
-            type="checkbox"
-            name="receiveNotifications"
-            checked={settings.receiveNotifications}
-            onChange={handleInputChange}
+          <label htmlFor="name">Korisničko ime:</label>
+          <Field
+            type="text"
+            id="korisnickoIme"
+            name="korisnickoIme"
           />
-        </label>
 
-        <button type="submit">Spremi</button>
-        
-      </form>
+          <label htmlFor="ime">Ime:</label>
+          <Field
+            type="text"
+            id="imeKorisnik"
+            name="imeKorisnik"
+          
+          />
+          <label htmlFor="ime">Prezime:</label>
+          <Field
+            type="text"
+            id="prezimeKorisnik"
+            name="prezimeKorisnik"
+          />
+
+          <label htmlFor="email">Email:</label>
+          <Field
+            type="email"
+            id="emailKorisnik"
+            name="emailKorisnik"
+            
+          />
+
+          <label htmlFor="brojTelefona">Broj telefona:</label>
+          <Field
+            type="text"
+            id="brojTelefona"
+            name="brojTelefona"
+          />
+
+          <label for="dostupnost">Dostupnost:</label>
+
+          <label>From: 
+          <Field type="time" id="dostupanOd" name="dostupanOd" min="00:00" max="24:00" 
+           />
+          </label>
+          <label>To: <Field type="time" id="dostupanDo" name="dostupanDo" min="00:00" max="24:00" 
+           /></label>
+
+          <label>
+            Primaj poruke?:
+            <Field
+              className='checkboxSetting'
+              type="checkbox"
+              id="primajPoruke"
+              name="primajPoruke"
+             
+            />
+          </label>
+
+          <label>
+            Primaj obavijesti?:
+            <Field
+              className='checkboxSetting'
+              type="checkbox"
+              id="primajObavijesti"
+              name="primajObavijesti"
+             
+            />
+          </label>
+
+          <button type="submit">Spremi</button>
+          
+        </Form>
+      </Formik>
+      <a href="#" onClick={() => deleteUserFunction(userProfileInfo.idKorisnik)} class="private-profile-button">
+        <button>Izbriši profil</button>
+      </a>
       <a href="/Profile" class="private-profile-button">
-          <button>Odustani</button>
-        </a>
+        <button>Odustani</button>
+      </a>
     </div>
   );
 };
