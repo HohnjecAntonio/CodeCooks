@@ -67,6 +67,7 @@ const arrayDataItems = kategorijaRecepti.map(recipe =>
               flexDirection: 'row',
               flexWrap: 'wrap',
               justifyContent: 'center',
+
             }}
           >
             {categories.map((category) => (
