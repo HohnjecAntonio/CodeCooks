@@ -9,12 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @SpringBootApplication
 public class CookBookedApplication {
 
-    @Bean
-    public PasswordEncoder pswdEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
-
     public static void main(String[] args) {
 		SpringApplication.run(CookBookedApplication.class, args);
 	}

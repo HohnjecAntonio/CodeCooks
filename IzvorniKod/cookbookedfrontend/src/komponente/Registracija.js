@@ -2,11 +2,15 @@ import "./Registracija.css";
 import React from "react";
 
 function Registracija(){
+
+
     const [form, setForm] = React.useState({
        username: '',
        password: '',
        email: ''
     });
+
+    const [error, setError] = React.useState('');
 
     function onChange(event){
         const {name, value} = event.target;
@@ -19,19 +23,31 @@ function Registracija(){
             password: form.password,
             email: form.email
         };
+
+        console.log(JSON.stringify(data));
         const options = {
             method: 'POST',
             headers: {
+                Accept: "application/json",
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         }
 
-        return fetch('/api/korisnici', options).then(
-            console.log(data)
-        ).catch(
-            console.log("Error u registraciji")
-        );
+        try {
+            return fetch('/api/korisnici', options)
+                .then(response => {
+                    if (!response.ok){
+                        alert("Registracija nije uspjela!");
+                        response.redirect("/");
+                    }else {
+                        alert("Registracija uspjela!");
+                        response.redirect("/");
+                    }
+                })
+        } catch (err){
+            alert("Registracija nije uspjela!");
+        }
     }
 
     return (
@@ -49,6 +65,8 @@ function Registracija(){
 
                 <button type = "submit">Register</button>
             </form>
+
+            <a href="/Login">Već imaš profil? Prijavi se ovdje.</a>
         </div>
     );
 }
