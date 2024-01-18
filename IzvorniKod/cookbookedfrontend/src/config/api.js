@@ -2,7 +2,7 @@ import axios from "axios";
 
 const token = localStorage.getItem("token");
 
-export const API_BASE_URL = "http://localhost:8080/api";
+export const API_BASE_URL = "https://codecooks-cookbooked-backend.onrender.com/api";
 
 export const api = axios.create({baseURL:API_BASE_URL,
     headers:{
