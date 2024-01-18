@@ -6,12 +6,12 @@
   padding: 20px;
   font-family: 'Arial', sans-serif;
 }
-
+/*
 h1,
 h2 {
   text-align: center;
   color: #000;
-}
+}*/
 
 .recipe-list {
   display: grid;

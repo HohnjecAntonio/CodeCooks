@@ -104,10 +104,7 @@ const Registration = () => {
                             </div>
                             <div className="flex items-center justify-between">
                                 <Button
-                                    sx={{ padding: '.8rem 9rem', backgroundColor: '#388E3C' }}
-                                    className="w-full"
                                     type="submit"
-                                    variant="container"
                                 >
                                     Register
                                 </Button>
