@@ -43,9 +43,11 @@ import {
     LIKE_RECIPE_FAILURE,LIKE_RECIPE_REQUEST,LIKE_RECIPE_SUCCESS, 
     DELETE_USER_PROFILE_REQUEST, DELETE_USER_PROFILE_SUCCESS, DELETE_USER_PROFILE_FAILURE, FETCH_OTHER_PROFILE_BY_USERNAME_REQUEST, FETCH_OTHER_PROFILE_BY_USERNAME_SUCCESS, FETCH_OTHER_PROFILE_BY_USERNAME_FAILURE, GET_ROLE_REQUEST, GET_ROLE_SUCCESS, GET_ROLE_FAILURE
 } from "./auth.actionType";
+import { useHistory } from 'react-router-dom';
 
 export const loginUserAction = (loginData) => async (dispatch) => {
     dispatch({ type: LOGIN_REQUEST });
+    const history = useHistory();
     try {
         const { data } = await axios.post(`${API_BASE_URL}/auth/signin`, loginData.data);
 
@@ -54,14 +56,19 @@ export const loginUserAction = (loginData) => async (dispatch) => {
         }
 
         dispatch({ type: LOGIN_SUCCESS, payload: data.token });
+        history.push('/user-feed');
+        window.location.reload();
     } catch (error) {
         console.log("------", error);
         dispatch({ type: LOGIN_FAILURE, payload: error });
+        window.alert("Kriva prijava!");
+        
     }
 };
 
 export const registerUserAction = (registerData) => async (dispatch) => {
     dispatch({ type: REGISTER_REQUEST });
+    const history = useHistory();
     try {
         const { data } = await axios.post(`${API_BASE_URL}/auth/signup`, registerData.data);
 
@@ -70,9 +77,12 @@ export const registerUserAction = (registerData) => async (dispatch) => {
         }
 
         dispatch({ type: REGISTER_SUCCESS, payload: data.jwt });
+        history.push('/user-feed');
+        window.location.reload();
     } catch (error) {
         console.log("------", error);
         dispatch({ type: REGISTER_FAILURE, payload: error });
+        window.alert("Kriva registracija!");
     }
 };
 
