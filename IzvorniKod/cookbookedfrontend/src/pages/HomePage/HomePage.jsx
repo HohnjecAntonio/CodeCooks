@@ -44,19 +44,12 @@ const HomePage = () => {
                 <a href="/RecipePage" style={{ fontWeight: 'bold' , fontSize: '20px', color: '#000'}} onClick={()=>{localStorage.setItem('recipeToLoad',JSON.stringify(recipe.idRecept)); console.log(recipe.idRecept);}}>
                 <div className="recipe-details">
                   <h2>{recipe.nazivRecept}</h2>
-                  {/*<p>Category: {recipe.category}</p>
-                  <ul>
-                    {recipe.ingredients.map((ingredient, index) => (
-                      <li key={index}>{ingredient}</li>
-                    ))}
-                  </ul>*/}
-                  <p>Uputstva: {recipe.priprema}</p>
                   <p>Autor: <a href="/Profile" onClick={() => {
                       localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
                 }}>{recipe.autor}</a></p>
                 <p>Vrijeme kuhanja: {recipe.vrijemeKuhanja}</p>
                 {
-                  recipe.kategorije &&  recipe.kategorije.length > 0  ?
+                  recipe.kategorije[0] ?
                   (
                     <p>Kategorija: {recipe.kategorije[0].nazivKategorija}</p>
                   )
@@ -66,9 +59,8 @@ const HomePage = () => {
                   )
                 }
 
-                
                 {
-                  recipe.vrsteKuhinje &&  recipe.vrsteKuhinje.length > 0 ?
+                  recipe.vrsteKuhinje[0] ?
                   (
                     <p>Vrste kuhinje: {recipe.vrsteKuhinje[0].nazivVrstaKuhinje}</p>
                   )

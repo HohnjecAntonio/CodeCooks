@@ -288,19 +288,12 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
 
             <div className="recipe-details">
               <h2>{recipe.nazivRecept}</h2>
-              {/*<p>Category: {recipe.category}</p>
-              <ul>
-                {recipe.ingredients.map((ingredient, index) => (
-                  <li key={index}>{ingredient}</li>
-                ))}
-              </ul>*/}
-              <p>Uputstva: {recipe.priprema}</p>
               <p>Autor: <a href="/Profile" onClick={() => {
                   localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
             }}>{recipe.autor}</a></p>
               <p>Vrijeme kuhanja: {recipe.vrijemeKuhanja}</p>
               {
-                  recipe.kategorije &&  recipe.kategorije.length > 0  ?
+                  recipe.kategorije[0] ?
                   (
                     <p>Kategorija: {recipe.kategorije[0].nazivKategorija}</p>
                   )
@@ -312,7 +305,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
 
                 
                 {
-                  recipe.vrsteKuhinje &&  recipe.vrsteKuhinje.length > 0 ?
+                  recipe.vrsteKuhinje[0] ?
                   (
                     <p>Vrste kuhinje: {recipe.vrsteKuhinje[0].nazivVrstaKuhinje}</p>
                   )
@@ -323,7 +316,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
                 }
 
                 {
-                  recipe.sastojci != {} && recipe.sastojci != null ?
+                  recipe.sastojci ?
                   <p>
                     Sastojci: 
                     <span>
