@@ -33,8 +33,13 @@ const Friend = ({ userName, onFriendSelect }) => {
         });
     }, [userName]);
 
+    useEffect(()=>{
+        handleAddFriendAuto();
+    },[]);
+
     const handleAddFriend = () => {
         const newfriendName = prompt('Upisi korisnickoIme prijatelja:');
+
         if(newfriendName!=null){
             const input = newfriendName.toString();
             if (input.trim() !== '' && input !== speakingWith) {
@@ -43,7 +48,20 @@ const Friend = ({ userName, onFriendSelect }) => {
             }
         }
     };
+
+    const handleAddFriendAuto = () => {
+        const newfriendName = JSON.parse(localStorage.getItem("friendUsername"));
+        if(newfriendName!=null && !speakingWith.includes(newfriendName)){
+            const input = newfriendName.toString();
+            if (input.trim() !== '' && input !== speakingWith) {
+                setSpeakingWith((prevSpeakingWith) => [...prevSpeakingWith, input]);
+                onFriendSelect(input);
+            }
+        }
+    };
     
+    console.log(speakingWith);
+
     return (
         <div className="friends-container">
             <div className = "friend-selector-title">
