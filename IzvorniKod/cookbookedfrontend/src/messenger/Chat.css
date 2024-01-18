@@ -54,7 +54,7 @@ input {
   border-radius: 5px 0 0 5px;
 }
 
-button {
+.send {
   flex: 1;
   padding: 8px;
   border: 1px solid #ddd;
@@ -65,7 +65,7 @@ button {
   min-width: fit-content;
 }
 
-button:hover {
+.send:hover {
   background-color: #45a049;
 }
 
