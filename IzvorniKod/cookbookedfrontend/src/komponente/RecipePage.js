@@ -298,6 +298,50 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
               <p>Autor: <a href="/Profile" onClick={() => {
                   localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
             }}>{recipe.autor}</a></p>
+              <p>Vrijeme kuhanja: {recipe.vrijemeKuhanja}</p>
+              {
+                  recipe.kategorije &&  recipe.kategorije.length > 0  ?
+                  (
+                    <p>Kategorija: {recipe.kategorije[0].nazivKategorija}</p>
+                  )
+                  :
+                  (
+                  <p>Kategorija: </p> 
+                  )
+                }
+
+                
+                {
+                  recipe.vrsteKuhinje &&  recipe.vrsteKuhinje.length > 0 ?
+                  (
+                    <p>Vrste kuhinje: {recipe.vrsteKuhinje[0].nazivVrstaKuhinje}</p>
+                  )
+                  :
+                  (
+                  <p>Vrste kuhinje: </p> 
+                  )
+                }
+
+                {
+                  recipe.sastojci != {} && recipe.sastojci != null ?
+                  <p>
+                    Sastojci: 
+                    <span>
+                    {
+                    recipe.sastojci.map((sastojak) =>
+                    (
+                      <span>{sastojak.nazivSastojka} </span>
+                    ))
+                    }
+                    </span>
+                  </p>
+                  :
+                  <p>
+                    Sastojci: 
+                  </p>
+                }
+                <p>Oznaka: {recipe.oznaka}</p>
+                <p>Uputstva: {recipe.priprema}</p>
             {
               props.currentUser
               ?

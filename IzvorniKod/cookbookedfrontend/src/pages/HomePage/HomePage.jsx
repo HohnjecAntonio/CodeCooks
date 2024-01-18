@@ -54,6 +54,29 @@ const HomePage = () => {
                   <p>Autor: <a href="/Profile" onClick={() => {
                       localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
                 }}>{recipe.autor}</a></p>
+                <p>Vrijeme kuhanja: {recipe.vrijemeKuhanja}</p>
+                {
+                  recipe.kategorije &&  recipe.kategorije.length > 0  ?
+                  (
+                    <p>Kategorija: {recipe.kategorije[0].nazivKategorija}</p>
+                  )
+                  :
+                  (
+                  <p>Kategorija: </p> 
+                  )
+                }
+
+                
+                {
+                  recipe.vrsteKuhinje &&  recipe.vrsteKuhinje.length > 0 ?
+                  (
+                    <p>Vrste kuhinje: {recipe.vrsteKuhinje[0].nazivVrstaKuhinje}</p>
+                  )
+                  :
+                  (
+                  <p>Vrste kuhinje: </p> 
+                  )
+                }
                 </div>
                 </a>
               </div>

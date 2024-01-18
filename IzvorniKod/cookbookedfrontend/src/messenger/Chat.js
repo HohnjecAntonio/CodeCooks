@@ -77,7 +77,7 @@ const Chat = ({ userName, friendName }) => {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
             />
-            <button onClick={handleSendMessage}>Send</button>
+            <button className='send' onClick={handleSendMessage}>Send</button>
         </div>
         </div>
     );
