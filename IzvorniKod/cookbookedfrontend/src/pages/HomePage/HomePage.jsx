@@ -49,7 +49,7 @@ const HomePage = () => {
                 }}>{recipe.autor}</a></p>
                 <p>Vrijeme kuhanja: {recipe.vrijemeKuhanja}</p>
                 {
-                  recipe.kategorije[0] ?
+                  recipe.kategorije &&  recipe.kategorije.length > 0  ?
                   (
                     <p>Kategorija: {recipe.kategorije[0].nazivKategorija}</p>
                   )
@@ -59,8 +59,9 @@ const HomePage = () => {
                   )
                 }
 
+                
                 {
-                  recipe.vrsteKuhinje[0] ?
+                  recipe.vrsteKuhinje &&  recipe.vrsteKuhinje.length > 0 ?
                   (
                     <p>Vrste kuhinje: {recipe.vrsteKuhinje[0].nazivVrstaKuhinje}</p>
                   )

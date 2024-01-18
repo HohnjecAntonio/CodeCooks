@@ -293,7 +293,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
             }}>{recipe.autor}</a></p>
               <p>Vrijeme kuhanja: {recipe.vrijemeKuhanja}</p>
               {
-                  recipe.kategorije[0] ?
+                  recipe.kategorije &&  recipe.kategorije.length > 0  ?
                   (
                     <p>Kategorija: {recipe.kategorije[0].nazivKategorija}</p>
                   )
@@ -305,7 +305,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
 
                 
                 {
-                  recipe.vrsteKuhinje[0] ?
+                  recipe.vrsteKuhinje &&  recipe.vrsteKuhinje.length > 0 ?
                   (
                     <p>Vrste kuhinje: {recipe.vrsteKuhinje[0].nazivVrstaKuhinje}</p>
                   )
@@ -316,7 +316,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
                 }
 
                 {
-                  recipe.sastojci ?
+                  recipe.sastojci != {} && recipe.sastojci != null ?
                   <p>
                     Sastojci: 
                     <span>
