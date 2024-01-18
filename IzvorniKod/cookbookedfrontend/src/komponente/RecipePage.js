@@ -288,53 +288,16 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
 
             <div className="recipe-details">
               <h2>{recipe.nazivRecept}</h2>
+              {/*<p>Category: {recipe.category}</p>
+              <ul>
+                {recipe.ingredients.map((ingredient, index) => (
+                  <li key={index}>{ingredient}</li>
+                ))}
+              </ul>*/}
+              <p>Uputstva: {recipe.priprema}</p>
               <p>Autor: <a href="/Profile" onClick={() => {
                   localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
             }}>{recipe.autor}</a></p>
-              <p>Vrijeme kuhanja: {recipe.vrijemeKuhanja}</p>
-              {
-                  recipe.kategorije[0] ?
-                  (
-                    <p>Kategorija: {recipe.kategorije[0].nazivKategorija}</p>
-                  )
-                  :
-                  (
-                  <p>Kategorija: </p> 
-                  )
-                }
-
-                
-                {
-                  recipe.vrsteKuhinje[0] ?
-                  (
-                    <p>Vrste kuhinje: {recipe.vrsteKuhinje[0].nazivVrstaKuhinje}</p>
-                  )
-                  :
-                  (
-                  <p>Vrste kuhinje: </p> 
-                  )
-                }
-
-                {
-                  recipe.sastojci ?
-                  <p>
-                    Sastojci: 
-                    <span>
-                    {
-                    recipe.sastojci.map((sastojak) =>
-                    (
-                      <span>{sastojak.nazivSastojka} </span>
-                    ))
-                    }
-                    </span>
-                  </p>
-                  :
-                  <p>
-                    Sastojci: 
-                  </p>
-                }
-                <p>Oznaka: {recipe.oznaka}</p>
-                <p>Uputstva: {recipe.priprema}</p>
             {
               props.currentUser
               ?
