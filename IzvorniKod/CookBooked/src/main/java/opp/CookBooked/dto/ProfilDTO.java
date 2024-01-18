@@ -56,4 +56,7 @@ public class ProfilDTO {
     @Setter
     private List<FollowDTO> pratiociKorisnika;
 
+    @Setter
+    private String razinaOvlasti;
+
 }

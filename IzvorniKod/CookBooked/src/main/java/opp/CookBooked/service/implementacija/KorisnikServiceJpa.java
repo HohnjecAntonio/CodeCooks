@@ -74,6 +74,7 @@ public class KorisnikServiceJpa implements KorisnikService {
                 profil.setPrezimeKorisnik(korisnik.getPrezimeKorisnik());
                 profil.setEmailKorisnik(korisnik.getEmailKorisnik());
                 profil.setBrojTelefona(korisnik.getBrojTelefona());
+                profil.setRazinaOvlasti(korisnik.getRazinaOvlasti());
                 profil.setDostupanOdDo(korisnik.getDostupanOd() + " - " + korisnik.getDostupanDo());
                 profil.setMojiRecepti(mojiRecepti);
                 profil.setSpremljeniReceptiKorisnika(spremljeniRecepti);

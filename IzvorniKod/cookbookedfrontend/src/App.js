@@ -16,10 +16,13 @@ import CategoryButtons from './komponente/CategoryButtons';
 import MessengerApp from './messenger/MessengerApp';
 import SpremljeniRecepti from "./pages/UserFeed/SpremljeniRecepti";
 
+import {useDispatch, useSelector} from "react-redux";
+import {fetchUserProfile} from "./redux/auth/auth.action";
+
 function App() {
     const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
-    const [isAdmin,setIsAdmin] = useState(false);
     const [currentUser, setCurrentUser] = useState(undefined);
+
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -39,6 +42,9 @@ function App() {
     const logOut = () => {
         AuthService.logoutUser();
     };
+
+
+
 
     return (
         <Router>
@@ -80,7 +86,6 @@ function App() {
 
                 <div className="Tijelo">
                     <button className = "hidden" onClick={() => setIsLoggedIn(!isLoggedIn)}>Toggle login</button>
-                    <button onClick={() => {setIsAdmin(!isAdmin)}}>Toggle admin</button>
                     <Switch>
 
                         <Route path="/" exact>
@@ -105,13 +110,13 @@ function App() {
 
                         <Route path="/Profile" exact>
                             {<Profile currentUser={currentUser}
-                                isAdmin={isAdmin} 
+                                
                                 />}
                         </Route>
 
                         <Route path="/RecipePage">
                             {<RecipePage currentUser={currentUser}
-                                isAdmin={isAdmin}></RecipePage>}
+                                ></RecipePage>}
                             </Route> 
 
                         <Route path="/PrivateProfile" exact component={PrivateProfile} />

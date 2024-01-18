@@ -3,7 +3,7 @@ import './Profile.css'; // You can create a separate CSS file for styling
 import profilePictureTemp from "../images/img/user.jpeg";
 import {useDispatch, useSelector} from "react-redux";
 import { useHistory } from 'react-router-dom';
-import {fetchUserProfile, fetchOtherProfile, followUser, fetchRecipesForUserFeed, fetchOtherProfileByUsername} from "../redux/auth/auth.action";
+import {fetchUserProfile, followUser, fetchRecipesForUserFeed, fetchOtherProfileByUsername,fetchRecipesByUser} from "../redux/auth/auth.action";
 
 
 function Profile(props) {
@@ -14,20 +14,19 @@ function Profile(props) {
   const loading = useSelector(state => state.auth.loading);
   const error = useSelector(state => state.auth.error);
   const history = useHistory();
-  const recipesForFeed = useSelector(state => state.auth.recipesForFeed);
+  const recipesByUser = useSelector(state => state.auth.recipesByUser);
 
   useEffect(() => {
     dispatch(fetchUserProfile());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
-    dispatch(fetchRecipesForUserFeed());
-}, [dispatch]);
-
+    dispatch(fetchRecipesByUser(profileToLoad.idKorisnik));
+  }, [profileToLoad]);
 
   useEffect(() => {
     dispatch(fetchOtherProfileByUsername(JSON.parse(localStorage.getItem("profileToLoad"))));
-  }, [dispatch]);
+  }, []);
 
   const followUserFunction = async () => {
     console.log("Trying to follow user");
@@ -36,69 +35,10 @@ function Profile(props) {
       //window.location.reload();
     });
   };
-  // State to store user profile information, followers, and following
-
-  const profiles = [
-    {
-      userID: '1',
-      name: 'John Doe',
-      bio: 'Web Developer | Explorer | Coffee Lover',
-      profilePicture: profilePictureTemp,
-      socialMedia: {
-        twitter: 'https://twitter.com/johndoe',
-        linkedin: 'https://www.linkedin.com/in/johndoe',
-        github: 'https://github.com/johndoe',
-      },
-      posts: [
-        {
-          title: 'Post Title 1',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-          date: 'January 1, 2023',
-        },
-        {
-          title: 'Post Title 2',
-          content: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-          date: 'January 2, 2023',
-        },
-      ],
-      followers: ['Follower1', 'Follower2', 'Follower3'],
-      following: ['Following1', 'Following2'],
-    },
-    {
-      userID: "2",
-      name: 'Other user',
-      bio: 'Web Developer | Explorer | Coffee Lover',
-      profilePicture: profilePictureTemp,
-      socialMedia: {
-        twitter: 'https://twitter.com/johndoe',
-        linkedin: 'https://www.linkedin.com/in/johndoe',
-        github: 'https://github.com/johndoe',
-      },
-      posts: [
-        {
-          title: 'Post Title 1',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-          date: 'January 1, 2023',
-        },
-        {
-          title: 'Post Title 2',
-          content: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-          date: 'January 2, 2023',
-        },
-      ],
-      followers: ['Follower1', 'Follower2', 'Follower3'],
-      following: ['Following1', 'Following2'],
-    }
-
-  ]
 
 
-  const korisnikRecepti = recipesForFeed.filter(recipe  =>
-    recipe.autor == profileToLoad.korisnickoIme
-  );
 
-
-  const arrayDataItems = korisnikRecepti.map(recipe => 
+  const arrayDataItems = recipesByUser.map(recipe => 
     <div className="single-recipe-page">
       <div className="recipe-card">
       <a href="/RecipePage" onClick={()=>{localStorage.setItem('recipeToLoad',JSON.stringify(recipe.idRecept)); console.log(recipe.idRecept);}}>
@@ -138,7 +78,7 @@ function Profile(props) {
                 ?
                 <div>
                   {
-                    props.isAdmin 
+                    userProfileInfo.razinaOvlasti == "Admin"
                     ?
                     <div>
                         <a href="/PrivateProfile" class="private-profile-button">

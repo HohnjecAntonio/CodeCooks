@@ -33,29 +33,6 @@ const Friend = ({ userName, onFriendSelect }) => {
         });
     }, [userName]);
 
-    /*
-    var getUserFromId = async (id) => {
-        try {
-            const response = await dispatch(fetchUserProfile(id));
-            return response && response.payload;
-        } catch (error) {
-            console.error('Error fetching user profile:', error);
-            return null;
-        }
-    };
-    };
-
-    const fetchData = async () => {
-        const userPromises = speakingWith.map((friendId) => getUserFromId(friendId));
-        const users = await Promise.all(userPromises);
-        setFriendList(users);
-      };
-      
-      useEffect(() => {
-        fetchData();
-      }, [speakingWith]);
-    */
-    
     const handleAddFriend = () => {
         const newfriendName = prompt('Upisi korisnickoIme prijatelja:');
         if(newfriendName!=null){
@@ -100,31 +77,3 @@ const Friend = ({ userName, onFriendSelect }) => {
 
 export default Friend;
 
-
-/*
-useEffect(() => {
-    
-    const getUserNameFromId = (id) => {
-        var names = []
-        
-        ids.forEach(element => {
-            names.append(dispatch(fetchUserProfile(element)));
-        });
-    };
-    getUserNameFromId();
-}, [dispatch]);
-*/
-
-
-
-/*
-useEffect(() => {
-    const fetchData = async () => {
-        const profiles = await fetchUserProfiles(speakingWith);
-        console.log("Profiles:", profiles);
-        setFriendList(profiles);
-    };
-
-    fetchData();
-}, [dispatch, speakingWith]);
-*/

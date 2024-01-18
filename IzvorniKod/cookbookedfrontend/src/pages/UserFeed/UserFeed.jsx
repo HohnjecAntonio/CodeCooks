@@ -12,19 +12,21 @@ const UserFeed = () => {
 
     useEffect(() => {
         dispatch(fetchRecipesForUserFeed());
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
         dispatch(fetchUserProfile());
-      }, [dispatch]);
+      }, []);
 
 
-    const korisnikRecepti = recipesForFeed.filter(recipe  =>
-       userProfileInfo.pratiteljiKorisnika.forEach(element => {
-           
-           return recipe.autor == element.korisnickoIme
+    const korisnikRecepti = recipesForFeed.filter(recipe  =>{
+        if(userProfileInfo.pratiteljiKorisnika)
+            userProfileInfo.pratiteljiKorisnika.forEach(element => {
+                
+                return recipe.autor == element.korisnickoIme
 
-        })
+            })
+        }
     );
     const recipeCardContainerStyle = {
         display: 'flex',

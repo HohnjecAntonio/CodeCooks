@@ -19,19 +19,21 @@ const RecipePage = (props) => {
 
   useEffect(() => {
     dispatch(fetchKategorije());
-}, [dispatch]);
+}, []);
 
   useEffect(() => {
     dispatch(fetchRecipeById(JSON.parse(localStorage.getItem("recipeToLoad"))));
-  }, [dispatch]);
+  }, []);
 
-  useEffect(() => {
-    dispatch(fetchUserProfile());
-  }, [dispatch]);
+  
 
   useEffect(() => {
     dispatch(fetchVrsteKuhinje());
-  }, [dispatch]);
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchUserProfile());
+  }, []);
 
   console.log(recipe);
 
@@ -53,7 +55,7 @@ const deleteCommentFunction = async (idKomentar, idKorisnik, idRecept) => {
     idRecept: idRecept
   } })).then(() => {
       //history.push('/');
-      //window.location.reload();
+      window.location.reload();
   });
 };
 
@@ -162,7 +164,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
             
             
             {
-              props.komentarKorisnikId == userProfileInfo.idKorisnik
+              props.komentarKorisnikId == userProfileInfo.idKorisnik || userProfileInfo.razinaOvlasti == "Admin"
               ?
               <div>
               <button onClick={()=> setUrediKomentar(true)}>Uredi komentar</button>
@@ -294,7 +296,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
               </ul>*/}
               <p>Uputstva: {recipe.priprema}</p>
               <p>Autor: <a href="/Profile" onClick={() => {
-                  localStorage.setItem('profileToLoad',JSON.stringify(recipe.idAutor))
+                  localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
             }}>{recipe.autor}</a></p>
             {
               props.currentUser
@@ -302,7 +304,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
               
               <div>
               {
-                props.isAdmin
+                userProfileInfo.razinaOvlasti == "Admin"
                 ?
                 <div>
                     <button onClick={()=> setUrediRecept(true) }>Uredi recept</button>

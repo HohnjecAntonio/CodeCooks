@@ -34,13 +34,13 @@ function SideBar(props){
   useEffect(() => {
     
       dispatch(fetchKategorije());
-}, [dispatch]);
+}, []);
 
 
 useEffect(() => {
   if(props.currentUser)
     dispatch(fetchUserProfile());
-}, [dispatch]);
+}, [props.currentUser]);
 
 
   function calcHeight(el){

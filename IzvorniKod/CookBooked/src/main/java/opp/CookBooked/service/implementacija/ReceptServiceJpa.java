@@ -79,6 +79,7 @@ public class ReceptServiceJpa implements ReceptService {
                 rdto.setAutor(r.getAutor().getKorisnickoIme());
                 rdto.setIdAutor(r.getAutor().getIdKorisnik());
                 rdto.setSlikaRecept(r.getSlikaRecept());
+                rdto.setPriprema(r.getPriprema());
                 rdto.setVideoRecept(r.getVideoRecept());
                 rdto.setVrijemeKuhanja(r.getVrijemeKuhanja());
                 rdto.setOznaka(r.getOznaka());

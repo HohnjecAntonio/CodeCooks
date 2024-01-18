@@ -14,12 +14,12 @@ const CategoryButtons = () => {
 
   useEffect(() => {
     dispatch(fetchRecipesForUserFeed());
-}, [dispatch]);
+}, []);
 
 
 useEffect(() => {
     dispatch(fetchKategorije());
-}, [dispatch]);
+}, []);
 
 
 

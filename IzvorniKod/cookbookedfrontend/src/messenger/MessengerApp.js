@@ -22,7 +22,7 @@ const MessingerApp = () => {
       }
     };
     getUserIdFromLocalStorage();
-  }, [dispatch]);
+  }, []);
 
   
   useEffect(() => {

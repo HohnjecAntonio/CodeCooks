@@ -41,7 +41,7 @@ import {
     EDIT_RECIPE_FAILURE,EDIT_RECIPE_REQUEST,EDIT_RECIPE_SUCCESS,
     SAVE_RECIPE_FAILURE,SAVE_RECIPE_REQUEST,SAVE_RECIPE_SUCCESS,
     LIKE_RECIPE_FAILURE,LIKE_RECIPE_REQUEST,LIKE_RECIPE_SUCCESS, 
-    DELETE_USER_PROFILE_REQUEST, DELETE_USER_PROFILE_SUCCESS, DELETE_USER_PROFILE_FAILURE, FETCH_OTHER_PROFILE_BY_USERNAME_REQUEST, FETCH_OTHER_PROFILE_BY_USERNAME_SUCCESS, FETCH_OTHER_PROFILE_BY_USERNAME_FAILURE
+    DELETE_USER_PROFILE_REQUEST, DELETE_USER_PROFILE_SUCCESS, DELETE_USER_PROFILE_FAILURE, FETCH_OTHER_PROFILE_BY_USERNAME_REQUEST, FETCH_OTHER_PROFILE_BY_USERNAME_SUCCESS, FETCH_OTHER_PROFILE_BY_USERNAME_FAILURE, GET_ROLE_REQUEST, GET_ROLE_SUCCESS, GET_ROLE_FAILURE
 } from "./auth.actionType";
 
 export const loginUserAction = (loginData) => async (dispatch) => {
@@ -199,7 +199,7 @@ export const editComment = (commentData) => async (dispatch) => {
     try {
         
         const { data } = 
-        await apiAuth.put(`${API_BASE_URL}/recepti/${commentData.data.idRecept}/editc/korisnik/${commentData.data.idKorisnik}/`,
+        await apiAuth.put(`${API_BASE_URL}/recepti/${commentData.data.idRecept}/editc/korisnik/${commentData.data.idKorisnik}`,
         commentData.data);
 
         console.log("Uređen komentar: ");
@@ -217,7 +217,7 @@ export const deleteComment = (commentData) => async (dispatch) => {
     dispatch({ type: DELETE_COMMENT_REQUEST });
     try {
         
-        const { data } = await apiAuth.delete(`${API_BASE_URL}/recepti/${commentData.data.idRecept}/delc/${commentData.data.idKomentar}/korisnik/${commentData.data.idKorisnik}/`);
+        const { data } = await apiAuth.delete(`${API_BASE_URL}/recepti/${commentData.data.idRecept}/delc/${commentData.data.idKomentar}/korisnik/${commentData.data.idKorisnik}`);
 
         console.log("Izbrisan komentar: ");
         console.log(data);
@@ -302,8 +302,8 @@ export const fetchUserProfile = (jwt) => async (dispatch) => {
     try {
         const { data } = await apiAuth.get(`${API_BASE_URL}/korisnici/profile`);
 
-        //console.log("Fetched user profile" );
-        //console.log(data);
+        console.log("Fetched user profile" );
+        console.log(data);
 
         dispatch({ type: FETCH_USER_PROFILE_SUCCESS, payload: data });
     } catch (error) {
@@ -371,6 +371,21 @@ export const followUser = (requestData) => async (dispatch) => {
     }
 };
 
+
+
+export const getUserRole = (id) => async (dispatch) => {
+    dispatch({ type: GET_ROLE_REQUEST });
+    try {
+        const { data } = await axios.get(`${API_BASE_URL}/korisnici/role/${id}`);
+
+        console.log("Profile to load data: ");
+        console.log(data);
+
+        dispatch({ type: GET_ROLE_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: GET_ROLE_FAILURE, payload: error });
+    }
+};
 
 export const logoutUser = () => {
     localStorage.removeItem("token");

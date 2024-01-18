@@ -7,49 +7,6 @@ const Chat = ({ userName, friendName }) => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
 
-    
-    const dispatch = useDispatch();
-    const friendProfileInfo = useSelector(state => state.auth.profileToLoad);
-    
-
-
-    //ovo bi bilo da fetchamo listu prijatelja prema postojećoj listi prijatelja od nekud, tu treba zamijeniti array i element da prestavljaju listu prijatelja i id prijatelja čiji profil želimo dohvatit
-    /*
-    useEffect(() => {
-
-        const fetchFriendsList = async () => {
-            friendList = []
-            array.forEach(async(element) => {
-                await dispatch(fetchOtherProfile(element));
-                friendList.append({id: friendProfileInfo.idKorisnik, username: friendProfileInfo.korisnickoIme})
-            });
-            return friendList;
-        };
-
-        friendList = fetchFriendsList();
-        setFriendList(friendList)
-
-    },[dispatch]);
-        */
-
-    //ovo bi bilo da fetchamo samo jednog novog prijatelja iz chata
-    /*
-    useEffect(() => {
-        dispatch(fetchOtherProfile(JSON.parse(localStorage.getItem("friendId"))));
-      }, [dispatch]);
-
-
-    var userId = JSON.parse(localStorage.getItem("userId"))
-    var friendId = JSON.parse(localStorage.getItem("friendId"));
-
-    console.log("Current user ID: "+userId);
-    console.log("Friend ID: "+friendId);
-    console.log("Friend profile info:");
-    console.log(friendProfileInfo);
-    
-      */
-
-
     useEffect(() => {
         const messagesRef = firebase.database().ref('messages');
         messagesRef.on('value', (snapshot) => {
