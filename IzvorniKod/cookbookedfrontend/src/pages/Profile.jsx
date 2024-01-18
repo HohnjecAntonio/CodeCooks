@@ -64,6 +64,8 @@ function Profile(props) {
 
   return (
     <div>
+      <div className="container mx-auto my-10 p-6 bg-white  rounded-md" style={{ display: 'flex', flexDirection: 'column' , justifyContent: 'space-between'}}>
+      <div className="container mx-auto my-10 p-6 bg-white  rounded-md" style={{ display: 'flex', flexDirection: 'row' , justifyContent: 'space-between'}}>
       <div className="container mx-auto my-10 p-6 bg-white shadow-md rounded-md" style={{ display: 'flex', flexDirection: 'row' , justifyContent: 'space-between'}}>
       <div style={{marginLeft: '50px', alignSelf: 'center'}}>
             <p>ID Korisnika: {profileToLoad.idKorisnik}</p>
@@ -86,7 +88,7 @@ function Profile(props) {
                     userProfileInfo.razinaOvlasti == "Admin"
                     ?
                     <div>
-                        <a href="/PrivateProfile" class="private-profile-button">
+                        <a href="/PrivateProfile" class="private-button" style={{color: '#fff',backgroundColor: '#702963'}}>
                           <button>Promjeni postavke</button> 
                         </a>
                         <a href="/MessengerApp">
@@ -99,7 +101,7 @@ function Profile(props) {
                       {
                         userProfileInfo.idKorisnik == profileToLoad.idKorisnik
                         ? 
-                        <a href="/PrivateProfile" class="private-profile-button">
+                        <a href="/PrivateProfile" class="private-button" style={{color: '#fff',backgroundColor: '#702963'}}>
                         <button>Promjeni postavke</button>
                         </a>
                         :
@@ -122,37 +124,43 @@ function Profile(props) {
           </div>
 
 
-          <div className="connections">
-            <div className="followers">
-              <h2>Followers</h2>
-
-              
-              {
-              profileToLoad.pratiociKorisnika && profileToLoad.pratiociKorisnika.map((follower) => (
-                <p key={follower.idKorisnik}>{follower.korisnickoIme}</p>
-              ))
-              }
-              
-            </div>
-
-            <div className="following">
-              <h2>Following</h2>
-              {
-
-              profileToLoad.pratiteljiKorisnika && profileToLoad.pratiteljiKorisnika.map((follower) => (
-                  <p key={follower.idKorisnik}>{follower.korisnickoIme}</p>
-              ))}
-            </div>
-          </div>
+          
 
           
         </div>
+    </div>
+      
+        <div className="connections" style={{ display: 'flex', flexDirection: 'column' , justifyContent: 'space-between'}}>
+                <div className="followers">
+                  <h2>Followers</h2>
+
+                  
+                  {
+                  profileToLoad.pratiociKorisnika && profileToLoad.pratiociKorisnika.map((follower) => (
+                    <p key={follower.idKorisnik}>{follower.korisnickoIme}</p>
+                  ))
+                  }
+                  
+                </div>
+
+                <div className="following">
+                  <h2>Following</h2>
+                  {
+
+                  profileToLoad.pratiteljiKorisnika && profileToLoad.pratiteljiKorisnika.map((follower) => (
+                      <p key={follower.idKorisnik}>{follower.korisnickoIme}</p>
+                  ))}
+                </div>
+              </div>
+              
     </div>
     <div className="posts">
             <h2>Recent Posts</h2>
             {arrayDataItems}
           </div>
     </div>
+    </div>
+    
       
       );
     };

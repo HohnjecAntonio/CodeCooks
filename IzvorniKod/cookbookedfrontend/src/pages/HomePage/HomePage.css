@@ -10,7 +10,7 @@
 h1,
 h2 {
   text-align: center;
-  color: #333;
+  color: #000;
 }
 
 .recipe-list {
@@ -38,12 +38,12 @@ h2 {
 
 .recipe-details h2 {
   margin: 10px 0;
-  color: #333;
+  color: #000;
 }
 
 .recipe-details p {
   margin: 0 0 10px;
-  color: #666;
+  color: #000;
 }
 
 .recipe-details ul {
@@ -54,7 +54,7 @@ h2 {
 
 .recipe-details li {
   margin-bottom: 5px;
-  color: #666;
+  color: #000;
 }
 
 .recipe-creator {
@@ -63,7 +63,7 @@ h2 {
 
 .recipe-creator h2 {
   text-align: center;
-  color: #333;
+  color: #000;
 }
 
 .recipe-creator form {
@@ -74,7 +74,7 @@ h2 {
 .recipe-creator label {
   margin-top: 10px;
   font-size: 16px;
-  color: #333;
+  color: #000;
 }
 
 .recipe-creator input,
