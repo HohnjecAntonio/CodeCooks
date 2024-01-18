@@ -20,6 +20,8 @@ public interface KorisnikService {
 
     Korisnik findByIdKorisnik(long idKorisnik);
 
+    Korisnik getRoleByIdKorisnik(long idKorisnik);
+
     ProfilDrugogKorisnikaDTO fetchZaProfil(String korisnickoIme) throws Exception;
 
     Korisnik fetch(long idKorisnik) throws Exception;

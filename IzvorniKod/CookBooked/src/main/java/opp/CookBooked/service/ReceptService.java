@@ -27,7 +27,7 @@ public interface ReceptService {
 
     Recept createRecept(ReceptSubmitDTO recept, long iDKorisnik) throws Exception;
 
-    Recept updateRecept(long idRecept, Recept updatedRecept) throws Exception;
+    Recept updateRecept(long idRecept, ReceptSubmitDTO updatedRecept) throws Exception;
 
     String deleteRecept(long idRecept, long korisnikId) throws Exception;
 }

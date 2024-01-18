@@ -4,19 +4,19 @@ import profilePictureTemp from "../images/img/user.jpeg";
 import {useDispatch, useSelector} from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import {fetchUserProfile, updateUserProfile, deleteUserAction} from "../redux/auth/auth.action";
+import {fetchUserProfile, updateUserProfile, deleteUserAction, fetchOtherProfileByUsername} from "../redux/auth/auth.action";
 
 const PrivateProfile = () => {
   const jwtToken = localStorage.getItem("token");
   const dispatch = useDispatch();
-  const userProfileInfo = useSelector(state => state.auth.userProfile); // Adjust path according to your store structure
+  const userProfileInfo = useSelector(state => state.auth.profileToLoad); // Adjust path according to your store structure
   const kategorije = useSelector(state => state.auth.kategorije);
   const loading = useSelector(state => state.auth.loading);
   const error = useSelector(state => state.auth.error);
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(fetchUserProfile());
+    dispatch(fetchOtherProfileByUsername(JSON.parse(localStorage.getItem("profileToLoad"))));
   }, [dispatch]);
 
 

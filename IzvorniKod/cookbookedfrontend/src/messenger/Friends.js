@@ -2,9 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import firebase from './firebase';
 import './Friend.css'
+import {useDispatch, useSelector} from "react-redux";
+import {fetchUserProfile, fetchOtherProfile, fetchOtherProfileByUsername} from "../redux/auth/auth.action";
 
-const Friend = ({ userId, onFriendSelect }) => {
+const Friend = ({ userName, onFriendSelect }) => {
     const [speakingWith, setSpeakingWith] = useState([]);
+    
 
     useEffect(() => {
         const messagesRef = firebase.database().ref('messages');
@@ -17,43 +20,75 @@ const Friend = ({ userId, onFriendSelect }) => {
                 messagesArray
                 .filter(
                     (message) =>
-                    (message.friendId === userId && message.userId) ||
-                    (message.userId === userId && message.friendId)
+                    (message.friendName === userName && message.userName) ||
+                    (message.userName === userName && message.friendName)
                 )
                 .map((message) =>
-                    message.userId === userId ? message.friendId : message.userId
+                    message.userName === userName ? message.friendName : message.userName
                 )
             )
             );
             setSpeakingWith(uniqueRecipients);
         }
         });
-    }, [userId]);
+    }, [userName]);
+
+    useEffect(()=>{
+        handleAddFriendAuto();
+    },[]);
 
     const handleAddFriend = () => {
-        const newFriendId = prompt('Enter the ID of the person you want to chat with:');
-        const input = newFriendId.toString();
-        if (input.trim() !== '' && input !== speakingWith) {
-            setSpeakingWith((prevSpeakingWith) => [...prevSpeakingWith, input]);
-            onFriendSelect(input);
+        const newfriendName = prompt('Upisi korisnickoIme prijatelja:');
+
+        if(newfriendName!=null){
+            const input = newfriendName.toString();
+            if (input.trim() !== '' && input !== speakingWith) {
+                setSpeakingWith((prevSpeakingWith) => [...prevSpeakingWith, input]);
+                onFriendSelect(input);
+            }
         }
     };
 
+    const handleAddFriendAuto = () => {
+        const newfriendName = JSON.parse(localStorage.getItem("friendUsername"));
+        if(newfriendName!=null && !speakingWith.includes(newfriendName)){
+            const input = newfriendName.toString();
+            if (input.trim() !== '' && input !== speakingWith) {
+                setSpeakingWith((prevSpeakingWith) => [...prevSpeakingWith, input]);
+                onFriendSelect(input);
+            }
+        }
+    };
+    
+    console.log(speakingWith);
+
     return (
-        <div className="sidebar">
+        <div className="friends-container">
             <div className = "friend-selector-title">
                 Friend Selector
             </div>
-        <div className="add-friend" onClick={handleAddFriend}>
-            + Add new friend
-        </div>
-        <div className="friends">
-            {speakingWith.map((friendId, index) => (
-            <div className="friend" key={index} onClick={() => onFriendSelect(friendId)}>
-                {friendId}
+            <div className="add-friend" onClick={handleAddFriend}>
+                + Add new friend
             </div>
-            ))}
-        </div>
+            <div className="friends">
+                {speakingWith.map((friendName, index) => (
+                    <div className="friend" key={index} onClick={() => onFriendSelect(friendName)}>
+                        {
+                          
+                            friendName
+                        }
+                    </div>
+                    ))
+                    }
+                
+                {/*
+                    {friendList.map((user, index) => (
+                        <div className="friend" key={index} onClick={() => onFriendSelect(user.id)}>
+                            {user.korisnickoIme}
+                        </div>
+                    ))}
+                    */}
+            </div>
         </div>
     );
 };

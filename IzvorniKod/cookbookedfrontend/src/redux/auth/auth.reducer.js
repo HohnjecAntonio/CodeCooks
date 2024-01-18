@@ -49,7 +49,8 @@ const initialState = {
     profileToLoad: '',
     recipeToLoad: '',
     recipesByUser: [],
-    vrKuhinje: []
+    vrKuhinje: [],
+    userRole: ''
 }
 
 export const authReducer = (state=initialState, action) => {

@@ -16,9 +16,13 @@ import CategoryButtons from './komponente/CategoryButtons';
 import MessengerApp from './messenger/MessengerApp';
 import SpremljeniRecepti from "./pages/UserFeed/SpremljeniRecepti";
 
+import {useDispatch, useSelector} from "react-redux";
+import {fetchUserProfile} from "./redux/auth/auth.action";
+
 function App() {
     const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
     const [currentUser, setCurrentUser] = useState(undefined);
+
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -38,6 +42,9 @@ function App() {
     const logOut = () => {
         AuthService.logoutUser();
     };
+
+
+
 
     return (
         <Router>
@@ -102,15 +109,19 @@ function App() {
 
 
                         <Route path="/Profile" exact>
-                            {<Profile currentUserID={currentUser} profileID={JSON.parse(localStorage.getItem('profileToLoad'))}
+                            {<Profile currentUser={currentUser}
+                                
                                 />}
                         </Route>
 
+                        <Route path="/RecipePage">
+                            {<RecipePage currentUser={currentUser}
+                                ></RecipePage>}
+                            </Route> 
+
                         <Route path="/PrivateProfile" exact component={PrivateProfile} />
                         <Route path="/AddRecipe" exact component={RecipeForm} />
-                        <Route path="/Categories" exact component={CategoryButtons} />
                         <Route path="/MessengerApp" exact component={MessengerApp} />
-                        <Route path="/RecipePage" exact component={RecipePage} />
                         <Route path="/Categories" exact component={CategoryButtons}/>
                         <Route path="/SpremljeniRecepti" exact component={SpremljeniRecepti}/>
                     </Switch>

@@ -3,7 +3,7 @@ import './Profile.css'; // You can create a separate CSS file for styling
 import profilePictureTemp from "../images/img/user.jpeg";
 import {useDispatch, useSelector} from "react-redux";
 import { useHistory } from 'react-router-dom';
-import {fetchUserProfile, followUser, fetchRecipesForUserFeed, fetchOtherProfileByUsername,fetchRecipesByUser} from "../redux/auth/auth.action";
+import {fetchUserProfile, fetchOtherProfile, followUser, fetchRecipesForUserFeed, fetchOtherProfileByUsername} from "../redux/auth/auth.action";
 
 
 function Profile(props) {
@@ -37,6 +37,61 @@ function Profile(props) {
     });
   };
   // State to store user profile information, followers, and following
+
+  const profiles = [
+    {
+      userID: '1',
+      name: 'John Doe',
+      bio: 'Web Developer | Explorer | Coffee Lover',
+      profilePicture: profilePictureTemp,
+      socialMedia: {
+        twitter: 'https://twitter.com/johndoe',
+        linkedin: 'https://www.linkedin.com/in/johndoe',
+        github: 'https://github.com/johndoe',
+      },
+      posts: [
+        {
+          title: 'Post Title 1',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+          date: 'January 1, 2023',
+        },
+        {
+          title: 'Post Title 2',
+          content: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+          date: 'January 2, 2023',
+        },
+      ],
+      followers: ['Follower1', 'Follower2', 'Follower3'],
+      following: ['Following1', 'Following2'],
+    },
+    {
+      userID: "2",
+      name: 'Other user',
+      bio: 'Web Developer | Explorer | Coffee Lover',
+      profilePicture: profilePictureTemp,
+      socialMedia: {
+        twitter: 'https://twitter.com/johndoe',
+        linkedin: 'https://www.linkedin.com/in/johndoe',
+        github: 'https://github.com/johndoe',
+      },
+      posts: [
+        {
+          title: 'Post Title 1',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+          date: 'January 1, 2023',
+        },
+        {
+          title: 'Post Title 2',
+          content: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+          date: 'January 2, 2023',
+        },
+      ],
+      followers: ['Follower1', 'Follower2', 'Follower3'],
+      following: ['Following1', 'Following2'],
+    }
+
+  ]
+
 
   const korisnikRecepti = recipesForFeed.filter(recipe  =>
     recipe.autor == profileToLoad.korisnickoIme
@@ -83,14 +138,14 @@ function Profile(props) {
                 ?
                 <div>
                   {
-                    userProfileInfo.razinaOvlasti == "Admin"
+                    props.isAdmin 
                     ?
                     <div>
                         <a href="/PrivateProfile" class="private-profile-button">
                           <button>Promjeni postavke</button> 
                         </a>
                         <a href="/MessengerApp">
-                          <button onClick={()=>{localStorage.setItem('friendUsername',JSON.stringify(profileToLoad.korisnickoIme)); localStorage.setItem('userId',JSON.stringify(userProfileInfo.idKorisnik));}}>Chat</button>
+                          <button onClick={()=>{localStorage.setItem('friendId',JSON.stringify(profileToLoad.idKorisnik)); localStorage.setItem('userId',JSON.stringify(userProfileInfo.idKorisnik));}}>Chat</button>
                         </a>
                         <button onClick={followUserFunction}>Zaprati korisnika</button>
                     </div>

@@ -1,39 +1,56 @@
-// App.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Friends from './Friends';
 import Chat from './Chat';
-import './MessengerApp.css'
+import './MessengerApp.css';
+import { fetchUserProfile } from '../redux/auth/auth.action';
 
-const App = () => {
-  const [userId, setUserId] = useState(''); // Your user ID
-  const [selectedFriendId, setSelectedFriendId] = useState('');
+const MessingerApp = () => {
+  const [userId, setUserId] = useState('');
+  const [selectedFriendName, setSelectedFriendName] = useState('');
+  const [userName, setUserName] = useState('');
 
-  const handleUserIdChange = (event) => {
-    setUserId(event.target.value);
-  };
+  const dispatch = useDispatch();
+  const userProfile = useSelector((state) => state.auth.userProfile);
 
-  const handleFriendSelect = (friendId) => {
-    setSelectedFriendId(friendId);
+  useEffect(() => {
+    const getUserIdFromLocalStorage = () => {
+      const storedUserId = localStorage.getItem('userId');
+      if (storedUserId) {
+        setUserId(storedUserId);
+        dispatch(fetchUserProfile(storedUserId));
+      }
+    };
+    getUserIdFromLocalStorage();
+  }, []);
+
+  
+  useEffect(() => {
+    if (userProfile && userProfile.idKorisnik) {
+      console.log('korisnik: ' + userProfile.idKorisnik);
+      setUserName(userProfile.korisnickoIme);
+    }
+  }, [userProfile]);
+  
+
+  const handleFriendSelect = (friendName) => {
+    setSelectedFriendName(friendName);
   };
 
   return (
     <div className="app-container">
-      <header>
-        <h1>Your Chat App</h1>
-        <input
-          type="text"
-          value={userId}
-          onChange={handleUserIdChange}
-          placeholder="Your ID"
-        />
-      </header>
       <main>
-        <Friends userId={userId} onFriendSelect={handleFriendSelect} />
-        <Chat userId={userId} friendId={selectedFriendId} />
+        {userName === '' ? (
+          <h1>ERROR no userName</h1>
+        ) : (
+          <>
+            <Friends userName={userName} onFriendSelect={handleFriendSelect} />
+            <Chat userName={userName} friendName={selectedFriendName} />
+          </>
+        )}
       </main>
     </div>
   );
 };
 
-export default App;
-
+export default MessingerApp;

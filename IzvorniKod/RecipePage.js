@@ -10,6 +10,7 @@ const RecipePage = (props) => {
   const recipe = useSelector(state => state.auth.recipeToLoad);
   const loading = useSelector(state => state.auth.loading);
   const error = useSelector(state => state.auth.error);
+  const recipesForFeed = useSelector(state => state.auth.recipesForFeed);
   const userProfileInfo = useSelector(state => state.auth.userProfile);
   const kategorije = useSelector(state => state.auth.kategorije); 
   const vrKuhinje = useSelector(state => state.auth.vrKuhinje);
@@ -19,21 +20,23 @@ const RecipePage = (props) => {
 
   useEffect(() => {
     dispatch(fetchKategorije());
-}, []);
+}, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchRecipesForUserFeed());
+}, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchRecipeById(JSON.parse(localStorage.getItem("recipeToLoad"))));
-  }, []);
-
-  
-
-  useEffect(() => {
-    dispatch(fetchVrsteKuhinje());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchUserProfile());
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchVrsteKuhinje());
+  }, [dispatch]);
 
   console.log(recipe);
 
@@ -55,7 +58,7 @@ const deleteCommentFunction = async (idKomentar, idKorisnik, idRecept) => {
     idRecept: idRecept
   } })).then(() => {
       //history.push('/');
-      window.location.reload();
+      //window.location.reload();
   });
 };
 
@@ -98,90 +101,15 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
   });
 };
 
-  console.log("Local Storage get: "+ JSON.parse(localStorage.getItem("recipeToLoad")));
-  
-  function Komentar(props){
-    const [urediKomentar,setUrediKomentar] = useState(false);
-
-    return(
-          <div class="komentar">
-            <span>{props.komentarKorisnikId} {props.komentarKorisnikIme} {props.komentarDatum}</span>
-            {
-              urediKomentar ?
-              
-              
-              <Formik enableReinitialize="true" initialValues={
-                {
-                  idKomentar: props.komentarId || '',
-                  idKorisnik: props.komentarKorisnikId || '',
-                  idRecept: props.recipeId || '',
-                  opisKomentar:  props.komentarTekst || ''
-                }
-                } onSubmit={
-                  async (values)=>{
-                    setUrediKomentar(false)
-                    console.log('handle submit ', values);
-                    await dispatch(editComment({ data: values })).then(() => {
-                        //history.push('/');
-                        //window.location.reload();
-                    });
-                }}>
-                <Form>
-                  <h1>Uredi komentar:</h1>
-                  <Field
-                    type="hidden"
-                    id="idKomentar"
-                    name="idKomentar"
-                  />
-
-                  <Field
-                    type="hidden"
-                    id="idKorisnik"
-                    name="idKorisnik"
-                  />
-        
-                  <Field
-                    type="hidden"
-                    id="idRecept"
-                    name="idRecept"
-                  />
-                  
-                  <Field
-                    component="textarea"
-                    type="text"
-                    id="opisKomentar"
-                    name="opisKomentar"
-                  />
-        
-                  <button type="submit">Spremi komentar</button>
-                  
-                  </Form>
-                </Formik>
-                :
-                <p>{props.komentarTekst}</p>
-              
-            }
-            
-            
-            {
-              props.komentarKorisnikId == userProfileInfo.idKorisnik || userProfileInfo.razinaOvlasti == "Admin"
-              ?
-              <div>
-              <button onClick={()=> setUrediKomentar(true)}>Uredi komentar</button>
-              <button onClick={() => deleteCommentFunction(props.komentarId,props.komentarKorisnikId,props.recipeId)}>Izbriši komentar</button>
-              </div>
-              :
-              null
-            }
-          </div>
-          );
-  }
+  const testings = recipesForFeed.filter(recipe  =>
+    recipe.idRecept == JSON.parse(localStorage.getItem("recipeToLoad"))
+  );
 
 
-  return (
-    
-    <div>
-      <div className="single-recipe-page">
+
+  const arrayDataItems = testings.map(recipe => 
+
+    <div className="single-recipe-page">
       {
         urediRecept ?
         <Formik enableReinitialize={true} onSubmit={(values) => { editRecipeFunction(values); setUrediRecept(false);}} 
@@ -288,60 +216,23 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
 
             <div className="recipe-details">
               <h2>{recipe.nazivRecept}</h2>
+              {/*<p>Category: {recipe.category}</p>
+              <ul>
+                {recipe.ingredients.map((ingredient, index) => (
+                  <li key={index}>{ingredient}</li>
+                ))}
+              </ul>*/}
+              <p>Uputstva: {recipe.priprema}</p>
               <p>Autor: <a href="/Profile" onClick={() => {
-                  localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
+                  localStorage.setItem('profileToLoad',JSON.stringify(recipe.idAutor))
             }}>{recipe.autor}</a></p>
-              <p>Vrijeme kuhanja: {recipe.vrijemeKuhanja}</p>
-              {
-                  recipe.kategorije[0] ?
-                  (
-                    <p>Kategorija: {recipe.kategorije[0].nazivKategorija}</p>
-                  )
-                  :
-                  (
-                  <p>Kategorija: </p> 
-                  )
-                }
-
-                
-                {
-                  recipe.vrsteKuhinje[0] ?
-                  (
-                    <p>Vrste kuhinje: {recipe.vrsteKuhinje[0].nazivVrstaKuhinje}</p>
-                  )
-                  :
-                  (
-                  <p>Vrste kuhinje: </p> 
-                  )
-                }
-
-                {
-                  recipe.sastojci ?
-                  <p>
-                    Sastojci: 
-                    <span>
-                    {
-                    recipe.sastojci.map((sastojak) =>
-                    (
-                      <span>{sastojak.nazivSastojka} </span>
-                    ))
-                    }
-                    </span>
-                  </p>
-                  :
-                  <p>
-                    Sastojci: 
-                  </p>
-                }
-                <p>Oznaka: {recipe.oznaka}</p>
-                <p>Uputstva: {recipe.priprema}</p>
             {
               props.currentUser
               ?
               
               <div>
               {
-                userProfileInfo.razinaOvlasti == "Admin"
+                props.isAdmin
                 ?
                 <div>
                     <button onClick={()=> setUrediRecept(true) }>Uredi recept</button>
@@ -420,11 +311,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
         null
       }
       <div>
-        {
-          recipe.komentari
-          ?
-          <div>
-            {recipe.komentari.map(komentar => (
+        {recipe.komentari.map(komentar => (
           <div>
 
             <Komentar
@@ -441,18 +328,122 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
             <p>{komentar.opisKomentar + " " + komentar.datumKomentar + " " + komentar.korisnik.korisnickoIme}</p>
           </div>
             
-          ))}
+        ))}
+        </div>
+  </div>
+  );
+
+  
+
+  console.log("Local Storage get: "+ JSON.parse(localStorage.getItem("recipeToLoad")));
+  
+  function Komentar(props){
+    const [urediKomentar,setUrediKomentar] = useState(false);
+
+    return(
+          <div class="komentar">
+            <span>{props.komentarKorisnikId} {props.komentarKorisnikIme} {props.komentarDatum}</span>
+            {
+              urediKomentar ?
+              
+              
+              <Formik enableReinitialize="true" initialValues={
+                {
+                  idKomentar: props.komentarId || '',
+                  idKorisnik: props.komentarKorisnikId || '',
+                  idRecept: props.recipeId || '',
+                  opisKomentar:  props.komentarTekst || ''
+                }
+                } onSubmit={
+                  async (values)=>{
+                    setUrediKomentar(false)
+                    console.log('handle submit ', values);
+                    await dispatch(editComment({ data: values })).then(() => {
+                        //history.push('/');
+                        //window.location.reload();
+                    });
+                }}>
+                <Form>
+                  <h1>Uredi komentar:</h1>
+                  <Field
+                    type="hidden"
+                    id="idKomentar"
+                    name="idKomentar"
+                  />
+
+                  <Field
+                    type="hidden"
+                    id="idKorisnik"
+                    name="idKorisnik"
+                  />
+        
+                  <Field
+                    type="hidden"
+                    id="idRecept"
+                    name="idRecept"
+                  />
+                  
+                  <Field
+                    component="textarea"
+                    type="text"
+                    id="opisKomentar"
+                    name="opisKomentar"
+                  />
+        
+                  <button type="submit">Spremi komentar</button>
+                  
+                  </Form>
+                </Formik>
+                :
+                <p>{props.komentarTekst}</p>
+              
+            }
+            
+            
+            {
+              props.komentarKorisnikId == userProfileInfo.idKorisnik
+              ?
+              <div>
+              <button onClick={()=> setUrediKomentar(true)}>Uredi komentar</button>
+              <button onClick={() => deleteCommentFunction(props.komentarId,props.komentarKorisnikId,props.recipeId)}>Izbriši komentar</button>
+              </div>
+              :
+              null
+            }
           </div>
-          
-          :
+          );
+  }
 
-          null
 
-        }
-        
-        
+  return (
+    
+    <div>
+      {arrayDataItems}
+
+      
+      {
+      
+      
+      <div className="single-recipe-page">
+        <div className="recipe-card">
+
+        <div className="recipe-details">
+          <h2>{recipe.nazivRecept}</h2>
+          {/*<p>Category: {recipe.category}</p>
+          <ul>
+            {recipe.ingredients.map((ingredient, index) => (
+              <li key={index}>{ingredient}</li>
+            ))}
+          </ul>*/}
+          <p>Uputstva: {recipe.priprema}</p>
+          {<p>Autor: <a href="/Profile" onClick={() => {
+              localStorage.setItem('profileToLoad',JSON.stringify(recipe.idAutor))
+        }}>{recipe.autor}</a></p>}
+        </div>
+
         </div>
       </div>
+      }
     </div>
     
   );

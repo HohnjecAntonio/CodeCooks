@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -41,7 +40,7 @@ public class ReceptController {
     }
 
     @GetMapping("/{idRecept}")
-    public ResponseEntity<ReceptDTO> findReceptById(@RequestHeader("Authorization") String jwt, @PathVariable long idRecept) throws Exception {
+    public ResponseEntity<ReceptDTO> findReceptById(@PathVariable long idRecept) throws Exception {
         ReceptDTO nRecept = receptService.findReceptDTOById(idRecept);
         return new ResponseEntity<>(nRecept, HttpStatus.OK);
     }
@@ -89,6 +88,11 @@ public class ReceptController {
     public ResponseEntity<OznacavanjeRecepata> oznaciRecept(@RequestHeader("Authorization") String jwt, @PathVariable long idRecept, @PathVariable long iDKorisnik) throws Exception {
         OznacavanjeRecepata r = oznRecService.oznaciRecept(korisnikService.findByIdKorisnik(iDKorisnik), receptService.findReceptById(idRecept));
         return new ResponseEntity<>(r, HttpStatus.OK);
+    }
+
+    @PutMapping("/edit/{idRecept}/korisnik/{idKorisnik}")
+    public Recept updateRecept(@RequestHeader("Authorization") String jwt, @PathVariable long idRecept, @RequestBody ReceptSubmitDTO recept) throws Exception {
+        return receptService.updateRecept(idRecept, recept);
     }
 
     @DeleteMapping("/delete/{idRecept}/korisnik/{iDKorisnik}")

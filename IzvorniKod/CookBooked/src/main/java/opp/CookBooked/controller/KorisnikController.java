@@ -39,7 +39,7 @@ public class KorisnikController {
     }
 
     @GetMapping("/profileDK/{korisnickoIme}")
-    public ProfilDrugogKorisnikaDTO getProfileDK(@RequestHeader("Authorization") String jwt, @PathVariable("korisnickoIme") String korisnickoIme) throws Throwable {
+    public ProfilDrugogKorisnikaDTO getProfileDK(@PathVariable("korisnickoIme") String korisnickoIme) throws Throwable {
         return korisnikService.fetchZaProfil(korisnickoIme);
     }
 
@@ -48,10 +48,14 @@ public class KorisnikController {
         return korisnikService.fetchProfil(jwt);
     }
 
-    @PutMapping("/update/{korisnickoIme}")
-    public Korisnik updateKorisnik(@RequestHeader("Authorization") String jwt, @RequestBody ProfilDTO korisnik) throws Throwable {
-        Korisnik kr = korisnikService.getKorisnikFromJWT(jwt);
-        return korisnikService.updateKorisnik(kr.getIdKorisnik(), korisnik);
+    @GetMapping("/role/{idKorisnik}")
+    public Korisnik getRoleByIdKorisnik(@PathVariable("idKorisnik") long idKorisnik) throws Throwable{
+        return korisnikService.getRoleByIdKorisnik(idKorisnik);
+    }
+
+    @PutMapping("/update/{idKorisnik}")
+    public Korisnik updateKorisnik(@RequestHeader("Authorization") String jwt,  @RequestBody ProfilDTO korisnik, @PathVariable("idKorisnik") long iDKorisnik) throws Throwable {
+        return korisnikService.updateKorisnik(iDKorisnik, korisnik);
     }
 
     @PostMapping("/{followerId}/follow/{followingId}")

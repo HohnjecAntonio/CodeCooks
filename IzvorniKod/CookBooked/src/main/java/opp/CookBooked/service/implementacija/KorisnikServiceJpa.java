@@ -74,6 +74,7 @@ public class KorisnikServiceJpa implements KorisnikService {
                 profil.setPrezimeKorisnik(korisnik.getPrezimeKorisnik());
                 profil.setEmailKorisnik(korisnik.getEmailKorisnik());
                 profil.setBrojTelefona(korisnik.getBrojTelefona());
+                profil.setRazinaOvlasti(korisnik.getRazinaOvlasti());
                 profil.setDostupanOdDo(korisnik.getDostupanOd() + " - " + korisnik.getDostupanDo());
                 profil.setMojiRecepti(mojiRecepti);
                 profil.setSpremljeniReceptiKorisnika(spremljeniRecepti);
@@ -122,6 +123,15 @@ public class KorisnikServiceJpa implements KorisnikService {
     public Korisnik findByIdKorisnik(long idKorisnik) {
         try {
             return korisnikRepo.findByIdKorisnik(idKorisnik);
+        } catch (Exception e) {
+            throw new EntityMissingException(Korisnik.class, idKorisnik);
+        }
+    }
+
+    @Override
+    public Korisnik getRoleByIdKorisnik(long idKorisnik){
+        try {
+            return korisnikRepo.getRoleByIdKorisnik(idKorisnik);
         } catch (Exception e) {
             throw new EntityMissingException(Korisnik.class, idKorisnik);
         }
