@@ -14,19 +14,20 @@ function Profile(props) {
   const loading = useSelector(state => state.auth.loading);
   const error = useSelector(state => state.auth.error);
   const history = useHistory();
-  const recipesByUser = useSelector(state => state.auth.recipesByUser);
+  const recipesForFeed = useSelector(state => state.auth.recipesForFeed);
 
   useEffect(() => {
     dispatch(fetchUserProfile());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchRecipesByUser(profileToLoad.idKorisnik));
-  }, [profileToLoad]);
+    dispatch(fetchRecipesForUserFeed());
+}, [dispatch]);
+
 
   useEffect(() => {
     dispatch(fetchOtherProfileByUsername(JSON.parse(localStorage.getItem("profileToLoad"))));
-  }, []);
+  }, [dispatch]);
 
   const followUserFunction = async () => {
     console.log("Trying to follow user");
@@ -35,10 +36,14 @@ function Profile(props) {
       //window.location.reload();
     });
   };
+  // State to store user profile information, followers, and following
+
+  const korisnikRecepti = recipesForFeed.filter(recipe  =>
+    recipe.autor == profileToLoad.korisnickoIme
+  );
 
 
-
-  const arrayDataItems = recipesByUser.map(recipe => 
+  const arrayDataItems = korisnikRecepti.map(recipe => 
     <div className="single-recipe-page">
       <div className="recipe-card">
       <a href="/RecipePage" onClick={()=>{localStorage.setItem('recipeToLoad',JSON.stringify(recipe.idRecept)); console.log(recipe.idRecept);}}>
@@ -85,7 +90,7 @@ function Profile(props) {
                           <button>Promjeni postavke</button> 
                         </a>
                         <a href="/MessengerApp">
-                          <button onClick={()=>{localStorage.setItem('friendId',JSON.stringify(profileToLoad.idKorisnik)); localStorage.setItem('userId',JSON.stringify(userProfileInfo.idKorisnik));}}>Chat</button>
+                          <button onClick={()=>{localStorage.setItem('friendUsername',JSON.stringify(profileToLoad.korisnickoIme)); localStorage.setItem('userId',JSON.stringify(userProfileInfo.idKorisnik));}}>Chat</button>
                         </a>
                         <button onClick={followUserFunction}>Zaprati korisnika</button>
                     </div>
