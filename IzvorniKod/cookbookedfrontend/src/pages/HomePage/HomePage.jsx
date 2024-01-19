@@ -59,7 +59,7 @@ const HomePage = () => {
 
 function delayForDemo(promise) {
     return new Promise(resolve => {
-        setTimeout(resolve, 100);
+        setTimeout(resolve, 500);
     }).then(() => promise);
 }
 

@@ -41,12 +41,7 @@ const PrivateProfile = () => {
 
   return (
     <div className="profile-settings-container">
-      
-      <div className="container mx-auto my-10 p-6 bg-white shadow-md rounded-md">
-        {userProfileInfo.korisnickoIme + " " + userProfileInfo.imeKorisnik + " " + userProfileInfo.prezimeKorisnik + " " + userProfileInfo.brojTelefona + " " + userProfileInfo.emailKorisnik}
-      </div>
-
-      <h2>Profile Settings</h2>
+      <h2>Postavke profila</h2>
       <Formik enableReinitialize="true" initialValues={userProfileInfo} onSubmit={handleSubmit}>
         <Form>
           <Field
@@ -121,15 +116,14 @@ const PrivateProfile = () => {
             />
           </label>
 
-          <button type="submit">Spremi</button>
+          <button type="submit" class="private-profile-button">Spremi</button>
           
         </Form>
       </Formik>
-      <a href="#" onClick={() => deleteUserFunction(userProfileInfo.idKorisnik)} class="private-profile-button">
-        <button>Izbriši profil</button>
-      </a>
-      <a href="/Profile" class="private-profile-button">
-        <button>Odustani</button>
+        <button class="private-profile-button" onClick={() => deleteUserFunction(userProfileInfo.idKorisnik)}>Izbriši profil</button>
+
+      <a href="/Profile" >
+        <button class="private-profile-button">Odustani</button>
       </a>
     </div>
   );

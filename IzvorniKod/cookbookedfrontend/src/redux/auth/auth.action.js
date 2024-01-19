@@ -43,8 +43,10 @@ import {
     LIKE_RECIPE_FAILURE,LIKE_RECIPE_REQUEST,LIKE_RECIPE_SUCCESS, 
     DELETE_USER_PROFILE_REQUEST, DELETE_USER_PROFILE_SUCCESS, DELETE_USER_PROFILE_FAILURE, FETCH_OTHER_PROFILE_BY_USERNAME_REQUEST, FETCH_OTHER_PROFILE_BY_USERNAME_SUCCESS, FETCH_OTHER_PROFILE_BY_USERNAME_FAILURE, GET_ROLE_REQUEST, GET_ROLE_SUCCESS, GET_ROLE_FAILURE
 } from "./auth.actionType";
+import { useHistory } from 'react-router-dom';
 
 export const loginUserAction = (loginData) => async (dispatch) => {
+    
     dispatch({ type: LOGIN_REQUEST });
     try {
         const { data } = await axios.post(`${API_BASE_URL}/auth/signin`, loginData.data);
@@ -52,15 +54,18 @@ export const loginUserAction = (loginData) => async (dispatch) => {
         if (data.token) {
             localStorage.setItem("token", data.token);
         }
+        window.alert("Prijava uspjela!");
 
         dispatch({ type: LOGIN_SUCCESS, payload: data.token });
     } catch (error) {
         console.log("------", error);
+        window.alert("Prijava nije uspjela!");
         dispatch({ type: LOGIN_FAILURE, payload: error });
     }
 };
 
 export const registerUserAction = (registerData) => async (dispatch) => {
+    //const history = useHistory();
     dispatch({ type: REGISTER_REQUEST });
     try {
         const { data } = await axios.post(`${API_BASE_URL}/auth/signup`, registerData.data);
@@ -69,9 +74,12 @@ export const registerUserAction = (registerData) => async (dispatch) => {
             localStorage.setItem("token", data.token);
         }
 
+        window.alert("Registracija uspjela!");
+
         dispatch({ type: REGISTER_SUCCESS, payload: data.jwt });
     } catch (error) {
         console.log("------", error);
+        window.alert("Registracija nije uspjela!");
         dispatch({ type: REGISTER_FAILURE, payload: error });
     }
 };

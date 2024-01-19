@@ -4,7 +4,8 @@ import profilePictureTemp from "../images/img/user.jpeg";
 import {useDispatch, useSelector} from "react-redux";
 import { useHistory } from 'react-router-dom';
 import {fetchUserProfile, followUser, fetchRecipesForUserFeed, fetchOtherProfileByUsername,fetchRecipesByUser} from "../redux/auth/auth.action";
-
+import Loading from './Components/Loading.js';
+import {lazy, Suspense} from 'react';
 
 function Profile(props) {
   const jwtToken = localStorage.getItem("token");
@@ -15,6 +16,8 @@ function Profile(props) {
   const error = useSelector(state => state.auth.error);
   const history = useHistory();
   const recipesForFeed = useSelector(state => state.auth.recipesForFeed);
+
+  const Recepti = lazy(() => delayForDemo(import('./Components/Recepti.js')));
 
   useEffect(() => {
     dispatch(fetchUserProfile());
@@ -33,7 +36,7 @@ function Profile(props) {
     console.log("Trying to follow user");
     await dispatch(followUser({ data: {followerId: userProfileInfo.idKorisnik, followingId: profileToLoad.idKorisnik}})).then(() => {
       //history.push('/Profile');
-      //window.location.reload();
+      window.location.reload();
     });
   };
   // State to store user profile information, followers, and following
@@ -43,102 +46,111 @@ function Profile(props) {
   );
 
 
-  const arrayDataItems = korisnikRecepti.map(recipe => 
-    <div className="single-recipe-page">
-      <div className="recipe-card">
-      <a href="/RecipePage" onClick={()=>{localStorage.setItem('recipeToLoad',JSON.stringify(recipe.idRecept)); console.log(recipe.idRecept);}}>
-      <div className="recipe-details">
-        <h2>{recipe.nazivRecept}</h2>
-        {/*<p>Category: {recipe.category}</p>
-        <ul>
-          {recipe.ingredients.map((ingredient, index) => (
-            <li key={index}>{ingredient}</li>
-          ))}
-        </ul>*/}
-        <p>Uputstva: {recipe.priprema}</p>
-      </div>
-      </a>
-      </div>
-  </div>
-  );
-
   return (
-    <div>
-      <div className="container mx-auto my-10 p-6 bg-white  rounded-md" style={{ display: 'flex', flexDirection: 'row' , justifyContent: 'space-between'}}>
-      <div className="container mx-auto my-10 p-6 bg-white  rounded-md" style={{ display: 'flex', flexDirection: 'column' , justifyContent: 'space-between'}}>
-      <div className="container mx-auto my-10 p-6 bg-white shadow-md rounded-md" style={{ display: 'flex', flexDirection: 'row' , justifyContent: 'space-between'}}>
-      <div style={{marginLeft: '50px', alignSelf: 'center'}}>
-            <p>ID Korisnika: {profileToLoad.idKorisnik}</p>
-            <p>Korisničko ime: {profileToLoad.korisnickoIme}</p>
-            <p>Ime: {profileToLoad.imeKorisnik}</p>
-            <p>Prezime:{profileToLoad.prezimeKorisnik}</p>
-            <p>Broj telefona: {profileToLoad.brojTelefona}</p>
-            <p>Email: {profileToLoad.emailKorisnik}</p>
-          </div>
-      <div className="profile-container">
-          
+    <div class="profile-box">
+      
+      <div className='profile-full'>
+        <div className="profile-container">
+              <h1 className="profile-name">{profileToLoad.imeKorisnik} {profileToLoad.prezimeKorisnik}</h1>
+              <br></br>
+              <div class="profile-info">
+                <h1 class="section-title">Korisničko ime:</h1>
+                <p>{profileToLoad.korisnickoIme}</p>
+                <br></br>
 
-          <div className="profile">
-            <h1 className="profile-name">{profileToLoad.imeKorisnik} {profileToLoad.prezimeKorisnik}</h1>
-            {
-                props.currentUser
-                ?
-                <div>
+
+                {
+                  profileToLoad.brojTelefona || profileToLoad.emailKorisnik ?
+
+                  <p><h1 class="section-title">Kontakt informacije:</h1>
                   {
-                    userProfileInfo.razinaOvlasti == "Admin"
-                    ?
-                    <div>
-                        <a href="/PrivateProfile" class="private-button" style={{color: '#fff',backgroundColor: '#702963'}}>
-                          <button>Promjeni postavke</button> 
-                        </a>
-                        <a href="/MessengerApp">
-                          <button onClick={()=>{localStorage.setItem('friendUsername',JSON.stringify(profileToLoad.korisnickoIme)); localStorage.setItem('userId',JSON.stringify(userProfileInfo.idKorisnik));}}>Chat</button>
-                        </a>
-                        <button onClick={followUserFunction}>Zaprati korisnika</button>
-                    </div>
+                    profileToLoad.brojTelefona?
+                    <p><span class="info-highlight">Broj telefona:</span> {profileToLoad.brojTelefona}</p>
                     :
-                    <div>
-                      {
-                        userProfileInfo.idKorisnik == profileToLoad.idKorisnik
-                        ? 
-                        <a href="/PrivateProfile" class="private-button" style={{color: '#fff',backgroundColor: '#702963'}}>
-                        <button>Promjeni postavke</button>
-                        </a>
-                        :
-                        <div className='contactButtons'>
-                          <a href="/MessengerApp">
-                            <button onClick={()=>{localStorage.setItem('friendUsername',JSON.stringify(profileToLoad.korisnickoIme)); localStorage.setItem('userId',JSON.stringify(userProfileInfo.idKorisnik));}}>Chat</button>
-                          </a>
-                          <button onClick={followUserFunction}>Zaprati korisnika</button>
-                        </div>
-                      }
-                    </div>
+                    null
                   }
-
-
-                  
-                </div>
+  
+                  {
+                    profileToLoad.emailKorisnik?
+                    <p><span class="info-highlight">Email:</span> {profileToLoad.emailKorisnik}</p>
+                    :
+                    null
+                  }
+                  </p>
                   :
                   null
-          }
+                }
+                
+                
+                
+                
+              </div>
+              <br></br>
+              {
+                  props.currentUser
+                  ?
+                  <div>
+                    {
+                      userProfileInfo.razinaOvlasti == "Admin"
+                      ?
+                      <div>
+                          <a href="/PrivateProfile" >
+                            <button class="profile-button">Promjeni postavke</button> 
+                          </a>
+                          <a href="/MessengerApp">
+                            <button class="profile-button" onClick={()=>{localStorage.setItem('friendUsername',JSON.stringify(profileToLoad.korisnickoIme)); localStorage.setItem('userId',JSON.stringify(userProfileInfo.idKorisnik));}}>Chat</button>
+                          </a>
+                          <button class="profile-button" onClick={followUserFunction}>
+                            
+                            {
+                              profileToLoad.pratiociKorisnika.includes(userProfileInfo.korisnickoIme)
+                              ?
+                              <p>Prestani pratiti</p>
+                              :
+                              <p>Zaprati korisnika</p>
+                            }
+                            
+                            
+                            </button>
+                      </div>
+                      :
+                      <div>
+                        {
+                          userProfileInfo.idKorisnik == profileToLoad.idKorisnik
+                          ? 
+                          <a href="/PrivateProfile">
+                          <button class="profile-button">Promjeni postavke</button>
+                          </a>
+                          :
+                          <div className='contactButtons'>
+                            <a href="/MessengerApp">
+                              <button class="profile-button" onClick={()=>{localStorage.setItem('friendUsername',JSON.stringify(profileToLoad.korisnickoIme)); localStorage.setItem('userId',JSON.stringify(userProfileInfo.idKorisnik));}}>Chat</button>
+                            </a>
+                            <button class="profile-button" onClick={followUserFunction}>Zaprati korisnika</button>
+                          </div>
+                        }
+                      </div>
+                    }
+
+
+                    
+                  </div>
+                    :
+                    null
+            }
           </div>
 
-
-          
-
-          
+        <div className="recipe-page">
+            <Suspense fallback={<Loading item={'recepata'}/>}>
+                <Recepti recepti={korisnikRecepti}/>
+            </Suspense>
         </div>
-    </div>
-    <div className="posts">
-            <h2>Recent Posts</h2>
-            {arrayDataItems}
-          </div>
         
-              
-    </div>
-    <div className="connections" style={{ display: 'flex', flexDirection: 'column' , justifyContent: 'space-between'}}>
+      </div> 
+
+      <div className="connections" >
                 <div className="followers">
-                  <h2>Followers</h2>
+                  <h2>Pratitelji</h2>
 
                   
                   {
@@ -150,19 +162,24 @@ function Profile(props) {
                 </div>
 
                 <div className="following">
-                  <h2>Following</h2>
+                  <h2>Prati</h2>
                   {
 
                   profileToLoad.pratiteljiKorisnika && profileToLoad.pratiteljiKorisnika.map((follower) => (
                       <p key={follower.idKorisnik}>{follower.korisnickoIme}</p>
                   ))}
                 </div>
-              </div>
+        </div>
+
     </div>
-    </div>
-    
       
       );
     };
+
+function delayForDemo(promise) {
+   return new Promise(resolve => {
+        setTimeout(resolve, 500);
+   }).then(() => promise);
+}
 
 export default Profile;

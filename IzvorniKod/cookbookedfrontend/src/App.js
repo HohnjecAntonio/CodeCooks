@@ -44,7 +44,7 @@ function App() {
             <div className="App">
                 <nav className="Header">
                     <div className="ref">
-                        <NavLink className="Header-button" to="/">
+                        <NavLink onClick={()=>localStorage.setItem('kategorijaLoad', JSON.stringify("1"))} className="Header-button" to="/">
                             Home
                         </NavLink>
 
@@ -80,7 +80,6 @@ function App() {
                 </nav>
 
                 <div className="Tijelo">
-                    <button className="hidden" onClick={() => setIsLoggedIn(!isLoggedIn)}>Toggle login</button>
                     <Suspense fallback={<div>Loading...</div>}>
                         <Switch>
                             <Route path="/" exact>

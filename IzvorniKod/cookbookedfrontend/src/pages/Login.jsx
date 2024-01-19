@@ -16,8 +16,11 @@ const Login = () => {
     const handleSubmit = async (values) => {
         console.log('handle submit ', values);
         await dispatch(loginUserAction({ data: values })).then(() => {
-            history.push('/user-feed');
-            window.location.reload();
+            if (localStorage.getItem("token")){
+                localStorage.setItem('kategorijaLoad', JSON.stringify("1"))
+                history.push('/');
+                window.location.reload();
+            }
         });
     };
 
