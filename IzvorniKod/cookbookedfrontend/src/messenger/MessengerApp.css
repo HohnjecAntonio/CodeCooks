@@ -8,19 +8,10 @@
     height: 100%;
   }
   
-  header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-  }
+
+
   
-  header input {
-    padding: 5px;
-    margin-left: 10px;
-  }
-  
-  main {
+  .main-messanger-app {
     display: flex;
     flex: 1;
   }
