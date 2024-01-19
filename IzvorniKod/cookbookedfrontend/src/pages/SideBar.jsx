@@ -135,6 +135,18 @@ useEffect(() => {
               </div>
             )}
 
+
+          {props.currentUser ? (
+              <NavItem
+                  leftIcon={<CatIcon/>}
+                  text ="Chat"
+                  link= "/MessengerApp">
+              </NavItem>
+              ) : (
+              <div className="hidden">
+              </div>
+            )}
+
             <NavItem
               leftIcon={<SpaceStationIcon/>}
               rightIcon={<CaretIcon/>}

@@ -36,7 +36,7 @@ function Profile(props) {
     console.log("Trying to follow user");
     await dispatch(followUser({ data: {followerId: userProfileInfo.idKorisnik, followingId: profileToLoad.idKorisnik}})).then(() => {
       //history.push('/Profile');
-      window.location.reload();
+      //window.location.reload();
     });
   };
   // State to store user profile information, followers, and following
@@ -102,13 +102,9 @@ function Profile(props) {
                           </a>
                           <button class="profile-button" onClick={followUserFunction}>
                             
-                            {
-                              profileToLoad.pratiociKorisnika.includes(userProfileInfo.korisnickoIme)
-                              ?
-                              <p>Prestani pratiti</p>
-                              :
+                            
                               <p>Zaprati korisnika</p>
-                            }
+                            
                             
                             
                             </button>

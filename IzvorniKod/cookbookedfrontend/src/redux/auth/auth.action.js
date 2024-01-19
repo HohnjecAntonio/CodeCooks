@@ -43,7 +43,6 @@ import {
     LIKE_RECIPE_FAILURE,LIKE_RECIPE_REQUEST,LIKE_RECIPE_SUCCESS, 
     DELETE_USER_PROFILE_REQUEST, DELETE_USER_PROFILE_SUCCESS, DELETE_USER_PROFILE_FAILURE, FETCH_OTHER_PROFILE_BY_USERNAME_REQUEST, FETCH_OTHER_PROFILE_BY_USERNAME_SUCCESS, FETCH_OTHER_PROFILE_BY_USERNAME_FAILURE, GET_ROLE_REQUEST, GET_ROLE_SUCCESS, GET_ROLE_FAILURE
 } from "./auth.actionType";
-import { useHistory } from 'react-router-dom';
 
 export const loginUserAction = (loginData) => async (dispatch) => {
     
@@ -159,7 +158,7 @@ export const saveRecipe = (recipeData) => async (dispatch) => {
 
         console.log("Spremljen recept: ");
         console.log(data);
-        window.alert("Spremljen recept!");
+        window.alert("Spremljen recept, osim ako već nije bio, onda sada više nije!");
         dispatch({ type: SAVE_RECIPE_SUCCESS, payload: data});
     } catch (error) {
         console.log("------", error);
@@ -175,7 +174,7 @@ export const likeRecipe = (recipeData) => async (dispatch) => {
 
         console.log("Označen recept: ");
         console.log(data);
-        window.alert("Označen recept");
+        window.alert("Označen recept, osim ako već nije bio, onda sada više nije!");
 
         dispatch({ type: LIKE_RECIPE_SUCCESS, payload: data});
     } catch (error) {
@@ -372,7 +371,8 @@ export const followUser = (requestData) => async (dispatch) => {
         const { data } = await apiAuth.post(`${API_BASE_URL}/korisnici/${requestData.data.followerId}/follow/${requestData.data.followingId}`);
 
         console.log(requestData.data.followerId + " followed user: " + requestData.data.followingId);
-
+        console.log(data);
+        window.alert("Zapraćen korisnik, osim ako ga niste već pratili, onda je otpraćen");
         dispatch({ type: FOLLOW_USER_SUCCESS, payload: data });
     } catch (error) {
         console.log("------", error);
