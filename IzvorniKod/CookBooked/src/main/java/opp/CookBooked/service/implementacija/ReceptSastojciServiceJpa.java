@@ -30,10 +30,13 @@ public class ReceptSastojciServiceJpa implements ReceptSastojciService {
 
         Recept recept = receptRepo.findByIdRecept(idRecept);
 
-        for (String s : sastojci) {
-            Sastojak sastojak = sastojakService.findByNaziv(s.trim());
-            ReceptSastojci spremRec = new ReceptSastojci(recept, sastojak);
-            recSasRepo.save(spremRec);
+        if (!sastojci.isEmpty()) {
+
+            for (String s : sastojci) {
+                Sastojak sastojak = sastojakService.findByNaziv(s.trim().toLowerCase());
+                ReceptSastojci spremRec = new ReceptSastojci(recept, sastojak);
+                recSasRepo.save(spremRec);
+            }
         }
 
         return null;
