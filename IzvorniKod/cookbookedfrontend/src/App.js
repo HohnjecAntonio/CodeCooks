@@ -45,20 +45,20 @@ function App() {
                 <nav className="Header">
                     <div className="ref">
                         <NavLink onClick={()=>localStorage.setItem('kategorijaLoad', JSON.stringify("1"))} className="Header-button" to="/">
-                            Home
+                            Naslovna stranica
                         </NavLink>
 
-                        {currentUser && (
+                        {/*currentUser && (
                             <NavLink to="/user-feed" className="Header-button">
                                 User feed
                             </NavLink>
-                        )}
+                        )*/}
                     </div>
 
                     {currentUser ? (
                         <div className="ref">
                             <a className="Header-button" href="/signin" onClick={logOut}>
-                                Logout
+                                Odjavi se
                             </a>
                             {/*
                             <a className="Header-button" href="/Profile">
@@ -69,11 +69,11 @@ function App() {
                     ) : (
                         <div className="ref">
                             <NavLink className="Header-button" to="/signin">
-                                Login
+                                Prijava
                             </NavLink>
 
                             <NavLink className="Header-button" to="/signup">
-                                Sign up
+                                Registracija
                             </NavLink>
                         </div>
                     )}

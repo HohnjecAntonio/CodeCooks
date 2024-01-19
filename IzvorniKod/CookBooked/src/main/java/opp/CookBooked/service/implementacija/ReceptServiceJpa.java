@@ -255,16 +255,22 @@ public class ReceptServiceJpa implements ReceptService {
 
             List<String> sas = new ArrayList<>(List.of(sastojciList));
 
-                recept.setNazivRecept(updatedRecept.getNazivRecept());
-                recept.setPriprema(updatedRecept.getPriprema());
-                recept.setOznaka(updatedRecept.getOznaka());
-                recept.setSlikaRecept(updatedRecept.getSlikaRecept());
-                recept.setVideoRecept(updatedRecept.getVideoRecept());
-                recept.setVrijemeObjave(LocalDate.now());
-                recept.setVrijemeKuhanja(updatedRecept.getVrijemeKuhanja());
+            recept.setNazivRecept(updatedRecept.getNazivRecept());
+            recept.setPriprema(updatedRecept.getPriprema());
+            recept.setOznaka(updatedRecept.getOznaka());
+            recept.setSlikaRecept(updatedRecept.getSlikaRecept());
+            recept.setVideoRecept(updatedRecept.getVideoRecept());
+            recept.setVrijemeKuhanja(updatedRecept.getVrijemeKuhanja());
 
-                recSasService.dodajSastojkeReceptu(updatedRecept.getIdRecept(), sas);
-                return receptRepo.save(recept);
+            recSasService.obrisiSastojkeRecepta(updatedRecept.getIdRecept());
+            recSasService.dodajSastojkeReceptu(updatedRecept.getIdRecept(), sas);
+            reKatService.dodajKategorijuReceptu(updatedRecept.getIdRecept(), updatedRecept.getIdKategorija());
+            vrKuhService.dodajVrstuKuhinjeReceptu(updatedRecept.getIdRecept(), updatedRecept.getIdVrstaKuhinje());
+
+
+            return receptRepo.save(recept);
+
+
         } catch (Exception e) {
             e.printStackTrace();
             return null;
