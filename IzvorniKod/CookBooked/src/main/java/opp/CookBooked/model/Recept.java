@@ -1,127 +1,118 @@
 package opp.CookBooked.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import java.util.Set;
+import lombok.*;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+import java.util.Set;
 import java.sql.Time;
 
 @Entity
 @Table(name = "recept")
 @Data
 @EqualsAndHashCode
+@NoArgsConstructor
 public class Recept {
 
     @Id
     @GeneratedValue
-    private Long IDRecept;
+    @Getter
+    @Setter
+    @Column(name = "idrecept")
+    private Long idRecept;
 
-    private String NazivRecept;
+    @Getter
+    @Setter
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_korisnik")
+    private Korisnik autor;
 
-    @OneToMany
-    @JoinColumn(name = "receptKategorije", referencedColumnName = "iDKategorija")
+    @Getter
+    @Setter
+    @Column(name = "nazivRecept")
+    private String nazivRecept;
+
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
     private Set<ReceptKategorije> receptKategorije;
 
-    private Long IDKategorija;
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
+    private Set<ReceptSastojci> receptSastojci;
 
-    private Long IDReceptSastojak;
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
+    private Set<VrsteKuhinjaRecepta> vrsteKuhinjaRecepta;
 
-    //@OneToMany
-    //@JoinColumn(name = "vrstaKuhinja", referencedColumnName = "iDVrstaKuhinja")
-    //private Set<VrstaKuhinja> vrstaKuhinja;
-
-    private Long IDVrstaKuhinje;
-
+    @Getter
+    @Setter
+    @Column(name = "priprema")
     private String Priprema;
 
-    private Time VrijemeKuhanja;
+    @Getter
+    @Setter
+    @Column(name = "vrijemeKuhanja")
+    private LocalTime vrijemeKuhanja;
 
-    private String Oznaka; // ???
+    @Getter
+    @Setter
+    @Column(name = "oznaka")
+    private String Oznaka;
 
-    private String SlikaRecept; // ?? Onda bolje link koji može bit il slika il dokument poput worda
+    @Getter
+    @Setter
+    @Column(name = "slikaRecept")
+    private String slikaRecept;
 
+    @Getter
+    @Setter
+    @Column(name = "videoRecept")
+    private String videoRecept;
 
-    private Long IDVideoRecept;
+    @Getter
+    @Setter
+    @Column(name = "vrijemeObjave")
+    private LocalDate vrijemeObjave;
 
-    public Long getIDRecept() {
-        return IDRecept;
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
+    private Set<SpremljeniRecepti> korisnici;
+
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
+    private Set<OznacavanjeRecepata> korisniciOzn;
+
+    @OneToMany(mappedBy = "recept")
+    @JsonIgnore
+    private List<KomentariRecept> komentari;
+
+    public Recept(String nazivRecept, Korisnik autor,
+                  String priprema, LocalTime vrijemeKuhanja,
+                  String oznaka, String slikaRecept, String videoRecept) {
+        this.nazivRecept = nazivRecept;
+        this.autor = autor;
+        this.Priprema = priprema;
+        this.vrijemeKuhanja = vrijemeKuhanja;
+        this.Oznaka = oznaka;
+        this.slikaRecept = slikaRecept;
+        this.videoRecept = videoRecept;
     }
 
-    public Long getIDKategorija() {
-        return IDKategorija;
+    public Recept(Long idRecept, Korisnik autor, String nazivRecept, String priprema, String oznaka, String slika, String video, LocalDate vrijemeObjave, LocalTime vrijemeKuhanja) {
+        this.idRecept = idRecept;
+        this.autor = autor;
+        this.nazivRecept = nazivRecept;
+        this.Priprema = priprema;
+        this.Oznaka = oznaka;
+        this.slikaRecept = slika;
+        this.videoRecept = video;
+        this.vrijemeObjave = vrijemeObjave;
+        this.vrijemeKuhanja = vrijemeKuhanja;
     }
 
-    public Long getIDReceptSastojak() {
-        return IDReceptSastojak;
-    }
-
-    public Long getIDVideoRecept() {
-        return IDVideoRecept;
-    }
-
-    public Long getIDVrstaKuhinje() {
-        return IDVrstaKuhinje;
-    }
-
-    public String getNazivRecept() {
-        return NazivRecept;
-    }
-
-    public String getOznaka() {
-        return Oznaka;
-    }
-
-    public String getPriprema() {
-        return Priprema;
-    }
-
-    public String getSlikaRecept() {
-        return SlikaRecept;
-    }
-
-    public Time getVrijemeKuhanja() {
-        return VrijemeKuhanja;
-    }
-
-    public void setNazivRecept(String nazivRecept) {
-        NazivRecept = nazivRecept;
-    }
-
-    public void setOznaka(String oznaka) {
-        Oznaka = oznaka;
-    }
-
-    public void setPriprema(String priprema) {
-        Priprema = priprema;
-    }
-
-    public void setSlikaRecept(String slikaRecept) {
-        SlikaRecept = slikaRecept;
-    }
-
-    public void setVrijemeKuhanja(Time vrijemeKuhanja) {
-        VrijemeKuhanja = vrijemeKuhanja;
-    }
-
-    public void setIDRecept(Long IDRecept) {
-        this.IDRecept = IDRecept;
-    }
-
-    public void setIDKategorija(Long IDKategorija) {
-        this.IDKategorija = IDKategorija;
-    }
-
-    public void setIDReceptSastojak(Long IDReceptSastojak) {
-        this.IDReceptSastojak = IDReceptSastojak;
-    }
-
-    public void setIDVideoRecept(Long IDVideoRecept) {
-        this.IDVideoRecept = IDVideoRecept;
-    }
-
-    public void setIDVrstaKuhinje(Long IDVrstaKuhinje) {
-        this.IDVrstaKuhinje = IDVrstaKuhinje;
-    }
 }
 

@@ -1,21 +1,34 @@
 package opp.CookBooked.service;
 
-import opp.CookBooked.controller.RegisterDTO;
+import opp.CookBooked.dto.FollowDTO;
+import opp.CookBooked.dto.ProfilDTO;
+import opp.CookBooked.dto.ProfilDrugogKorisnikaDTO;
 import opp.CookBooked.model.Korisnik;
+import opp.CookBooked.model.Recept;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 public interface KorisnikService {
     List<Korisnik> listAll();
 
-    Korisnik createKorisnik(String korisnickoIme, String lozinkaKorisnik, String emailKorisnik);
+    ProfilDTO fetchProfil(String jwt) throws Exception;
 
-    Optional<Korisnik> findByKorisnickoIme(String korisnickoIme);
+    Korisnik createKorisnik(Korisnik korisnik) throws Exception;
 
-    Optional<Korisnik> findByIdKorisnik(long iDKorisnik);
+    Korisnik findByKorisnickoIme(String korisnickoIme);
 
-    Korisnik fetch(long iDKorisnik) throws Throwable;
+    Korisnik findByIdKorisnik(long idKorisnik);
 
-    Korisnik deleteKorisnik(long iDKorisnik);
+    Korisnik getRoleByIdKorisnik(long idKorisnik);
+
+    ProfilDrugogKorisnikaDTO fetchZaProfil(String korisnickoIme) throws Exception;
+
+    Korisnik fetch(long idKorisnik) throws Exception;
+
+    Korisnik updateKorisnik(long idKorisnik, ProfilDTO updatedKorisnik) throws Exception;
+
+    Korisnik getKorisnikFromJWT(String jwt);
+
+    Korisnik deleteKorisnik(long idKorisnik) throws Exception;
 }

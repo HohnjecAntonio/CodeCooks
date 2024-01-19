@@ -12,6 +12,31 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    overflow: hidden;
+}
+
+.hidden{
+    visibility: hidden;
+    display: none;
+}
+
+.ref{
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+    height: auto;
+}
+
+.Tijelo::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+.Tijelo::-webkit-scrollbar-track {
+    background: #1e1e24;
+}
+
+.Tijelo::-webkit-scrollbar-thumb {
+    background: #6649b8;
 }
 
 .MenuIkona{
@@ -50,12 +75,13 @@
 }
 
 .Header{
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     width: 100%;
     display: flex;
     justify-content: right;
     align-items: center;
-    height: 60px;
+    height: 5rem;
     box-shadow: 0px 2px 1px 0px #222;
     margin: 0px;
 }
@@ -63,7 +89,6 @@
 .Tijelo{
     background-color: transparent;
     width: 100%;
-    margin-top: 2px;
     display: block;
     height: calc(100vh - 62px);
 }
@@ -72,7 +97,7 @@
     display: inline-block;
     margin: auto 10px;
     text-decoration: none;
-    color: black;
+    color: var(--text-primary);
     border: 0px solid black;
     height: 100%;
     font-weight: bold;
@@ -83,7 +108,7 @@
 .Header-button button{
     margin: 0px;
     text-decoration: none;
-    color: black;
+    color: var(--text-primary);
     font-weight: bold;
     font-family: Arial, sans-serif;
     background-color: rgba(255,255,255, 0);
@@ -96,6 +121,9 @@
 
 button:hover{
     cursor: pointer;
+    filter: grayscale(0%) opacity(1);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
 }
 
 form input, label, button {

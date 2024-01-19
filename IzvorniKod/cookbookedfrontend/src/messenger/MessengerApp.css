@@ -1,0 +1,17 @@
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .app-container {
+    display: flex;
+    height: 100%;
+  }
+  
+
+
+  
+  .main-messanger-app {
+    display: flex;
+    flex: 1;
+  }

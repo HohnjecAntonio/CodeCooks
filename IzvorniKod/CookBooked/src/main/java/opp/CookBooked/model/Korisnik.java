@@ -1,41 +1,91 @@
 package opp.CookBooked.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.*;
 
 @Entity
 @Table(name = "korisnik")
 @Data
 @EqualsAndHashCode
+@NoArgsConstructor
 public class Korisnik {
 
     @Id
-    @GeneratedValue
-    @Column(name = "idKorisnik")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "idkorisnik")
+    @Getter
+    @Setter
     private Long idKorisnik;
 
     @NotNull
     @Column(name = "korisnickoIme", unique = true)
+    @Getter
+    @Setter
     private String korisnickoIme;
 
     @NotNull
+    @Column(name = "lozinkaKorisnik")
     @Size(min = 6)
+    @Getter
+    @Setter
     private String lozinkaKorisnik;
+
+    @Column(name = "imeKorisnik")
+    @Getter
+    @Setter
     private String imeKorisnik;
+
+    @Column(name = "prezimeKorisnik")
+    @Getter
+    @Setter
     private String prezimeKorisnik;
+
+    @Getter
+    @Setter
     private String brojTelefona;
+
+    @Column(name = "emailKorisnik")
+    @Getter
+    @Setter
     private String emailKorisnik;
+
+    @Getter
+    @Setter
     private String razinaOvlasti;
-    private Time dostupan;
 
-    public Korisnik() {
+    @Getter
+    @Setter
+    private String dostupanOd;
 
-    }
+    @Getter
+    @Setter
+    private String dostupanDo;
+
+    @OneToMany(mappedBy = "follower")
+    @JsonIgnore
+    private Set<Pratioci> follows;
+
+    @OneToMany(mappedBy = "following")
+    @JsonIgnore
+    private Set<Pratioci> followers;
+
+    @OneToMany(mappedBy = "korisnik")
+    @JsonIgnore
+    private Set<SpremljeniRecepti> spremljeniRecepti;
+
+    @OneToMany(mappedBy = "korisnik")
+    @JsonIgnore
+    private Set<OznacavanjeRecepata> oznaceniRecepti;
 
     public Korisnik(String korisnickoIme, String lozinkaKorisnik, String emailKorisnik) {
         this.korisnickoIme = korisnickoIme;
@@ -43,75 +93,15 @@ public class Korisnik {
         this.emailKorisnik = emailKorisnik;
     }
 
-    public Long getIDKorisnik() {
-        return idKorisnik;
-    }
-
-    public String getKorisnickoIme() {
-        return korisnickoIme;
-    }
-
-    public String getLozinkaKorisnik() {
-        return lozinkaKorisnik;
-    }
-
-    public String getImeKorisnik() {
-        return imeKorisnik;
-    }
-
-    public String getPrezimeKorisnik() {
-        return prezimeKorisnik;
-    }
-
-    public String getBrojTelefona() {
-        return brojTelefona;
-    }
-
-    public String getEmailKorisnik() {
-        return emailKorisnik;
-    }
-
-    public String getRazinaOvlasti() {
-        return razinaOvlasti;
-    }
-
-    public Time getDostupan() {
-        return dostupan;
-    }
-
-    public void setKorisnickoIme(String korisnickoIme) {
+    public Korisnik(Long idKorisnik, String korisnickoIme) {
+        this.idKorisnik = idKorisnik;
         this.korisnickoIme = korisnickoIme;
     }
 
-    public void setLozinkaKorisnik(String lozinkaKorisnik) {
-        lozinkaKorisnik = lozinkaKorisnik;
+    public Korisnik(Long idKorisnik, String korisnickoIme, String razinaOvlasti) {
+        this.idKorisnik = idKorisnik;
+        this.korisnickoIme = korisnickoIme;
+        this.razinaOvlasti = razinaOvlasti;
     }
 
-    public void setImeKorisnik(String imeKorisnik) {
-        imeKorisnik = imeKorisnik;
-    }
-
-    public void setPrezimeKorisnik(String prezimeKorisnik) {
-        prezimeKorisnik = prezimeKorisnik;
-    }
-
-    public void setBrojTelefona(String brojTelefona) {
-        brojTelefona = brojTelefona;
-    }
-
-    public void setEmailKorisnik(String emailKorisnik) {
-        emailKorisnik = emailKorisnik;
-    }
-
-    public void setRazinaOvlasti(String razinaOvlasti) {
-        razinaOvlasti = razinaOvlasti;
-    }
-
-    public void setDostupan(Time dostupan) {
-        dostupan = dostupan;
-    }
-
-    public void setIDKorisnik(Long IDKorisnik) {
-        this.idKorisnik = IDKorisnik;
-    }
 }

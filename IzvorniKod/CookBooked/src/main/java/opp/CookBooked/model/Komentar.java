@@ -1,84 +1,45 @@
 package opp.CookBooked.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Table(name = "komentar")
 @Data
 @EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class Komentar {
 
     @Id
-    @GeneratedValue
-    private Long IDKomentar;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idkomentar")
+    @Getter
+    @Setter
+    private Long idKomentar;
 
     @ManyToOne
-    @JoinColumn(name = "objavaRecepata", referencedColumnName = "iDObjava")
-    private ObjavaRecepta objavaRecepta;
-
-    private Long IDObjava;
-
-    @ManyToOne
-    @JoinColumn(name = "korisnik", referencedColumnName = "iDKorisnik")
+    @JoinColumn(name = "idkorisnik")
+    @Getter
+    @Setter
     private Korisnik korisnik;
 
-    private Long IDKorisnik;
+    @Getter
+    @Setter
+    @Column(name = "opisKomentar")
+    private String opisKomentar;
 
-    private String NaslovKomentar;
+    @Getter
+    @Setter
+    @Column(name = "datumKomentar")
+    private LocalDate datumKomentar;
 
-    private String OpisKomentar;
-
-    private Date DatumKomentar;
-
-    public Long getIDKorisnik() {
-        return IDKorisnik;
+    public Komentar(String opisKomentar, LocalDate datumKomentar) {
+        this.opisKomentar = opisKomentar;
+        this.datumKomentar = datumKomentar;
     }
 
-    public Date getDatumKomentar() {
-        return DatumKomentar;
-    }
-
-    public Long getIDKomentar() {
-        return IDKomentar;
-    }
-
-    public Long getIDObjava() {
-        return IDObjava;
-    }
-
-    public String getNaslovKomentar() {
-        return NaslovKomentar;
-    }
-
-    public String getOpisKomentar() {
-        return OpisKomentar;
-    }
-
-    public void setIDKorisnik(Long IDKorisnik) {
-        this.IDKorisnik = IDKorisnik;
-    }
-
-    public void setDatumKomentar(Date datumKomentar) {
-        DatumKomentar = datumKomentar;
-    }
-
-    public void setIDKomentar(Long IDKomentar) {
-        this.IDKomentar = IDKomentar;
-    }
-
-    public void setIDObjava(Long IDObjava) {
-        this.IDObjava = IDObjava;
-    }
-
-    public void setNaslovKomentar(String naslovKomentar) {
-        NaslovKomentar = naslovKomentar;
-    }
-
-    public void setOpisKomentar(String opisKomentar) {
-        OpisKomentar = opisKomentar;
-    }
 }

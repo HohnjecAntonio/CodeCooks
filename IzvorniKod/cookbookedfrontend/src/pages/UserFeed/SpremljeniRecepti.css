@@ -1,0 +1,121 @@
+
+*{
+    box-sizing: border-box;
+    border-collapse: collapse;
+}
+
+.recipe-page {
+    max-width: 1000px;
+    height: 100%;
+    margin: 50px auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+
+.header{
+    width: 100vw;
+    border-top: 1px solid #4485;
+    border-left: 1px solid #4485;
+    background-color: #23232e;
+    text-align: center;
+}
+
+.px-20 h1{
+    height: 80px;
+    font-size: 40px;
+    background-color: transparent;
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+    width: fit-content;
+    color: white;
+}
+
+.px-20{
+    margin-left: 80px;
+    width: 100vw;
+    padding: 0px;
+}
+/*
+h1,
+h2 {
+    text-align: center;
+    color: #000;
+}*/
+
+.recipe-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+}
+
+.categories{
+    width: 80vw;
+    display: flex;
+    justify-self: center;
+    margin: auto;
+    justify-content: space-between;
+    background-color: transparent;
+    text-align: center;
+    height: 40px;
+}
+
+.opis{
+    width: 50vw;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    height: 80px;
+    font-size: 20px;
+    color: white;
+}
+
+.categories a{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 100%;
+    text-align: center;
+    color: white;
+}
+
+.recipe-creator {
+    margin-top: 30px;
+}
+
+.recipe-creator h2 {
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+}
+
+.recipe-creator form {
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe-creator label {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #000;
+}
+
+.recipe-creator textarea,
+.recipe-creator button {
+    padding: 12px;
+    margin: 5px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    transition: border-color 0.3s;
+}
+
+.loading{
+    width: 500px;
+    height: 500px;
+    display: block;
+    color: black;
+    font-size: 20px;
+}
