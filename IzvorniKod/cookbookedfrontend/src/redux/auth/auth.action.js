@@ -159,7 +159,7 @@ export const saveRecipe = (recipeData) => async (dispatch) => {
 
         console.log("Spremljen recept: ");
         console.log(data);
-
+        window.alert("Spremljen recept!");
         dispatch({ type: SAVE_RECIPE_SUCCESS, payload: data});
     } catch (error) {
         console.log("------", error);
@@ -175,6 +175,7 @@ export const likeRecipe = (recipeData) => async (dispatch) => {
 
         console.log("Označen recept: ");
         console.log(data);
+        window.alert("Označen recept");
 
         dispatch({ type: LIKE_RECIPE_SUCCESS, payload: data});
     } catch (error) {
