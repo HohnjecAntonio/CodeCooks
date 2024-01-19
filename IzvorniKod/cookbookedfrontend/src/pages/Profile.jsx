@@ -64,8 +64,8 @@ function Profile(props) {
 
   return (
     <div>
-      <div className="container mx-auto my-10 p-6 bg-white  rounded-md" style={{ display: 'flex', flexDirection: 'column' , justifyContent: 'space-between'}}>
       <div className="container mx-auto my-10 p-6 bg-white  rounded-md" style={{ display: 'flex', flexDirection: 'row' , justifyContent: 'space-between'}}>
+      <div className="container mx-auto my-10 p-6 bg-white  rounded-md" style={{ display: 'flex', flexDirection: 'column' , justifyContent: 'space-between'}}>
       <div className="container mx-auto my-10 p-6 bg-white shadow-md rounded-md" style={{ display: 'flex', flexDirection: 'row' , justifyContent: 'space-between'}}>
       <div style={{marginLeft: '50px', alignSelf: 'center'}}>
             <p>ID Korisnika: {profileToLoad.idKorisnik}</p>
@@ -129,8 +129,14 @@ function Profile(props) {
           
         </div>
     </div>
-      
-        <div className="connections" style={{ display: 'flex', flexDirection: 'column' , justifyContent: 'space-between'}}>
+    <div className="posts">
+            <h2>Recent Posts</h2>
+            {arrayDataItems}
+          </div>
+        
+              
+    </div>
+    <div className="connections" style={{ display: 'flex', flexDirection: 'column' , justifyContent: 'space-between'}}>
                 <div className="followers">
                   <h2>Followers</h2>
 
@@ -152,12 +158,6 @@ function Profile(props) {
                   ))}
                 </div>
               </div>
-              
-    </div>
-    <div className="posts">
-            <h2>Recent Posts</h2>
-            {arrayDataItems}
-          </div>
     </div>
     </div>
     

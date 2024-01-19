@@ -48,19 +48,20 @@ const UserFeed = () => {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         padding: '20px',
-        
+       
       };
       
       const textElementStyle = {
         marginLeft: '90px', 
+        
       };
 
     var arrayDataItems = korisnikRecepti.map(recipe => 
             <div className="single-recipe-page">
-            <div className="recipe-card">
+            <div className="recipe-card" >
             <a href="/RecipePage" onClick={()=>{localStorage.setItem('recipeToLoad',JSON.stringify(recipe.idRecept)); console.log(recipe.idRecept);}}>
-            <div className="recipe-details">
-                <h2>{recipe.nazivRecept}</h2>
+            <div className="recipe-details" >
+                <h2 >{recipe.nazivRecept}</h2>
                 {/*<p>Category: {recipe.category}</p>
                 <ul>
                 {recipe.ingredients.map((ingredient, index) => (
@@ -76,13 +77,14 @@ const UserFeed = () => {
     
 
     return (
-        <div className="container mx-auto my-10 p-6 bg-white shadow-md rounded-md">
-            <h1 className="text-3xl font-bold mb-4 text-black">Welcome to Your User Feed!</h1>
+        <div className="container mx-auto my-10 p-6  shadow-md rounded-md" style={{backgroundColor:'#23232e'}}>
+            <h1 className="text-3xl font-bold mb-4 text-white">Welcome to Your User Feed!</h1>
             {/*<p className="text-gray-600">Your JWT Token: {jwtToken}</p>*/}
-            <div className="container mx-auto my-10 p-6 bg-white shadow-md rounded-md">
+            <div className="container mx-auto my-10 p-6  rounded-md" style={{backgroundColor:'#23232e'}}>
             <div style={recipeCardContainerStyle}>
                 {recipesForFeed.map(recipe => (
                     <div key={recipe.idRecept} style={recipeCard }>
+                        <div style={{marginTop: '50%'}}>
                         <p style={textElementStyle}>{recipe.nazivRecept}</p>
                         <p style={textElementStyle}>{recipe.autor}</p>
                         <p style={textElementStyle}>{recipe.oznaka}</p>
@@ -90,7 +92,7 @@ const UserFeed = () => {
                         
                         {recipe.komentari.map(komentar => (
                             <p style={textElementStyle}>{komentar.opisKomentar + " " + komentar.datumKomentar + " " + komentar.korisnik.korisnickoIme}</p>
-                        ))}
+                        ))}</div>
                     </div>
                 ))}
             </div>

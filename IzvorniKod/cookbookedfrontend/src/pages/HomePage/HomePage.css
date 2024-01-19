@@ -34,11 +34,13 @@ h2 {
 
 .recipe-details {
   padding: 20px;
+  align-items: center;
 }
 
 .recipe-details h2 {
   margin: 10px 0;
   color: #000;
+  font-weight: bold;
 }
 
 .recipe-details p {
@@ -55,6 +57,7 @@ h2 {
 .recipe-details li {
   margin-bottom: 5px;
   color: #000;
+  font-weight: bold;
 }
 
 .recipe-creator {
@@ -64,6 +67,7 @@ h2 {
 .recipe-creator h2 {
   text-align: center;
   color: #000;
+  font-weight: bold;
 }
 
 .recipe-creator form {
