@@ -10,7 +10,7 @@
     border-radius: 8px;
     padding: 16px;
     margin: 8px;
-    background-color: var(--bg-primary);
+    background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
@@ -30,11 +30,11 @@
   .recipe-icon-button-comment{
     height: fit-content;
     width: fit-content;
-    background-color: white;
+    background-color: var(--bg-primary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   
     padding: 12px;
     margin: 5px 0 20px;
-    border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
   }
@@ -50,9 +50,7 @@
   }
 
   .recipe-icon-button-comment:hover{
-    height: fit-content;
-    width: fit-content;
-    background-color: rgb(219, 219, 219);
+    background-color: var(--bg-secondary);
   }
 
   .comment-date{

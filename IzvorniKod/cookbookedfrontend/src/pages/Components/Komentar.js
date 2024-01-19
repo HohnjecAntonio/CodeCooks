@@ -41,7 +41,7 @@ function Komentar(props){
                     console.log('handle submit ', values);
                     await dispatch(editComment({ data: values })).then(() => {
                         //history.push('/');
-                        //window.location.reload();
+                        window.location.reload();
                     });
                 }}>
                 <Form>
