@@ -95,7 +95,7 @@ useEffect(() => {
 
             <NavItem
               leftIcon={<CatIcon/>}
-              text ="Home"
+              text ="Naslovna stranica"
               link= "/"
               categoryId="1"
               openCategory="true">
@@ -149,7 +149,7 @@ useEffect(() => {
             {props.currentUser ? (
               <NavItem
                   leftIcon={<CatIcon/>}
-                  text ="Logout"
+                  text ="Odjavi se"
                   link= "/signin"
                   logout="true"
                   >

@@ -57,7 +57,7 @@ const editRecipeFunction = async (values) => {
   console.log('handle submit ', values);
   await dispatch(editRecipe({ data: values })).then(() => {
       //history.push('/');
-      window.location.reload();
+      //window.location.reload();
   });
 };
 
@@ -122,7 +122,9 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
               sastojci: returnSastojciList(recipe.sastojci) || '',
               vrijemeKuhanja: recipe.vrijemeKuhanja || '',
               priprema: recipe.priprema || '',
-              oznaka: recipe.oznaka || ''
+              oznaka: recipe.oznaka || '',
+              idVrstaKuhinje: "1",
+              idKategorija: "1"
             }
           }>
 
@@ -149,7 +151,8 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
           />
 
           <label htmlFor="idVrstaKuhinje">Vrsta kuhinje:</label>
-          <select
+          <Field
+              as="select"
               id="idVrstaKuhinje"
               name="idVrstaKuhinje"
           >
@@ -158,7 +161,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
                   {vrsta.nazivVrstaKuhinje}
                 </option>
             ))}
-          </select>
+          </Field>
 
           <label htmlFor="sastojci">Sastojci:</label>
           <Field
@@ -168,7 +171,8 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
           />
 
           <label htmlFor="kategorija">Izaberite kategoriju:</label>
-          <select
+          <Field
+            as="select"
             id="idKategorija"
             name="idKategorija"
           >
@@ -177,7 +181,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
                       {kategorija.nazivKategorija}
                   </option>
               ))}
-          </select>
+          </Field>
 
           {
 

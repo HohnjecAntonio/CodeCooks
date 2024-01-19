@@ -110,7 +110,7 @@ h2 {
 }
 
 .categories a:hover{
-    background-color: wheat;
+    background-color: var(--bg-secondary);
 }
 
 .recipe-creator {

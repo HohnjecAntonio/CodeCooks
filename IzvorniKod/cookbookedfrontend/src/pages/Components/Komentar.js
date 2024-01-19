@@ -25,7 +25,7 @@ function Komentar(props){
     };
 
     return(
-        <div class="komentar">
+        <div  className="comment-box">
         {
             urediKomentar ?
             <Formik enableReinitialize="true" initialValues={
@@ -76,7 +76,7 @@ function Komentar(props){
                 </Form>
             </Formik>
             :
-            <div className="comment-box">
+            <div>
                 {
                     props.komentarKorisnikId == userProfileInfo.idKorisnik || userProfileInfo.razinaOvlasti == "Admin"
                         ?

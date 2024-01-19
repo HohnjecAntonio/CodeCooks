@@ -4,24 +4,12 @@ import '../ComponentsCss/Recepti.css'; // You can create a separate CSS file for
 import {fetchRecipesForUserFeed} from "../../redux/auth/auth.action";
 
 
-const Recepti = () => {
-    const dispatch = useDispatch();
-    const recipesForFeed = useSelector(state => state.auth.recipesForFeed);
+const Recepti = (props) => {
 
-    useEffect(() => {
-        dispatch(fetchRecipesForUserFeed());
-    }, []);
-
-    const kategorijaRecepti = recipesForFeed.filter(recipe  =>{
-            if(recipe.kategorije.length>0){
-                return recipe.kategorije[0].idKategorija == JSON.parse(localStorage.getItem("kategorijaLoad"))
-            }
-        }
-    );
 
 return (
     <div className="recipe-list-new">
-        {kategorijaRecepti.map((recipe) => (
+        {props.recepti.map((recipe) => (
             <div key={recipe.idRecept} className="recipe-card">
                 <a href="/RecipePage"
                    onClick={() => {
@@ -38,10 +26,10 @@ return (
                             </a>
                         
                         <p>Vrijeme kuhanja: {recipe.vrijemeKuhanja}</p>
-                        {recipe.kategorije[0] ?
+                        {recipe.kategorije && recipe.kategorije.length >0 ?
                             (<p>Kategorija: {recipe.kategorije[0].nazivKategorija}</p>)
                             : (<p>Kategorija: </p>)}
-                        {recipe.vrsteKuhinje[0] ?
+                        {recipe.vrsteKuhinje && recipe.vrsteKuhinje.length > 0 ?
                             (<p>Vrste kuhinje: {recipe.vrsteKuhinje[0].nazivVrstaKuhinje}</p>)
                             : (<p>Vrste kuhinje: </p>)}
                     </div>

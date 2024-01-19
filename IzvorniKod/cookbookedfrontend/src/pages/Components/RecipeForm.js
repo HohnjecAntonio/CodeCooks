@@ -33,9 +33,8 @@ function RecipeForm () {
   const handleSubmit = async (values) => {
     console.log('handle submit ', values);
     await dispatch(newRecipe({ data: values })).then((response) => {
-        history.push('/RecipePage');
-        localStorage.setItem('recipeToLoad', JSON.stringify(response.idRecept));
-        window.location.reload();
+        //history.push('/RecipePage');
+        //window.location.reload();
     });
   };
 
@@ -71,7 +70,8 @@ function RecipeForm () {
           />
 
           <label htmlFor="idVrstaKuhinje">Vrsta kuhinje:</label>
-          <select
+          <Field
+              as="select"
               id="idVrstaKuhinje"
               name="idVrstaKuhinje"
           >
@@ -80,7 +80,7 @@ function RecipeForm () {
                   {vrsta.nazivVrstaKuhinje}
                 </option>
             ))}
-          </select>
+          </Field>
 
           <label htmlFor="sastojci">Sastojci:</label>
           <Field
@@ -90,7 +90,8 @@ function RecipeForm () {
           />
 
           <label htmlFor="kategorija">Izaberite kategoriju:</label>
-          <select
+          <Field
+            as="select"
             id="idKategorija"
             name="idKategorija"
           >
@@ -99,7 +100,7 @@ function RecipeForm () {
                       {kategorija.nazivKategorija}
                   </option>
               ))}
-          </select>
+          </Field>
 
           {
 
