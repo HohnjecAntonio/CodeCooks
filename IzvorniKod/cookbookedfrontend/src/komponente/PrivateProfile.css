@@ -16,7 +16,7 @@
     margin-bottom: 20px;
     
   }
-
+  
   h2 {
     text-align: center;
     color: #333;
@@ -55,11 +55,11 @@
   input:focus,
   select:focus {
     outline: none;
-    border-color: #4CAF50;
+    border-color: #702963;
   }
   
   button {
-    background-color: #4CAF50;
+    background-color: #702963;
     color: white;
     border: none;
     border-radius: 5px;
@@ -68,7 +68,7 @@
   }
   
   button:hover {
-    background-color: #45a049;
+    background-color: #702963;
   }
   
   .profile-settings-container {

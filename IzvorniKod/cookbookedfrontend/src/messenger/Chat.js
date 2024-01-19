@@ -37,7 +37,7 @@ const Chat = ({ userName, friendName }) => {
 
     return (
         <div className="chat">
-        <header>
+        <header className='header-chat'>
             <h2 className='chatingWith'>{friendName}</h2>
         </header>
         <div className="messages">
