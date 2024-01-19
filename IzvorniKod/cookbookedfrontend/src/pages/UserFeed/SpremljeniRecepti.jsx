@@ -4,26 +4,22 @@ import {fetchRecipesForUserFeed,fetchUserProfile} from "../../redux/auth/auth.ac
 import './SpremljeniRecepti.css'; // You can create a separate CSS file for styling
 import {lazy, Suspense} from "react";
 import Loading from "../Components/Loading";
-
+import '../HomePage/HomePage.css'; 
 
 const SpremljeniRecepti = () => {
-    const dispatch = useDispatch();
-    const userProfileInfo = useSelector(state => state.auth.userProfile);
     const Recepti = lazy(() => delayForDemo(import('../Components/DohvacanjeSpremljenihRecepata.js')));
 
-    useEffect(() => {
-        dispatch(fetchRecipesForUserFeed());
-    }, [dispatch]);
-
-    useEffect(() => {
-        dispatch(fetchUserProfile());
-      }, [dispatch]);
 
     return (
         <div className='px-20'>
-                
+            <div className='homepage-info'>
+            <h1 className='homepage-title'>Spremljeni recepti</h1>
+                <div className={'opis'}>
+                    <p>Ovdje možete pregledati vaše spremljene recepte.</p>
+                </div>
+            </div>
             <div className="recipe-page">
-                <h1>Spremljeni recepti</h1>
+                
 
                 <Suspense fallback={<Loading item={'recepata'}/>}>
                     <Recepti/>
@@ -37,7 +33,7 @@ const SpremljeniRecepti = () => {
 
 function delayForDemo(promise) {
     return new Promise(resolve => {
-        setTimeout(resolve, 1000);
+        setTimeout(resolve, 500);
     }).then(() => promise);
 }
 

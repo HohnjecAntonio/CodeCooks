@@ -1,14 +1,12 @@
-/* ProfileSettings.css */
-
-
 .profile-settings-container {
-    max-width: 500px;
+    max-width: 600px;
     margin: 50px auto;
     padding: 20px;
-    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+    background-color: white;
+    color: black;
+}
 
   .profile-picture {
     border-radius: 50%;
@@ -17,6 +15,26 @@
     
   }
   
+  .private-profile-button{
+    background-color:  var(--misc-primary);
+    color: #fff;
+    padding: 12px;
+    margin: 5px 0 20px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    height: fit-content;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: var(--transition-speed);
+  }
+  
+  .private-profile-button:hover{
+    background-color: var(--misc-secondary);
+    color: #fff;
+    
+  }
+
   h2 {
     text-align: center;
     color: #333;

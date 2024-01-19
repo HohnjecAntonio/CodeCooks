@@ -36,7 +36,7 @@
 }
 
 .Tijelo::-webkit-scrollbar-thumb {
-    background: #6649b8;
+    background: var(--misc-secondary);
 }
 
 .MenuIkona{
@@ -82,7 +82,7 @@
     justify-content: right;
     align-items: center;
     height: 5rem;
-    box-shadow: 0px 2px 1px 0px #222;
+    
     margin: 0px;
 }
 

@@ -10,32 +10,26 @@ const MessingerApp = () => {
   const [selectedFriendName, setSelectedFriendName] = useState('');
   const [userName, setUserName] = useState('');
 
-  const dispatch = useDispatch();
-  const userProfile = useSelector((state) => state.auth.userProfile);
-
-  useEffect(() => {
-    const getUserIdFromLocalStorage = () => {
-      const storedUserId = localStorage.getItem('userId');
-      if (storedUserId) {
-        setUserId(storedUserId);
-        dispatch(fetchUserProfile(storedUserId));
-      }
-    };
-    getUserIdFromLocalStorage();
-  }, []);
-
   
-  useEffect(() => {
-    if (userProfile && userProfile.idKorisnik) {
-      console.log('korisnik: ' + userProfile.idKorisnik);
-      setUserName(userProfile.korisnickoIme);
-    }
-  }, [userProfile]);
-  
-
   const handleFriendSelect = (friendName) => {
     setSelectedFriendName(friendName);
   };
+  
+  const callOnce = () => {
+    const friendName = localStorage.getItem('friendUsername');
+    if (friendName) {
+      handleFriendSelect(friendName);
+    }
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      setUserName(storedUserId);
+    }
+    console.log("usao");
+  };
+  
+  useEffect(() => {
+    callOnce();
+  }, []);
 
   return (
     <div className="app-container">
@@ -54,3 +48,29 @@ const MessingerApp = () => {
 };
 
 export default MessingerApp;
+
+/*
+  kako preuzeti profile od userIDa
+  
+  const dispatch = useDispatch();
+  const userProfile = useSelector((state) => state.auth.userProfile);
+
+  useEffect(() => {
+    const getUserIdFromLocalStorage = () => {
+      const storedUserId = localStorage.getItem('userId');
+      if (storedUserId) {
+        setUserId(storedUserId);
+        dispatch(fetchUserProfile(storedUserId));
+      }
+    };
+    getUserIdFromLocalStorage();
+  }, [userProfile]);
+  
+  
+  useEffect(() => {
+    if (userProfile && userProfile.idKorisnik) {
+      console.log('korisnik: ' + userProfile.idKorisnik);
+      setUserName(userProfile.korisnickoIme);
+    }
+  }, [userProfile]);
+  */

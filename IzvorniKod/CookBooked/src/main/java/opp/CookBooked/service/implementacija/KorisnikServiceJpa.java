@@ -92,8 +92,6 @@ public class KorisnikServiceJpa implements KorisnikService {
     public Korisnik createKorisnik(Korisnik korisnik) throws Exception {
         try {
 
-            Assert.notNull(korisnik, "Objekt korisnik mora biti predan");
-
             Korisnik noviKorisnik = new Korisnik();
 
             noviKorisnik.setImeKorisnik(korisnik.getImeKorisnik());

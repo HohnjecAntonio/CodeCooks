@@ -72,6 +72,7 @@ const Chat = ({ userName, friendName }) => {
         </div>
         <div className="input">
             <input
+            className='chat-text'
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
