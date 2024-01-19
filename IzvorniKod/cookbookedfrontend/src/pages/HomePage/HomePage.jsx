@@ -21,14 +21,10 @@ const HomePage = () => {
         <div className='px-20'>
             <div className={'header'}>
                 <h1>Najnoviji recepti</h1>
-                {/*{kategorije.map((category) => (*/}
-                {/*    <NavItem*/}
-                {/*        categoryId={category.idKategorija}*/}
-                {/*        text={category.nazivKategorija}*/}
-                {/*        link="/"*/}
-                {/*        openCategory = "true"*/}
-                {/*    />*/}
-                {/*))}*/}
+                <div className={'opis'}>
+                    <p>Dobrodošli na web aplikaciju CookBooked. Mjesto gdje postoji recept za svačiji ukus.
+                       Pronađite novog sebe u jednom od recepata.</p>
+                </div>
                 <div className={'categories'}>
                     {kategorije.map(kategorija => (
                         <a href = "/" key={kategorija.idKategorija}

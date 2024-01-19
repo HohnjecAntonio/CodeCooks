@@ -14,7 +14,6 @@ import Profile from "./pages/Profile";
 import RecipeForm from "./komponente/RecipeForm";
 import PrivateProfile from "./komponente/PrivateProfile";
 import RecipePage from "./komponente/RecipePage";
-import CategoryButtons from './komponente/CategoryButtons';
 import MessengerApp from './messenger/MessengerApp';
 import SpremljeniRecepti from "./pages/UserFeed/SpremljeniRecepti";
 
@@ -135,7 +134,6 @@ function App() {
                         <Route path="/PrivateProfile" exact component={PrivateProfile} />
                         <Route path="/AddRecipe" exact component={RecipeForm} />
                         <Route path="/MessengerApp" exact component={MessengerApp} />
-                        <Route path="/Categories" exact component={CategoryButtons}/>
                         <Route path="/SpremljeniRecepti" exact component={SpremljeniRecepti}/>
                     </Switch>
                 </div>

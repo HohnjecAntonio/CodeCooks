@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchKategorije } from '../../redux/auth/auth.action.js'; // Import the action
-import '../HomePage/HomePage.css'; // You can create a separate CSS file for styling
+import '../ComponentsCss/Recepti.css'; // You can create a separate CSS file for styling
 import {fetchRecipesForUserFeed} from "../../redux/auth/auth.action";
 
 
@@ -24,7 +24,7 @@ return (
     <div className="recipe-list">
         {kategorijaRecepti.map((recipe) => (
             <div key={recipe.idRecept} className="recipe-card">
-                <a href="/RecipePage" style={{fontWeight: 'bold', fontSize: '20px', color: '#000'}}
+                <a href="/RecipePage"
                    onClick={() => {
                        localStorage.setItem('recipeToLoad', JSON.stringify(recipe.idRecept));
                        console.log(recipe.idRecept);
