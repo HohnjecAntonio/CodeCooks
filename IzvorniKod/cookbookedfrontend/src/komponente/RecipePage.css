@@ -7,12 +7,12 @@
   font-family: 'Arial', sans-serif;
   
 }
-
+/*
 h1 {
   text-align: center;
   color: #000;
   
-}
+}*/
 
 .recipe-card {
   /*border: 1px solid #e0e0e0;
@@ -23,12 +23,13 @@ h1 {
   border-radius: 8px;
   padding: 16px;
   margin: 8px;
-  background-color: rgba(255, 255, 255, 0.7);
-  background-image: url('/public/pexels-lukas-349609.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: var(--bg-secondary);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-title-recipe-page{
+  color: var(--text-secondary);
+  font-weight: bold;
 }
 
 .recipe-card img {
@@ -45,7 +46,7 @@ h1 {
 
 .recipe-details p {
   margin: 0 0 10px;
-  color: #000;
+  color: var(--text-secondary);
   font-weight: bold;
 }
 
@@ -65,4 +66,46 @@ h1 {
   background-color: #702963;
   color: #fff;
   
+}
+
+.recipe-buttons-flex{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.recipe-icon-button{
+  height: fit-content;
+  width: fit-content;
+  background-color: white;
+}
+
+.recipe-icon-button:hover{
+  height: fit-content;
+  width: fit-content;
+  background-color: rgb(219, 219, 219);
+}
+
+.recipe-icon-button svg {
+  height: 20px;
+  width: 20px;
+}
+
+.comment-box{
+  
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
+  background-color:'#23232e';
+  color: white;
+  border: 2px solid #45a1df;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 8px;
+  background-color: var(--bg-secondary);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
