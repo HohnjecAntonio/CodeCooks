@@ -20,7 +20,7 @@ const HomePage = () => {
     return (
         <div className='px-20'>
             <div className={'header'}>
-                <h1>Recent Recipes</h1>
+                <h1>Najnoviji recepti</h1>
                 {/*{kategorije.map((category) => (*/}
                 {/*    <NavItem*/}
                 {/*        categoryId={category.idKategorija}*/}
@@ -32,7 +32,7 @@ const HomePage = () => {
                 <div className={'categories'}>
                     {kategorije.map(kategorija => (
                         <a href = "/" key={kategorija.idKategorija}
-                            onClick={localStorage.setItem('kategorijaLoad', JSON.stringify(kategorija.idKategorija))}>
+                            onClick={()=>localStorage.setItem('kategorijaLoad', JSON.stringify(kategorija.idKategorija))}>
                             <span>{kategorija.nazivKategorija}</span>
                         </a>
                     ))}
