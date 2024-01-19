@@ -265,7 +265,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
               <h1 class="recipe-title-recipe-page">{recipe.nazivRecept}</h1>
 
               <h1 class="uputstva-title"> Autor: </h1>
-              <p ><a href="/Profile" onClick={() => {
+              <p ><a class="autor-link" href="/Profile" onClick={() => {
                   localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
             }}>{recipe.autor}</a></p>
 

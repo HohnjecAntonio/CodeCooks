@@ -30,11 +30,13 @@ return (
                    }}>
                     <div className="recipe-details">
                         <h2 class="recipe-title-recipe-list">{recipe.nazivRecept}</h2>
-                        <p>Autor: 
-                            <a href="/Profile" onClick={() => { localStorage.setItem('profileToLoad', JSON.stringify(recipe.autor))}}>
+                        
+                            <a class="autor-link" href="/Profile" onClick={() => { localStorage.setItem('profileToLoad', JSON.stringify(recipe.autor))}}>
+                                <p>Autor: 
                                 {recipe.autor}
+                                </p>
                             </a>
-                        </p>
+                        
                         <p>Vrijeme kuhanja: {recipe.vrijemeKuhanja}</p>
                         {recipe.kategorije[0] ?
                             (<p>Kategorija: {recipe.kategorije[0].nazivKategorija}</p>)

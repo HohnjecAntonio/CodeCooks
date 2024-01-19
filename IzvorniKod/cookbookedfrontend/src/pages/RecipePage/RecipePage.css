@@ -189,3 +189,7 @@ select[multiple] {
     margin: 20px;
   }
 }
+
+.autor-link{
+  text-decoration: underline green;
+}
