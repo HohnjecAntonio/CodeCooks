@@ -18,16 +18,16 @@ function Profile(props) {
 
   useEffect(() => {
     dispatch(fetchUserProfile());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     dispatch(fetchRecipesForUserFeed());
-}, [dispatch]);
+}, []);
 
 
   useEffect(() => {
     dispatch(fetchOtherProfileByUsername(JSON.parse(localStorage.getItem("profileToLoad"))));
-  }, [dispatch]);
+  }, []);
 
   const followUserFunction = async () => {
     console.log("Trying to follow user");
