@@ -24,14 +24,14 @@ const MessingerApp = () => {
     getUserIdFromLocalStorage();
   }, [userProfile]);
   
-  /*
+  
   useEffect(() => {
     if (userProfile && userProfile.idKorisnik) {
-      console.log('korisnik: ' + userProfile.idKorisnik);
+      //console.log('korisnik: ' + userProfile.idKorisnik);
       setUserName(userProfile.korisnickoIme);
     }
   }, [userProfile]);
-  */
+  
 
   const handleFriendSelect = (friendName) => {
     setSelectedFriendName(friendName);
@@ -42,11 +42,6 @@ const MessingerApp = () => {
     if (friendName) {
       handleFriendSelect(friendName);
     }
-
-    if (userProfile) {
-      setUserName(userProfile.korisnickoIme);
-    }
-    console.log("usao");
   };
   
   useEffect(() => {
