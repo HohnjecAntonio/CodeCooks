@@ -1,10 +1,10 @@
-/* Chat.css */
 .chat {
   flex: 1;
   display: flex;
   flex-direction: column;
   padding: 20px;
   overflow-y: auto;
+  padding-top: 0;
 }
 
 .chatingWith {
@@ -43,30 +43,6 @@
   clear: both;
   min-height: fit-content;
 }
-
-.input {
-  display: flex;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 5px 0 0 5px;
-}
-
-
-.send {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 0 5px 5px 0;
-  background-color: #4CAF50;
-  color: white;
-  cursor: pointer;
-  min-width: fit-content;
-}
-
-.send:hover {
-  background-color: #45a049;
-}
-
 .chat-date {
   text-align: center;
   font-size: 12px;
@@ -87,8 +63,33 @@
   text-align: center;
 }
 
-
-.chat input {
-  padding: 5px;
-  margin-left: 10px;
+.input {
+  display: flex;
+  border-radius: 5px 0 0 5px;
 }
+
+.send {
+  float: left;
+  border: 1px solid #ddd;
+  border-radius: 5px ;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+}
+
+.send:hover {
+  background-color: #45a049;
+}
+
+.chat-text{
+  flex: 1;
+  float: left;
+  margin: 15px;
+  padding: 10px;
+}
+
+
+
