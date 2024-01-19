@@ -63,9 +63,11 @@ const Login = () => {
                             </div>
                             <div className="flex items-center justify-between">
                                 <Button
-                                    
+                                    sx={{ padding: '.8rem 9rem', backgroundColor: '#388E3C' }}
+                                    className="w-full bg-green-700 btn"
+                                    color="violet"
                                     type="submit"
-                                   
+                                    variant="container"
                                 >
                                     Login
                                 </Button>

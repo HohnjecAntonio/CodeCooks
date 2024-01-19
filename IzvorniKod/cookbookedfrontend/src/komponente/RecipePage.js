@@ -105,7 +105,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
 
     return(
           <div class="komentar">
-            {/*<span>{props.komentarKorisnikId} {props.komentarKorisnikIme} {props.komentarDatum}</span>*/}
+            <span>{props.komentarKorisnikId} {props.komentarKorisnikIme} {props.komentarDatum}</span>
             {
               urediKomentar ?
               
@@ -153,16 +153,15 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
                     name="opisKomentar"
                   />
         
-                  <button className='recipe-button' type="submit">Spremi komentar</button>
+                  <button type="submit">Spremi komentar</button>
                   
                   </Form>
                 </Formik>
                 :
-                <p></p>
-              
+                <p>{props.komentarTekst}</p>
               
             }
-            {/*<p>{props.komentarTekst}</p>*/}
+            
             
             {
               props.komentarKorisnikId == userProfileInfo.idKorisnik || userProfileInfo.razinaOvlasti == "Admin"
@@ -286,10 +285,10 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
         :
         
         <div className="recipe-card">
-            <div className=''> </div>
+
             <div className="recipe-details">
-              <h2 style={{color: 'black' , fontWeight: 'bold'}}>{recipe.nazivRecept}</h2>
-              <p >Autor: <a href="/Profile" onClick={() => {
+              <h2>{recipe.nazivRecept}</h2>
+              <p>Autor: <a href="/Profile" onClick={() => {
                   localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
             }}>{recipe.autor}</a></p>
               <p>Vrijeme kuhanja: {recipe.vrijemeKuhanja}</p>
@@ -345,10 +344,10 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
                 userProfileInfo.razinaOvlasti == "Admin"
                 ?
                 <div>
-                    <button className='recipe-button' onClick={()=> setUrediRecept(true) }>Uredi recept</button>
-                    <button className='recipe-button' onClick={() => deleteRecipeFunction(recipe.idAutor,recipe.idRecept)}>Izbriši recept</button>
-                    <button className='recipe-button' onClick={() => saveRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Spremi recept</button>
-                    <button className='recipe-button' onClick={() => likeRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Označi recept</button>
+                    <button onClick={()=> setUrediRecept(true) }>Uredi recept</button>
+                    <button onClick={() => deleteRecipeFunction(recipe.idAutor,recipe.idRecept)}>Izbriši recept</button>
+                    <button onClick={() => saveRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Spremi recept</button>
+                    <button onClick={() => likeRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Označi recept</button>
 
                 </div>
                 :
@@ -357,13 +356,13 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
                      recipe.autor == userProfileInfo.korisnickoIme
                     ?
                       <div>
-                        <button className='recipe-button' onClick={()=> setUrediRecept(true) }>Uredi recept</button>
-                        <button className='recipe-button' onClick={() => deleteRecipeFunction(recipe.idAutor,recipe.idRecept)}>Izbriši recept</button>
+                        <button onClick={()=> setUrediRecept(true) }>Uredi recept</button>
+                        <button onClick={() => deleteRecipeFunction(recipe.idAutor,recipe.idRecept)}>Izbriši recept</button>
                       </div>
                       :
                       <div>
-                        <button className='recipe-button' onClick={() => saveRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Spremi recept</button>
-                        <button className='recipe-button' onClick={() => likeRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Označi recept</button>
+                        <button onClick={() => saveRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Spremi recept</button>
+                        <button onClick={() => likeRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}>Označi recept</button>
                       </div>
                   }
                 </div>
@@ -377,7 +376,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
             </div>
         </div>
       }
-      
+      <p>Komentari:</p>
       
       {
        props.currentUser
@@ -411,7 +410,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
                 name="opisKomentar"
               />
 
-              <button className='recipe-button' type="submit">Dodaj komentar</button>
+              <button type="submit">Dodaj komentar</button>
               
               </Form>
             </Formik>
@@ -421,7 +420,6 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
         null
       }
       <div>
-      <p>Komentari:</p>
         {
           recipe.komentari
           ?
@@ -440,13 +438,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
 
             
             />
-            <div className="container mx-auto my-10 p-6  shadow-md rounded-md" style={{backgroundColor:'#23232e', color:'white'}}>
-
-            
-            <p > {'Korisnik: '+ komentar.korisnik.korisnickoIme}         {'Datum: '+ komentar.datumKomentar}</p>
-            
-            <p>Opis: {komentar.opisKomentar}</p>
-            </div>
+            <p>{komentar.opisKomentar + " " + komentar.datumKomentar + " " + komentar.korisnik.korisnickoIme}</p>
           </div>
             
           ))}

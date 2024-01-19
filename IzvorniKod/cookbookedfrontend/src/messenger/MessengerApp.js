@@ -39,7 +39,7 @@ const MessingerApp = () => {
 
   return (
     <div className="app-container">
-      <main class="main-messanger-app">
+      <main>
         {userName === '' ? (
           <h1>ERROR no userName</h1>
         ) : (
