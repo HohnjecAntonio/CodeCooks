@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
+import { lazy } from 'react';
+
 import UserFeed from "./pages/UserFeed/UserFeed";
 import Registration from "./pages/Registration";
 import * as AuthService from "./redux/auth/auth.action";
@@ -22,7 +24,18 @@ import {fetchUserProfile} from "./redux/auth/auth.action";
 function App() {
     const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
     const [currentUser, setCurrentUser] = useState(undefined);
-
+    // const SideBarLazy = lazy(() => SideBar());
+    // const UserFeedLazy = lazy(() => UserFeed());
+    // const RegistrationLazy = lazy(() => Registration());
+    // const LoginLazy = lazy(() => Login());
+    // const HomePageLazy = lazy(() => HomePage());
+    // const ProfilerLazy = lazy(() => Profile());
+    // const RecipeFormLazy = lazy(() => RecipeForm());
+    // const PrivateProfileLazy = lazy(() => PrivateProfile());
+    // const RecipePageLazy = lazy(() => RecipePage());
+    // const CategoryButtonsLazy = lazy(() => CategoryButtons());
+    // const MessengerAppLazy = lazy(() => MessengerApp());
+    // const SpremljeniReceptiLazy = lazy(() => SpremljeniRecepti());
 
     useEffect(() => {
         const fetchUser = async () => {
