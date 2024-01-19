@@ -57,7 +57,7 @@ const editRecipeFunction = async (values) => {
   console.log('handle submit ', values);
   await dispatch(editRecipe({ data: values })).then(() => {
       //history.push('/');
-      //window.location.reload();
+      window.location.reload();
   });
 };
 
@@ -300,20 +300,20 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
                   recipe.vrsteKuhinje && recipe.vrsteKuhinje.length > 0  ?
                   (
                     <>
-                    <h1 class="uputstva-title"> Vrsta kuhinje: :</h1>
+                    <h1 class="uputstva-title"> Vrsta kuhinje:</h1>
                     <p>{recipe.vrsteKuhinje[0].nazivVrstaKuhinje}</p>
                     </>
                   )
                   :
                   (
-                    <h1 class="uputstva-title"> Vrsta kuhinje: :</h1>
+                    <h1 class="uputstva-title"> Vrsta kuhinje:</h1>
                   )
                 }
                 <br></br>
                 {
                   recipe.sastojci ?
                   <>
-                  <h1 class="uputstva-title"> Sastojci: :</h1>
+                  <h1 class="uputstva-title"> Sastojci:</h1>
                   <p>
                    
                     <span>
@@ -325,7 +325,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
                   </>
                   :
 
-                  <h1 class="uputstva-title"> Sastojci: :</h1>
+                  <h1 class="uputstva-title"> Sastojci:</h1>
                   
                 }
                 <br></br>

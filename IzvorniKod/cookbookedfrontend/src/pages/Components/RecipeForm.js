@@ -33,8 +33,8 @@ function RecipeForm () {
   const handleSubmit = async (values) => {
     console.log('handle submit ', values);
     await dispatch(newRecipe({ data: values })).then((response) => {
-        //history.push('/RecipePage');
-        //window.location.reload();
+        history.push('/');
+        window.location.reload();
     });
   };
 
