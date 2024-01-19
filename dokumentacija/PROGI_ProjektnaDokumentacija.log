@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.23)  16 JAN 2024 22:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.23)  19 JAN 2024 18:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2690,7 +2690,7 @@ has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.364 
-       <./slike/dijagramRazreda.png>]
+       <./slike/DijagramRazreda.png>]
 <slike/DTO.png, id=521, 1142.76938pt x 656.4525pt>
 File: slike/DTO.png Graphic file (type png)
 <use slike/DTO.png>
@@ -3119,8 +3119,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [60]
-Underfull \hbox (badness 10000) in paragraph at lines 140--141
+<slike/Logs.png, id=711, 1127.412pt x 522.15076pt>
+File: slike/Logs.png Graphic file (type png)
+<use slike/Logs.png>
+Package pdftex.def Info: slike/Logs.png  used on input line 141.
+(pdftex.def)             Requested size: 507.33072pt x 234.96567pt.
 
+Overfull \hbox (71.71992pt too wide) in paragraph at lines 141--143
+ [][] 
  []
 
 )
@@ -3132,7 +3138,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[61] 
+[61
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6.1}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.148 	\include{Dodatak}
+                         <./slike/Logs.png>]
+
 enddocument/afterlastpage: lastpage setting LastPage.
 (./PROGI_ProjektnaDokumentacija.aux (./Dnevnik_promjena_dokumentacije.aux)
 (./Opis_projektnog_zadatka.aux) (./Specifikacija_programske_potpore.aux)
@@ -3151,10 +3164,10 @@ anged.
 (rerunfilecheck)             Checksum: 46A7821FADC36785D21244220BA2AA97;4585.
  ) 
 Here is how much of TeX's memory you used:
- 18032 strings out of 474504
- 319322 string characters out of 5756725
+ 18041 strings out of 474504
+ 319495 string characters out of 5756725
  2068043 words of memory out of 5000000
- 39395 multiletter control sequences out of 15000+600000
+ 39403 multiletter control sequences out of 15000+600000
  629663 words of font info for 192 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  86i,13n,115p,937b,1047s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -3168,10 +3181,10 @@ dist/fonts/type1/public/kpfonts/jkpmi.pfb><c:/texlive/2023/texmf-dist/fonts/typ
 e1/public/kpfonts/jkpmit8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/k
 pfonts/jkpmn8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkptt
 mn8a.pfb>
-Output written on PROGI_ProjektnaDokumentacija.pdf (62 pages, 3475498 bytes).
+Output written on PROGI_ProjektnaDokumentacija.pdf (62 pages, 3576175 bytes).
 PDF statistics:
- 798 PDF objects out of 1000 (max. 8388607)
- 671 compressed objects within 7 object streams
- 248 named destinations out of 1000 (max. 500000)
- 327 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 802 PDF objects out of 1000 (max. 8388607)
+ 673 compressed objects within 7 object streams
+ 249 named destinations out of 1000 (max. 500000)
+ 332 words of extra memory for PDF output out of 10000 (max. 10000000)
 
