@@ -25,6 +25,13 @@
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Dijagram aktivnosti}}{42}{figure.4.9}%
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Dijagram komponenti}}{44}{figure.4.10}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Dijagram razmještaja}}{48}{figure.5.1}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Testiranje dohvacanja korisnika preko idKorisnika}}{47}{figure.5.1}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Testiranje logina}}{47}{figure.5.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Test dodavanja recepata}}{48}{figure.5.3}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Testiranje registracije korisnika}}{49}{figure.5.4}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Testiranje pregleda profila}}{49}{figure.5.5}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Testiranje pregleda recepata}}{50}{figure.5.6}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Testiranje neuspjelog pokušaja}}{51}{figure.5.7}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Dijagram razmještaja}}{52}{figure.5.8}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Github logs master, publish i dokumentacija grana}}{61}{figure.6.1}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Github logs master, publish i dokumentacija grana}}{66}{figure.6.1}%
