@@ -5,7 +5,11 @@ import { useHistory } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import '../ComponentsCss/RecipeForm.css'; // You can create a separate CSS file for styling
 
+
+
 function RecipeForm () {
+  const history = useHistory();
+
   const dispatch = useDispatch();
   const kategorije = useSelector(state => state.auth.kategorije); // Adjust path according to your store structure
   const loading = useSelector(state => state.auth.loading);
@@ -28,8 +32,8 @@ function RecipeForm () {
 
   const handleSubmit = async (values) => {
     console.log('handle submit ', values);
-    await dispatch(newRecipe({ data: values })).then(() => {
-        //history.push('/');
+    await dispatch(newRecipe({ data: values })).then((response) => {
+        //history.push('/RecipePage');
         //window.location.reload();
     });
   };
@@ -66,7 +70,8 @@ function RecipeForm () {
           />
 
           <label htmlFor="idVrstaKuhinje">Vrsta kuhinje:</label>
-          <select
+          <Field
+              as="select"
               id="idVrstaKuhinje"
               name="idVrstaKuhinje"
           >
@@ -75,7 +80,7 @@ function RecipeForm () {
                   {vrsta.nazivVrstaKuhinje}
                 </option>
             ))}
-          </select>
+          </Field>
 
           <label htmlFor="sastojci">Sastojci:</label>
           <Field
@@ -85,7 +90,8 @@ function RecipeForm () {
           />
 
           <label htmlFor="kategorija">Izaberite kategoriju:</label>
-          <select
+          <Field
+            as="select"
             id="idKategorija"
             name="idKategorija"
           >
@@ -94,7 +100,7 @@ function RecipeForm () {
                       {kategorija.nazivKategorija}
                   </option>
               ))}
-          </select>
+          </Field>
 
           {
 

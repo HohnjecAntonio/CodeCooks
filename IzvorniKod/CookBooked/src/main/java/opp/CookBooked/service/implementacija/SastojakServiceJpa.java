@@ -20,9 +20,8 @@ public class SastojakServiceJpa implements SastojakService {
 
         for (String sas : sastojci) {
             if (!sas.isEmpty()) {
-                Sastojak sastojak = findByNaziv(sas.trim());
-                System.out.println(sas);
-                if (sastojak == null) sastojakRepo.save(new Sastojak(sas.trim()));
+                Sastojak sastojak = findByNaziv(sas.trim().toLowerCase());
+                if (sastojak == null) sastojakRepo.save(new Sastojak(sas.trim().toLowerCase()));
             }
         }
 
