@@ -20,37 +20,36 @@ const Recepti = () => {
         }
     );
 
-    const arrayDataItems = kategorijaRecepti.map((recipe) => (
-        <div key={recipe.idRecept} className="recipe-card">
-            <a href="/RecipePage" style={{fontWeight: 'bold', fontSize: '20px', color: '#000'}}
-               onClick={() => {
-                   localStorage.setItem('recipeToLoad', JSON.stringify(recipe.idRecept));
-                   console.log(recipe.idRecept);
-               }}>
-                <div className="recipe-details">
-                    <h2>{recipe.nazivRecept}</h2>
-                    <p>Autor:
-                        <a href="/Profile" onClick={() => { localStorage.setItem('profileToLoad', JSON.stringify(recipe.autor))}}>
-                            {recipe.autor}
-                        </a>
-                    </p>
-                    <p>Vrijeme kuhanja: {recipe.vrijemeKuhanja}</p>
-                    {recipe.kategorije[0] ?
+return (
+    <div className="recipe-list">
+        {kategorijaRecepti.map((recipe) => (
+            <div key={recipe.idRecept} className="recipe-card">
+                <a href="/RecipePage" style={{fontWeight: 'bold', fontSize: '20px', color: '#000'}}
+                   onClick={() => {
+                       localStorage.setItem('recipeToLoad', JSON.stringify(recipe.idRecept));
+                       console.log(recipe.idRecept);
+                   }}>
+                    <div className="recipe-details">
+                        <h2>{recipe.nazivRecept}</h2>
+                        <p>Autor:
+                            <a href="/Profile" onClick={() => { localStorage.setItem('profileToLoad', JSON.stringify(recipe.autor))}}>
+                                {recipe.autor}
+                            </a>
+                        </p>
+                        <p>Vrijeme kuhanja: {recipe.vrijemeKuhanja}</p>
+                        {recipe.kategorije[0] ?
                             (<p>Kategorija: {recipe.kategorije[0].nazivKategorija}</p>)
                             : (<p>Kategorija: </p>)}
-                    {recipe.vrsteKuhinje[0] ?
+                        {recipe.vrsteKuhinje[0] ?
                             (<p>Vrste kuhinje: {recipe.vrsteKuhinje[0].nazivVrstaKuhinje}</p>)
                             : (<p>Vrste kuhinje: </p>)}
-                </div>
-            </a>
-        </div>
-    ));
+                    </div>
+                </a>
+            </div>
+        ))}
+    </div>
+);
 
-    return (
-        <div className="recipe-list">
-            {arrayDataItems}
-        </div>
-    );
 }
 
 export default Recepti;

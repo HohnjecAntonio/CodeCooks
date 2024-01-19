@@ -21,14 +21,20 @@ const HomePage = () => {
         <div className='px-20'>
             <div className={'header'}>
                 <h1>Recent Recipes</h1>
+                {/*{kategorije.map((category) => (*/}
+                {/*    <NavItem*/}
+                {/*        categoryId={category.idKategorija}*/}
+                {/*        text={category.nazivKategorija}*/}
+                {/*        link="/"*/}
+                {/*        openCategory = "true"*/}
+                {/*    />*/}
+                {/*))}*/}
                 <div className={'categories'}>
-                    {kategorije.map((category) => (
-                        <NavItem
-                            categoryId={category.idKategorija}
-                            text={category.nazivKategorija}
-                            link="/"
-                            openCategory = "true"
-                        />
+                    {kategorije.map(kategorija => (
+                        <a href = "/" key={kategorija.idKategorija}
+                            onClick={localStorage.setItem('kategorijaLoad', JSON.stringify(kategorija.idKategorija))}>
+                            <span>{kategorija.nazivKategorija}</span>
+                        </a>
                     ))}
                 </div>
             </div>
