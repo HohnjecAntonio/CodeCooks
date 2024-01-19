@@ -63,17 +63,22 @@ h1 {
   
 }
 .recipe-button{
-  background-color: #702963;
+  background-color: purple;
   color: #fff;
   padding: 12px;
   margin: 5px 0 20px;
-  border: 1px solid #ccc;
+  border: 1px solid purple;
   border-radius: 5px;
   box-sizing: border-box;
   width: 100%;
-  transition: border-color 0.3s;
   height: fit-content;
   overflow: hidden;
+  transition: var(--transition-speed);
+}
+
+.recipe-button:hover{
+  background-color: rgb(197, 1, 197);
+  
 }
 
 .recipe-card:hover .recipe-buttons-flex {
