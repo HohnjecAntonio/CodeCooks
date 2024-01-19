@@ -15,21 +15,48 @@
 
 .header{
     width: 100vw;
-    border-top: 1px solid #4485;
-    border-left: 1px solid #4485;
-    background-color: #23232e;
+    /*border-top: 1px solid #4485;
+    border-left: 1px solid #4485;*/
+    background-color: #FAEBD7;
     text-align: center;
 }
 
-.px-20 h1{
+.opis{
+    width: 50vw;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    height: fit-content;
+    font-size: 20px;
+    color: black;
+    overflow:visible;
+}
+
+
+.homepage-info{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 8px;
+    background-color: white;
+    border-radius: 10px;
+    width: fit-content;
+    
+    box-sizing: border-box;
+    margin: 50px auto ;
+    color: rgb(41, 41, 41);
+    transition: var(--transition-speed);
+}
+
+.px-20 .homepage-title{
     height: 80px;
     font-size: 40px;
+    font-weight: bolder;
     background-color: transparent;
     text-align: center;
     margin: auto;
     padding: 10px;
     width: fit-content;
-    color: white;
+    color: #b93a24;
 }
 
 .px-20{
@@ -44,40 +71,46 @@ h2 {
     color: #000;
 }*/
 
-.recipe-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 20px;
-}
-
 .categories{
     width: 80vw;
+    flex-direction: row;
     display: flex;
+    flex-wrap: wrap;
     justify-self: center;
     margin: auto;
-    justify-content: space-between;
+    justify-content: space-around;
     background-color: transparent;
     text-align: center;
-    height: 40px;
+    height: fit-content;
+    overflow: visible;
+
 }
 
-.opis{
-    width: 50vw;
-    display: block;
-    margin: 10px auto;
-    text-align: center;
-    height: 80px;
-    font-size: 20px;
-    color: white;
-}
 
 .categories a{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     height: 100%;
     text-align: center;
-    color: white;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    background-color: white;
+    width: 150px;
+    justify-content: center;
+    align-self: center;
+    vertical-align: middle;
+    overflow: visible;
+
+    margin: 20px 0 20px;
+    box-sizing: border-box;
+    height: fit-content;
+    font-weight:600;
+    transition: var(--transition-speed);
+}
+
+.categories a:hover{
+    background-color: var(--bg-secondary);
 }
 
 .recipe-creator {

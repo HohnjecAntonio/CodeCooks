@@ -22,12 +22,12 @@ const MessingerApp = () => {
       }
     };
     getUserIdFromLocalStorage();
-  }, []);
-
+  }, [userProfile]);
+  
   
   useEffect(() => {
     if (userProfile && userProfile.idKorisnik) {
-      console.log('korisnik: ' + userProfile.idKorisnik);
+      //console.log('korisnik: ' + userProfile.idKorisnik);
       setUserName(userProfile.korisnickoIme);
     }
   }, [userProfile]);
@@ -36,6 +36,17 @@ const MessingerApp = () => {
   const handleFriendSelect = (friendName) => {
     setSelectedFriendName(friendName);
   };
+  
+  const callOnce = () => {
+    const friendName = localStorage.getItem('friendUsername');
+    if (friendName) {
+      handleFriendSelect(friendName);
+    }
+  };
+  
+  useEffect(() => {
+    callOnce();
+  }, []);
 
   return (
     <div className="app-container">
@@ -54,3 +65,29 @@ const MessingerApp = () => {
 };
 
 export default MessingerApp;
+
+/*
+  kako preuzeti profile od userIDa
+  
+  const dispatch = useDispatch();
+  const userProfile = useSelector((state) => state.auth.userProfile);
+
+  useEffect(() => {
+    const getUserIdFromLocalStorage = () => {
+      const storedUserId = localStorage.getItem('userId');
+      if (storedUserId) {
+        setUserId(storedUserId);
+        dispatch(fetchUserProfile(storedUserId));
+      }
+    };
+    getUserIdFromLocalStorage();
+  }, [userProfile]);
+  
+  
+  useEffect(() => {
+    if (userProfile && userProfile.idKorisnik) {
+      console.log('korisnik: ' + userProfile.idKorisnik);
+      setUserName(userProfile.korisnickoIme);
+    }
+  }, [userProfile]);
+  */

@@ -21,8 +21,12 @@ const Registration = () => {
 
     const handleSubmit = async (values) => {
         await dispatch(registerUserAction({ data: values })).then(() => {
-            history.push('/user-feed');
-            window.location.reload();
+            if (localStorage.getItem("token")){
+                localStorage.setItem('kategorijaLoad', JSON.stringify("1"))
+                history.push('/');
+                window.location.reload();
+            }
+           
         });
     };
 

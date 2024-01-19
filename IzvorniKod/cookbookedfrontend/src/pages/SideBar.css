@@ -1,10 +1,17 @@
 :root {
   font-size: 16px;
   font-family: 'Open Sans';
+  /*
   --text-primary: #b6b6b6;
   --text-secondary: #ececec;
   --bg-primary: #23232e;
-  --bg-secondary: #141418;
+  --bg-secondary: #141418;*/
+  --text-primary: #383838;
+  --text-secondary: #000000;
+  --bg-primary: wheat;
+  --bg-secondary: #DEB887;
+  --misc-primary: #6D3228;
+  --misc-secondary:  #b93a24;
   --transition-speed: 600ms;
   --speed: 500ms; 
 }
@@ -91,11 +98,16 @@
 }
 
 .fa-primary {
-  color: #ff7eee;
+  /*color: #ff7eee;
+  color: #F4A460;*/
+  color: var(--misc-secondary);
 }
 
 .fa-secondary {
-  color: #df49a6;
+  /*color: #df49a6;
+  
+  color: #8B4513;*/
+  color: var(--misc-primary);
 }
 
 .fa-primary,

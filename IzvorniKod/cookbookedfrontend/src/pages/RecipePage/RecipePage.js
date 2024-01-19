@@ -7,6 +7,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Komentar from "../Components/Komentar";
 
 
+
 import { ReactComponent as PencilIcon } from '../../icons/recipePage/pencil-solid.svg';
 import { ReactComponent as TrashIcon } from '../../icons/recipePage/trash-solid.svg';
 import { ReactComponent as BookmarkIcon } from '../../icons/recipePage/bookmark-regular.svg';
@@ -14,6 +15,7 @@ import { ReactComponent as HeartIcon } from '../../icons/recipePage/heart-regula
 
 
 const RecipePage = (props) => {
+  
   const dispatch = useDispatch();
   const recipe = useSelector(state => state.auth.recipeToLoad);
   const loading = useSelector(state => state.auth.loading);
@@ -51,24 +53,11 @@ const addCommentFunction = async (values) => {
   });
 };
 
-
-
-const deleteCommentFunction = async (idKomentar, idKorisnik, idRecept) => {
-  await dispatch(deleteComment({ data: {
-    idKomentar: idKomentar,
-    idKorisnik: idKorisnik,
-    idRecept: idRecept
-  } })).then(() => {
-      //history.push('/');
-      window.location.reload();
-  });
-};
-
 const editRecipeFunction = async (values) => {
   console.log('handle submit ', values);
   await dispatch(editRecipe({ data: values })).then(() => {
       //history.push('/');
-      //window.location.reload();
+      window.location.reload();
   });
 };
 
@@ -79,7 +68,7 @@ const deleteRecipeFunction = async (idKorisnik, idRecept) => {
     idRecept: idRecept
   } })).then(() => {
       //history.push('/');
-      //window.location.reload();
+      window.location.reload();
   });
 };
 
@@ -103,15 +92,40 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
   });
 };
 
+  function returnSastojciList(sastojci){
+    var listaSastojaka = "";
+    var i = 0;
+    sastojci.forEach(element => {
+      listaSastojaka+= element.nazivSastojak
+      if (i<sastojci.length-1)
+      listaSastojaka+=", ";
+      i++;
+
+    });
+    return listaSastojaka;
+  }
+
   return (
     
     <div>
       <div className="single-recipe-page">
+
       {
         urediRecept ?
+        <div className="recipe-form-container">
         <Formik enableReinitialize={true} onSubmit={(values) => { editRecipeFunction(values); setUrediRecept(false);}} 
           initialValues={
-            recipe
+            {
+              idRecept: recipe.idRecept || '',
+              idAutor: recipe.idAutor || '',
+              nazivRecept: recipe.nazivRecept || '',
+              sastojci: returnSastojciList(recipe.sastojci) || '',
+              vrijemeKuhanja: recipe.vrijemeKuhanja || '',
+              priprema: recipe.priprema || '',
+              oznaka: recipe.oznaka || '',
+              idVrstaKuhinje: "1",
+              idKategorija: "1"
+            }
           }>
 
         <Form>
@@ -128,7 +142,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
             name="idAutor"
           />
 
-          <h1>Izradite novi recept</h1>
+          <h1>Uredite recept</h1>
           <label htmlFor="nazivRecept">Naziv recepta:</label>
           <Field
             type="text"
@@ -137,7 +151,8 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
           />
 
           <label htmlFor="idVrstaKuhinje">Vrsta kuhinje:</label>
-          <select
+          <Field
+              as="select"
               id="idVrstaKuhinje"
               name="idVrstaKuhinje"
           >
@@ -146,7 +161,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
                   {vrsta.nazivVrstaKuhinje}
                 </option>
             ))}
-          </select>
+          </Field>
 
           <label htmlFor="sastojci">Sastojci:</label>
           <Field
@@ -156,7 +171,8 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
           />
 
           <label htmlFor="kategorija">Izaberite kategoriju:</label>
-          <select
+          <Field
+            as="select"
             id="idKategorija"
             name="idKategorija"
           >
@@ -165,7 +181,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
                       {kategorija.nazivKategorija}
                   </option>
               ))}
-          </select>
+          </Field>
 
           {
 
@@ -203,9 +219,11 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
               name="oznaka"
           />
 
-          <button type="submit">Spremi recept</button>
+          <button class="recipe-button" type="submit">Spremi recept</button>
+          <button class="recipe-button" onClick={()=>setUrediRecept(false)}>Odustani</button>
         </Form>
         </Formik>
+        </div>
 
         :
         
@@ -231,12 +249,12 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
                   {
                      recipe.autor == userProfileInfo.korisnickoIme
                     ?
-                      <div>
+                      <div class="recipe-buttons-flex">
                         <button className='recipe-icon-button' onClick={()=> setUrediRecept(true) }><PencilIcon/></button>
                         <button className='recipe-icon-button' onClick={() => deleteRecipeFunction(recipe.idAutor,recipe.idRecept)}><TrashIcon/></button>
                       </div>
                       :
-                      <div>
+                      <div class="recipe-buttons-flex">
                         <button className='recipe-icon-button' onClick={() => saveRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}><BookmarkIcon/></button>
                         <button className='recipe-icon-button' onClick={() => likeRecipeFunction(userProfileInfo.idKorisnik,recipe.idRecept)}><HeartIcon></HeartIcon></button>
                       </div>
@@ -249,59 +267,83 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
               null
             }
               <h1 class="recipe-title-recipe-page">{recipe.nazivRecept}</h1>
-              <p >Autor: <a href="/Profile" onClick={() => {
+
+              <h1 class="uputstva-title"> Autor: </h1>
+              <p ><a class="autor-link" href="/Profile" onClick={() => {
                   localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
             }}>{recipe.autor}</a></p>
-              <p>Vrijeme kuhanja: {recipe.vrijemeKuhanja}</p>
+
+                  
+              <br></br>
+              <h1 class="uputstva-title"> Vrijeme kuhanja: </h1>
+              <p> {recipe.vrijemeKuhanja}</p>
+               
+              <br></br>
               {
                   recipe.kategorije && recipe.kategorije.length > 0 ?
                   (
-                    <p>Kategorija: {recipe.kategorije[0].nazivKategorija}</p>
+                    <>
+                    <h1 class="uputstva-title"> Kategorija: </h1>
+                    <p>{recipe.kategorije[0].nazivKategorija}</p>
+                    </>
+                    
                   )
                   :
                   (
-                  <p>Kategorija: </p> 
+                    <h1 class="uputstva-title"> Kategorija: </h1>
                   )
                 }
 
-                
+                <br></br>
+
                 {
                   recipe.vrsteKuhinje && recipe.vrsteKuhinje.length > 0  ?
                   (
-                    <p>Vrste kuhinje: {recipe.vrsteKuhinje[0].nazivVrstaKuhinje}</p>
+                    <>
+                    <h1 class="uputstva-title"> Vrsta kuhinje:</h1>
+                    <p>{recipe.vrsteKuhinje[0].nazivVrstaKuhinje}</p>
+                    </>
                   )
                   :
                   (
-                  <p>Vrste kuhinje: </p> 
+                    <h1 class="uputstva-title"> Vrsta kuhinje:</h1>
                   )
                 }
-
+                <br></br>
                 {
                   recipe.sastojci ?
+                  <>
+                  <h1 class="uputstva-title"> Sastojci:</h1>
                   <p>
-                    Sastojci: 
+                   
                     <span>
                     {
-                    recipe.sastojci.map((sastojak) =>
-                    (
-                      <span>{sastojak.nazivSastojka} </span>
-                    ))
+                    <span>{returnSastojciList(recipe.sastojci)}</span>
                     }
                     </span>
                   </p>
+                  </>
                   :
-                  <p>
-                    Sastojci: 
-                  </p>
+
+                  <h1 class="uputstva-title"> Sastojci:</h1>
+                  
                 }
-                <p>Oznaka: {recipe.oznaka}</p>
-                <p>Uputstva: {recipe.priprema}</p>
+                <br></br>
+                <h1 class="uputstva-title">Oznaka:</h1>
+                <p> {recipe.oznaka}</p>
+                <br></br>
+                <h1 class="uputstva-title">Uputstva:</h1>
+                <p> {recipe.priprema}</p>
             
             </div>
         </div>
       }
       
+      <br></br>
+      <br></br>
       
+      <div>
+      <h1 class='section-title'>Komentari:</h1>
       {
        props.currentUser
             ?
@@ -314,7 +356,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
           }
             } onSubmit={addCommentFunction}>
             <Form>
-              <h1>Dodaj komentar:</h1>
+              <h1 class="add-comment-title">Dodaj komentar:</h1>
               <Field
                 type="hidden"
                 id="idKorisnik"
@@ -343,8 +385,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
         :
         null
       }
-      <div>
-      <p>Komentari:</p>
+
         {
           recipe.komentari
           ?

@@ -1,15 +1,9 @@
-  body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-  }
-  
   .app-container {
     display: flex;
-    height: 100%;
+    margin-top: 25px;
+    margin-left: 100px;
+    height: 95%;
   }
-  
-
-
   
   .main-messanger-app {
     display: flex;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchKategorije } from '../../redux/auth/auth.action.js'; // Import the action
+import { fetchKategorije, fetchRecipesForUserFeed } from '../../redux/auth/auth.action.js'; // Import the action
 import './HomePage.css'; // You can create a separate CSS file for styling
 import Loading from "../Components/Loading";
 import {lazy, Suspense} from 'react';
@@ -9,8 +9,20 @@ import {lazy, Suspense} from 'react';
 const HomePage = () => {
     const dispatch = useDispatch();
     const kategorije = useSelector(state => state.auth.kategorije);
-    const userProfileInfo = useSelector(state => state.auth.userProfile);
+    const recipesForFeed = useSelector(state => state.auth.recipesForFeed);
+
     const Recepti = lazy(() => delayForDemo(import('../Components/Recepti.js')));
+
+    useEffect(() => {
+        dispatch(fetchRecipesForUserFeed());
+    }, []);
+
+    const kategorijaRecepti = recipesForFeed.filter(recipe  =>{
+            if(recipe.kategorije.length>0){
+                return recipe.kategorije[0].idKategorija == JSON.parse(localStorage.getItem("kategorijaLoad"))
+            }
+        }
+    );
 
     useEffect(() => {
         dispatch(fetchKategorije());
@@ -19,11 +31,7 @@ const HomePage = () => {
     return (
         <div className='px-20'>
             <div className={'header'}>
-                <h1>Najnoviji recepti</h1>
-                <div className={'opis'}>
-                    <p>Dobrodošli na web aplikaciju CookBooked. Mjesto gdje postoji recept za svačiji ukus.
-                       Pronađite novog sebe u jednom od recepata.</p>
-                </div>
+                
                 <div className={'categories'}>
                     {kategorije.map(kategorija => (
                         <a href = "/" key={kategorija.idKategorija}
@@ -33,9 +41,16 @@ const HomePage = () => {
                     ))}
                 </div>
             </div>
+            <div className='homepage-info'>
+            <h1 className='homepage-title'>Najnoviji recepti</h1>
+                <div className={'opis'}>
+                    <p>Dobrodošli na web aplikaciju CookBooked. Mjesto gdje postoji recept za svačiji ukus.
+                       Pronađite novog sebe u jednom od recepata.</p>
+                </div>
+            </div>
             <div className="recipe-page">
                 <Suspense fallback={<Loading item={'recepata'}/>}>
-                    <Recepti/>
+                    <Recepti recepti={kategorijaRecepti}/>
                 </Suspense>
             </div>
         </div>
@@ -44,7 +59,7 @@ const HomePage = () => {
 
 function delayForDemo(promise) {
     return new Promise(resolve => {
-        setTimeout(resolve, 100);
+        setTimeout(resolve, 500);
     }).then(() => promise);
 }
 

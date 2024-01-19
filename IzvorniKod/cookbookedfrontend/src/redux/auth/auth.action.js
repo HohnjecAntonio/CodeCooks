@@ -45,6 +45,7 @@ import {
 } from "./auth.actionType";
 
 export const loginUserAction = (loginData) => async (dispatch) => {
+    
     dispatch({ type: LOGIN_REQUEST });
     try {
         const { data } = await axios.post(`${API_BASE_URL}/auth/signin`, loginData.data);
@@ -52,15 +53,18 @@ export const loginUserAction = (loginData) => async (dispatch) => {
         if (data.token) {
             localStorage.setItem("token", data.token);
         }
+        window.alert("Prijava uspjela!");
 
         dispatch({ type: LOGIN_SUCCESS, payload: data.token });
     } catch (error) {
         console.log("------", error);
+        window.alert("Prijava nije uspjela!");
         dispatch({ type: LOGIN_FAILURE, payload: error });
     }
 };
 
 export const registerUserAction = (registerData) => async (dispatch) => {
+    //const history = useHistory();
     dispatch({ type: REGISTER_REQUEST });
     try {
         const { data } = await axios.post(`${API_BASE_URL}/auth/signup`, registerData.data);
@@ -69,9 +73,12 @@ export const registerUserAction = (registerData) => async (dispatch) => {
             localStorage.setItem("token", data.token);
         }
 
+        window.alert("Registracija uspjela!");
+
         dispatch({ type: REGISTER_SUCCESS, payload: data.jwt });
     } catch (error) {
         console.log("------", error);
+        window.alert("Registracija nije uspjela!");
         dispatch({ type: REGISTER_FAILURE, payload: error });
     }
 };
@@ -151,7 +158,7 @@ export const saveRecipe = (recipeData) => async (dispatch) => {
 
         console.log("Spremljen recept: ");
         console.log(data);
-
+        window.alert("Spremljen recept, osim ako već nije bio, onda sada više nije!");
         dispatch({ type: SAVE_RECIPE_SUCCESS, payload: data});
     } catch (error) {
         console.log("------", error);
@@ -167,6 +174,7 @@ export const likeRecipe = (recipeData) => async (dispatch) => {
 
         console.log("Označen recept: ");
         console.log(data);
+        window.alert("Označen recept, osim ako već nije bio, onda sada više nije!");
 
         dispatch({ type: LIKE_RECIPE_SUCCESS, payload: data});
     } catch (error) {
@@ -363,7 +371,8 @@ export const followUser = (requestData) => async (dispatch) => {
         const { data } = await apiAuth.post(`${API_BASE_URL}/korisnici/${requestData.data.followerId}/follow/${requestData.data.followingId}`);
 
         console.log(requestData.data.followerId + " followed user: " + requestData.data.followingId);
-
+        console.log(data);
+        window.alert("Zapraćen korisnik, osim ako ga niste već pratili, onda je otpraćen");
         dispatch({ type: FOLLOW_USER_SUCCESS, payload: data });
     } catch (error) {
         console.log("------", error);
