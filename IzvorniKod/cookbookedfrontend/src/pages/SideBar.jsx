@@ -190,7 +190,7 @@ useEffect(() => {
                 categoryId={category.idKategorija}
                 leftIcon={<AlienIcon />}
                 text={category.nazivKategorija}
-                link="/Categories"
+                link="/"
                 openCategory = "true"
               />
             ))}
@@ -208,7 +208,7 @@ useEffect(() => {
           <li class="nav-item">
             <a href={props.link} class="nav-link" onClick={() => {(props.goToMenu && setActiveMenu(props.goToMenu))
             || (props.openProfile && localStorage.setItem('profileToLoad', JSON.stringify(userProfileInfo.korisnickoIme)))
-            || (props.openCategory && localStorage.setItem('categoryToLoad', JSON.stringify(props.categoryId)))
+            || (props.openCategory && localStorage.setItem('kategorijaLoad', JSON.stringify(props.categoryId)))
             || (props.logout && logOut())
             }}>
               <span className="icon-button">{props.leftIcon}</span>

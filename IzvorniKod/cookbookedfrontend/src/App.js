@@ -1,28 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
-import UserFeed from "./pages/UserFeed/UserFeed";
-import Registration from "./pages/Registration";
 import * as AuthService from "./redux/auth/auth.action";
-import Login from "./pages/Login";
-import HomePage from "./pages/HomePage/HomePage";
 import './App.css';
-import SideBar from "./pages/SideBar";
-import Profile from "./pages/Profile";
 
-import RecipeForm from "./komponente/RecipeForm";
-import PrivateProfile from "./komponente/PrivateProfile";
-import RecipePage from "./komponente/RecipePage";
-import CategoryButtons from './komponente/CategoryButtons';
-import MessengerApp from './messenger/MessengerApp';
-import SpremljeniRecepti from "./pages/UserFeed/SpremljeniRecepti";
-
-import {useDispatch, useSelector} from "react-redux";
-import {fetchUserProfile} from "./redux/auth/auth.action";
+const RecipePage = lazy(() => import("./pages/RecipePage/RecipePage"));
+const SpremljeniRecepti = lazy(() => import("./pages/UserFeed/SpremljeniRecepti"));
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const UserFeed = lazy(() => import("./pages/UserFeed/UserFeed"));
+const SideBar = lazy(() => import("./pages/SideBar"));
+const Atributions = lazy(() => import("./pages/AtributionsPage/Atributions"));
+const PrivateProfile = lazy(() => import("./pages/PrivateProfilePage/PrivateProfile"));
+const RecipeForm = lazy(() => import("./pages/Components/RecipeForm"));
+const Profile = lazy(() => import("./pages/Profile"));
+const Login = lazy(() => import("./pages/Login"));
+const Registration = lazy(() => import("./pages/Registration"));
+const MessengerApp = lazy(() => import("./messenger/MessengerApp"));
 
 function App() {
-    const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
     const [currentUser, setCurrentUser] = useState(undefined);
-
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -43,15 +39,12 @@ function App() {
         AuthService.logoutUser();
     };
 
-
-
-
     return (
         <Router>
-            <div className = "App">
-                <nav className = "Header">
+            <div className="App">
+                <nav className="Header">
                     <div className="ref">
-                        <NavLink className = "Header-button"  to="/">
+                        <NavLink className="Header-button" to="/">
                             Home
                         </NavLink>
 
@@ -73,11 +66,11 @@ function App() {
                         </div>
                     ) : (
                         <div className="ref">
-                            <NavLink className = "Header-button" to="/signin">
-                            Login
+                            <NavLink className="Header-button" to="/signin">
+                                Login
                             </NavLink>
 
-                            <NavLink className = "Header-button" to="/signup">
+                            <NavLink className="Header-button" to="/signup">
                                 Sign up
                             </NavLink>
                         </div>
@@ -85,48 +78,46 @@ function App() {
                 </nav>
 
                 <div className="Tijelo">
-                    <button className = "hidden" onClick={() => setIsLoggedIn(!isLoggedIn)}>Toggle login</button>
-                    <Switch>
-
-                        <Route path="/" exact>
-                            {<HomePage/>}
-
-                        </Route>
-
-                        {currentUser ? (
-                            <Route path="/user-feed">
-                                <UserFeed/>
+                    <button className="hidden" onClick={() => setIsLoggedIn(!isLoggedIn)}>Toggle login</button>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Switch>
+                            <Route path="/" exact>
+                                <HomePage />
                             </Route>
-                        ) : null}
 
-                        <Route path="/signin">
-                            <Login/>
-                        </Route>
+                            {currentUser && (
+                                <Route path="/user-feed">
+                                    <UserFeed />
+                                </Route>
+                            )}
 
-                        <Route path="/signup">
-                            <Registration/>
-                        </Route>
+                            <Route path="/signin">
+                                <Login />
+                            </Route>
 
+                            <Route path="/signup">
+                                <Registration />
+                            </Route>
 
-                        <Route path="/Profile" exact>
-                            {<Profile currentUser={currentUser}
-                                
-                                />}
-                        </Route>
+                            <Route path="/Profile" exact>
+                                <Profile currentUser={currentUser} />
+                            </Route>
 
-                        <Route path="/RecipePage">
-                            {<RecipePage currentUser={currentUser}
-                                ></RecipePage>}
-                            </Route> 
+                            <Route path="/RecipePage">
+                                <RecipePage currentUser={currentUser} />
+                            </Route>
 
-                        <Route path="/PrivateProfile" exact component={PrivateProfile} />
-                        <Route path="/AddRecipe" exact component={RecipeForm} />
-                        <Route path="/MessengerApp" exact component={MessengerApp} />
-                        <Route path="/Categories" exact component={CategoryButtons}/>
-                        <Route path="/SpremljeniRecepti" exact component={SpremljeniRecepti}/>
-                    </Switch>
+                            <Route path="/PrivateProfile" exact component={PrivateProfile} />
+                            <Route path="/AddRecipe" exact component={RecipeForm} />
+                            <Route path="/MessengerApp" exact component={MessengerApp} />
+                            <Route path="/SpremljeniRecepti" exact component={SpremljeniRecepti} />
+                            <Route path="/Atributions" exact component={Atributions} />
+                        </Switch>
+                    </Suspense>
                 </div>
-                <SideBar currentUser={currentUser} changeLoginState = {isLoggedIn => setIsLoggedIn(isLoggedIn)} />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <SideBar currentUser={currentUser} changeLoginState={(isLoggedIn) => setIsLoggedIn(isLoggedIn)} />
+                </Suspense>
             </div>
         </Router>
     );

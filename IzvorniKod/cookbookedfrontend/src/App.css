@@ -88,9 +88,7 @@
 
 .Tijelo{
     background-color: transparent;
-    /*width: 100%;*/
-    margin-left: 5rem;
-    padding: 1rem;
+    width: 100%;
     display: block;
     height: calc(100vh - 62px);
 }
