@@ -263,56 +263,80 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
               null
             }
               <h1 class="recipe-title-recipe-page">{recipe.nazivRecept}</h1>
-              <p >Autor: <a href="/Profile" onClick={() => {
+
+              <h1 class="uputstva-title"> Autor: </h1>
+              <p ><a href="/Profile" onClick={() => {
                   localStorage.setItem('profileToLoad',JSON.stringify(recipe.autor))
             }}>{recipe.autor}</a></p>
-              <p>Vrijeme kuhanja: {recipe.vrijemeKuhanja}</p>
+
+                  
+              <br></br>
+              <h1 class="uputstva-title"> Vrijeme kuhanja: </h1>
+              <p> {recipe.vrijemeKuhanja}</p>
+               
+              <br></br>
               {
                   recipe.kategorije && recipe.kategorije.length > 0 ?
                   (
-                    <p>Kategorija: {recipe.kategorije[0].nazivKategorija}</p>
+                    <>
+                    <h1 class="uputstva-title"> Kategorija: </h1>
+                    <p>{recipe.kategorije[0].nazivKategorija}</p>
+                    </>
+                    
                   )
                   :
                   (
-                  <p>Kategorija: </p> 
+                    <h1 class="uputstva-title"> Kategorija: </h1>
                   )
                 }
 
-                
+                <br></br>
+
                 {
                   recipe.vrsteKuhinje && recipe.vrsteKuhinje.length > 0  ?
                   (
-                    <p>Vrste kuhinje: {recipe.vrsteKuhinje[0].nazivVrstaKuhinje}</p>
+                    <>
+                    <h1 class="uputstva-title"> Vrsta kuhinje: :</h1>
+                    <p>{recipe.vrsteKuhinje[0].nazivVrstaKuhinje}</p>
+                    </>
                   )
                   :
                   (
-                  <p>Vrste kuhinje: </p> 
+                    <h1 class="uputstva-title"> Vrsta kuhinje: :</h1>
                   )
                 }
-
+                <br></br>
                 {
                   recipe.sastojci ?
+                  <>
+                  <h1 class="uputstva-title"> Sastojci: :</h1>
                   <p>
-                    Sastojci: 
+                   
                     <span>
                     {
                     <span>{returnSastojciList(recipe.sastojci)}</span>
                     }
                     </span>
                   </p>
+                  </>
                   :
-                  <p>
-                    Sastojci: 
-                  </p>
+
+                  <h1 class="uputstva-title"> Sastojci: :</h1>
+                  
                 }
-                <p>Oznaka: {recipe.oznaka}</p>
-                <p>Uputstva: {recipe.priprema}</p>
+                <br></br>
+                <h1 class="uputstva-title">Oznaka:</h1>
+                <p> {recipe.oznaka}</p>
+                <br></br>
+                <h1 class="uputstva-title">Uputstva:</h1>
+                <p> {recipe.priprema}</p>
             
             </div>
         </div>
       }
       
-      
+      <br></br>
+      <br></br>
       
       <div>
       <h1 class='section-title'>Komentari:</h1>

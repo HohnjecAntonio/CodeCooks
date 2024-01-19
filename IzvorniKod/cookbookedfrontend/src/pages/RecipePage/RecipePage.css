@@ -136,11 +136,17 @@ h1 {
 }
 
 
+
 h1 {
   text-align: center;
+  font-size: large;
   color: var(--text-primary);
 }
 
+.uputstva-title{
+  font-size: large;
+  font-weight: bold;
+}
 .section-title{
   font-size: 30px;
   color: black;
