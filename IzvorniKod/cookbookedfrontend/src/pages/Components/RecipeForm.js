@@ -5,7 +5,11 @@ import { useHistory } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import '../ComponentsCss/RecipeForm.css'; // You can create a separate CSS file for styling
 
+
+
 function RecipeForm () {
+  const history = useHistory();
+
   const dispatch = useDispatch();
   const kategorije = useSelector(state => state.auth.kategorije); // Adjust path according to your store structure
   const loading = useSelector(state => state.auth.loading);
@@ -28,9 +32,10 @@ function RecipeForm () {
 
   const handleSubmit = async (values) => {
     console.log('handle submit ', values);
-    await dispatch(newRecipe({ data: values })).then(() => {
-        //history.push('/');
-        //window.location.reload();
+    await dispatch(newRecipe({ data: values })).then((response) => {
+        history.push('/RecipePage');
+        localStorage.setItem('recipeToLoad', JSON.stringify(response.idRecept));
+        window.location.reload();
     });
   };
 

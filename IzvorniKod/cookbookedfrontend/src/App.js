@@ -60,9 +60,11 @@ function App() {
                             <a className="Header-button" href="/signin" onClick={logOut}>
                                 Logout
                             </a>
+                            {/*
                             <a className="Header-button" href="/Profile">
                                 Profil
                             </a>
+                             */}
                         </div>
                     ) : (
                         <div className="ref">

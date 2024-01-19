@@ -20,17 +20,17 @@ const Recepti = () => {
     );
 
 return (
-    <div className="recipe-list">
+    <div className="recipe-list-new">
         {kategorijaRecepti.map((recipe) => (
             <div key={recipe.idRecept} className="recipe-card">
-                <a href="/RecipePage/RecipePage"
+                <a href="/RecipePage"
                    onClick={() => {
                        localStorage.setItem('recipeToLoad', JSON.stringify(recipe.idRecept));
                        console.log(recipe.idRecept);
                    }}>
                     <div className="recipe-details">
-                        <h2>{recipe.nazivRecept}</h2>
-                        <p>Autor:
+                        <h2 class="recipe-title-recipe-list">{recipe.nazivRecept}</h2>
+                        <p>Autor: 
                             <a href="/Profile" onClick={() => { localStorage.setItem('profileToLoad', JSON.stringify(recipe.autor))}}>
                                 {recipe.autor}
                             </a>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {editComment,deleteComment} from '../../redux/auth/auth.action.js';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import './Komentar.css'; 
 
 
 import { ReactComponent as PencilIcon } from '../../icons/recipePage/pencil-solid.svg';
@@ -9,12 +10,7 @@ import { ReactComponent as TrashIcon } from '../../icons/recipePage/trash-solid.
 
 function Komentar(props){
     const dispatch = useDispatch();
-    const recipe = useSelector(state => state.auth.recipeToLoad);
-    const loading = useSelector(state => state.auth.loading);
-    const error = useSelector(state => state.auth.error);
     const userProfileInfo = useSelector(state => state.auth.userProfile);
-    const kategorije = useSelector(state => state.auth.kategorije);
-    const vrKuhinje = useSelector(state => state.auth.vrKuhinje);
     const [urediKomentar,setUrediKomentar] = useState(false);
 
     const deleteCommentFunction = async (idKomentar, idKorisnik, idRecept) => {
@@ -81,18 +77,22 @@ function Komentar(props){
             </Formik>
             :
             <div className="comment-box">
-                <p><span>{props.komentarKorisnikIme}</span>     <span>{props.komentarDatum}</span></p>
-                <p><span>{props.komentarTekst}</span></p>
                 {
                     props.komentarKorisnikId == userProfileInfo.idKorisnik || userProfileInfo.razinaOvlasti == "Admin"
                         ?
-                        <div class="recipe-buttons-flex">
-                            <button className='recipe-icon-button' onClick={()=> setUrediKomentar(true) }><PencilIcon/></button>
-                            <button className='recipe-icon-button' onClick={() => deleteCommentFunction(props.komentarId,props.komentarKorisnikId,props.recipeId)}><TrashIcon/></button>
+                        <div class="recipe-buttons-flex-comment">
+                            <button className='recipe-icon-button-comment' onClick={()=> setUrediKomentar(true) }><PencilIcon/></button>
+                            <button className='recipe-icon-button-comment' onClick={() => deleteCommentFunction(props.komentarId,props.komentarKorisnikId,props.recipeId)}><TrashIcon/></button>
                         </div>
                         :
                         null
                 }
+                <p ><span class="comment-top-row">{props.komentarKorisnikIme}            </span>         <span class="comment-date">{props.komentarDatum}</span>
+                
+                
+                </p>
+                <p class="comment-bottom-row">{props.komentarTekst}</p>
+                
             </div>
         }
         </div>
