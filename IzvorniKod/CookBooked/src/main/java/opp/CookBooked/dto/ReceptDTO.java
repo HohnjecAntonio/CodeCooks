@@ -33,4 +33,9 @@ public class ReceptDTO {
     private List<Komentar> komentari;
     private List<Korisnik> lajkovi;
 
+    public ReceptDTO(Long idRecept, String nazivRecept) {
+        this.idRecept = idRecept;
+        this.nazivRecept = nazivRecept;
+    }
+
 }
