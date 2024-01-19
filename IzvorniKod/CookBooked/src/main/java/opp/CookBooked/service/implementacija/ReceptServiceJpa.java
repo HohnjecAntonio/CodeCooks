@@ -234,7 +234,7 @@ public class ReceptServiceJpa implements ReceptService {
                 receptRepo.save(noviRecept);
                 reKatService.dodajKategorijuReceptu(noviRecept.getIdRecept(), recept.getIdKategorija());
                 vrKuhService.dodajVrstuKuhinjeReceptu(noviRecept.getIdRecept(), recept.getIdVrstaKuhinje());
-                recSasService.dodajSastojkeReceptu(noviRecept.getIdRecept(), sas);
+
                 return noviRecept;
 
             }  else return null;

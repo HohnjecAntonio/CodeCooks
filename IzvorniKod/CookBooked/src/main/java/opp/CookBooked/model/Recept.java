@@ -114,5 +114,10 @@ public class Recept {
         this.vrijemeKuhanja = vrijemeKuhanja;
     }
 
+    public Recept(Long idRecept, String nazivRecept) {
+        this.idRecept = idRecept;
+        this.nazivRecept = nazivRecept;
+    }
+
 }
 

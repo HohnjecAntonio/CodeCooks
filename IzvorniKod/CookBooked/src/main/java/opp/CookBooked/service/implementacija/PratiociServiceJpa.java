@@ -28,7 +28,7 @@ public class PratiociServiceJpa implements PratiociService {
                 return existingRelationship;
             } else {
                 Pratioci pratioci = new Pratioci(follower, following);
-                return pratiociRepo.save(pratioci);
+                return pratioci;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,8 +44,7 @@ public class PratiociServiceJpa implements PratiociService {
 
             if (existingRelationship != null)
                 pratiociRepo.deleteAll(existingRelationship);
-
-            return existingRelationship;
+                return existingRelationship;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
