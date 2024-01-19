@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './PrivateProfile.css'; // You can create a separate CSS file for styling
-import profilePictureTemp from "../images/img/user.jpeg";
+import profilePictureTemp from "../../images/img/user.jpeg";
 import {useDispatch, useSelector} from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import {fetchUserProfile, updateUserProfile, deleteUserAction, fetchOtherProfileByUsername} from "../redux/auth/auth.action";
+import {fetchUserProfile, updateUserProfile, deleteUserAction, fetchOtherProfileByUsername} from "../../redux/auth/auth.action";
 
 const PrivateProfile = () => {
   const jwtToken = localStorage.getItem("token");

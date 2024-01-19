@@ -15,16 +15,10 @@ h1 {
 }*/
 
 .recipe-card {
-  /*border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
-  border: 2px solid #45a1df;
-  border-radius: 8px;
+  border: 2px solid rgb(230, 230, 220);
   padding: 16px;
   margin: 8px;
-  background-color: var(--bg-secondary);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .recipe-title-recipe-page{

@@ -6,7 +6,7 @@ function Loading(props) {
 
     return(
         <div className={'Loader'}>
-            <p>Loading {props.item}...</p>
+            <p>Učitavanje {props.item}...</p>
         </div>
     );
 };

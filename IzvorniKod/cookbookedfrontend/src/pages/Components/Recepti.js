@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchKategorije } from '../../redux/auth/auth.action.js'; // Import the action
 import '../ComponentsCss/Recepti.css'; // You can create a separate CSS file for styling
 import {fetchRecipesForUserFeed} from "../../redux/auth/auth.action";
 
@@ -24,7 +23,7 @@ return (
     <div className="recipe-list">
         {kategorijaRecepti.map((recipe) => (
             <div key={recipe.idRecept} className="recipe-card">
-                <a href="/RecipePage"
+                <a href="/RecipePage/RecipePage"
                    onClick={() => {
                        localStorage.setItem('recipeToLoad', JSON.stringify(recipe.idRecept));
                        console.log(recipe.idRecept);

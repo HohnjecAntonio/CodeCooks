@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Profile.css'; // You can create a separate CSS file for styling
-import profilePictureTemp from "../images/img/user.jpeg";
+import profilePictureTemp from "../../images/img/user.jpeg";
 
 
 function Profile(props) {
@@ -108,7 +108,7 @@ function Profile(props) {
               </a>
             </div>
             :
-            <a href="/PrivateProfile" class="private-profile-button">
+            <a href="/src/pages/PrivateProfilePage/PrivateProfile" class="private-profile-button">
               <button>Promjeni postavke</button>
             </a>
             

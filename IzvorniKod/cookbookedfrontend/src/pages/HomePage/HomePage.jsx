@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchKategorije } from '../../redux/auth/auth.action.js'; // Import the action
 import './HomePage.css'; // You can create a separate CSS file for styling
-import {fetchRecipesForUserFeed} from "../../redux/auth/auth.action";
 import Loading from "../Components/Loading";
 import {lazy, Suspense} from 'react';
 
@@ -35,7 +34,7 @@ const HomePage = () => {
                 </div>
             </div>
             <div className="recipe-page">
-                <Suspense fallback={<Loading item={'Recipes'}/>}>
+                <Suspense fallback={<Loading item={'recepata'}/>}>
                     <Recepti/>
                 </Suspense>
             </div>

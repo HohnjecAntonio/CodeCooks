@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchKategorije, fetchVrsteKuhinje, fetchRecipesForUserFeed ,addComment,editComment,deleteComment,deleteRecipe, fetchUserProfile, likeRecipe, saveRecipe, editRecipe} from '../redux/auth/auth.action.js'; 
-import {fetchRecipeById} from "../redux/auth/auth.action";
+import { fetchKategorije, fetchVrsteKuhinje, fetchRecipesForUserFeed ,addComment,editComment,deleteComment,deleteRecipe, fetchUserProfile, likeRecipe, saveRecipe, editRecipe} from '../../redux/auth/auth.action.js';
+import {fetchRecipeById} from "../../redux/auth/auth.action";
 import './RecipePage.css'; // You can create a separate CSS file for styling
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import Komentar from "../Components/Komentar";
 
 
-import { ReactComponent as PencilIcon } from '../icons/recipePage/pencil-solid.svg';
-import { ReactComponent as TrashIcon } from '../icons/recipePage/trash-solid.svg';
-import { ReactComponent as BookmarkIcon } from '../icons/recipePage/bookmark-regular.svg';
-import { ReactComponent as BookmarkIconFilled } from '../icons/recipePage/bookmark-solid.svg';
-import { ReactComponent as HeartIcon } from '../icons/recipePage/heart-regular.svg';
-import { ReactComponent as HeartIconFilled } from '../icons/recipePage/heart-solid.svg';
-
-
+import { ReactComponent as PencilIcon } from '../../icons/recipePage/pencil-solid.svg';
+import { ReactComponent as TrashIcon } from '../../icons/recipePage/trash-solid.svg';
+import { ReactComponent as BookmarkIcon } from '../../icons/recipePage/bookmark-regular.svg';
+import { ReactComponent as HeartIcon } from '../../icons/recipePage/heart-regular.svg';
 
 
 const RecipePage = (props) => {
@@ -25,9 +22,6 @@ const RecipePage = (props) => {
   const kategorije = useSelector(state => state.auth.kategorije); 
   const vrKuhinje = useSelector(state => state.auth.vrKuhinje);
 
-
-  
-
   const [urediRecept,setUrediRecept] = useState(false);
 
   useEffect(() => {
@@ -37,8 +31,6 @@ const RecipePage = (props) => {
   useEffect(() => {
     dispatch(fetchRecipeById(JSON.parse(localStorage.getItem("recipeToLoad"))));
   }, []);
-
-  
 
   useEffect(() => {
     dispatch(fetchVrsteKuhinje());
@@ -110,95 +102,6 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
       //window.location.reload();
   });
 };
-
-  console.log("Local Storage get: "+ JSON.parse(localStorage.getItem("recipeToLoad")));
-  
-  function Komentar(props){
-    const [urediKomentar,setUrediKomentar] = useState(false);
-
-    return(
-          <div class="komentar">
-            {
-              urediKomentar ?
-              
-              
-              <Formik enableReinitialize="true" initialValues={
-                {
-                  idKomentar: props.komentarId || '',
-                  idKorisnik: props.komentarKorisnikId || '',
-                  idRecept: props.recipeId || '',
-                  opisKomentar:  props.komentarTekst || ''
-                }
-                } onSubmit={
-                  async (values)=>{
-                    setUrediKomentar(false)
-                    console.log('handle submit ', values);
-                    await dispatch(editComment({ data: values })).then(() => {
-                        //history.push('/');
-                        //window.location.reload();
-                    });
-                }}>
-                <Form>
-                  <h1>Uredi komentar:</h1>
-                  <Field
-                    type="hidden"
-                    id="idKomentar"
-                    name="idKomentar"
-                  />
-
-                  <Field
-                    type="hidden"
-                    id="idKorisnik"
-                    name="idKorisnik"
-                  />
-        
-                  <Field
-                    type="hidden"
-                    id="idRecept"
-                    name="idRecept"
-                  />
-                  
-                  <Field
-                    component="textarea"
-                    type="text"
-                    id="opisKomentar"
-                    name="opisKomentar"
-                  />
-        
-                  <button className='recipe-button' type="submit">Spremi komentar</button>
-                  
-                  </Form>
-                </Formik>
-                :
-                
-                <div className="comment-box">
-                  
-                  <p><span>{props.komentarKorisnikIme}</span>     <span>{props.komentarDatum}</span></p>
-
-                  <p><span>{props.komentarTekst}</span></p>
-
-                  {
-                    props.komentarKorisnikId == userProfileInfo.idKorisnik || userProfileInfo.razinaOvlasti == "Admin"
-                    ?
-                    <div class="recipe-buttons-flex">
-                    <button className='recipe-icon-button' onClick={()=> setUrediKomentar(true) }><PencilIcon/></button>
-                    <button className='recipe-icon-button' onClick={() => deleteCommentFunction(props.komentarId,props.komentarKorisnikId,props.recipeId)}><TrashIcon/></button>
-                    </div>
-                    :
-                    null
-                  }
-                </div>
-                
-              
-              
-            }
-          
-            
-           
-          </div>
-          );
-  }
-
 
   return (
     
@@ -340,8 +243,7 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
                   }
                 </div>
               }
-              
-              
+
               </div>
               :
               null
@@ -457,23 +359,13 @@ const saveRecipeFunction = async (idKorisnik, idRecept) => {
               komentarKorisnikIme = {komentar.korisnik.korisnickoIme}
               komentarKorisnikId = {komentar.korisnik.idKorisnik}
               recipeId = {JSON.parse(localStorage.getItem("recipeToLoad"))}
-
-
-            
             />
-            
           </div>
-            
           ))}
           </div>
-          
           :
-
           null
-
         }
-        
-        
         </div>
       </div>
     </div>

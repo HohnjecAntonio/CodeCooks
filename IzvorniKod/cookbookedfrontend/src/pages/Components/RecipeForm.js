@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchKategorije, newRecipe, fetchUserProfile, fetchVrsteKuhinje } from '../redux/auth/auth.action.js';
+import { fetchKategorije, newRecipe, fetchUserProfile, fetchVrsteKuhinje } from '../../redux/auth/auth.action.js';
 import { useHistory } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import './RecipeForm.css'; // You can create a separate CSS file for styling
+import '../ComponentsCss/RecipeForm.css'; // You can create a separate CSS file for styling
 
 function RecipeForm () {
   const dispatch = useDispatch();
