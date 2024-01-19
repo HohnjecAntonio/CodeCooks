@@ -96,7 +96,9 @@ useEffect(() => {
             <NavItem
               leftIcon={<CatIcon/>}
               text ="Home"
-              link= "/">
+              link= "/"
+              categoryId="1"
+              openCategory="true">
             </NavItem>
 
             {props.currentUser ? (

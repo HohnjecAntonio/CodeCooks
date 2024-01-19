@@ -107,7 +107,7 @@ function Profile(props) {
                         :
                         <div className='contactButtons'>
                           <a href="/MessengerApp">
-                            <button onClick={()=>{localStorage.setItem('friendId',JSON.stringify(profileToLoad.idKorisnik)); localStorage.setItem('userId',JSON.stringify(userProfileInfo.idKorisnik));}}>Chat</button>
+                            <button onClick={()=>{localStorage.setItem('friendUsername',JSON.stringify(profileToLoad.korisnickoIme)); localStorage.setItem('userId',JSON.stringify(userProfileInfo.idKorisnik));}}>Chat</button>
                           </a>
                           <button onClick={followUserFunction}>Zaprati korisnika</button>
                         </div>
