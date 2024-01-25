@@ -8,8 +8,8 @@ Link backenda na renderu: https://codecooks-cookbooked-backend.onrender.com
 
 Za potrebe spajanja na web bazu putem pgadmin, podatci za spajanje su sljedeci:
 
-connection: dpg-cml1sjicn0vc739ltf50-a.frankfurt-postgres.render.com
-baza: baza_9yyp
+connection: dpg-cmlfgvol5elc73c4jdp0-a.frankfurt-postgres.render.com
+baza: baza_j6uq 
 username: user
-password: PHKXXR33M3kSR0vYtpbeD04WG497o38M
+password: tp4MRHAyk0ohYRvPRNkphAtU9ZwhNkVN
 PORT: 5432
